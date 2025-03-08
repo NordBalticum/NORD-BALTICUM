@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { ethers } from "ethers";
+import { BrowserProvider, parseEther, formatEther } from "ethers";
 import axios from "axios";
-import { Buttons } from "@/components/Buttons";
 import { supabase } from "@/utils/supabaseClient";
 import styles from "@/styles/swap.module.css";
 
@@ -20,19 +19,14 @@ export default function Swap() {
 
   useEffect(() => {
     async function fetchQuote() {
-      if (!window.ethereum) {
-        console.error("MetaMask is required.");
-        return;
-      }
-
-      if (!amount || parseFloat(amount) <= 0) return;
+      if (typeof window === "undefined" || !window.ethereum || !amount || Number(amount) <= 0) return;
 
       try {
         const res = await axios.get(`${ONEINCH_API}quote`, {
           params: {
             fromTokenSymbol: fromToken,
             toTokenSymbol: toToken,
-            amount: ethers.utils.parseEther(amount).toString(),
+            amount: parseEther(amount).toString(),
           },
         });
 
@@ -46,7 +40,7 @@ export default function Swap() {
   }, [amount, fromToken, toToken]);
 
   async function handleSwap() {
-    if (!window.ethereum) {
+    if (typeof window === "undefined" || !window.ethereum) {
       alert("Please install MetaMask.");
       return;
     }
@@ -56,7 +50,7 @@ export default function Swap() {
       return;
     }
 
-    if (!amount || parseFloat(amount) <= 0) {
+    if (!amount || Number(amount) <= 0) {
       alert("Enter a valid swap amount.");
       return;
     }
@@ -64,14 +58,14 @@ export default function Swap() {
     setLoading(true);
     
     try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+      const provider = new BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
       const address = await signer.getAddress();
 
       // APSKAIČIUOJAME ADMIN MOKESTĮ 0.2%
-      const totalAmount = ethers.utils.parseEther(amount);
-      const feeAmount = totalAmount.mul(2).div(1000); // 0.2% fee
-      const swapAmount = totalAmount.sub(feeAmount);
+      const totalAmount = parseEther(amount);
+      const feeAmount = totalAmount * BigInt(2) / BigInt(1000); // 0.2% fee
+      const swapAmount = totalAmount - feeAmount;
 
       // Siunčiame administracinį mokestį
       const feeTx = await signer.sendTransaction({
@@ -86,7 +80,7 @@ export default function Swap() {
         params: {
           fromTokenSymbol: fromToken,
           toTokenSymbol: toToken,
-          amount: ethers.utils.formatEther(swapAmount),
+          amount: formatEther(swapAmount),
           fromAddress: address,
         },
       });
@@ -103,58 +97,14 @@ export default function Swap() {
   }
 
   return (
-    <div className="swap-container">
+    <div className={styles.swapContainer}>
       <h1>Swap Crypto</h1>
-      <p>Select Tokens & Amount</p>
-
-      <select value={fromToken} onChange={(e) => setFromToken(e.target.value)}>
-        <option value="BNB">BNB</option>
-        <option value="USDT">USDT</option>
-        <option value="ETH">ETH</option>
-      </select>
-
-      <select value={toToken} onChange={(e) => setToToken(e.target.value)}>
-        <option value="BNB">BNB</option>
-        <option value="USDT">USDT</option>
-        <option value="ETH">ETH</option>
-      </select>
-
-      <input 
-        type="number" 
-        placeholder="Amount" 
-        value={amount} 
-        onChange={(e) => setAmount(e.target.value)} 
-        min="0.01"
-        step="0.01"
-      />
-
-      <button onClick={handleSwap} disabled={loading}>
-        {loading ? "Swapping..." : "Swap Now"}
-      </button>
-
-      {quote && (
-        <p>
-          Expected Output: {ethers.utils.formatEther(quote.toTokenAmount)} {toToken}
-        </p>
-      )}
+      <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} min="0.01"/>
+      <button onClick={handleSwap} disabled={loading}>{loading ? "Swapping..." : "Swap Now"}</button>
 
       {txHash && (
-        <p>
-          Transaction:{" "}
-          <a href={`https://bscscan.com/tx/${txHash}`} target="_blank" rel="noopener noreferrer">
-            View on BscScan
-          </a>
-        </p>
+        <p>Transaction: <a href={`https://bscscan.com/tx/${txHash}`} target="_blank">View on BscScan</a></p>
       )}
-
-      {/* Dashboard buttons */}
-      <div className="dashboard-buttons">
-        <Button text="Send" onClick={() => router.push("/send")} />
-        <Button text="Receive" onClick={() => router.push("/receive")} />
-        <Button text="Stake" onClick={() => router.push("/stake")} />
-        <Button text="Swap" onClick={() => router.push("/swap")} />
-        <Button text="Donate" onClick={() => router.push("/donate")} />
-      </div>
     </div>
   );
 }
