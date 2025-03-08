@@ -1,18 +1,20 @@
 .theme-switcher {
   background: none;
-  border: 2px solid #ffd700;
+  border: 2px solid var(--primary-color);
   border-radius: 50%;
-  padding: 10px;
+  padding: 12px;
+  font-size: 18px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  color: #ffd700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-speed) ease-in-out;
+  color: var(--primary-color);
+  box-shadow: var(--shadow-glow);
 }
 
 .theme-switcher:hover {
-  background: #ffd700;
-  color: #121212;
-}
-
-.icon {
-  font-size: 24px;
+  background: var(--primary-color);
+  color: var(--background-color);
+  transform: scale(1.1);
 }
