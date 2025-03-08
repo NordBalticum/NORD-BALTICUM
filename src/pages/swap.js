@@ -83,7 +83,8 @@ export default function Swap() {
       {quote && <p>Expected Output: {quote.toTokenAmount} {toToken}</p>}
       {txHash && <p>Transaction: <a href={`https://bscscan.com/tx/${txHash}`} target="_blank">View on BscScan</a></p>}
     </div>
-        
+       
+{/* Dashboard buttons */}
 <div className="dashboard-buttons">
   <Button text="Send" onClick={() => router.push("/send")} />
   <Button text="Receive" onClick={() => router.push("/receive")} />
