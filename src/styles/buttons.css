@@ -1,41 +1,16 @@
 .custom-button {
-  padding: 12px 20px;
-  font-size: 18px;
+  background: linear-gradient(90deg, #ffd700, #ffcc00);
+  color: #121212;
+  font-size: 16px;
   font-weight: bold;
-  text-transform: uppercase;
+  padding: 12px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
-.primary {
-  background: linear-gradient(90deg, #ffd700, #ffcc00);
-  color: #121212;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-}
-
-.primary:hover {
+.custom-button:hover {
   background: linear-gradient(90deg, #ffcc00, #ffb300);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-}
-
-.secondary {
-  background: #222;
-  color: #fff;
-  border: 2px solid #ffd700;
-}
-
-.secondary:hover {
-  background: #333;
-  color: #ffd700;
-}
-
-.danger {
-  background: #d9534f;
-  color: #fff;
-}
-
-.danger:hover {
-  background: #c9302c;
+  transform: scale(1.05);
 }
