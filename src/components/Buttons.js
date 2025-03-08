@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import "@/styles/buttons.css";
 
 export const Button = forwardRef(
   ({ type = "primary", onClick, children, icon, fullWidth, size = "medium", disabled }, ref) => {
