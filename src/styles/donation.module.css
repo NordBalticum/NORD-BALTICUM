@@ -10,6 +10,16 @@
   transition: all 0.3s ease-in-out;
 }
 
+/* 🔥 ANTRAŠTĖ */
+.donation-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--accent-color, #ffd700);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 1.2px;
+}
+
 /* 🔥 CHARITY DISPLAY */
 .charity-display {
   display: flex;
@@ -25,6 +35,7 @@
 
 .charity-display:hover {
   transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 }
 
 .charity-display img {
@@ -45,7 +56,7 @@
   display: block;
   font-size: 18px;
   margin-bottom: 8px;
-  color: #ffd700;
+  color: var(--accent-color, #ffd700);
   font-weight: bold;
 }
 
@@ -53,7 +64,7 @@
   width: 100%;
   padding: 12px;
   border-radius: 8px;
-  border: 2px solid #ffd700;
+  border: 2px solid var(--accent-color, #ffd700);
   background: #181818;
   color: #fff;
   font-size: 16px;
@@ -63,6 +74,11 @@
 .input-group input:focus {
   border-color: #ffcc00;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.input-group input:hover {
+  border-color: #ffe066;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
 }
 
 /* 💰 DONATE BUTTON */
@@ -76,6 +92,7 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  border: none;
 }
 
 .donate-btn:hover {
@@ -90,17 +107,17 @@
   margin-top: 25px;
 }
 
-.charity-navigation button {
+.charity-nav-btn {
   background: none;
   border: none;
-  color: #ffd700;
+  color: var(--accent-color, #ffd700);
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
-.charity-navigation button:hover {
+.charity-nav-btn:hover {
   color: #ffcc00;
   transform: scale(1.1);
 }
