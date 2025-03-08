@@ -1,22 +1,16 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "@/context/ThemeContext";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState("light");
+  const { theme, setTheme } = useContext(ThemeContext);
 
-  useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) {
-      setTheme(storedTheme);
-      document.documentElement.setAttribute("data-theme", storedTheme);
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-  };
-
-  return <button onClick={toggleTheme}>Switch Theme</button>;
+  return (
+    <button
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="theme-switcher"
+    >
+      {theme === "dark" ? <FaSun /> : <FaMoon />}
+    </button>
+  );
 }
