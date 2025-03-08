@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import QRCode from "qrcode.react";
 import { useRouter } from "next/router";
 import "../styles/send.css";
-import Button from "../components/Buttons";
+import { Button } from "../components/Buttons";
 import { supabase } from "../supabaseClient";
 
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
@@ -77,7 +77,8 @@ export default function Send() {
       </button>
       <QRCode value={recipient || "Scan QR"} />
     </div>
-        
+
+{/* Dashboard buttons */}
 <div className="dashboard-buttons">
   <Button text="Send" onClick={() => router.push("/send")} />
   <Button text="Receive" onClick={() => router.push("/receive")} />
