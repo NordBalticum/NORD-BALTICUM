@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../utils/supabaseClient";
 import { useAuth } from "../context/AuthContext";
-import { ethers } from "ethers";
 import "../styles/profile.css";
 
 export default function Profile() {
@@ -9,43 +8,52 @@ export default function Profile() {
   const [username, setUsername] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
   const [loginHistory, setLoginHistory] = useState([]);
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
+    if (!user) return;
+
     async function fetchProfile() {
-      if (!user) return;
+      try {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("id", user.id)
+          .single();
 
-      // Gauti vartotojo duomenis iš Supabase
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id)
-        .single();
+        if (data) {
+          setUsername(data.username || "Anonymous");
+          setWalletAddress(data.wallet_address || "No wallet linked");
+          setLoginHistory(data.login_history || []);
+        }
 
-      if (data) {
-        setUsername(data.username);
-        setWalletAddress(data.wallet_address);
-        setLoginHistory(data.login_history || []);
+        if (error) console.error("Error fetching profile:", error);
+      } catch (err) {
+        console.error("Unexpected error:", err);
       }
-
-      if (error) console.error("Error fetching profile", error);
     }
 
     fetchProfile();
   }, [user]);
 
   function copyToClipboard() {
+    if (!walletAddress) return;
     navigator.clipboard.writeText(walletAddress);
     alert("Wallet address copied!");
   }
 
   async function updateProfile() {
+    if (!user) {
+      alert("You must be logged in to update your profile.");
+      return;
+    }
+
     const { error } = await supabase
       .from("profiles")
       .update({ username })
       .eq("id", user.id);
 
-    if (error) alert("Failed to update profile");
+    if (error) alert("Failed to update profile.");
     else alert("Profile updated successfully!");
   }
 
@@ -53,14 +61,20 @@ export default function Profile() {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
     document.body.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
   }
 
   return (
     <div className="profile-container">
       <h1>User Profile</h1>
-      
+
       <label>Username:</label>
-      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Enter your username"
+      />
       <button onClick={updateProfile}>Save</button>
 
       <h2>Wallet Address</h2>
@@ -71,11 +85,17 @@ export default function Profile() {
       <p>{user?.provider === "google" ? "Google Login" : "MetaMask"}</p>
 
       <h2>Recent Logins</h2>
-      <ul>
-        {loginHistory.map((login, index) => (
-          <li key={index}>{login.timestamp} - {login.ip}</li>
-        ))}
-      </ul>
+      {loginHistory.length > 0 ? (
+        <ul>
+          {loginHistory.map((login, index) => (
+            <li key={index}>
+              {new Date(login.timestamp).toLocaleString()} - {login.ip || "Unknown IP"}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No login history available.</p>
+      )}
 
       <h2>Settings</h2>
       <button onClick={toggleTheme}>Toggle Theme</button>
