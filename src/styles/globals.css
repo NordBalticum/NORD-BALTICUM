@@ -1,50 +1,64 @@
-/* 🌟 Reset & Global Styling */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+:root {
+  --primary-color: #ffd700;
+  --secondary-color: #1e1e1e;
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --button-hover: #ffcc00;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 body {
-  background-color: var(--bg-color);
+  background: var(--background-color);
   color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
+  line-height: 1.6;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* 🌟 Glassmorphism Effect */
-.glass-container {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--button-hover);
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
   padding: 20px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* 🌟 Buttons */
 button {
+  font-size: 16px;
   padding: 12px 20px;
-  font-size: 18px;
-  font-weight: bold;
   border-radius: 8px;
+  border: none;
   cursor: pointer;
-  transition: all 0.3s;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
 }
 
-button.primary {
-  background: linear-gradient(45deg, #ffcc00, #ff9900);
+button:hover {
+  transform: scale(1.05);
+}
+
+.primary-button {
+  background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
-  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.4);
 }
 
-button.primary:hover {
-  background: linear-gradient(45deg, #ffaa00, #ff7700);
-}
-
-/* 🌟 Responsive Design */
-@media (max-width: 768px) {
-  body {
-    font-size: 16px;
-  }
+.secondary-button {
+  background: linear-gradient(90deg, #0a0a0a, #333);
+  color: #ffd700;
+  border: 2px solid #ffd700;
 }
