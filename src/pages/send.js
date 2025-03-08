@@ -4,6 +4,7 @@ import QRCode from "qrcode.react";
 import { useRouter } from "next/router";
 import "../styles/send.css";
 import Button from "../components/Buttons";
+import { supabase } from "../supabaseClient";
 
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
