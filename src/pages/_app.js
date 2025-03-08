@@ -2,7 +2,8 @@ import "@/styles/globals.css";
 import "@/styles/theme.css";
 import "@/styles/navbar.css";
 import "@/styles/footer.css";
-import "@/styles/buttons.css"; // ✅ Paliekam, nes globalus
+import "@/styles/themeswitcher.css";
+import "@/styles/buttons.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
