@@ -6,11 +6,15 @@ import styles from "@/styles/profile.module.css";
 export default function Profile() {
   const { user, logout } = useAuth();
   const [username, setUsername] = useState("");
-  const [walletAddress, setWalletAddress] = useState("");
+  const [walletAddress, setWalletAddress] = useState("No wallet linked");
   const [loginHistory, setLoginHistory] = useState([]);
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      setTheme(localStorage.getItem("theme") || "dark");
+    }
+
     if (!user) return;
 
     async function fetchProfile() {
@@ -27,9 +31,9 @@ export default function Profile() {
           setLoginHistory(data.login_history || []);
         }
 
-        if (error) console.error("Error fetching profile:", error);
+        if (error) console.error("❌ Error fetching profile:", error);
       } catch (err) {
-        console.error("Unexpected error:", err);
+        console.error("❌ Unexpected error:", err);
       }
     }
 
@@ -39,12 +43,12 @@ export default function Profile() {
   function copyToClipboard() {
     if (!walletAddress) return;
     navigator.clipboard.writeText(walletAddress);
-    alert("Wallet address copied!");
+    alert("✅ Wallet address copied!");
   }
 
   async function updateProfile() {
     if (!user) {
-      alert("You must be logged in to update your profile.");
+      alert("⚠ You must be logged in to update your profile.");
       return;
     }
 
@@ -53,8 +57,8 @@ export default function Profile() {
       .update({ username })
       .eq("id", user.id);
 
-    if (error) alert("Failed to update profile.");
-    else alert("Profile updated successfully!");
+    if (error) alert("❌ Failed to update profile.");
+    else alert("✅ Profile updated successfully!");
   }
 
   function toggleTheme() {
@@ -65,46 +69,60 @@ export default function Profile() {
   }
 
   return (
-    <div className="profile-container">
-      <h1>User Profile</h1>
+    <div className={styles.profileContainer}>
+      <h1>👤 User Profile</h1>
 
-      <label>Username:</label>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Enter your username"
-      />
-      <button onClick={updateProfile}>Save</button>
+      <div className={styles.inputGroup}>
+        <label>Username:</label>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter your username"
+        />
+        <button onClick={updateProfile}>Save</button>
+      </div>
 
-      <h2>Wallet Address</h2>
-      <p>{walletAddress}</p>
-      <button onClick={copyToClipboard}>Copy</button>
+      <div className={styles.walletSection}>
+        <h2>💳 Wallet Address</h2>
+        <p>{walletAddress}</p>
+        <button onClick={copyToClipboard}>Copy Address</button>
+      </div>
 
-      <h2>Login Method</h2>
-      <p>{user?.provider === "google" ? "Google Login" : "MetaMask"}</p>
+      <div className={styles.authMethod}>
+        <h2>🔑 Login Method</h2>
+        <p>{user?.provider === "google" ? "Google Login" : "MetaMask / MagicLink"}</p>
+      </div>
 
-      <h2>Recent Logins</h2>
-      {loginHistory.length > 0 ? (
-        <ul>
-          {loginHistory.map((login, index) => (
-            <li key={index}>
-              {new Date(login.timestamp).toLocaleString()} - {login.ip || "Unknown IP"}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No login history available.</p>
-      )}
+      <div className={styles.loginHistory}>
+        <h2>📅 Recent Logins</h2>
+        {loginHistory.length > 0 ? (
+          <ul>
+            {loginHistory.map((login, index) => (
+              <li key={index}>
+                {new Date(login.timestamp).toLocaleString()} - {login.ip || "Unknown IP"}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No login history available.</p>
+        )}
+      </div>
 
-      <h2>Settings</h2>
-      <button onClick={toggleTheme}>Toggle Theme</button>
+      <div className={styles.settings}>
+        <h2>⚙️ Settings</h2>
+        <button onClick={toggleTheme}>
+          {theme === "dark" ? "🌙 Switch to Light Mode" : "☀️ Switch to Dark Mode"}
+        </button>
+      </div>
 
-      <h2>Security</h2>
-      <p>2FA Status: <span className="status">Disabled</span></p>
-      <button>Enable 2FA (Coming Soon)</button>
+      <div className={styles.security}>
+        <h2>🔒 Security</h2>
+        <p>2FA Status: <span className={styles.status}>Disabled</span></p>
+        <button>Enable 2FA (Coming Soon)</button>
+      </div>
 
-      <button className="logout-btn" onClick={logout}>Logout</button>
+      <button className={styles.logoutBtn} onClick={logout}>🚪 Logout</button>
     </div>
   );
 }
