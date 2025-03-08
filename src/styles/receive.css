@@ -1,0 +1,50 @@
+.receive-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.receive-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-weight: bold;
+}
+
+.receive-container button {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.receive-container button:hover {
+  background: #0056b3;
+}
+
+.receive-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.receive-container li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.receive-container li a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.receive-container li a:hover {
+  text-decoration: underline;
+}
