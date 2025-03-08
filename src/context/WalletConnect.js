@@ -64,7 +64,7 @@ export const WalletProvider = ({ children }) => {
       if (!user.data.user) return;
 
       const { error } = await supabase
-        .from("profiles") // 🔹 Pakeisk į savo lentelės pavadinimą
+        .from("users") // 🔹 Pakeisk į savo lentelės pavadinimą
         .update({ wallet: address })
         .eq("id", user.data.user.id);
 
