@@ -1,35 +1,45 @@
 .admin-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
-  text-align: center;
   padding: 20px;
+  text-align: center;
   background: #121212;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
   color: #fff;
 }
 
+.search-box {
+  margin-bottom: 15px;
+}
+
+input {
+  padding: 10px;
+  width: 80%;
+  border-radius: 5px;
+}
+
 table {
   width: 100%;
-  margin-top: 20px;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
 th, td {
   padding: 10px;
-  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+  border-bottom: 1px solid #ffd700;
 }
 
 button {
   padding: 8px;
-  background: red;
-  color: white;
-  border: none;
+  margin: 5px;
   border-radius: 5px;
+  background: #ffd700;
+  color: #121212;
+  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 button:hover {
-  background: darkred;
+  background: #ffcc00;
 }
