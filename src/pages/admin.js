@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { supabase } from "../utils/supabaseClient";
 import NetworkSwitcher from "../components/NetworkSwitcher";
 import "../styles/admin.css";
@@ -8,6 +9,8 @@ export default function Admin() {
   const [transactions, setTransactions] = useState([]);
   const [search, setSearch] = useState("");
   const [adminFee, setAdminFee] = useState("");
+  const [compensateAmount, setCompensateAmount] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     fetchUsers();
@@ -59,9 +62,14 @@ export default function Admin() {
     fetchUsers();
   }
 
-  async function compensateFunds(id, amount) {
-    await supabase.from("transactions").insert([{ user_id: id, amount, type: "compensation" }]);
-    alert("Funds compensated successfully!");
+  async function compensateFunds(id) {
+    if (!compensateAmount || isNaN(compensateAmount) || compensateAmount <= 0) {
+      alert("Please enter a valid amount.");
+      return;
+    }
+    await supabase.from("transactions").insert([{ user_id: id, amount: compensateAmount, type: "compensation" }]);
+    alert(`Successfully compensated ${compensateAmount} BNB to user!`);
+    setCompensateAmount("");
     fetchTransactions();
   }
 
@@ -112,7 +120,13 @@ export default function Admin() {
                   ) : (
                     <button onClick={() => freezeWallet(user.id)}>Freeze Wallet</button>
                   )}
-                  <button onClick={() => compensateFunds(user.id, 0.5)}>Compensate 0.5 BNB</button>
+                  <input
+                    type="number"
+                    placeholder="Amount"
+                    value={compensateAmount}
+                    onChange={(e) => setCompensateAmount(e.target.value)}
+                  />
+                  <button onClick={() => compensateFunds(user.id)}>Compensate</button>
                 </td>
               </tr>
             ))}
