@@ -1,65 +1,79 @@
-/* 🔥 Bendras stilius */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
+  font-weight: bold;
   padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
-  animation: fadeIn 0.4s ease-in-out;
-}
-
-/* 🔥 Animacija */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
+  transition: all var(--transition-speed) ease-in-out;
+  box-shadow: var(--shadow-glow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .button:hover {
   transform: scale(1.05);
+  filter: brightness(1.2);
 }
 
-/* 🔥 Pirminis mygtukas */
-.primary {
+.button:active {
+  transform: scale(0.98);
+}
+
+.button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 🔥 Mygtukų tipai */
+.button.primary {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
 }
 
-/* 🔥 Antrinis mygtukas */
-.secondary {
-  background: linear-gradient(90deg, #1e1e1e, #333);
+.button.secondary {
+  background: linear-gradient(90deg, #0a0a0a, #333);
   color: #ffd700;
   border: 2px solid #ffd700;
 }
 
-/* 🔥 Kontūrinis mygtukas */
-.outline {
+.button.outline {
   background: transparent;
-  border: 2px solid #ffd700;
-  color: #ffd700;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
 }
 
-/* 🔥 "Ghost" mygtukas */
-.ghost {
+.button.ghost {
   background: none;
-  color: #ffd700;
   border: none;
-  box-shadow: none;
+  color: var(--primary-color);
 }
 
-/* 🔥 Pilno pločio mygtukas */
-.full-width {
-  width: 100%;
+/* 🔥 Dydžiai */
+.button.small {
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+.button.medium {
+  font-size: 16px;
+  padding: 12px 24px;
+}
+
+.button.large {
+  font-size: 18px;
+  padding: 16px 32px;
 }
 
 /* 🔥 Ikonos */
 .button-icon {
   margin-right: 8px;
-  display: flex;
-  align-items: center;
+  font-size: 1.2em;
+}
+
+.full-width {
+  width: 100%;
 }
