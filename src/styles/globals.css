@@ -6,6 +6,14 @@
   --background-color: #121212;
   --text-color: #ffffff;
   --button-hover: #ffcc00;
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+}
+
+[data-theme="light"] {
+  --background-color: #ffffff;
+  --text-color: #121212;
+  --secondary-color: #f0f0f0;
 }
 
 * {
@@ -19,13 +27,13 @@ body {
   background: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background var(--transition-speed), color var(--transition-speed);
 }
 
 a {
   text-decoration: none;
   color: var(--primary-color);
-  transition: color 0.3s ease;
+  transition: color var(--transition-speed);
 }
 
 a:hover {
@@ -38,20 +46,22 @@ a:hover {
   padding: 20px;
 }
 
+/* 🔥 Mygtukai */
 button {
   font-size: 16px;
   padding: 12px 20px;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
   font-weight: bold;
-  transition: all 0.3s ease-in-out;
+  transition: all var(--transition-speed) ease-in-out;
 }
 
 button:hover {
   transform: scale(1.05);
 }
 
+/* 🔥 Pagrindiniai mygtukai */
 .primary-button {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
@@ -61,4 +71,51 @@ button:hover {
   background: linear-gradient(90deg, #0a0a0a, #333);
   color: #ffd700;
   border: 2px solid #ffd700;
+}
+
+/* 🔥 Animacinis tamsos/šviesos perjungimas */
+.theme-switcher {
+  background: none;
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease-in-out;
+  color: var(--primary-color);
+}
+
+.theme-switcher:hover {
+  background: var(--primary-color);
+  color: var(--background-color);
+}
+
+/* 🔥 Navbar atnaujinimai */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--secondary-color);
+  padding: 15px 20px;
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.navbar a {
+  color: var(--text-color);
+  font-weight: 600;
+  padding: 8px 12px;
+  transition: color var(--transition-speed);
+}
+
+.navbar a:hover {
+  color: var(--primary-color);
+}
+
+/* 🔥 Footer */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background: var(--secondary-color);
+  color: var(--text-color);
+  font-size: 14px;
+  border-top: 3px solid var(--primary-color);
 }
