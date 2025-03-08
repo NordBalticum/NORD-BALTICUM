@@ -1,48 +1,39 @@
 .stake-container {
   max-width: 500px;
   margin: auto;
-  padding: 20px;
+  padding: 30px;
+  background: #121212;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
   text-align: center;
+  color: #fff;
 }
 
-.stake-container input,
-.stake-container select {
+.stake-container h1 {
+  margin-bottom: 20px;
+}
+
+input, select {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  text-align: center;
-  font-weight: bold;
+  border-radius: 5px;
+  font-size: 18px;
 }
 
-.stake-container button {
+button {
   width: 100%;
   padding: 12px;
-  background: #ff9900;
-  color: white;
+  background: #ffd700;
+  color: #121212;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 1rem;
+  transition: 0.3s;
 }
 
-.stake-container button:hover {
-  background: #cc7a00;
-}
-
-.staking-iframe-container {
-  margin-top: 20px;
-  width: 100%;
-  max-width: 600px;
-  height: 500px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.staking-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 10px;
+button:hover {
+  background: #ffcc00;
 }
