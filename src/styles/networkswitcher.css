@@ -1,32 +1,38 @@
 .network-switcher {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin: 20px 0;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
+  background: #222;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .network-switcher p {
+  margin: 0;
   font-size: 16px;
-  font-weight: bold;
 }
 
 .network-switcher button {
-  padding: 10px 20px;
+  background: linear-gradient(90deg, #ffd700, #ffcc00);
+  color: #121212;
+  padding: 10px 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  transition: 0.3s;
-  background: #ffd700;
-  color: #121212;
+  transition: all 0.3s ease-in-out;
 }
 
 .network-switcher button:hover {
-  background: #ffcc00;
+  transform: scale(1.05);
 }
 
 .network-switcher .active {
   background: #ffcc00;
-  box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.8);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
