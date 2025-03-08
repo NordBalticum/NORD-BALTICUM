@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
+import NetworkSwitcher from "../components/NetworkSwitcher";
 import "../styles/admin.css";
 
 export default function Admin() {
   const [users, setUsers] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [search, setSearch] = useState("");
+  const [adminFee, setAdminFee] = useState("");
 
   useEffect(() => {
     fetchUsers();
     fetchTransactions();
+    fetchAdminFee();
   }, []);
 
   async function fetchUsers() {
@@ -18,8 +21,22 @@ export default function Admin() {
   }
 
   async function fetchTransactions() {
-    let { data, error } = await supabase.from("transactions").select("*").order("created_at", { ascending: false });
+    let { data, error } = await supabase
+      .from("transactions")
+      .select("*")
+      .order("created_at", { ascending: false });
     if (!error) setTransactions(data);
+  }
+
+  async function fetchAdminFee() {
+    let { data, error } = await supabase.from("settings").select("admin_fee").eq("id", 1).single();
+    if (!error) setAdminFee(data.admin_fee);
+  }
+
+  async function updateAdminFee(fee) {
+    await supabase.from("settings").update({ admin_fee: fee }).eq("id", 1);
+    setAdminFee(fee);
+    alert("Admin fee updated successfully!");
   }
 
   async function banUser(id) {
@@ -42,14 +59,18 @@ export default function Admin() {
     fetchUsers();
   }
 
-  async function updateAdminFee(fee) {
-    await supabase.from("settings").update({ admin_fee: fee }).eq("id", 1);
-    alert("Admin fee updated successfully!");
+  async function compensateFunds(id, amount) {
+    await supabase.from("transactions").insert([{ user_id: id, amount, type: "compensation" }]);
+    alert("Funds compensated successfully!");
+    fetchTransactions();
   }
 
   return (
     <div className="admin-container">
       <h1>Admin Panel</h1>
+
+      {/* ✅ TINKLO PERJUNGIMAS */}
+      <NetworkSwitcher />
 
       <div className="search-box">
         <input
@@ -77,7 +98,9 @@ export default function Admin() {
               <tr key={user.id}>
                 <td>{user.email}</td>
                 <td>{user.wallet}</td>
-                <td>{user.banned ? "BANNED" : "ACTIVE"}</td>
+                <td className={user.banned ? "banned" : "active"}>
+                  {user.banned ? "BANNED" : "ACTIVE"}
+                </td>
                 <td>
                   {user.banned ? (
                     <button onClick={() => unbanUser(user.id)}>Unban</button>
@@ -89,6 +112,7 @@ export default function Admin() {
                   ) : (
                     <button onClick={() => freezeWallet(user.id)}>Freeze Wallet</button>
                   )}
+                  <button onClick={() => compensateFunds(user.id, 0.5)}>Compensate 0.5 BNB</button>
                 </td>
               </tr>
             ))}
@@ -118,7 +142,13 @@ export default function Admin() {
       </table>
 
       <h2>Admin Fee</h2>
-      <input type="number" placeholder="Set new admin fee %" onBlur={(e) => updateAdminFee(e.target.value)} />
+      <input
+        type="number"
+        placeholder="Set new admin fee %"
+        value={adminFee}
+        onChange={(e) => setAdminFee(e.target.value)}
+        onBlur={(e) => updateAdminFee(e.target.value)}
+      />
     </div>
   );
 }
