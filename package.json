@@ -21,7 +21,8 @@
     "glob": "^9.2.0",
     "@supabase/supabase-js": "latest",
     "ethers": "latest",
-    "axios": "latest"
+    "axios": "latest",
+    "react-icons": "^5.5.0" 
   },
   "devDependencies": {
     "eslint": "^9.0.0",
