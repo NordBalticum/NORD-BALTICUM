@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import QRCode from "qrcode.react";
 import { useRouter } from "next/router";
-import { Button } from "@/components/Buttons";
+import { Button } from "@/components/Button";
 import { supabase } from "@/utils/supabaseClient";
 import "@/styles/send.css";
 
