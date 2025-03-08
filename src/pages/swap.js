@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { supabase } from "@/loginsystem/supabaseClient";
+import "@/styles/swap.css";
 
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET; // Admin fee wallet
 
