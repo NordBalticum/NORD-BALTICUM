@@ -1,38 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
 .receive-container {
-  max-width: 600px;
+  max-width: 650px;
   margin: auto;
   text-align: center;
-  padding: 20px;
-  background: #121212;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  background: rgba(10, 31, 68, 0.85); /* 🔹 GLASSMORPHIC BACKGROUND */
+  backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
   color: #fff;
+  border: 2px solid rgba(255, 215, 0, 0.6);
+  transition: all 0.3s ease-in-out;
 }
 
+.receive-container:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+}
+
+/* 🔹 TEKSTO STILIAI */
+h1 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+}
+
+/* 🔹 WALLET BOX */
 .wallet-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #222;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 16px;
+  background: rgba(255, 215, 0, 0.1);
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 18px;
   font-weight: bold;
+  color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease-in-out;
 }
 
+.wallet-box:hover {
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+/* 🔹 COPY BUTTON */
 .wallet-box button {
-  background: #ffd700;
+  background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
+  padding: 10px 15px;
+  font-weight: bold;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
+.wallet-box button:hover {
+  background: linear-gradient(90deg, #ffec8b, #ffcc00);
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+/* 🔹 QR CODE ANIMACIJA */
 .qr-code {
   margin-top: 20px;
+  animation: pulse 1.5s infinite alternate;
 }
 
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+  }
+  to {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  }
+}
+
+/* 🔹 BSC SCAN LINK */
 .bscscan-link {
   margin-top: 15px;
 }
@@ -41,8 +88,11 @@
   color: #ffd700;
   font-weight: bold;
   text-decoration: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .bscscan-link a:hover {
   text-decoration: underline;
+  color: #ffcc00;
+  transform: scale(1.1);
 }
