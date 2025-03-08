@@ -1,50 +1,39 @@
 .receive-container {
   max-width: 500px;
   margin: auto;
+  text-align: center;
   padding: 20px;
-  text-align: center;
+  background: #121212;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  color: #fff;
 }
 
-.receive-container input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  text-align: center;
-  font-weight: bold;
-}
-
-.receive-container button {
+input {
   width: 100%;
   padding: 12px;
-  background: #007bff;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ffd700;
+  font-size: 18px;
+  background: #222;
   color: white;
+  text-align: center;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #ffd700;
+  color: #121212;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 1rem;
+  transition: 0.3s;
 }
 
-.receive-container button:hover {
-  background: #0056b3;
-}
-
-.receive-container ul {
-  list-style: none;
-  padding: 0;
-}
-
-.receive-container li {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-}
-
-.receive-container li a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.receive-container li a:hover {
-  text-decoration: underline;
+button:hover {
+  background: #ffcc00;
 }
