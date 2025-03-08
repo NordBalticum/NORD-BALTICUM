@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import "../styles/themeSwitcher.css";
 
-export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState("dark");
+const ThemeSwitcher = () => {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "dark";
-    setTheme(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  }, []);
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
+    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
   };
 
   return (
-    <button className="theme-switcher" onClick={toggleTheme}>
-      {theme === "dark" ? <FaSun className="icon" /> : <FaMoon className="icon" />}
+    <button className="theme-switcher" onClick={toggleTheme} aria-label="Toggle Theme">
+      {theme === "dark" ? <FaSun /> : <FaMoon />}
     </button>
   );
-}
+};
+
+export default ThemeSwitcher;
