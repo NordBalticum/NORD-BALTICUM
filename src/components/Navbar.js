@@ -2,6 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useTheme } from "../context/ThemeContext";
 import "@/styles/navbar.css";
+import { supabase } from "@/utils/supabaseClient";
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
