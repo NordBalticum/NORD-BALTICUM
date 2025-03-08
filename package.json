@@ -16,12 +16,15 @@
     "react-apexcharts": "^1.7.0",
     "apexcharts": "^4.5.0",
     "qrcode.react": "^4.2.0",
+    "webpack": "^5.90.0",
+    "rimraf": "^4.2.0",
+    "glob": "^9.2.0",
     "@supabase/supabase-js": "latest",
     "ethers": "latest",
     "axios": "latest"
   },
   "devDependencies": {
-    "eslint": "^8.57.1",
+    "eslint": "^9.0.0",
     "eslint-config-next": "latest",
     "prettier": "^3.0.3"
   },
