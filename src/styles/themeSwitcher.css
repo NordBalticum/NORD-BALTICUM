@@ -1,0 +1,12 @@
+.theme-switcher {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: 0.3s;
+}
+
+.theme-switcher:hover {
+  transform: scale(1.1);
+}
