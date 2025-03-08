@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import QRCode from "qrcode.react";
 import { supabase } from "@/utils/supabaseClient";
-import "@/styles/receive.css";
+import styles from "@/styles/receive.css";
 
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
 
