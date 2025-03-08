@@ -19,7 +19,7 @@
 }
 
 /* 🔹 TEKSTAI */
-h1 {
+.stake-title {
   font-size: 26px;
   font-weight: bold;
   color: #ffd700;
@@ -27,13 +27,13 @@ h1 {
   margin-bottom: 15px;
 }
 
-p {
+.stake-text {
   font-size: 18px;
   color: rgba(255, 255, 255, 0.85);
 }
 
 /* 🔹 INPUT & SELECT */
-input, select {
+.stake-input, .stake-select {
   width: 100%;
   padding: 12px;
   margin: 12px 0;
@@ -45,14 +45,14 @@ input, select {
   transition: all 0.3s ease-in-out;
 }
 
-input:focus, select:focus {
+.stake-input:focus, .stake-select:focus {
   border-color: #ffd700;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
   outline: none;
 }
 
 /* 🔹 MYGTUKAI */
-button {
+.stake-button {
   width: 100%;
   padding: 14px;
   background: linear-gradient(90deg, #ffd700, #ffcc00);
@@ -68,13 +68,13 @@ button {
   letter-spacing: 0.05em;
 }
 
-button:hover {
+.stake-button:hover {
   background: linear-gradient(90deg, #ffec8b, #ffcc00);
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
 }
 
-button:active {
+.stake-button:active {
   transform: scale(0.98);
   box-shadow: 0 2px 10px rgba(255, 215, 0, 0.6);
 }
@@ -92,4 +92,16 @@ button:active {
   font-size: 16px;
   font-weight: bold;
   color: #ffd700;
+}
+
+/* 🔹 RESPONSIVE */
+@media (max-width: 500px) {
+  .stake-container {
+    padding: 25px;
+    max-width: 90%;
+  }
+
+  .stake-button {
+    width: 100%;
+  }
 }
