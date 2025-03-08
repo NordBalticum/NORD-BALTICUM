@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
-import "@/styles/donation.css";
+import { supabase } from "../utils/supabaseClient";
+import "../styles/donation.css";
 import Button from "../components/Buttons";
-import { supabase } from "../supabaseClient";
 
 const charities = [
   {
@@ -39,7 +39,8 @@ export default function Donation() {
 
   // Tikriname ar suma tinkama
   const isValidAmount = (value) => {
-    return !isNaN(value) && parseFloat(value) > 0.0001 && parseFloat(value) <= 100; // Min 0.0001 BNB, Max 100 BNB
+    const parsedValue = parseFloat(value);
+    return !isNaN(parsedValue) && parsedValue >= 0.0001 && parsedValue <= 100;
   };
 
   const handleDonation = async () => {
@@ -62,32 +63,24 @@ export default function Donation() {
 
       // Konvertuojame sumą į WEI
       const value = ethers.utils.parseEther(amount);
+      const fee = value.mul(3).div(100); // 3% mokesčio apskaičiavimas
+      const donationAmount = value.sub(fee); // Likusi suma po mokesčių
 
-      // Skaičiuojame mokesčius (3% admin fee)
-      const fee = value.mul(3).div(100);
-      const totalAmount = value; // Bendra transakcijos suma
-
-      // Gavėjų sąrašas
-      const recipients = [
-        {
-          to: selectedCharity.wallet,
-          value: value.sub(fee),
-        },
-        {
-          to: adminWallet,
-          value: fee,
-        },
-      ];
-
-      // Siunčiame transakciją
-      const tx = await signer.sendTransaction({
-        to: recipients[0].to,
-        value: recipients[0].value.add(recipients[1].value), // Viena transakcija apima abi sumas
+      // Pervedimas į labdaros gavėjo adresą
+      const tx1 = await signer.sendTransaction({
+        to: selectedCharity.wallet,
+        value: donationAmount,
       });
+      await tx1.wait();
 
-      await tx.wait();
+      // Pervedimas į admin piniginę (3% fee)
+      const tx2 = await signer.sendTransaction({
+        to: adminWallet,
+        value: fee,
+      });
+      await tx2.wait();
 
-      alert(`Donation successful! View transaction: https://bscscan.com/tx/${tx.hash}`);
+      alert(`Donation successful! View transaction: https://bscscan.com/tx/${tx1.hash}`);
       router.push("/dashboard");
     } catch (error) {
       console.error("Donation failed", error);
@@ -149,14 +142,14 @@ export default function Donation() {
           Next →
         </button>
       </div>
-            
-<div className="dashboard-buttons">
-  <Button text="Send" onClick={() => router.push("/send")} />
-  <Button text="Receive" onClick={() => router.push("/receive")} />
-  <Button text="Stake" onClick={() => router.push("/stake")} />
-  <Button text="Swap" onClick={() => router.push("/swap")} />
-  <Button text="Donate" onClick={() => router.push("/donate")} />
-</div>        
+
+      <div className="dashboard-buttons">
+        <Button text="Send" onClick={() => router.push("/send")} />
+        <Button text="Receive" onClick={() => router.push("/receive")} />
+        <Button text="Stake" onClick={() => router.push("/stake")} />
+        <Button text="Swap" onClick={() => router.push("/swap")} />
+        <Button text="Donate" onClick={() => router.push("/donate")} />
+      </div>
     </div>
   );
 }
