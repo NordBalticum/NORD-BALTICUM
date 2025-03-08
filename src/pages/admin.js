@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import NetworkSwitcher from "@/components/NetworkSwitcher";
+import "@/styles/admin.module.css";
 
 export default function Admin() {
   const [users, setUsers] = useState([]);
