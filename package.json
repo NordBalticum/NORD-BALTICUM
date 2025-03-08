@@ -1,33 +1,37 @@
 {
-  "name": "nord-balticum-wallet",
+  "name": "nord-balticum",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint --fix .",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "@reown/appkit": "latest",
-    "@reown/appkit-adapter-wagmi": "1.0.3",
-    "ethers": "^5.7.2",
-    "crypto-browserify": "^3.12.0",
-    "@supabase/supabase-js": "^2.39.3",
-    "react-icons": "^4.10.1",
-    "framer-motion": "^10.16.4",
-    "@tanstack/react-query": "latest",
-    "axios": "^1.6.5",
-    "qrcode.react": "^3.2.0",
-    "react-apexcharts": "^1.4.0",
-    "next": "15.2.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "@supabase/supabase-js": "latest",
+    "ethers": "latest",
+    "axios": "latest"
   },
   "devDependencies": {
-    "eslint": "8.57.1",
-    "eslint-config-next": "15.2.1"
+    "eslint": "^8.57.1",
+    "eslint-config-next": "latest",
+    "prettier": "^3.0.3"
   },
-  "engines": {
-    "node": ">=18.0.0"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
