@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../styles/networkswitcher.css";
+import "@/styles/networkswitcher.css";
 
 const NetworkSwitcher = () => {
   const [network, setNetwork] = useState("Mainnet");
