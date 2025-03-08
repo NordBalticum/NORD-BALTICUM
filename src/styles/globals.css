@@ -2,151 +2,175 @@
 
 :root {
   --primary-color: #ffd700;
-  --secondary-color: #1e1e1e;
+  --secondary-color: #0a0a0a;
   --background-color: #121212;
   --text-color: #ffffff;
   --button-hover: #ffcc00;
-  --border-radius: 10px;
+  --border-radius: 12px;
   --transition-speed: 0.3s;
-  --shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  --shadow-glow: 0 0 15px rgba(255, 215, 0, 0.5);
+  --glass-blur: rgba(18, 18, 18, 0.85);
+  --glass-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
 [data-theme="light"] {
   --background-color: #ffffff;
   --text-color: #121212;
-  --secondary-color: #f0f0f0;
+  --secondary-color: #f4f4f4;
 }
 
+/* 🔥 VISI ELEMENTAI */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
+  transition: all var(--transition-speed) ease-in-out;
 }
 
+/* 🔥 BODY */
 body {
   background: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
-  transition: background var(--transition-speed), color var(--transition-speed);
 }
 
-/* 🔥 Nuorodų stilius */
+/* 🔥 NUORODŲ STILIUS */
 a {
   text-decoration: none;
   color: var(--primary-color);
   font-weight: 600;
-  transition: color var(--transition-speed);
 }
 
 a:hover {
   color: var(--button-hover);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
 }
 
-/* 🔥 Pagrindinis konteineris */
+/* 🔥 PAGRINDINIS KONTEINERIS */
 .container {
   max-width: 1200px;
   margin: auto;
   padding: 20px;
 }
 
-/* 🔥 Mygtukai */
+/* 🔥 PREMIUM MYGTUKAI */
 button {
   font-size: 16px;
-  padding: 12px 20px;
+  padding: 14px 24px;
   border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
   font-weight: bold;
-  transition: all var(--transition-speed) ease-in-out;
+  box-shadow: var(--shadow-glow);
+  text-transform: uppercase;
+  transition: all var(--transition-speed);
 }
 
 button:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-/* 🔥 Pagrindiniai mygtukai */
+/* 🔥 PREMIUM PAGRINDINIAI MYGTUKAI */
 .primary-button {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
-  box-shadow: var(--shadow);
 }
 
 .secondary-button {
   background: linear-gradient(90deg, #0a0a0a, #333);
   color: #ffd700;
   border: 2px solid #ffd700;
-  box-shadow: var(--shadow);
 }
 
-/* 🔥 Animacinis tamsos/šviesos perjungimas */
+/* 🔥 INTERAKTYVUS TEMOS PERJUNGIMAS */
 .theme-switcher {
-  background: none;
+  background: var(--glass-blur);
   border: 2px solid var(--primary-color);
   border-radius: 50%;
-  padding: 10px;
+  padding: 14px;
   cursor: pointer;
-  transition: all var(--transition-speed) ease-in-out;
-  color: var(--primary-color);
+  box-shadow: var(--shadow-glow);
 }
 
 .theme-switcher:hover {
   background: var(--primary-color);
   color: var(--background-color);
+  transform: scale(1.1);
 }
 
-/* 🔥 Navigacijos juosta */
+/* 🔥 NAVIGACIJOS JUOSTA */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--secondary-color);
+  background: var(--glass-blur);
+  backdrop-filter: blur(10px);
   padding: 15px 20px;
   border-bottom: 3px solid var(--primary-color);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-glow);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .navbar a {
   color: var(--text-color);
   font-weight: 600;
   padding: 8px 12px;
-  transition: color var(--transition-speed);
 }
 
 .navbar a:hover {
   color: var(--primary-color);
 }
 
-/* 🔥 Footer (Puslapio apačia) */
+/* 🔥 PUSLAPIO APAČIA */
 .footer {
   text-align: center;
-  padding: 15px;
-  background: var(--secondary-color);
+  padding: 20px;
+  background: var(--glass-blur);
   color: var(--text-color);
   font-size: 14px;
   border-top: 3px solid var(--primary-color);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-glow);
 }
 
-/* 🔥 Kortelių UI */
+/* 🔥 PREMIUM KORTELĖS */
 .card {
-  background: var(--secondary-color);
+  background: var(--glass-blur);
   padding: 20px;
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--glass-shadow);
   transition: transform var(--transition-speed);
 }
 
 .card:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
 }
 
-/* 🔥 Animacijos */
+/* 🔥 HOLOGRAPHIC UI */
+.holo-effect {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(0, 102, 204, 0.3));
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-glow);
+  padding: 15px;
+  transition: transform var(--transition-speed);
+}
+
+.holo-effect:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+}
+
+/* 🔥 MODERNUS ANIMACIJOS */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
+  from { opacity: 0; transform: translateY(-15px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .animated {
-  animation: fadeIn 0.5s ease-in-out;
+  animation: fadeIn 0.7s ease-in-out;
 }
