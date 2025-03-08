@@ -6,16 +6,16 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>© {new Date().getFullYear()} Nord Baltic. All Rights Reserved.</p>
+        <p>© {new Date().getFullYear()} Nord Balticum. All Rights Reserved.</p>
         <div className="social-icons">
           <a href="https://twitter.com/nordbaltic" target="_blank" rel="noopener noreferrer">
-            <FaTwitter />
+            <FaTwitter className="social-icon" />
           </a>
           <a href="https://t.me/nordbaltic" target="_blank" rel="noopener noreferrer">
-            <FaTelegram />
+            <FaTelegram className="social-icon" />
           </a>
           <a href="https://github.com/NordBalticum" target="_blank" rel="noopener noreferrer">
-            <FaGithub />
+            <FaGithub className="social-icon" />
           </a>
         </div>
       </div>
