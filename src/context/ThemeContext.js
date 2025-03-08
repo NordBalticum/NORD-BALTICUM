@@ -1,23 +1,40 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-export const ThemeContext = createContext();
+// ✅ Sukuriame kontekstą
+const ThemeContext = createContext();
 
+// ✅ Custom hook, kad būtų galima naudoti `useTheme()`
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
+};
+
+// ✅ ThemeProvider komponentas
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("dark");
+  // Patikrina, ar vartotojas jau turi išsaugotą temą
+  const getInitialTheme = () => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") || "dark"; // ✅ Numatytoji tema – "dark"
+    }
+    return "dark";
+  };
 
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  // Pasikeitus temai – išsaugo į `localStorage`
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "dark";
-    setTheme(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  }, []);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", theme);
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+  }, [theme]);
 
+  // ✅ Perjungia temą
   const toggleTheme = () => {
-    setTheme((prev) => {
-      const newTheme = prev === "dark" ? "light" : "dark";
-      localStorage.setItem("theme", newTheme);
-      document.documentElement.setAttribute("data-theme", newTheme);
-      return newTheme;
-    });
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   return (
@@ -27,4 +44,5 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
-export const useTheme = () => useContext(ThemeContext);
+// ✅ Default eksportas, jei reikia importuoti visą kontekstą
+export default ThemeContext;
