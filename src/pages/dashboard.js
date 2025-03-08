@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Chart from "chart.js/auto";
-import 
+import "@/styles/dashboard.css";
 
 const BSC_SCAN_API = process.env.NEXT_PUBLIC_BSC_SCAN_API;
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
