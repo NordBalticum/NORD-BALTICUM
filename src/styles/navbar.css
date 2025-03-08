@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 3px solid rgba(255, 215, 0, 0.6);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
   position: fixed;
   top: 0;
   left: 0;
@@ -27,13 +27,13 @@
 
 .navbar .logo a:hover {
   text-shadow: 0 0 20px rgba(255, 215, 0, 1);
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 /* 🔥 NAV MENU */
 .menu {
   display: flex;
-  gap: 25px;
+  gap: 30px;
   list-style: none;
 }
 
@@ -44,18 +44,18 @@
 .menu a {
   color: #fff;
   font-weight: 600;
-  padding: 12px 18px;
-  transition: color 0.3s ease-in-out;
+  padding: 12px 20px;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   font-size: 16px;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
 }
 
 .menu a:hover {
   color: #ffd700;
-  text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-  transform: scale(1.05);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
+  transform: scale(1.08);
 }
 
 /* 🔥 DROPDOWN MENU */
@@ -68,8 +68,8 @@
 .dropdown-menu {
   position: absolute;
   background: rgba(20, 20, 40, 0.95);
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
   top: 50px;
   left: 0;
   padding: 12px;
@@ -80,15 +80,35 @@
 }
 
 .dropdown-menu li {
-  padding: 8px 12px;
+  padding: 10px 15px;
 }
 
 .dropdown-menu li a {
   color: #ffd700;
+  font-weight: bold;
 }
 
 .dropdown-menu li a:hover {
   color: #fff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+/* 🔥 LOGIN / LOGOUT MYGTUKAI */
+.logout-btn, .login-btn {
+  background: none;
+  border: 2px solid #ffd700;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: #ffd700;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.logout-btn:hover, .login-btn:hover {
+  background: #ffd700;
+  color: #121212;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
 }
 
 /* 🔥 TEMOS PERJUNGIMO MYGTUKAS */
@@ -119,7 +139,7 @@
 }
 
 .menu-toggle:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 @media (max-width: 768px) {
@@ -130,10 +150,10 @@
     background: rgba(20, 20, 40, 0.95);
     top: 60px;
     right: 20px;
-    width: 220px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-    padding: 12px;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    padding: 15px;
     text-align: left;
   }
 
