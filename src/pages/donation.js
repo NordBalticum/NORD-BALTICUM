@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import "@/styles/donation.css";
+import Button from "../components/Buttons";
 
 const charities = [
   {
@@ -147,6 +148,14 @@ export default function Donation() {
           Next →
         </button>
       </div>
+            
+<div className="dashboard-buttons">
+  <Button text="Send" onClick={() => router.push("/send")} />
+  <Button text="Receive" onClick={() => router.push("/receive")} />
+  <Button text="Stake" onClick={() => router.push("/stake")} />
+  <Button text="Swap" onClick={() => router.push("/swap")} />
+  <Button text="Donate" onClick={() => router.push("/donate")} />
+</div>        
     </div>
   );
 }
