@@ -1,22 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true, // Užtikrina griežtesnę React logiką
-  trailingSlash: false, // Nepalikti / URL pabaigoje
+  reactStrictMode: true,
+  trailingSlash: false, // Nepalikti / pabaigoje URL
   images: {
-    domains: ["example.com"], // ✅ Pakeisk į savo domenus
-    formats: ["image/webp"], // ✅ WebP formatas optimaliam vaizdų naudojimui
+    domains: ["example.com"], // Pridėti reikiamus domenus
+    formats: ["image/webp"], // Optimizuotos WebP nuotraukos
   },
   experimental: {
-    optimizeCss: true, // ✅ Optimizuoja CSS (naudoti atsargiai)
-    serverActions: true, // ✅ Nauja Next.js server-side funkcija
+    optimizeCss: true, // Optimizuotas CSS
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
-      config.resolve.fallback = {
-        fs: false, // ✅ Išjungia fs naudojimą kliento pusėje
-      };
+      config.resolve.fallback = { fs: false }; // Pašalina fs klaidas kliento pusėje
     }
-    config.cache = false; // ✅ Išjungia Webpack cache, jei reikalinga švari kompiliacija
+    config.cache = true; // Išjungia cache, jei reikalinga švari kompiliacija
     return config;
   },
 };
