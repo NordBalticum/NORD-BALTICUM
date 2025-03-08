@@ -1,13 +1,18 @@
 .theme-switcher {
   background: none;
-  border: none;
+  border: 2px solid #ffd700;
+  border-radius: 50%;
+  padding: 10px;
   cursor: pointer;
-  font-size: 24px;
+  transition: all 0.3s ease-in-out;
   color: #ffd700;
-  transition: transform 0.3s ease-in-out;
 }
 
 .theme-switcher:hover {
-  transform: rotate(180deg);
-  color: #ffcc00;
+  background: #ffd700;
+  color: #121212;
+}
+
+.icon {
+  font-size: 24px;
 }
