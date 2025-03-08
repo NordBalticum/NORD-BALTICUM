@@ -40,6 +40,7 @@ export const WalletProvider = ({ children }) => {
         const address = await connectWallet();
         if (address && isMounted) {
           setWallet(address);
+          await saveWalletToDB(address);
           await updateBalance(address);
         }
       } catch (error) {
@@ -55,6 +56,27 @@ export const WalletProvider = ({ children }) => {
       isMounted = false;
     };
   }, []);
+
+  // ✅ Pridedame funkciją, kuri įrašo piniginės adresą į Supabase
+  const saveWalletToDB = async (address) => {
+    try {
+      const user = await supabase.auth.getUser();
+      if (!user.data.user) return;
+
+      const { error } = await supabase
+        .from("profiles") // 🔹 Pakeisk į savo lentelės pavadinimą
+        .update({ wallet: address })
+        .eq("id", user.data.user.id);
+
+      if (error) {
+        console.error("❌ Error saving wallet:", error);
+      } else {
+        console.log("✅ Wallet saved successfully!");
+      }
+    } catch (error) {
+      console.error("❌ Unexpected error in saveWalletToDB:", error);
+    }
+  };
 
   const updateBalance = useCallback(async (address) => {
     try {
