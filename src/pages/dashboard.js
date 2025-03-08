@@ -4,7 +4,6 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { supabase } from "../utils/supabaseClient";
 import Chart from "react-apexcharts";
-import "../styles/dashboard.css";
 import Button from "../components/Buttons";
 
 const BSC_SCAN_API = process.env.NEXT_PUBLIC_BSC_SCAN_API;
