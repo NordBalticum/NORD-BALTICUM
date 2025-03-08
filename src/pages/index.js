@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { supabase } from "@/loginsystem/supabaseClient";
-import "@/styles/index.css";
+import "@/styles/index.module.css";
 
 export default function Home() {
   const router = useRouter();
