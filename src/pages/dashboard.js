@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -24,79 +24,84 @@ export default function Dashboard() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    async function fetchBalances() {
-      if (!window.ethereum) {
-        alert("Please install MetaMask.");
-        return;
-      }
-
-      const provider = new ethers.providers.JsonRpcProvider(BSC_RPC_URL);
-
-      try {
-        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-        const address = accounts[0];
-
-        const balance = await provider.getBalance(address);
-        setBnbBalance(ethers.utils.formatEther(balance));
-
-        // Gauname visų tokenų balansą iš BscScan API
-        const tokenRes = await axios.get(
-          `https://api.bscscan.com/api?module=account&action=tokenbalance&address=${address}&apikey=${BSC_SCAN_API}`
-        );
-
-        if (tokenRes.data.status === "1") {
-          setTokens(tokenRes.data.result);
-        }
-
-        // Užkrauname balanso istoriją grafikui
-        let { data, error } = await supabase
-          .from("balances")
-          .select("amount")
-          .order("created_at", { ascending: false })
-          .limit(4);
-        if (!error) {
-          setChartData(prev => ({
-            ...prev,
-            series: [{ data: data.map(item => item.amount) }],
-          }));
-        }
-
-        // Užkrauname paskutines operacijas
-        let { data: txData, error: txError } = await supabase
-          .from("transactions")
-          .select("*")
-          .order("created_at", { ascending: false })
-          .limit(5);
-        if (!txError) {
-          setTransactions(txData);
-        }
-      } catch (error) {
-        console.error("Failed to fetch balances", error);
-      }
+  // ✅ Optimizuotas async funkcija adresų tikrinimui
+  const fetchBalances = useCallback(async () => {
+    if (typeof window === "undefined" || !window.ethereum) {
+      console.warn("MetaMask not detected.");
+      return;
     }
 
-    fetchBalances();
+    try {
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      const address = accounts[0];
+
+      const balance = await provider.getBalance(address);
+      setBnbBalance(ethers.formatEther(balance));
+
+      // Gauname visų tokenų balansą iš BscScan API
+      const tokenRes = await axios.get(
+        `https://api.bscscan.com/api?module=account&action=tokenbalance&address=${address}&apikey=${BSC_SCAN_API}`
+      );
+
+      if (tokenRes.data.status === "1" && Array.isArray(tokenRes.data.result)) {
+        const formattedTokens = tokenRes.data.result.map(token => ({
+          tokenName: token.tokenName,
+          tokenSymbol: token.tokenSymbol,
+          balance: ethers.formatUnits(token.balance || "0", token.tokenDecimal),
+        }));
+        setTokens(formattedTokens);
+      }
+
+      // Užkrauname balanso istoriją grafikui
+      let { data, error } = await supabase
+        .from("balances")
+        .select("amount")
+        .order("created_at", { ascending: false })
+        .limit(4);
+      if (!error) {
+        setChartData(prev => ({
+          ...prev,
+          series: [{ data: data.map(item => Number(item.amount)) }],
+        }));
+      }
+
+      // Užkrauname paskutines operacijas
+      let { data: txData, error: txError } = await supabase
+        .from("transactions")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(5);
+      if (!txError) {
+        setTransactions(txData);
+      }
+    } catch (error) {
+      console.error("Failed to fetch balances", error);
+    }
   }, []);
 
+  useEffect(() => {
+    fetchBalances();
+  }, [fetchBalances]);
+
   return (
-    <div className="dashboard-container">
+    <div className={styles.dashboardContainer}>
       <h1>Dashboard</h1>
 
-      <div className="balance-box">
+      <div className={styles.balanceBox}>
         <h2>BNB Balance</h2>
         <p>{bnbBalance} BNB</p>
       </div>
 
       <Chart options={chartData.options} series={chartData.series} type="line" height={250} />
 
-      <div className="token-list">
+      <div className={styles.tokenList}>
         <h2>Your Tokens</h2>
         {tokens.length > 0 ? (
           tokens.map((token, index) => (
-            <div key={index} className="token-item">
+            <div key={index} className={styles.tokenItem}>
               <span>{token.tokenName}</span>
-              <span>{ethers.utils.formatUnits(token.balance, token.tokenDecimal)} {token.tokenSymbol}</span>
+              <span>{token.balance} {token.tokenSymbol}</span>
             </div>
           ))
         ) : (
@@ -105,7 +110,7 @@ export default function Dashboard() {
       </div>
 
       <h2>Recent Transactions</h2>
-      <table className="transaction-table">
+      <table className={styles.transactionTable}>
         <thead>
           <tr>
             <th>Type</th>
@@ -130,12 +135,12 @@ export default function Dashboard() {
         </tbody>
       </table>
 
-      <div className="dashboard-buttons">
-        <Button text="Send" onClick={() => router.push("/send")} />
-        <Button text="Receive" onClick={() => router.push("/receive")} />
-        <Button text="Stake" onClick={() => router.push("/stake")} />
-        <Button text="Swap" onClick={() => router.push("/swap")} />
-        <Button text="Donate" onClick={() => router.push("/donate")} />
+      <div className={styles.dashboardButtons}>
+        <Buttons text="Send" onClick={() => router.push("/send")} />
+        <Buttons text="Receive" onClick={() => router.push("/receive")} />
+        <Buttons text="Stake" onClick={() => router.push("/stake")} />
+        <Buttons text="Swap" onClick={() => router.push("/swap")} />
+        <Buttons text="Donate" onClick={() => router.push("/donate")} />
       </div>
     </div>
   );
