@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import QRCode from "qrcode.react";
 import { useRouter } from "next/router";
-import "../styles/Send.css";
+import "../styles/send.css";
 import Button from "../components/Buttons";
 
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
