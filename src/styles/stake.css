@@ -19,7 +19,7 @@
 .stake-container button {
   width: 100%;
   padding: 12px;
-  background: #28a745;
+  background: #ff9900;
   color: white;
   border: none;
   border-radius: 8px;
@@ -28,5 +28,21 @@
 }
 
 .stake-container button:hover {
-  background: #218838;
+  background: #cc7a00;
+}
+
+.staking-iframe-container {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.staking-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
 }
