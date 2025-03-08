@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
-import { Buttons } from "@/components/Buttons";
+import Buttons from "@/components/Buttons"; // 🔹 Užtikrintas teisingas importas
 import styles from "@/styles/donation.module.css";
 
 const charities = [
@@ -45,7 +45,7 @@ export default function Donation() {
 
   const handleDonation = async () => {
     if (!isValidAmount(amount)) {
-      alert("Please enter a valid amount (0.0001 - 100 BNB).");
+      alert("⚠ Please enter a valid amount (0.0001 - 100 BNB).");
       return;
     }
 
@@ -53,14 +53,14 @@ export default function Donation() {
       setLoading(true);
 
       if (typeof window === "undefined" || !window.ethereum) {
-        alert("MetaMask is required to make a donation.");
+        alert("⚠ MetaMask is required to make a donation.");
         return;
       }
 
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
 
-      // Konvertuojame sumą į WEI
+      // 🔹 Konvertuojame sumą į WEI
       const value = ethers.parseEther(amount);
       const fee = (value * 3n) / 100n; // 3% mokestis
       const donationAmount = value - fee; // Likusi suma po mokesčių
@@ -79,11 +79,11 @@ export default function Donation() {
       });
       await tx2.wait();
 
-      alert(`Donation successful! View transaction: https://bscscan.com/tx/${tx1.hash}`);
+      alert(`✅ Donation successful! View transaction: https://bscscan.com/tx/${tx1.hash}`);
       router.push("/dashboard");
     } catch (error) {
-      console.error("Donation failed", error);
-      alert("Transaction failed. Please check your balance and network fees.");
+      console.error("❌ Donation failed", error);
+      alert("❌ Transaction failed. Please check your balance and network fees.");
     } finally {
       setLoading(false);
     }
@@ -92,15 +92,18 @@ export default function Donation() {
   return (
     <div className={styles.donationContainer}>
       <h1>Donate Cryptocurrency to Trusted Funds</h1>
+
+      {/* 📌 Labdaros organizacijos informacija */}
       <div className={styles.charityDisplay}>
         <img src={selectedCharity.image} alt={selectedCharity.name} />
         <h2>{selectedCharity.name}</h2>
         <p>{selectedCharity.description}</p>
         <a href={selectedCharity.link} target="_blank" rel="noopener noreferrer">
-          Learn More
+          🌍 Learn More
         </a>
       </div>
 
+      {/* 📌 Įveskite sumą */}
       <div className={styles.inputGroup}>
         <label>Amount (BNB)</label>
         <input
@@ -114,10 +117,12 @@ export default function Donation() {
         />
       </div>
 
+      {/* 📌 Donate mygtukas */}
       <button className={styles.donateBtn} onClick={handleDonation} disabled={loading}>
-        {loading ? "Processing..." : `Donate to ${selectedCharity.name}`}
+        {loading ? "⏳ Processing..." : `Donate to ${selectedCharity.name}`}
       </button>
 
+      {/* 📌 Navigacija tarp labdaros organizacijų */}
       <div className={styles.charityNavigation}>
         <button
           onClick={() =>
@@ -142,6 +147,7 @@ export default function Donation() {
         </button>
       </div>
 
+      {/* 📌 Greiti navigacijos mygtukai */}
       <div className={styles.dashboardButtons}>
         <Buttons text="Send" onClick={() => router.push("/send")} />
         <Buttons text="Receive" onClick={() => router.push("/receive")} />
