@@ -19,6 +19,7 @@
     "webpack": "^5.90.0",
     "rimraf": "^4.2.0",
     "glob": "^9.2.0",
+    "critters": "latest",
     "@supabase/supabase-js": "latest",
     "ethers": "latest",
     "axios": "latest",
