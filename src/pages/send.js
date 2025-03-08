@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import QRCode from "qrcode.react";
 import { useRouter } from "next/router";
-import "../styles/Send.css"; 
+import "../styles/Send.css";
+import Button from "../components/Buttons";
 
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
@@ -75,5 +76,13 @@ export default function Send() {
       </button>
       <QRCode value={recipient || "Scan QR"} />
     </div>
+        
+<div className="dashboard-buttons">
+  <Button text="Send" onClick={() => router.push("/send")} />
+  <Button text="Receive" onClick={() => router.push("/receive")} />
+  <Button text="Stake" onClick={() => router.push("/stake")} />
+  <Button text="Swap" onClick={() => router.push("/swap")} />
+  <Button text="Donate" onClick={() => router.push("/donate")} />
+</div>
   );
 }
