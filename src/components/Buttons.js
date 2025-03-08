@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import "@/styles/buttons.css"; // ✅ Teisingas globalus importas
+import "@/styles/buttons.module.css";
 
 const Buttons = forwardRef(
   (
