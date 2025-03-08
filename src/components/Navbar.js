@@ -1,12 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useTheme } from "../context/ThemeContext";
-import "@/styles/navbar.css";
+import { useRouter } from "next/router";
+import { useTheme } from "@/context/ThemeContext";
 import { supabase } from "@/utils/supabaseClient";
+import "@/styles/navbar.css";
 
 export default function Navbar() {
+  const router = useRouter();
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    fetchUser();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    router.push("/");
+  };
 
   return (
     <nav className={`navbar ${theme}`}>
@@ -31,8 +48,17 @@ export default function Navbar() {
               <li><Link href="/donate">Donate</Link></li>
             </ul>
           </li>
-          <li><Link href="/profile">Profile</Link></li>
-          <li><Link href="/settings">Settings</Link></li>
+          {user ? (
+            <>
+              <li><Link href="/profile">Profile</Link></li>
+              <li><Link href="/settings">Settings</Link></li>
+              <li>
+                <button className="logout-btn" onClick={handleLogout}>Logout</button>
+              </li>
+            </>
+          ) : (
+            <li><Link href="/auth/login">Login</Link></li>
+          )}
           <li>
             <button className="theme-toggle" onClick={toggleTheme}>
               {theme === "light" ? "🌙 Dark" : "☀️ Light"}
