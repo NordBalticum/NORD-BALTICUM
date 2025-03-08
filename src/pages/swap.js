@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { ethers } from "ethers";
 import axios from "axios";
 import "../styles/swap.css";
@@ -15,6 +16,7 @@ export default function Swap() {
   const [quote, setQuote] = useState(null);
   const [txHash, setTxHash] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchQuote() {
