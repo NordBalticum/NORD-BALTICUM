@@ -5,7 +5,7 @@
   margin: auto;
   text-align: center;
   background: rgba(10, 31, 68, 0.85); /* 🔹 GLASSMORPHIC BACKGROUND */
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
@@ -19,14 +19,14 @@
 }
 
 /* 🔹 TEKSTO STILIAI */
-h1 {
+.profile-title {
   font-size: 26px;
   font-weight: bold;
   color: #ffd700;
   text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
 }
 
-label {
+.profile-label {
   display: block;
   font-size: 18px;
   margin-top: 15px;
@@ -35,7 +35,7 @@ label {
 }
 
 /* 🔥 INPUT FIELDS */
-input {
+.profile-input {
   padding: 12px;
   width: 85%;
   font-size: 16px;
@@ -47,14 +47,14 @@ input {
   transition: all 0.3s ease-in-out;
 }
 
-input:focus {
+.profile-input:focus {
   border-color: #ffd700;
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
   outline: none;
 }
 
 /* 🔥 MYGTUKAI */
-button {
+.profile-button {
   padding: 12px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -67,31 +67,31 @@ button {
 }
 
 /* 🔥 PRIMARY BUTTON */
-button:not(.logout-btn) {
+.profile-button:not(.profile-logout) {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
 }
 
-button:not(.logout-btn):hover {
+.profile-button:not(.profile-logout):hover {
   background: linear-gradient(90deg, #ffec8b, #ffcc00);
   transform: scale(1.08);
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
 }
 
 /* 🔥 LOGOUT BUTTON */
-.logout-btn {
+.profile-logout {
   background: linear-gradient(90deg, #ff4c4c, #ff0000);
   color: #ffffff;
 }
 
-.logout-btn:hover {
+.profile-logout:hover {
   background: linear-gradient(90deg, #ff6666, #cc0000);
   transform: scale(1.08);
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
 }
 
 /* 🔥 STATUS */
-.status {
+.profile-status {
   font-weight: bold;
   font-size: 16px;
   color: #ff4c4c;
@@ -110,4 +110,20 @@ button:not(.logout-btn):hover {
 
 .profile-section:hover {
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+/* 🔹 RESPONSIVE */
+@media (max-width: 500px) {
+  .profile-container {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .profile-input {
+    width: 100%;
+  }
+
+  .profile-button {
+    width: 100%;
+  }
 }
