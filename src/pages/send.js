@@ -182,11 +182,4 @@ export default function Send() {
     </div>
   );
 }
-
-
----
-
-🔥 KODAS DABAR PILNAI OPTIMIZUOTAS:
-
-✅ Sujungtas Magic Link ir Web3 prisijungimas – tikrina ir Supabase vartotojo wallet, ir
-
+          
