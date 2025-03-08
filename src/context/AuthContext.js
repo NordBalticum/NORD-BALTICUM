@@ -8,25 +8,39 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true; // ✅ Apsauga nuo nereikalingų `setState` po unmount
+
     async function fetchSession() {
-      const { data: session, error } = await supabase.auth.getSession();
-      if (error) console.error("Session fetch error:", error);
-      setUser(session?.user ?? null);
-      setLoading(false);
+      try {
+        const { data: session, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        if (isMounted) setUser(session?.user ?? null);
+      } catch (error) {
+        console.error("Session fetch error:", error);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
     }
 
     fetchSession();
 
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (isMounted) setUser(session?.user ?? null);
     });
 
-    return () => authListener?.subscription?.unsubscribe();
+    return () => {
+      isMounted = false;
+      subscription?.unsubscribe();
+    };
   }, []);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
+    try {
+      await supabase.auth.signOut();
+      setUser(null);
+    } catch (error) {
+      console.error("Sign out error:", error);
+    }
   };
 
   return (
