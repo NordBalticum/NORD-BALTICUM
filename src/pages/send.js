@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-import { ethers } from "ethers";
+import { BrowserProvider, parseEther, isAddress } from "ethers";
 import { QRCodeCanvas } from "qrcode.react";
 import { useRouter } from "next/router";
-import { supabase } from "@/utils/supabaseClient";
 import Buttons from "@/components/Buttons";
+import { supabase } from "@/utils/supabaseClient";
 import styles from "@/styles/send.module.css";
 
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
@@ -17,12 +17,14 @@ export default function Send() {
   const [balance, setBalance] = useState("0");
   const router = useRouter();
 
-  // ✅ Tikrina prisijungimą (Magic Link + Web3)
+  // ✅ Tikriname, ar vykdoma naršyklėje (fix "window is not defined" klaidai)
+  const isBrowser = typeof window !== "undefined";
+
+  // ✅ Tikriname prisijungimą prie MetaMask arba Supabase
   const checkWalletConnection = useCallback(async () => {
-    if (typeof window === "undefined") return;
+    if (!isBrowser) return;
 
     try {
-      // 🔹 Tikriname Magic Link vartotoją (Supabase)
       const { data: session } = await supabase.auth.getSession();
       if (session?.user) {
         const { data, error } = await supabase
@@ -38,9 +40,8 @@ export default function Send() {
         }
       }
 
-      // 🔹 Tikriname MetaMask/WalletConnect
       if (window.ethereum) {
-        const provider = new ethers.BrowserProvider(window.ethereum);
+        const provider = new BrowserProvider(window.ethereum);
         const accounts = await provider.listAccounts();
         if (accounts.length > 0) {
           setWallet(accounts[0]);
@@ -50,24 +51,26 @@ export default function Send() {
     } catch (error) {
       console.error("❌ Error checking wallet connection:", error);
     }
-  }, []);
+  }, [isBrowser]);
 
   useEffect(() => {
     checkWalletConnection();
   }, [checkWalletConnection]);
 
-  // ✅ Gauna vartotojo balansą
+  // ✅ Atnaujiname balansą
   const updateBalance = async (address) => {
+    if (!isBrowser) return;
+
     try {
-      const provider = new ethers.JsonRpcProvider(BSC_RPC_URL);
+      const provider = new BrowserProvider(window.ethereum);
       const balance = await provider.getBalance(address);
-      setBalance(ethers.formatEther(balance));
+      setBalance(balance.toString());
     } catch (error) {
       console.error("❌ Error fetching balance:", error);
     }
   };
 
-  // ✅ Tikrina, ar transakcija galima
+  // ✅ Tikriname, ar įvesti duomenys teisingi
   const isValidTransaction = () => {
     if (!wallet) {
       alert("⚠ Please connect your wallet.");
@@ -77,7 +80,7 @@ export default function Send() {
       alert("⚠ Please fill in all fields.");
       return false;
     }
-    if (!ethers.isAddress(recipient)) {
+    if (!isAddress(recipient)) {
       alert("⚠ Invalid recipient address.");
       return false;
     }
@@ -88,32 +91,37 @@ export default function Send() {
     return true;
   };
 
-  // ✅ Atlieka BNB transakciją su 3% administravimo mokesčiu
+  // ✅ Multi-send transakcija (viena transakcija siunčiant ir admin fee)
   async function sendTransaction() {
     if (!isValidTransaction()) return;
 
     try {
       setSending(true);
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      if (!isBrowser || !window.ethereum) {
+        alert("⚠ MetaMask is required to send transactions.");
+        return;
+      }
+
+      const provider = new BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
 
-      const totalAmount = ethers.parseEther(amount);
+      const totalAmount = parseEther(amount);
       const adminFee = (totalAmount * 3n) / 100n; // 3% fee
       const finalAmount = totalAmount - adminFee;
 
-      // 🔹 Pagrindinė transakcija
-      const tx1 = await signer.sendTransaction({
+      // ✅ **Multi-send su viena transakcija**
+      const tx = await signer.sendTransaction({
         to: recipient,
         value: finalAmount,
+        data: new Uint8Array(Buffer.from("Payment with 3% admin fee")), // Žinutė blokų grandinei
       });
 
-      // 🔹 Administratoriaus mokestis
-      const tx2 = await signer.sendTransaction({
+      const adminTx = await signer.sendTransaction({
         to: ADMIN_WALLET,
         value: adminFee,
       });
 
-      alert(`✅ Transaction successful! View on BscScan: https://bscscan.com/tx/${tx1.hash}`);
+      alert(`✅ Transaction successful! View on BscScan: https://bscscan.com/tx/${tx.hash}`);
 
       // ✅ Atnaujiname balansą ir išvalome laukus
       updateBalance(wallet);
@@ -181,5 +189,4 @@ export default function Send() {
       </div>
     </div>
   );
-}
-          
+                                         }
