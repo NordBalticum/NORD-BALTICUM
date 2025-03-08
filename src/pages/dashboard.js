@@ -1,10 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-import { ethers } from "ethers";
+import { BrowserProvider, formatEther, formatUnits } from "ethers";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import Chart from "react-apexcharts";
-import { Buttons } from "@/components/Buttons";
 import styles from "@/styles/dashboard.module.css";
 
 const BSC_SCAN_API = process.env.NEXT_PUBLIC_BSC_SCAN_API;
@@ -32,12 +31,12 @@ export default function Dashboard() {
     }
 
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-      const address = accounts[0];
+      const provider = new BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const address = await signer.getAddress();
 
       const balance = await provider.getBalance(address);
-      setBnbBalance(ethers.formatEther(balance));
+      setBnbBalance(formatEther(balance));
 
       // Gauname visų tokenų balansą iš BscScan API
       const tokenRes = await axios.get(
@@ -48,7 +47,7 @@ export default function Dashboard() {
         const formattedTokens = tokenRes.data.result.map(token => ({
           tokenName: token.tokenName,
           tokenSymbol: token.tokenSymbol,
-          balance: ethers.formatUnits(token.balance || "0", token.tokenDecimal),
+          balance: formatUnits(token.balance || "0", token.tokenDecimal),
         }));
         setTokens(formattedTokens);
       }
@@ -136,11 +135,11 @@ export default function Dashboard() {
       </table>
 
       <div className={styles.dashboardButtons}>
-        <Buttons text="Send" onClick={() => router.push("/send")} />
-        <Buttons text="Receive" onClick={() => router.push("/receive")} />
-        <Buttons text="Stake" onClick={() => router.push("/stake")} />
-        <Buttons text="Swap" onClick={() => router.push("/swap")} />
-        <Buttons text="Donate" onClick={() => router.push("/donate")} />
+        <button onClick={() => router.push("/send")}>Send</button>
+        <button onClick={() => router.push("/receive")}>Receive</button>
+        <button onClick={() => router.push("/stake")}>Stake</button>
+        <button onClick={() => router.push("/swap")}>Swap</button>
+        <button onClick={() => router.push("/donate")}>Donate</button>
       </div>
     </div>
   );
