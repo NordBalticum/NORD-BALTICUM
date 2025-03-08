@@ -1,4 +1,6 @@
-.onboarding-container {
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+.indexContainer {
   max-width: 900px;
   margin: auto;
   text-align: center;
@@ -10,7 +12,7 @@
   animation: fadeIn 1.5s ease-in-out;
 }
 
-h1 {
+.indexTitle {
   font-size: 36px;
   margin-bottom: 10px;
 }
@@ -20,19 +22,19 @@ h1 {
   font-weight: bold;
 }
 
-p {
+.indexText {
   font-size: 18px;
   opacity: 0.9;
 }
 
-.cta-buttons {
+.ctaButtons {
   margin-top: 30px;
   display: flex;
   justify-content: center;
   gap: 20px;
 }
 
-.cta-button {
+.ctaButton {
   font-size: 18px;
   padding: 15px 25px;
   border-radius: 8px;
@@ -53,7 +55,7 @@ p {
   border: 2px solid #ffd700;
 }
 
-.cta-button:hover {
+.ctaButton:hover {
   transform: scale(1.05);
 }
 
@@ -64,7 +66,7 @@ p {
   text-align: center;
 }
 
-.feature {
+.featureBox {
   background: rgba(255, 215, 0, 0.1);
   padding: 20px;
   border-radius: 10px;
@@ -73,13 +75,13 @@ p {
   margin: 0 10px;
 }
 
-.feature h3 {
+.featureTitle {
   font-size: 20px;
   margin-bottom: 10px;
   color: #ffd700;
 }
 
-.feature p {
+.featureText {
   font-size: 16px;
 }
 
@@ -89,6 +91,7 @@ p {
   font-size: 14px;
 }
 
+/* ✅ Sklandesnė animacija */
 @keyframes fadeIn {
   from {
     opacity: 0;
