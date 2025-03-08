@@ -5,10 +5,13 @@
   --background-color: #121212;
   --text-color: #ffffff;
   --button-hover: #ffcc00;
-  --border-radius: 8px;
+  --border-radius: 10px;
   --transition-speed: 0.3s;
   --shadow-glow: 0 0 15px rgba(255, 215, 0, 0.5);
   --navbar-height: 60px;
+  --card-bg: #181818;
+  --card-border: rgba(255, 215, 0, 0.3);
+  --card-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
 }
 
 [data-theme="light"] {
@@ -16,6 +19,9 @@
   --text-color: #121212;
   --secondary-color: #f0f0f0;
   --shadow-glow: 0 0 10px rgba(0, 0, 0, 0.2);
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* 🔥 Bendras UI išvaizdos atnaujinimas */
@@ -24,6 +30,21 @@ body {
   color: var(--text-color);
   font-family: "Inter", sans-serif;
   transition: background var(--transition-speed), color var(--transition-speed);
+}
+
+/* 🔥 Kortelės UI */
+.card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
 
 /* 🔥 Mygtukai */
@@ -43,6 +64,7 @@ body {
 
 .button:hover {
   transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
 }
 
 /* 🔥 Pagrindiniai mygtukai */
@@ -71,6 +93,7 @@ body {
 .theme-switcher:hover {
   background: var(--primary-color);
   color: var(--background-color);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
 }
 
 /* 🔥 Navbar */
@@ -83,6 +106,11 @@ body {
   padding: 15px 20px;
   border-bottom: 3px solid var(--primary-color);
   box-shadow: var(--shadow-glow);
+  transition: box-shadow var(--transition-speed);
+}
+
+.navbar:hover {
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
 }
 
 .navbar a {
@@ -121,4 +149,40 @@ body {
 
 .animated-fadeIn {
   animation: fadeIn 0.6s ease-in-out;
+}
+
+/* 🔥 Sklandus įėjimas į ekraną */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animated-slideIn {
+  animation: slideIn 0.8s ease-in-out;
+}
+
+/* 🔥 Loading efektas */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 5px solid var(--secondary-color);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
