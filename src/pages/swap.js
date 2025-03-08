@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
 import "../styles/swap.css";
-import Button from "../components/Buttons";
+import { Button } from "../components/Buttons";
 import { supabase } from "../supabaseClient";
 
 const ONEINCH_API = "https://api.1inch.io/v5.0/56/";
