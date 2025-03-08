@@ -1,13 +1,17 @@
 import React from "react";
 import "../styles/footer.css";
 
-const Footer = () => {
+export default function Footer() {
   return (
     <footer className="footer">
-      <p>© 2025 NORD BALTICUM. All Rights Reserved.</p>
-      <p className="tagline">The Future of Web3 Finance.</p>
+      <div className="footer-content">
+        <p>© 2025 Nord Balticum. All Rights Reserved.</p>
+        <div className="footer-links">
+          <a href="/terms">Terms of Service</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
     </footer>
   );
-};
-
-export default Footer;
+}
