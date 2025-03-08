@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import QRCode from "react-qr-code";
 import { supabase } from "@/loginsystem/supabaseClient";
+import "@/styles/receive.css";
 
 export default function Receive() {
   const [walletAddress, setWalletAddress] = useState("");
