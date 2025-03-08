@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { supabase } from "@/loginsystem/supabaseClient";
+import "@/styles/stake.css";
 
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET; // Taken from Vercel `.env`
 
