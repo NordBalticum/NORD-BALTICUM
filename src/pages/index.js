@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "@/styles/index.module.css";
-import "@/styles/globals.css"; // ✅ Importuota naujai
 
 export default function Home() {
   const router = useRouter();
