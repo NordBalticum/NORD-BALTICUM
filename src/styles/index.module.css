@@ -35,6 +35,7 @@
 .indexText {
   font-size: 20px;
   opacity: 0.9;
+  line-height: 1.5;
 }
 
 /* 🔥 CALL TO ACTION BUTTONS */
@@ -58,6 +59,7 @@
 
 .ctaButton:hover {
   transform: scale(1.07);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
   filter: brightness(1.2);
 }
 
@@ -92,6 +94,7 @@
 
 .featureBox:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 }
 
 .featureTitle {
@@ -104,13 +107,19 @@
 
 .featureText {
   font-size: 17px;
+  opacity: 0.85;
 }
 
 /* 🔥 FOOTER */
 .footer {
   margin-top: 45px;
-  opacity: 0.8;
+  opacity: 0.85;
   font-size: 15px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.footer:hover {
+  opacity: 1;
 }
 
 /* 🔥 FADE-IN ANIMACIJA */
