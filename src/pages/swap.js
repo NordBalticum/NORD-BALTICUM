@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ethers } from "ethers";
 import axios from "axios";
-import "../styles/swap.css";
-import { Button } from "../components/Buttons";
-import { supabase } from "../utils/supabaseClient";
+import "@/styles/swap.css";
+import { Button } from "@/components/Buttons";
+import { supabase } from "@/utils/supabaseClient";
 
 const ONEINCH_API = "https://api.1inch.io/v5.0/56/";
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
