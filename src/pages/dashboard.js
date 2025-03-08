@@ -3,8 +3,10 @@ import { BrowserProvider, formatEther, formatUnits } from "ethers";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
-import Chart from "react-apexcharts";
+import dynamic from "next/dynamic"; // ✅ Užtikriname, kad komponentas vykdomas tik kliente
 import styles from "@/styles/dashboard.module.css";
+
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false }); // ✅ Dinaminis įkėlimas be SSR
 
 const BSC_SCAN_API = process.env.NEXT_PUBLIC_BSC_SCAN_API;
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
@@ -24,11 +26,10 @@ export default function Dashboard() {
   });
 
   const router = useRouter();
-  const isBrowser = typeof window !== "undefined";
 
-  // ✅ Tikriname vartotojo piniginę (MetaMask arba Supabase)
+  // ✅ Tikriname vartotojo prisijungimą (klientinėje pusėje)
   const checkWalletConnection = useCallback(async () => {
-    if (!isBrowser) return;
+    if (typeof window === "undefined") return; // 🚀 FIX SSR PROBLEMĄ
 
     try {
       // 📌 Patikriname Supabase naudotoją (magic link)
@@ -59,7 +60,7 @@ export default function Dashboard() {
     } catch (error) {
       console.error("❌ Error checking wallet connection:", error);
     }
-  }, [isBrowser]);
+  }, []);
 
   useEffect(() => {
     checkWalletConnection();
