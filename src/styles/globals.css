@@ -6,8 +6,9 @@
   --background-color: #121212;
   --text-color: #ffffff;
   --button-hover: #ffcc00;
-  --border-radius: 8px;
+  --border-radius: 10px;
   --transition-speed: 0.3s;
+  --shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
 [data-theme="light"] {
@@ -30,9 +31,11 @@ body {
   transition: background var(--transition-speed), color var(--transition-speed);
 }
 
+/* 🔥 Nuorodų stilius */
 a {
   text-decoration: none;
   color: var(--primary-color);
+  font-weight: 600;
   transition: color var(--transition-speed);
 }
 
@@ -40,6 +43,7 @@ a:hover {
   color: var(--button-hover);
 }
 
+/* 🔥 Pagrindinis konteineris */
 .container {
   max-width: 1200px;
   margin: auto;
@@ -65,12 +69,14 @@ button:hover {
 .primary-button {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
+  box-shadow: var(--shadow);
 }
 
 .secondary-button {
   background: linear-gradient(90deg, #0a0a0a, #333);
   color: #ffd700;
   border: 2px solid #ffd700;
+  box-shadow: var(--shadow);
 }
 
 /* 🔥 Animacinis tamsos/šviesos perjungimas */
@@ -89,7 +95,7 @@ button:hover {
   color: var(--background-color);
 }
 
-/* 🔥 Navbar atnaujinimai */
+/* 🔥 Navigacijos juosta */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -97,6 +103,7 @@ button:hover {
   background: var(--secondary-color);
   padding: 15px 20px;
   border-bottom: 3px solid var(--primary-color);
+  box-shadow: var(--shadow);
 }
 
 .navbar a {
@@ -110,7 +117,7 @@ button:hover {
   color: var(--primary-color);
 }
 
-/* 🔥 Footer */
+/* 🔥 Footer (Puslapio apačia) */
 .footer {
   text-align: center;
   padding: 15px;
@@ -118,4 +125,28 @@ button:hover {
   color: var(--text-color);
   font-size: 14px;
   border-top: 3px solid var(--primary-color);
+  box-shadow: var(--shadow);
+}
+
+/* 🔥 Kortelių UI */
+.card {
+  background: var(--secondary-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition-speed);
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+/* 🔥 Animacijos */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animated {
+  animation: fadeIn 0.5s ease-in-out;
 }
