@@ -1,38 +1,48 @@
 .receive-container {
-  max-width: 500px;
+  max-width: 600px;
   margin: auto;
   text-align: center;
-  background: #121212;
   padding: 20px;
+  background: #121212;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
   color: #fff;
 }
 
 .wallet-box {
-  background: #181818;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #222;
   padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-button {
-  padding: 10px;
+.wallet-box button {
   background: #ffd700;
   color: #121212;
+  padding: 8px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-button:hover {
-  background: #ffcc00;
+.qr-code {
+  margin-top: 20px;
 }
 
-.token-item, .tx-item {
-  background: #222;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 5px 0;
+.bscscan-link {
+  margin-top: 15px;
+}
+
+.bscscan-link a {
+  color: #ffd700;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.bscscan-link a:hover {
+  text-decoration: underline;
 }
