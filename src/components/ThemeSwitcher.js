@@ -1,16 +1,16 @@
-import { useContext } from "react";
-import { ThemeContext } from "@/context/ThemeContext";
-import { FaMoon, FaSun } from "react-icons/fa";
+import React, { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import { FaSun, FaMoon } from "react-icons/fa";
+import "../styles/themeSwitcher.css";
 
-export default function ThemeSwitcher() {
-  const { theme, setTheme } = useContext(ThemeContext);
+const ThemeSwitcher = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="theme-switcher"
-    >
-      {theme === "dark" ? <FaSun /> : <FaMoon />}
+    <button className="theme-switcher" onClick={toggleTheme}>
+      {theme === "light" ? <FaMoon /> : <FaSun />}
     </button>
   );
-}
+};
+
+export default ThemeSwitcher;
