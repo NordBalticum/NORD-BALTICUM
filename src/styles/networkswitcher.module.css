@@ -1,6 +1,6 @@
 .network-switcher {
   background: rgba(10, 31, 68, 0.85); /* 🔹 GLASSMORPHIC BACKGROUND */
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
   padding: 15px 25px;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
@@ -39,7 +39,7 @@
 }
 
 /* 🔥 MYGTUKAI */
-button {
+.network-button {
   padding: 12px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -62,6 +62,7 @@ button {
   background: linear-gradient(90deg, #FFEC8B, #FFA500);
   transform: scale(1.08);
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  filter: brightness(1.1);
 }
 
 /* 🔥 TESTNET MYGTUKAS */
@@ -75,4 +76,20 @@ button {
   background: linear-gradient(90deg, #87CEFA, #1E90FF);
   transform: scale(1.08);
   box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
+  filter: brightness(1.1);
+}
+
+/* 🔹 RESPONSIVE */
+@media (max-width: 400px) {
+  .network-switcher {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .network-button {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
