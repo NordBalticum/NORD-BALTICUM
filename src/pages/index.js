@@ -1,17 +1,24 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/index.module.css";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../utils/supabaseClient";
 
 export default function Home() {
   const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      router.push("/dashboard");
+    setIsClient(true);
+
+    if (typeof window !== "undefined") {
+      const user = localStorage.getItem("user");
+      if (user) {
+        router.push("/dashboard");
+      }
     }
-  }, []);
+  }, [router]);
+
+  if (!isClient) return null; // Užtikrina, kad kodas neveikia SSR metu
 
   return (
     <div className={styles.indexContainer}>
