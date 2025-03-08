@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ethers } from "ethers";
+import { BrowserProvider, parseEther, formatEther } from "ethers";
 import axios from "axios";
 import { supabase } from "@/utils/supabaseClient";
 import styles from "@/styles/stake.module.css";
@@ -16,17 +16,14 @@ export default function Stake() {
 
   useEffect(() => {
     async function fetchBalance() {
-      if (!window.ethereum) {
-        console.error("MetaMask is required");
-        return;
-      }
+      if (typeof window === "undefined" || !window.ethereum) return;
 
       try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
+        const provider = new BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
         const address = await signer.getAddress();
         const balance = await provider.getBalance(address);
-        setBnbBalance(ethers.utils.formatEther(balance));
+        setBnbBalance(formatEther(balance));
       } catch (error) {
         console.error("Error fetching wallet balance:", error);
       }
@@ -36,7 +33,7 @@ export default function Stake() {
   }, []);
 
   async function handleStake() {
-    if (!window.ethereum) {
+    if (typeof window === "undefined" || !window.ethereum) {
       alert("Please install MetaMask.");
       return;
     }
@@ -46,12 +43,12 @@ export default function Stake() {
       return;
     }
 
-    if (!amount || parseFloat(amount) <= 0) {
+    if (!amount || Number(amount) <= 0) {
       alert("Enter a valid staking amount.");
       return;
     }
 
-    if (parseFloat(amount) > parseFloat(bnbBalance)) {
+    if (Number(amount) > Number(bnbBalance)) {
       alert("Insufficient BNB balance.");
       return;
     }
@@ -61,12 +58,12 @@ export default function Stake() {
     try {
       const stakeFeeRates = { "365": 1, "180": 2, "90": 3, "30": 4 };
       const feePercentage = stakeFeeRates[stakePeriod] || 4;
-      const totalAmount = ethers.utils.parseEther(amount);
-      const feeAmount = totalAmount.mul(feePercentage).div(100);
-      const stakeAmount = totalAmount.sub(feeAmount);
+      const totalAmount = parseEther(amount);
+      const feeAmount = totalAmount * BigInt(feePercentage) / BigInt(100);
+      const stakeAmount = totalAmount - feeAmount;
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+      const provider = new BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
 
       // Siunčiame administracinį mokestį
       const feeTx = await signer.sendTransaction({
@@ -78,7 +75,7 @@ export default function Stake() {
 
       // Stake operacija per 1inch API
       const stakeTx = await axios.get(`${ONEINCH_API}stake`, {
-        params: { amount: ethers.utils.formatEther(stakeAmount), duration: stakePeriod },
+        params: { amount: formatEther(stakeAmount), duration: stakePeriod },
       });
 
       console.log("Staking Successful!", stakeTx.data);
@@ -93,7 +90,7 @@ export default function Stake() {
   }
 
   return (
-    <div className="stake-container">
+    <div className={styles.stakeContainer}>
       <h1>Stake BNB</h1>
       <p>Balance: {bnbBalance} BNB</p>
 
