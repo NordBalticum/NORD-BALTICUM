@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { supabase } from "../supabaseClient";
 import Chart from "react-apexcharts";
 import "../styles/dashboard.css";
+import Button from "../components/Buttons";
 
 const BSC_SCAN_API = process.env.NEXT_PUBLIC_BSC_SCAN_API;
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
@@ -90,14 +91,14 @@ export default function Dashboard() {
           <p>No tokens found</p>
         )}
       </div>
-
-      <div className="buttons-group">
-        <button onClick={() => router.push("/send")}>Send</button>
-        <button onClick={() => router.push("/receive")}>Receive</button>
-        <button onClick={() => router.push("/stake")}>Stake</button>
-        <button onClick={() => router.push("/swap")}>Swap</button>
-        <button onClick={() => router.push("/donate")}>Donate</button>
-      </div>
+          
+<div className="dashboard-buttons">
+  <Button text="Send" onClick={() => router.push("/send")} />
+  <Button text="Receive" onClick={() => router.push("/receive")} />
+  <Button text="Stake" onClick={() => router.push("/stake")} />
+  <Button text="Swap" onClick={() => router.push("/swap")} />
+  <Button text="Donate" onClick={() => router.push("/donate")} />
+</div>
     </div>
   );
 }
