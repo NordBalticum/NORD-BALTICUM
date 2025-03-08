@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import { Buttons } from "@/components/Buttons";
+import "@/styles/donation.module.css";
 
 const charities = [
   {
