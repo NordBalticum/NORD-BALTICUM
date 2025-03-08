@@ -1,66 +1,131 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import { supabase } from "@/loginsystem/supabaseClient";
-import "@/styles/swap.css";
+import axios from "axios";
+import { supabase } from "../supabaseClient";
+import "../styles/swap.css";
 
-const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET; // Admin fee wallet
+const ONE_INCH_API = "https://api.1inch.io/v4.0/56";
+const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
 
 export default function Swap() {
-  const [walletAddress, setWalletAddress] = useState("");
-  const [swapUrl, setSwapUrl] = useState("");
+  const [tokens, setTokens] = useState([]);
+  const [fromToken, setFromToken] = useState("BNB");
+  const [toToken, setToToken] = useState("");
+  const [amount, setAmount] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [swapQuote, setSwapQuote] = useState(null);
 
   useEffect(() => {
-    async function loadWallet() {
-      if (!window.ethereum) return;
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const accounts = await provider.listAccounts();
-      if (accounts.length > 0) {
-        setWalletAddress(accounts[0]);
+    async function fetchTokens() {
+      try {
+        const res = await axios.get(`${ONE_INCH_API}/tokens`);
+        setTokens(Object.values(res.data.tokens));
+      } catch (error) {
+        console.error("Failed to fetch tokens", error);
       }
     }
-    loadWallet();
-
-    // 1inch Swap Interface – Users select pairs themselves
-    setSwapUrl(`https://app.1inch.io/#/56/simple/swap/BNB/USDT`);
+    fetchTokens();
   }, []);
 
-  async function handleFee(amount) {
-    if (!walletAddress || !amount) return;
+  const getSwapQuote = async () => {
+    if (!fromToken || !toToken || !amount) return;
 
-    let feePercentage = 0.2; // 0.2% swap fee
-    let feeAmount = (amount * feePercentage) / 100;
+    try {
+      const res = await axios.get(`${ONE_INCH_API}/quote`, {
+        params: {
+          fromTokenAddress: fromToken,
+          toTokenAddress: toToken,
+          amount: ethers.utils.parseUnits(amount, 18).toString(),
+        },
+      });
+      setSwapQuote(res.data);
+    } catch (error) {
+      console.error("Failed to fetch swap quote", error);
+    }
+  };
 
-    // Send fee to Admin Wallet
+  const executeSwap = async () => {
+    if (!window.ethereum) {
+      alert("Please install MetaMask.");
+      return;
+    }
+
+    setLoading(true);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    await signer.sendTransaction({
-      to: ADMIN_WALLET,
-      value: ethers.utils.parseEther(feeAmount.toString()),
-    });
+    const address = await signer.getAddress();
 
-    // Store swap data in Supabase
-    await supabase.from("swaps").insert([
-      {
-        user: walletAddress,
-        amount: amount,
-        fee: feeAmount,
-        transaction_time: new Date().toISOString(),
-      },
-    ]);
+    const feeAmount = (amount * 0.2) / 100;
+    const swapAmount = amount - feeAmount;
 
-    alert("Swap fee paid – You can now proceed with your swap.");
-  }
+    try {
+      const tx = await signer.sendTransaction({
+        to: ADMIN_WALLET,
+        value: ethers.utils.parseEther(feeAmount.toString()),
+      });
+      await tx.wait();
+
+      const swapTx = await axios.get(`${ONE_INCH_API}/swap`, {
+        params: {
+          fromTokenAddress: fromToken,
+          toTokenAddress: toToken,
+          amount: ethers.utils.parseUnits(swapAmount.toString(), 18).toString(),
+          fromAddress: address,
+          slippage: 1,
+        },
+      });
+
+      await supabase.from("swaps").insert([{ user: address, fromToken, toToken, amount: swapAmount }]);
+
+      alert("Swap Successful!");
+    } catch (error) {
+      console.error("Swap failed", error);
+    }
+
+    setLoading(false);
+  };
 
   return (
     <div className="swap-container">
-      <h1>Swap BNB & Tokens</h1>
-      <p>Use the 1inch aggregator to get the best swap rates.</p>
+      <h1>Swap Your Tokens</h1>
 
-      <div className="swap-iframe-container">
-        <iframe src={swapUrl} title="1inch Swap" className="swap-iframe"></iframe>
+      <div className="input-group">
+        <label>From</label>
+        <select value={fromToken} onChange={(e) => setFromToken(e.target.value)}>
+          <option value="BNB">BNB</option>
+          {tokens.map((token) => (
+            <option key={token.address} value={token.address}>
+              {token.symbol}
+            </option>
+          ))}
+        </select>
       </div>
 
-      <button onClick={() => handleFee(1)}>Pay Swap Fee (Auto 0.2%)</button>
+      <div className="input-group">
+        <label>To</label>
+        <select value={toToken} onChange={(e) => setToToken(e.target.value)}>
+          <option value="">Select Token</option>
+          {tokens.map((token) => (
+            <option key={token.address} value={token.address}>
+              {token.symbol}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
+
+      <button onClick={getSwapQuote}>Get Quote</button>
+
+      {swapQuote && (
+        <div className="quote-box">
+          <p>Estimated Output: {swapQuote.toTokenAmount / 10 ** swapQuote.toToken.decimals} {swapQuote.toToken.symbol}</p>
+        </div>
+      )}
+
+      <button onClick={executeSwap} disabled={loading}>
+        {loading ? "Processing..." : "Swap"}
+      </button>
     </div>
   );
 }
