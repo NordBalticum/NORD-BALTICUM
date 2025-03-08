@@ -1,45 +1,152 @@
 .admin-container {
-  max-width: 900px;
-  margin: auto;
+  max-width: 1100px;
+  margin: 40px auto;
   padding: 20px;
-  text-align: center;
   background: #121212;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
-  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  text-align: center;
+  color: #ffffff;
 }
 
-.search-box {
-  margin-bottom: 15px;
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #ffd700;
 }
 
-input {
+.search-box input {
+  width: 100%;
   padding: 10px;
-  width: 80%;
+  font-size: 16px;
+  margin-bottom: 20px;
   border-radius: 5px;
+  border: 2px solid #ffd700;
+  background: #1e1e1e;
+  color: #ffffff;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 th, td {
-  padding: 10px;
-  border-bottom: 1px solid #ffd700;
+  border: 1px solid #ffd700;
+  padding: 12px;
+  text-align: center;
+  font-size: 16px;
+}
+
+th {
+  background: #222;
+  color: #ffd700;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background: #1e1e1e;
+}
+
+tr:nth-child(odd) {
+  background: #2a2a2a;
 }
 
 button {
-  padding: 8px;
-  margin: 5px;
-  border-radius: 5px;
-  background: #ffd700;
-  color: #121212;
+  padding: 10px 15px;
+  font-size: 14px;
   font-weight: bold;
+  border-radius: 5px;
+  border: none;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 button:hover {
+  transform: scale(1.05);
+}
+
+.ban-button {
+  background: #ff4c4c;
+  color: #ffffff;
+}
+
+.unban-button {
+  background: #4caf50;
+  color: #ffffff;
+}
+
+.freeze-button {
+  background: #ff9800;
+  color: #ffffff;
+}
+
+.unfreeze-button {
+  background: #03a9f4;
+  color: #ffffff;
+}
+
+.admin-fee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.admin-fee input {
+  padding: 10px;
+  font-size: 16px;
+  width: 100px;
+  border: 2px solid #ffd700;
+  background: #1e1e1e;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.admin-fee button {
+  background: linear-gradient(90deg, #ffd700, #ffcc00);
+  color: #121212;
+}
+
+.admin-fee button:hover {
+  background: #ffcc00;
+}
+
+/* 🔥 Specialios būsenos */
+.banned {
+  color: #ff4c4c;
+  font-weight: bold;
+}
+
+.active {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* 🔥 Tinklo perjungimo mygtuko dizainas */
+.network-switcher {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.network-switcher button {
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  background: linear-gradient(90deg, #ffd700, #ffcc00);
+  color: #121212;
+}
+
+.network-switcher button:hover {
+  transform: scale(1.05);
   background: #ffcc00;
 }
