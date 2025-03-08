@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
-import { supabase } from "../utils/supabaseClient";
-import Button from "../components/Buttons";
+import { supabase } from "@/utils/supabaseClient";
+import { Buttons } from "@/components/Buttons";
 
 const charities = [
   {
