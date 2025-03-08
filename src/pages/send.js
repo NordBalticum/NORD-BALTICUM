@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { ethers } from "ethers";
 import { supabase } from "@/loginsystem/supabaseClient";
 import QRCode from "react-qr-code";
+import "@/styles/send.css";
 
 export default function Send() {
   const router = useRouter();
