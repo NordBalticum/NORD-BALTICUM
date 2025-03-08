@@ -1,131 +1,85 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
-import { supabase } from "../supabaseClient";
 import "../styles/swap.css";
 
-const ONE_INCH_API = "https://api.1inch.io/v4.0/56";
+const ONEINCH_API = "https://api.1inch.io/v5.0/56/";
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
 
 export default function Swap() {
-  const [tokens, setTokens] = useState([]);
   const [fromToken, setFromToken] = useState("BNB");
-  const [toToken, setToToken] = useState("");
+  const [toToken, setToToken] = useState("USDT");
   const [amount, setAmount] = useState("");
+  const [quote, setQuote] = useState(null);
+  const [txHash, setTxHash] = useState("");
   const [loading, setLoading] = useState(false);
-  const [swapQuote, setSwapQuote] = useState(null);
 
   useEffect(() => {
-    async function fetchTokens() {
+    async function fetchQuote() {
+      if (!amount || parseFloat(amount) <= 0) return;
       try {
-        const res = await axios.get(`${ONE_INCH_API}/tokens`);
-        setTokens(Object.values(res.data.tokens));
+        const res = await axios.get(`${ONEINCH_API}quote`, {
+          params: { fromTokenSymbol: fromToken, toTokenSymbol: toToken, amount: ethers.utils.parseEther(amount) },
+        });
+        setQuote(res.data);
       } catch (error) {
-        console.error("Failed to fetch tokens", error);
+        console.error("Failed to fetch quote", error);
       }
     }
-    fetchTokens();
-  }, []);
+    fetchQuote();
+  }, [amount, fromToken, toToken]);
 
-  const getSwapQuote = async () => {
-    if (!fromToken || !toToken || !amount) return;
-
-    try {
-      const res = await axios.get(`${ONE_INCH_API}/quote`, {
-        params: {
-          fromTokenAddress: fromToken,
-          toTokenAddress: toToken,
-          amount: ethers.utils.parseUnits(amount, 18).toString(),
-        },
-      });
-      setSwapQuote(res.data);
-    } catch (error) {
-      console.error("Failed to fetch swap quote", error);
-    }
-  };
-
-  const executeSwap = async () => {
-    if (!window.ethereum) {
-      alert("Please install MetaMask.");
-      return;
-    }
+  async function handleSwap() {
+    if (!amount || parseFloat(amount) <= 0) return alert("Enter a valid amount");
 
     setLoading(true);
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const address = await signer.getAddress();
-
-    const feeAmount = (amount * 0.2) / 100;
-    const swapAmount = amount - feeAmount;
-
     try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+
+      // APSKAIČIUOJAME ADMIN MOKESTĮ 0.2%
+      const feeAmount = (parseFloat(amount) * 0.2) / 100;
+      const swapAmount = parseFloat(amount) - feeAmount;
+
+      // PERVEDIMAS ADMIN UI MOKESČIUI
       const tx = await signer.sendTransaction({
         to: ADMIN_WALLET,
         value: ethers.utils.parseEther(feeAmount.toString()),
       });
-      await tx.wait();
 
-      const swapTx = await axios.get(`${ONE_INCH_API}/swap`, {
-        params: {
-          fromTokenAddress: fromToken,
-          toTokenAddress: toToken,
-          amount: ethers.utils.parseUnits(swapAmount.toString(), 18).toString(),
-          fromAddress: address,
-          slippage: 1,
-        },
+      setTxHash(tx.hash);
+
+      // SWAP VYKDYMAS PER 1INCH API
+      const swapTx = await axios.get(`${ONEINCH_API}swap`, {
+        params: { fromTokenSymbol: fromToken, toTokenSymbol: toToken, amount: swapAmount, fromAddress: address },
       });
 
-      await supabase.from("swaps").insert([{ user: address, fromToken, toToken, amount: swapAmount }]);
-
-      alert("Swap Successful!");
+      console.log("Swap Successful!", swapTx.data);
     } catch (error) {
       console.error("Swap failed", error);
     }
-
     setLoading(false);
-  };
+  }
 
   return (
     <div className="swap-container">
-      <h1>Swap Your Tokens</h1>
-
-      <div className="input-group">
-        <label>From</label>
-        <select value={fromToken} onChange={(e) => setFromToken(e.target.value)}>
-          <option value="BNB">BNB</option>
-          {tokens.map((token) => (
-            <option key={token.address} value={token.address}>
-              {token.symbol}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="input-group">
-        <label>To</label>
-        <select value={toToken} onChange={(e) => setToToken(e.target.value)}>
-          <option value="">Select Token</option>
-          {tokens.map((token) => (
-            <option key={token.address} value={token.address}>
-              {token.symbol}
-            </option>
-          ))}
-        </select>
-      </div>
-
+      <h1>Swap Crypto</h1>
+      <p>Select Tokens & Amount</p>
+      <select value={fromToken} onChange={(e) => setFromToken(e.target.value)}>
+        <option value="BNB">BNB</option>
+        <option value="USDT">USDT</option>
+        <option value="ETH">ETH</option>
+      </select>
+      <select value={toToken} onChange={(e) => setToToken(e.target.value)}>
+        <option value="BNB">BNB</option>
+        <option value="USDT">USDT</option>
+        <option value="ETH">ETH</option>
+      </select>
       <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
-
-      <button onClick={getSwapQuote}>Get Quote</button>
-
-      {swapQuote && (
-        <div className="quote-box">
-          <p>Estimated Output: {swapQuote.toTokenAmount / 10 ** swapQuote.toToken.decimals} {swapQuote.toToken.symbol}</p>
-        </div>
-      )}
-
-      <button onClick={executeSwap} disabled={loading}>
-        {loading ? "Processing..." : "Swap"}
-      </button>
+      <button onClick={handleSwap} disabled={loading}>{loading ? "Swapping..." : "Swap Now"}</button>
+      {quote && <p>Expected Output: {quote.toTokenAmount} {toToken}</p>}
+      {txHash && <p>Transaction: <a href={`https://bscscan.com/tx/${txHash}`} target="_blank">View on BscScan</a></p>}
     </div>
   );
-}
+      }
