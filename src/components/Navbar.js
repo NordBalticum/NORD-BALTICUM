@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { supabase } from "@/utils/supabaseClient";
+import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import Image from "next/image";
 import "@/styles/navbar.css";
@@ -9,39 +9,22 @@ import "@/styles/navbar.css";
 export default function Navbar() {
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
+  const { user, signOut } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    };
-    fetchUser();
-  }, []);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
+    await signOut();
     router.push("/");
   };
 
   return (
     <nav className="navbar">
-      {/* 🔥 LOGOTIPAS */}
       <div className="logo">
         <Link href="/">
-          <Image 
-            src="/images/logo.svg" // DABAR PILNAI PALAIKO SVG
-            alt="Nord Balticum Logo" 
-            width={180} 
-            height={55} 
-            priority
-          />
+          <Image src="/images/logo.svg" alt="Nord Balticum Logo" width={160} height={50} priority />
         </Link>
       </div>
 
-      {/* 🔥 NAVIGACIJOS MENIU */}
       <ul className={`menu ${menuOpen ? "open" : ""}`}>
         <li><Link href="/dashboard">Dashboard</Link></li>
         <li className="dropdown">
@@ -78,7 +61,6 @@ export default function Navbar() {
         </li>
       </ul>
 
-      {/* 🔥 MOBILIOJO MENIU PERJUNGIMAS */}
       <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
         ☰
       </div>
