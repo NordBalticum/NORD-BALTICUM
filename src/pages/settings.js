@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { useAuth } from "@/context/AuthContext";
-import "@/styles/settings.css";
+import styles from "@/styles/settings.module.css";
 
 export default function Settings() {
   const { user, logout } = useAuth();
