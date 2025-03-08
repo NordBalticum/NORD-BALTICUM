@@ -14,16 +14,23 @@ const NetworkSwitcher = () => {
     setNetwork(newNetwork);
     localStorage.setItem("bscNetwork", newNetwork);
     alert(`Switched to ${newNetwork}`);
-    window.location.reload(); // Perkrauna puslapį su nauju tinklu
+    
+    // Jei būtina, perkrauna puslapį, bet tik jei tinklas skiriasi nuo dabartinio
+    if (network !== newNetwork) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    }
   };
 
   return (
     <div className="network-switcher">
-      <p>Current Network: <strong>{network}</strong></p>
-      <button 
-        onClick={switchNetwork} 
-        className={network === "Mainnet" ? "active" : ""}
-      >
+      <p>
+        Current Network: <strong className={network === "Mainnet" ? "mainnet" : "testnet"}>
+          {network}
+        </strong>
+      </p>
+      <button onClick={switchNetwork} className={network === "Mainnet" ? "mainnet-btn" : "testnet-btn"}>
         Switch to {network === "Mainnet" ? "Testnet" : "Mainnet"}
       </button>
     </div>
