@@ -1,30 +1,29 @@
-/* 🎨 Temų kintamieji */
+/* 🎨 Premium UI Theme Variables */
 :root {
   --primary-color: #ffd700;
-  --secondary-color: #1e1e1e;
+  --secondary-color: #0a0a0a;
   --background-color: #121212;
   --text-color: #ffffff;
   --button-hover: #ffcc00;
-  --border-radius: 10px;
+  --border-radius: 12px;
   --transition-speed: 0.3s;
-  --shadow-glow: 0 0 15px rgba(255, 215, 0, 0.5);
-  --navbar-height: 60px;
-  --card-bg: #181818;
-  --card-border: rgba(255, 215, 0, 0.3);
-  --card-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  --shadow-glow: 0 0 20px rgba(255, 215, 0, 0.5);
+  --glass-blur: rgba(18, 18, 18, 0.85);
+  --glass-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  --neon-blue: #009dff;
+  --neon-pink: #ff00ff;
+  --navbar-height: 65px;
 }
 
 [data-theme="light"] {
   --background-color: #ffffff;
   --text-color: #121212;
-  --secondary-color: #f0f0f0;
+  --secondary-color: #f4f4f4;
   --shadow-glow: 0 0 10px rgba(0, 0, 0, 0.2);
-  --card-bg: #ffffff;
-  --card-border: rgba(0, 0, 0, 0.1);
-  --card-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  --glass-blur: rgba(255, 255, 255, 0.9);
 }
 
-/* 🔥 Bendras UI išvaizdos atnaujinimas */
+/* 🔥 BODY UI */
 body {
   background: var(--background-color);
   color: var(--text-color);
@@ -32,42 +31,65 @@ body {
   transition: background var(--transition-speed), color var(--transition-speed);
 }
 
-/* 🔥 Kortelės UI */
-.card {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: var(--border-radius);
-  border: 2px solid var(--card-border);
-  box-shadow: var(--card-shadow);
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-}
-
-.card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-}
-
-/* 🔥 Mygtukai */
-.button {
-  display: inline-flex;
+/* 🔥 NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  padding: 12px 24px;
+  height: var(--navbar-height);
+  background: var(--glass-blur);
+  backdrop-filter: blur(10px);
+  padding: 15px 25px;
+  border-bottom: 3px solid var(--primary-color);
+  box-shadow: var(--shadow-glow);
+}
+
+.navbar:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+}
+
+.navbar a {
+  color: var(--text-color);
+  font-weight: 600;
+  padding: 10px 15px;
+  transition: color var(--transition-speed);
+}
+
+.navbar a:hover {
+  color: var(--primary-color);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
+
+/* 🔥 FOOTER */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--glass-blur);
+  color: var(--text-color);
+  font-size: 14px;
+  border-top: 3px solid var(--primary-color);
+  box-shadow: var(--shadow-glow);
+}
+
+/* 🔥 PREMIUM MYGTUKAI */
+button {
+  font-size: 18px;
+  padding: 14px 26px;
   border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
   font-weight: bold;
   transition: all var(--transition-speed) ease-in-out;
   box-shadow: var(--shadow-glow);
+  text-transform: uppercase;
 }
 
-.button:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
 }
 
-/* 🔥 Pagrindiniai mygtukai */
+/* 🔥 HOLOGRAPHIC PREMIUM MYGTUKAI */
 .primary-button {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
@@ -79,110 +101,100 @@ body {
   border: 2px solid #ffd700;
 }
 
-/* 🔥 Animacinis temų perjungimas */
+/* 🔥 INTERAKTYVUS TEMOS PERJUNGIMAS */
 .theme-switcher {
-  background: none;
+  background: var(--glass-blur);
   border: 2px solid var(--primary-color);
   border-radius: 50%;
-  padding: 10px;
+  padding: 14px;
   cursor: pointer;
-  transition: all var(--transition-speed) ease-in-out;
-  color: var(--primary-color);
+  box-shadow: var(--shadow-glow);
 }
 
 .theme-switcher:hover {
   background: var(--primary-color);
   color: var(--background-color);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
 }
 
-/* 🔥 Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: var(--navbar-height);
-  background: var(--secondary-color);
-  padding: 15px 20px;
-  border-bottom: 3px solid var(--primary-color);
-  box-shadow: var(--shadow-glow);
-  transition: box-shadow var(--transition-speed);
-}
-
-.navbar:hover {
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
-}
-
-.navbar a {
-  color: var(--text-color);
-  font-weight: 600;
-  padding: 8px 12px;
-  transition: color var(--transition-speed);
-}
-
-.navbar a:hover {
-  color: var(--primary-color);
-}
-
-/* 🔥 Footer */
-.footer {
-  text-align: center;
-  padding: 15px;
-  background: var(--secondary-color);
-  color: var(--text-color);
-  font-size: 14px;
-  border-top: 3px solid var(--primary-color);
-  box-shadow: var(--shadow-glow);
-}
-
-/* 🔥 Animacijos */
+/* 🔥 ANIMUOTI INTERAKTYVŪS ELEMENTAI */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .animated-fadeIn {
-  animation: fadeIn 0.6s ease-in-out;
+  animation: fadeIn 0.7s ease-in-out;
 }
 
-/* 🔥 Sklandus įėjimas į ekraną */
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .animated-slideIn {
   animation: slideIn 0.8s ease-in-out;
 }
 
-/* 🔥 Loading efektas */
+/* 🔥 LOADING EFFECT */
 .loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 5px solid var(--secondary-color);
-  border-top: 5px solid var(--primary-color);
+  width: 50px;
+  height: 50px;
+  border: 6px solid var(--secondary-color);
+  border-top: 6px solid var(--primary-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin: auto;
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 🔥 HOLOGRAPHIC UI ELEMENTAI */
+.holo-effect {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(0, 102, 204, 0.3));
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-glow);
+  padding: 18px;
+  transition: transform var(--transition-speed);
+}
+
+.holo-effect:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+}
+
+/* 🔥 CARD ELEMENTS */
+.card {
+  background: var(--glass-blur);
+  padding: 22px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--glass-shadow);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+}
+
+/* 🔥 NEON LIGHT UI */
+.neon-blue {
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.neon-pink {
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* 🔥 TEXT HIGHLIGHT */
+.text-glow {
+  font-weight: bold;
+  color: var(--primary-color);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
 }
