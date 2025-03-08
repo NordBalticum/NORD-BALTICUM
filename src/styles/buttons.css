@@ -1,90 +1,65 @@
-/* 🎨 Mygtukų UI */
+/* 🔥 Bendras stilius */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  padding: 14px 28px;
-  border-radius: var(--border-radius);
+  padding: 12px 24px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  transition: all var(--transition-speed) ease-in-out;
-  box-shadow: var(--shadow-glow);
-  position: relative;
-  overflow: hidden;
-  animation: fadeIn 0.6s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  animation: fadeIn 0.4s ease-in-out;
 }
 
-.button::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 300%;
-  height: 300%;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 10%, transparent 50%);
-  transition: all var(--transition-speed) ease-in-out;
-  transform: translate(-50%, -50%) scale(0);
+/* 🔥 Animacija */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.button:hover::before {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 0;
+.button:hover {
+  transform: scale(1.05);
 }
 
-/* 🔥 Pagrindiniai mygtukai */
+/* 🔥 Pirminis mygtukas */
 .primary {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
 }
 
-.primary:hover {
-  background: linear-gradient(90deg, #ffcc00, #ffd700);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-}
-
+/* 🔥 Antrinis mygtukas */
 .secondary {
-  background: linear-gradient(90deg, #0a0a0a, #333);
+  background: linear-gradient(90deg, #1e1e1e, #333);
   color: #ffd700;
   border: 2px solid #ffd700;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
-.secondary:hover {
-  background: linear-gradient(90deg, #333, #0a0a0a);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
-}
-
-.tertiary {
+/* 🔥 Kontūrinis mygtukas */
+.outline {
   background: transparent;
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
+  border: 2px solid #ffd700;
+  color: #ffd700;
 }
 
-.tertiary:hover {
-  background: var(--primary-color);
-  color: var(--background-color);
+/* 🔥 "Ghost" mygtukas */
+.ghost {
+  background: none;
+  color: #ffd700;
+  border: none;
+  box-shadow: none;
 }
 
-/* 🔥 Pilnas plotis */
+/* 🔥 Pilno pločio mygtukas */
 .full-width {
   width: 100%;
 }
 
-/* 🔥 Animacijos */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animated-fadeIn {
-  animation: fadeIn 0.6s ease-in-out;
+/* 🔥 Ikonos */
+.button-icon {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
 }
