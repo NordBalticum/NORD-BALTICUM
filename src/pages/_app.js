@@ -6,6 +6,7 @@ import "@/styles/dashboard.css";
 import "@/styles/admin.css";
 import "@/styles/donation.css";
 import "@/styles/networkswitcher.css";
+import "@/styles/profile.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { useRouter } from "next/router";
