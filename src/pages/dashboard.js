@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "@/utils/supabaseClient";
 import Chart from "react-apexcharts";
-import Button from "../components/Buttons";
+import { Buttons } from "@/components/Buttons";
 
 const BSC_SCAN_API = process.env.NEXT_PUBLIC_BSC_SCAN_API;
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
