@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../utils/supabaseClient";
 import { useAuth } from "../context/AuthContext";
 import { ethers } from "ethers";
 import "../styles/profile.css";
