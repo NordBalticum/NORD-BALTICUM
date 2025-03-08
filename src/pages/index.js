@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "@/styles/index.module.css";
+import "@/styles/globals.css"; // ✅ Importuota naujai
 
 export default function Home() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function Home() {
     }
   }, []);
 
-  if (!isClient) return null; // Užtikrina, kad kodas neveikia SSR metu
+  if (!isClient) return null;
 
   return (
     <div className={styles.container}>
@@ -42,21 +43,6 @@ export default function Home() {
         >
           ✉️ Sign up with Email
         </button>
-      </div>
-
-      <div className={styles.features}>
-        <div className={styles.featureBox}>
-          <h3 className={styles.featureTitle}>🛡️ Secure</h3>
-          <p className={styles.featureText}>Bank-grade encryption for all transactions.</p>
-        </div>
-        <div className={styles.featureBox}>
-          <h3 className={styles.featureTitle}>⚡ Fast</h3>
-          <p className={styles.featureText}>Instant transactions on Binance Smart Chain.</p>
-        </div>
-        <div className={styles.featureBox}>
-          <h3 className={styles.featureTitle}>🌍 Global</h3>
-          <p className={styles.featureText}>Seamless payments worldwide.</p>
-        </div>
       </div>
 
       <footer className={styles.footer}>
