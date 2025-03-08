@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
-import "../styles/themeswitcher.css";
+import "@/styles/themeswitcher.css";
 
 const ThemeSwitcher = () => {
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
