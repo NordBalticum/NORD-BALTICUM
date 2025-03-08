@@ -1,63 +1,87 @@
 .admin-container {
   max-width: 1100px;
   margin: 40px auto;
-  padding: 20px;
-  background: #121212;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  padding: 25px;
+  background: linear-gradient(135deg, #0A1F44, #142F60);
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
   text-align: center;
   color: #ffffff;
+  animation: fadeIn 1.2s ease-in-out;
 }
 
 h1 {
-  font-size: 28px;
+  font-size: 30px;
   margin-bottom: 20px;
-  color: #ffd700;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
 }
 
+/* 🔍 Search Box */
 .search-box input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
   margin-bottom: 20px;
-  border-radius: 5px;
-  border: 2px solid #ffd700;
-  background: #1e1e1e;
+  border-radius: 8px;
+  border: 2px solid var(--accent-color);
+  background: rgba(255, 215, 0, 0.05);
   color: #ffffff;
+  text-align: center;
+  transition: 0.3s;
 }
 
+.search-box input:focus {
+  outline: none;
+  border-color: #ffcc00;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+/* 📊 Tables */
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin-bottom: 30px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 th, td {
-  border: 1px solid #ffd700;
-  padding: 12px;
+  padding: 14px;
   text-align: center;
   font-size: 16px;
 }
 
 th {
-  background: #222;
-  color: #ffd700;
+  background: rgba(255, 215, 0, 0.2);
+  color: var(--accent-color);
   font-weight: bold;
+}
+
+tr {
+  transition: background 0.3s ease-in-out;
 }
 
 tr:nth-child(even) {
-  background: #1e1e1e;
+  background: rgba(255, 215, 0, 0.05);
 }
 
 tr:nth-child(odd) {
-  background: #2a2a2a;
+  background: rgba(255, 215, 0, 0.1);
 }
 
+tr:hover {
+  background: rgba(255, 215, 0, 0.3);
+}
+
+/* 🎛️ Buttons */
 button {
-  padding: 10px 15px;
+  padding: 12px 18px;
   font-size: 14px;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -87,6 +111,7 @@ button:hover {
   color: #ffffff;
 }
 
+/* ⚙️ Admin Fee */
 .admin-fee {
   display: flex;
   justify-content: center;
@@ -96,26 +121,36 @@ button:hover {
 }
 
 .admin-fee input {
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
-  width: 100px;
-  border: 2px solid #ffd700;
-  background: #1e1e1e;
+  width: 120px;
+  border: 2px solid var(--accent-color);
+  background: rgba(255, 215, 0, 0.1);
   color: #ffffff;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.admin-fee input:focus {
+  outline: none;
+  border-color: #ffcc00;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
 .admin-fee button {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
 }
 
 .admin-fee button:hover {
   background: #ffcc00;
 }
 
-/* 🔥 Specialios būsenos */
+/* 🔥 Status */
 .banned {
   color: #ff4c4c;
   font-weight: bold;
@@ -126,7 +161,7 @@ button:hover {
   font-weight: bold;
 }
 
-/* 🔥 Tinklo perjungimo mygtuko dizainas */
+/* 🔄 Network Switcher */
 .network-switcher {
   margin-bottom: 20px;
   display: flex;
@@ -135,10 +170,10 @@ button:hover {
 }
 
 .network-switcher button {
-  padding: 10px 15px;
+  padding: 12px 16px;
   font-size: 14px;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -149,4 +184,16 @@ button:hover {
 .network-switcher button:hover {
   transform: scale(1.05);
   background: #ffcc00;
+}
+
+/* 🔥 Smooth Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
