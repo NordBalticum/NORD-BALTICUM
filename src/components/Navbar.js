@@ -1,60 +1,42 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { useAuth } from "../context/AuthContext";
+import { useState } from "react";
+import Link from "next/link";
 import { useTheme } from "../context/ThemeContext";
-import "@/styles/navbar.css";
+import "../styles/navbar.css";
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
-  const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Automatiškai atpažįsta, ar vartotojas prisijungęs
-  useEffect(() => {
-    if (!user) {
-      router.push("/");
-    }
-  }, [user]);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className={`navbar ${theme}`}>
-      <div className="nav-logo" onClick={() => router.push("/dashboard")}>
-        NordBaltic Wallet
+      <div className="logo">
+        <Link href="/">NORD BALTICUM</Link>
       </div>
 
-      <div className="nav-links">
-        <a onClick={() => router.push("/dashboard")}>Dashboard</a>
-        <a onClick={() => router.push("/send")}>Send</a>
-        <a onClick={() => router.push("/receive")}>Receive</a>
-        <a onClick={() => router.push("/stake")}>Stake</a>
-        <a onClick={() => router.push("/swap")}>Swap</a>
-        <a onClick={() => router.push("/donate")}>Donate</a>
+      <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+        ☰
       </div>
 
-      <div className="nav-actions">
-        <button className="theme-toggle" onClick={toggleTheme}>
-          {theme === "dark" ? "🌙" : "☀️"}
-        </button>
-
-        {user ? (
-          <div className="dropdown">
-            <button onClick={() => setIsOpen(!isOpen)}>⚙️</button>
-            {isOpen && (
-              <div className="dropdown-menu">
-                <a onClick={() => router.push("/profile")}>Profile</a>
-                <a onClick={() => router.push("/settings")}>Settings</a>
-                <a onClick={() => router.push("/admin")}>Admin</a>
-                <a onClick={logout}>Logout</a>
-              </div>
-            )}
-          </div>
-        ) : (
-          <button className="login-btn" onClick={() => router.push("/login")}>
-            Login
+      <ul className={`menu ${menuOpen ? "open" : ""}`}>
+        <li><Link href="/dashboard">Dashboard</Link></li>
+        <li className="dropdown">
+          <span>Crypto Actions ▼</span>
+          <ul className="dropdown-menu">
+            <li><Link href="/send">Send</Link></li>
+            <li><Link href="/receive">Receive</Link></li>
+            <li><Link href="/stake">Stake</Link></li>
+            <li><Link href="/swap">Swap</Link></li>
+            <li><Link href="/donate">Donate</Link></li>
+          </ul>
+        </li>
+        <li><Link href="/profile">Profile</Link></li>
+        <li><Link href="/settings">Settings</Link></li>
+        <li>
+          <button className="theme-toggle" onClick={toggleTheme}>
+            {theme === "light" ? "🌙 Dark" : "☀️ Light"}
           </button>
-        )}
-      </div>
+        </li>
+      </ul>
     </nav>
   );
 }
