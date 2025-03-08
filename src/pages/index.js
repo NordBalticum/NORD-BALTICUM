@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import "../styles/index.module.css";
+import styles from "../styles/index.module.css";
 
 export default function Home() {
   const router = useRouter();
@@ -13,37 +13,43 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="onboarding-container">
-      <h1>Welcome to <span className="highlight">Nord Balticum</span></h1>
-      <p>The most advanced Web3 financial ecosystem.</p>
+    <div className={styles.indexContainer}>
+      <h1 className={styles.indexTitle}>
+        Welcome to <span className={styles.highlight}>Nord Balticum</span>
+      </h1>
+      <p className={styles.indexText}>The most advanced Web3 financial ecosystem.</p>
 
-      <div className="cta-buttons">
-        <button className="cta-button primary" onClick={() => router.push("/auth/login")}>
+      <div className={styles.ctaButtons}>
+        <button
+          className={`${styles.ctaButton} ${styles.primary}`}
+          onClick={() => router.push("/auth/login")}
+        >
           🚀 Login with Wallet
         </button>
-        <button className="cta-button secondary" onClick={() => router.push("/auth/signup")}>
+        <button
+          className={`${styles.ctaButton} ${styles.secondary}`}
+          onClick={() => router.push("/auth/signup")}
+        >
           ✉️ Sign up with Email
         </button>
       </div>
 
-      <div className="features">
-        <div className="feature">
-          <h3>🛡️ Secure</h3>
-          <p>Bank-grade encryption for all transactions.</p>
+      <div className={styles.features}>
+        <div className={styles.featureBox}>
+          <h3 className={styles.featureTitle}>🛡️ Secure</h3>
+          <p className={styles.featureText}>Bank-grade encryption for all transactions.</p>
         </div>
-        <div className="feature">
-          <h3>⚡ Fast</h3>
-          <p>Instant transactions on Binance Smart Chain.</p>
+        <div className={styles.featureBox}>
+          <h3 className={styles.featureTitle}>⚡ Fast</h3>
+          <p className={styles.featureText}>Instant transactions on Binance Smart Chain.</p>
         </div>
-        <div className="feature">
-          <h3>🌍 Global</h3>
-          <p>Seamless payments worldwide.</p>
+        <div className={styles.featureBox}>
+          <h3 className={styles.featureTitle}>🌍 Global</h3>
+          <p className={styles.featureText}>Seamless payments worldwide.</p>
         </div>
       </div>
 
-      <footer className="footer">
-        <p>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
-      </footer>
+      <p className={styles.footer}>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
     </div>
   );
 }
