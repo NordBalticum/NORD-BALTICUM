@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
-import QRCode from "qrcode.react";
+import { QRCodeCanvas } from "qrcode.react";
 import { useRouter } from "next/router";
 import { Buttons } from "@/components/Buttons";
 import { supabase } from "@/utils/supabaseClient";
@@ -17,20 +17,25 @@ export default function Send() {
   const [connected, setConnected] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!window.ethereum) {
+  // ✅ Optimizuotas async funkcija adresų tikrinimui
+  const checkConnection = useCallback(async () => {
+    if (typeof window === "undefined" || !window.ethereum) {
       alert("Please install MetaMask.");
       return;
     }
 
-    async function checkConnection() {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+    try {
+      const provider = new ethers.BrowserProvider(window.ethereum);
       const accounts = await provider.listAccounts();
       if (accounts.length > 0) setConnected(true);
+    } catch (error) {
+      console.error("Error checking connection:", error);
     }
-
-    checkConnection();
   }, []);
+
+  useEffect(() => {
+    checkConnection();
+  }, [checkConnection]);
 
   async function sendTransaction() {
     if (!recipient || !amount) {
@@ -38,7 +43,7 @@ export default function Send() {
       return;
     }
 
-    if (!ethers.utils.isAddress(recipient)) {
+    if (!ethers.isAddress(recipient)) {
       alert("Invalid recipient address.");
       return;
     }
@@ -46,12 +51,12 @@ export default function Send() {
     try {
       setSending(true);
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
 
-      const totalAmount = ethers.utils.parseEther(amount);
-      const adminFee = totalAmount.mul(fee).div(100);
-      const finalAmount = totalAmount.sub(adminFee);
+      const totalAmount = ethers.parseEther(amount);
+      const adminFee = (totalAmount * BigInt(fee)) / BigInt(100);
+      const finalAmount = totalAmount - adminFee;
 
       // Pagrindinė transakcija
       const tx1 = await signer.sendTransaction({
@@ -66,6 +71,11 @@ export default function Send() {
       });
 
       alert(`Transaction successful! View on BscScan: https://bscscan.com/tx/${tx1.hash}`);
+      
+      // ✅ Išvalome laukus po transakcijos
+      setRecipient("");
+      setAmount("");
+      
       router.push("/dashboard");
     } catch (error) {
       console.error("Transaction failed:", error);
@@ -76,10 +86,10 @@ export default function Send() {
   }
 
   return (
-    <div className="send-container">
+    <div className={styles.sendContainer}>
       <h1>Send BNB / Tokens</h1>
 
-      <div className="input-group">
+      <div className={styles.inputGroup}>
         <label>Recipient Address</label>
         <input
           type="text"
@@ -89,7 +99,7 @@ export default function Send() {
         />
       </div>
 
-      <div className="input-group">
+      <div className={styles.inputGroup}>
         <label>Amount (BNB)</label>
         <input
           type="number"
@@ -107,18 +117,18 @@ export default function Send() {
         {sending ? "Sending..." : "Send"}
       </button>
 
-      <div className="qr-code">
-        {recipient ? <QRCode value={recipient} size={200} /> : <p>No QR Code Available</p>}
+      <div className={styles.qrCode}>
+        {recipient ? <QRCodeCanvas value={recipient} size={200} /> : <p>No QR Code Available</p>}
       </div>
 
       {/* Dashboard buttons */}
-      <div className="dashboard-buttons">
-        <Button text="Send" onClick={() => router.push("/send")} />
-        <Button text="Receive" onClick={() => router.push("/receive")} />
-        <Button text="Stake" onClick={() => router.push("/stake")} />
-        <Button text="Swap" onClick={() => router.push("/swap")} />
-        <Button text="Donate" onClick={() => router.push("/donate")} />
+      <div className={styles.dashboardButtons}>
+        <Buttons text="Send" onClick={() => router.push("/send")} />
+        <Buttons text="Receive" onClick={() => router.push("/receive")} />
+        <Buttons text="Stake" onClick={() => router.push("/stake")} />
+        <Buttons text="Swap" onClick={() => router.push("/swap")} />
+        <Buttons text="Donate" onClick={() => router.push("/donate")} />
       </div>
     </div>
   );
-                                   }
+                                         }
