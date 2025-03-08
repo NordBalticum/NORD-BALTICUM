@@ -32,16 +32,13 @@ export default function Stake() {
     // Pervesti fee į admin wallet
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const txFee = await signer.sendTransaction({
+    await signer.sendTransaction({
       to: ADMIN_WALLET,
       value: ethers.utils.parseEther(feeAmount.toString()),
     });
 
-    // Pervesti likusią sumą į staking contract (čia būtų 1inch API ar custom smart contract)
-    const txStake = await signer.sendTransaction({
-      to: "0x1inch_Staking_Contract", // Pakeisti į 1inch staking adresą
-      value: ethers.utils.parseEther(finalStake.toString()),
-    });
+    // Peradresuoti į 1inch staking puslapį su vartotojo pasirinkimu
+    window.open(`https://app.1inch.io/#/staking`, "_blank");
 
     await supabase.from("staking").insert([
       {
@@ -49,17 +46,17 @@ export default function Stake() {
         amount: finalStake,
         fee: feeAmount,
         lock_period: lockPeriod,
-        transaction_hash: txStake.hash,
+        timestamp: new Date(),
       },
     ]);
-    
-    alert("Staking successful!");
+
+    alert("Staking initialized. Complete the process on 1inch.");
   }
 
   return (
     <div className="stake-container">
       <h1>Stake Your BNB</h1>
-      <p>Lock your BNB and earn rewards</p>
+      <p>Select a staking provider on 1inch and earn rewards</p>
 
       <input
         type="number"
