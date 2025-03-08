@@ -1,72 +1,60 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { supabase } from "@/loginsystem/supabaseClient";
-import { HiOutlineMenu, HiOutlineX, HiMoon, HiSun } from "react-icons/hi";
-import Link from "next/link";
+import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
+import "@/styles/navbar.css";
 
 export default function Navbar() {
+  const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
 
+  // Automatiškai atpažįsta, ar vartotojas prisijungęs
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
-  }, [darkMode]);
-
-  async function handleLogout() {
-    await supabase.auth.signOut();
-    router.replace("/");
-  }
-
-  if (router.pathname === "/") return null; // Paslėpti Navbar iš Onboarding puslapio
+    if (!user) {
+      router.push("/");
+    }
+  }, [user]);
 
   return (
-    <nav className="navbar">
-      <div className="nav-container">
-        <span className="nav-logo" onClick={() => router.push("/dashboard")}>
-          Nord Balticum
-        </span>
-
-        {/* Desktop Menu */}
-        <div className="nav-menu">
-          <Link href="/dashboard">Dashboard</Link>
-          <Link href="/send">Send</Link>
-          <Link href="/receive">Receive</Link>
-          <Link href="/stake">Stake</Link>
-          <Link href="/swap">Swap</Link>
-          <Link href="/donate">Donate</Link>
-          <Link href="/profile">Profile</Link>
-          <Link href="/settings">Settings</Link>
-          <button onClick={handleLogout} className="logout-btn">Logout</button>
-          <button onClick={() => setDarkMode(!darkMode)} className="theme-toggle">
-            {darkMode ? <HiSun size={20} /> : <HiMoon size={20} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className="nav-mobile">
-          <button onClick={() => setIsOpen(!isOpen)} className="menu-button">
-            {isOpen ? <HiOutlineX size={24} /> : <HiOutlineMenu size={24} />}
-          </button>
-        </div>
+    <nav className={`navbar ${theme}`}>
+      <div className="nav-logo" onClick={() => router.push("/dashboard")}>
+        NordBaltic Wallet
       </div>
 
-      {isOpen && (
-        <div className="mobile-menu">
-          <Link href="/dashboard" onClick={() => setIsOpen(false)}>Dashboard</Link>
-          <Link href="/send" onClick={() => setIsOpen(false)}>Send</Link>
-          <Link href="/receive" onClick={() => setIsOpen(false)}>Receive</Link>
-          <Link href="/stake" onClick={() => setIsOpen(false)}>Stake</Link>
-          <Link href="/swap" onClick={() => setIsOpen(false)}>Swap</Link>
-          <Link href="/donate" onClick={() => setIsOpen(false)}>Donate</Link>
-          <Link href="/profile" onClick={() => setIsOpen(false)}>Profile</Link>
-          <Link href="/settings" onClick={() => setIsOpen(false)}>Settings</Link>
-          <button onClick={handleLogout} className="logout-btn">Logout</button>
-          <button onClick={() => setDarkMode(!darkMode)} className="theme-toggle">
-            {darkMode ? <HiSun size={20} /> : <HiMoon size={20} />}
+      <div className="nav-links">
+        <a onClick={() => router.push("/dashboard")}>Dashboard</a>
+        <a onClick={() => router.push("/send")}>Send</a>
+        <a onClick={() => router.push("/receive")}>Receive</a>
+        <a onClick={() => router.push("/stake")}>Stake</a>
+        <a onClick={() => router.push("/swap")}>Swap</a>
+        <a onClick={() => router.push("/donate")}>Donate</a>
+      </div>
+
+      <div className="nav-actions">
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === "dark" ? "🌙" : "☀️"}
+        </button>
+
+        {user ? (
+          <div className="dropdown">
+            <button onClick={() => setIsOpen(!isOpen)}>⚙️</button>
+            {isOpen && (
+              <div className="dropdown-menu">
+                <a onClick={() => router.push("/profile")}>Profile</a>
+                <a onClick={() => router.push("/settings")}>Settings</a>
+                <a onClick={() => router.push("/admin")}>Admin</a>
+                <a onClick={logout}>Logout</a>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button className="login-btn" onClick={() => router.push("/login")}>
+            Login
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </nav>
   );
 }
