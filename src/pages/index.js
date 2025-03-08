@@ -1,31 +1,33 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styles from "@/styles/index.module.css";
-import { supabase } from "@/utils/supabaseClient";
 
 export default function Home() {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
 
     if (typeof window !== "undefined") {
-      const user = localStorage.getItem("user");
-      if (user) {
-        router.push("/dashboard");
-      }
+      const checkScreenSize = () => setIsMobile(window.innerWidth <= 768);
+      checkScreenSize();
+      window.addEventListener("resize", checkScreenSize);
+      return () => window.removeEventListener("resize", checkScreenSize);
     }
-  }, [router]);
+  }, []);
 
   if (!isClient) return null; // Užtikrina, kad kodas neveikia SSR metu
 
   return (
-    <div className={styles.indexContainer}>
-      <h1 className={styles.indexTitle}>
+    <div className={styles.container}>
+      <div className={styles.glowOverlay}></div> {/* Neon glow efektas */}
+
+      <h1 className={styles.title}>
         Welcome to <span className={styles.highlight}>Nord Balticum</span>
       </h1>
-      <p className={styles.indexText}>The most advanced Web3 financial ecosystem.</p>
+      <p className={styles.subtitle}>The most advanced Web3 financial ecosystem.</p>
 
       <div className={styles.ctaButtons}>
         <button
@@ -57,7 +59,9 @@ export default function Home() {
         </div>
       </div>
 
-      <p className={styles.footer}>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
+      <footer className={styles.footer}>
+        <p>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
+      </footer>
     </div>
   );
 }
