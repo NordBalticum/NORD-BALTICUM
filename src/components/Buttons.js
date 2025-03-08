@@ -1,18 +1,22 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import "../styles/buttons.css";
 
-export const Button = ({ type = "primary", onClick, children, icon, fullWidth }) => {
-  return (
-    <button
-      className={`button ${type} ${fullWidth ? "full-width" : ""}`}
-      onClick={onClick}
-    >
-      {icon && <span className="button-icon">{icon}</span>}
-      {children}
-    </button>
-  );
-};
+export const Button = forwardRef(
+  ({ type = "primary", onClick, children, icon, fullWidth, size = "medium", disabled }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={`button ${type} ${size} ${fullWidth ? "full-width" : ""} ${disabled ? "disabled" : ""}`}
+        onClick={onClick}
+        disabled={disabled}
+      >
+        {icon && <span className="button-icon">{icon}</span>}
+        <span className="button-text">{children}</span>
+      </button>
+    );
+  }
+);
 
 Button.propTypes = {
   type: PropTypes.oneOf(["primary", "secondary", "outline", "ghost"]),
@@ -20,4 +24,8 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   icon: PropTypes.node,
   fullWidth: PropTypes.bool,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  disabled: PropTypes.bool,
 };
+
+Button.displayName = "Button";
