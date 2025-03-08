@@ -1,135 +1,87 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
-
-.indexContainer {
-  max-width: 960px;
-  margin: auto;
-  text-align: center;
-  padding: 60px;
-  background: linear-gradient(135deg, #0A1F44, #142F60);
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-  color: #fff;
-  animation: fadeIn 1.5s ease-in-out;
-  transition: transform 0.3s ease-in-out;
+/* ✅ BENDRI STILIAI */
+:root {
+  --primary-color: #ffd700;
+  --secondary-color: #0a1f44;
+  --background-dark: #020d26;
+  --text-light: #ffffff;
+  --border-radius: 10px;
 }
 
-.indexContainer:hover {
-  transform: scale(1.01);
+body {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* 🔥 PAGRINDINIS TEKSTAS */
-.indexTitle {
-  font-size: 40px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #fff;
-  text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-}
-
-.highlight {
-  color: #ffd700;
-  font-weight: bold;
-  text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
-}
-
-.indexText {
-  font-size: 20px;
-  opacity: 0.9;
-  line-height: 1.5;
-}
-
-/* 🔥 CALL TO ACTION BUTTONS */
-.ctaButtons {
-  margin-top: 35px;
+/* ✅ KONTEINERIO DYDŽIO PRITAIKYMAS */
+.container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 25px;
+  min-height: 100vh;
+  padding: 20px;
+  text-align: center;
 }
 
-.ctaButton {
-  font-size: 18px;
-  padding: 15px 30px;
-  border-radius: 10px;
+/* ✅ AUTOMATINĖ TEKSTŲ SKALEI PRITAIKYMAS */
+h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--text-light);
+}
+
+p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-light);
+}
+
+/* ✅ MYGTUKŲ STILIZACIJA IR RESPONSYVUMAS */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button {
+  background: var(--primary-color);
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
-  font-weight: bold;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
 
-.ctaButton:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-  filter: brightness(1.2);
+button:hover {
+  background: #e6c200;
 }
 
-.primary {
-  background: linear-gradient(90deg, #ffd700, #ffcc00);
-  color: #121212;
-}
-
-.secondary {
-  background: linear-gradient(90deg, #0a0a0a, #333);
-  color: #ffd700;
-  border: 2px solid #ffd700;
-}
-
-/* 🔥 FEATURE BOX */
-.features {
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  gap: 20px;
-}
-
-.featureBox {
-  background: rgba(255, 215, 0, 0.1);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-  flex: 1;
-  transition: transform 0.3s ease-in-out;
-}
-
-.featureBox:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-}
-
-.featureTitle {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 12px;
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-}
-
-.featureText {
-  font-size: 17px;
-  opacity: 0.85;
-}
-
-/* 🔥 FOOTER */
-.footer {
-  margin-top: 45px;
-  opacity: 0.85;
-  font-size: 15px;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.footer:hover {
-  opacity: 1;
-}
-
-/* 🔥 FADE-IN ANIMACIJA */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
+/* ✅ ADAPTACIJA TELEFONAMS */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 14px;
   }
 }
