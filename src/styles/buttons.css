@@ -4,76 +4,127 @@
   justify-content: center;
   font-size: 16px;
   font-weight: bold;
-  padding: 12px 24px;
-  border-radius: var(--border-radius);
+  padding: 14px 28px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  transition: all var(--transition-speed) ease-in-out;
-  box-shadow: var(--shadow-glow);
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
 }
 
-.button:hover {
-  transform: scale(1.05);
-  filter: brightness(1.2);
+/* 🔥 Futuristinis hover efektas */
+.button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.5s ease-in-out;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
 }
 
-.button:active {
-  transform: scale(0.98);
+.button:hover::before {
+  transform: translate(-50%, -50%) scale(1);
 }
 
-.button.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* 🔥 Mygtukų tipai */
+/* 🎨 Premium Gradientai */
 .button.primary {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+}
+
+.button.primary:hover {
+  background: linear-gradient(90deg, #ffcc00, #ffd700);
+  filter: brightness(1.1);
+  transform: translateY(-3px);
 }
 
 .button.secondary {
-  background: linear-gradient(90deg, #0a0a0a, #333);
+  background: linear-gradient(90deg, #0A1F44, #142F60);
   color: #ffd700;
   border: 2px solid #ffd700;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
 }
 
+.button.secondary:hover {
+  background: linear-gradient(90deg, #142F60, #0A1F44);
+  filter: brightness(1.1);
+  transform: translateY(-3px);
+}
+
+/* 🖥️ OUTLINE & GHOST */
 .button.outline {
   background: transparent;
-  border: 2px solid var(--primary-color);
-  color: var(--primary-color);
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.button.outline:hover {
+  background: rgba(255, 215, 0, 0.1);
+  transform: translateY(-3px);
 }
 
 .button.ghost {
   background: none;
   border: none;
-  color: var(--primary-color);
+  color: var(--accent-color);
+}
+
+.button.ghost:hover {
+  color: #ffcc00;
 }
 
 /* 🔥 Dydžiai */
 .button.small {
   font-size: 14px;
-  padding: 8px 16px;
+  padding: 10px 20px;
 }
 
 .button.medium {
   font-size: 16px;
-  padding: 12px 24px;
+  padding: 14px 28px;
 }
 
 .button.large {
   font-size: 18px;
-  padding: 16px 32px;
+  padding: 18px 36px;
 }
 
-/* 🔥 Ikonos */
+/* 🎭 Ikonos */
 .button-icon {
   margin-right: 8px;
-  font-size: 1.2em;
+  font-size: 1.4em;
 }
 
+/* 🔄 Disabled */
+.button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 📱 FULL WIDTH */
 .full-width {
   width: 100%;
+}
+
+/* 🔥 ANIMACIJOS */
+@keyframes neon-glow {
+  0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+  100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
+}
+
+.button.primary, 
+.button.secondary, 
+.button.outline {
+  animation: neon-glow 2s infinite alternate;
 }
