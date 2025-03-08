@@ -13,6 +13,7 @@ const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
 export default function Dashboard() {
   const [bnbBalance, setBnbBalance] = useState("0");
   const [tokens, setTokens] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   const [chartData, setChartData] = useState({
     series: [{ data: [0, 0, 0, 0] }],
     options: {
@@ -31,10 +32,11 @@ export default function Dashboard() {
       }
 
       const provider = new ethers.providers.JsonRpcProvider(BSC_RPC_URL);
-      const signer = provider.getSigner();
 
       try {
-        const address = await signer.getAddress();
+        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        const address = accounts[0];
+
         const balance = await provider.getBalance(address);
         setBnbBalance(ethers.utils.formatEther(balance));
 
@@ -58,6 +60,16 @@ export default function Dashboard() {
             ...prev,
             series: [{ data: data.map(item => item.amount) }],
           }));
+        }
+
+        // Užkrauname paskutines operacijas
+        let { data: txData, error: txError } = await supabase
+          .from("transactions")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(5);
+        if (!txError) {
+          setTransactions(txData);
         }
       } catch (error) {
         console.error("Failed to fetch balances", error);
@@ -91,14 +103,40 @@ export default function Dashboard() {
           <p>No tokens found</p>
         )}
       </div>
-          
-<div className="dashboard-buttons">
-  <Button text="Send" onClick={() => router.push("/send")} />
-  <Button text="Receive" onClick={() => router.push("/receive")} />
-  <Button text="Stake" onClick={() => router.push("/stake")} />
-  <Button text="Swap" onClick={() => router.push("/swap")} />
-  <Button text="Donate" onClick={() => router.push("/donate")} />
-</div>
+
+      <h2>Recent Transactions</h2>
+      <table className="transaction-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.length > 0 ? (
+            transactions.map((tx, index) => (
+              <tr key={index}>
+                <td>{tx.type}</td>
+                <td>{tx.amount} BNB</td>
+                <td>{new Date(tx.created_at).toLocaleString()}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="3">No transactions found</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+
+      <div className="dashboard-buttons">
+        <Button text="Send" onClick={() => router.push("/send")} />
+        <Button text="Receive" onClick={() => router.push("/receive")} />
+        <Button text="Stake" onClick={() => router.push("/stake")} />
+        <Button text="Swap" onClick={() => router.push("/swap")} />
+        <Button text="Donate" onClick={() => router.push("/donate")} />
+      </div>
     </div>
   );
 }
