@@ -1,0 +1,32 @@
+.stake-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.stake-container input,
+.stake-container select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-weight: bold;
+}
+
+.stake-container button {
+  width: 100%;
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.stake-container button:hover {
+  background: #218838;
+}
