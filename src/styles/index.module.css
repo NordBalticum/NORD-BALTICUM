@@ -1,98 +1,101 @@
-/* ===== Globalūs Stiliai ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+.onboarding-container {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+  padding: 50px;
+  background: linear-gradient(135deg, #121212, #1e1e1e);
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  color: #fff;
+  animation: fadeIn 1.5s ease-in-out;
 }
 
-body {
-  background: linear-gradient(135deg, #0A1F44, #121212);
-  color: white;
-  overflow: hidden;
+h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
 }
 
-/* ===== Onboarding konteineris ===== */
-.onboarding-wrapper {
+.highlight {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+p {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.cta-buttons {
+  margin-top: 30px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  gap: 20px;
 }
 
-.onboarding-container {
-  text-align: center;
-  padding: 3rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.07);
-  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(15px);
-  width: 90%;
-  max-width: 420px;
-  transition: 0.3s ease-in-out;
-}
-
-.onboarding-container:hover {
-  box-shadow: 0px 12px 50px rgba(255, 215, 0, 0.2);
-}
-
-/* ===== Logotipas ===== */
-.onboarding-container img {
-  width: 100px;
-  height: auto;
-  margin-bottom: 20px;
-  filter: drop-shadow(0px 4px 10px rgba(255, 215, 0, 0.5));
-}
-
-/* ===== Mygtukų grupė ===== */
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.login-btn, .wallet-btn {
-  width: 100%;
-  padding: 12px 16px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border: none;
+.cta-button {
+  font-size: 18px;
+  padding: 15px 25px;
   border-radius: 8px;
+  border: none;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  text-transform: uppercase;
-}
-
-.login-btn {
-  background: #007aff;
-  color: white;
-}
-
-.wallet-btn {
-  background: #ffcc00;
-  color: black;
-}
-
-.login-btn:hover, .wallet-btn:hover {
-  transform: scale(1.05);
-  filter: brightness(1.2);
-}
-
-/* ===== Registracijos tekstas ===== */
-.register-text {
-  font-size: 0.95rem;
-  margin-top: 15px;
-  opacity: 0.8;
-}
-
-.register-link {
-  color: #FFD700;
   font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease-in-out;
 }
 
-.register-link:hover {
-  text-decoration: underline;
+.primary {
+  background: linear-gradient(90deg, #ffd700, #ffcc00);
+  color: #121212;
+}
+
+.secondary {
+  background: linear-gradient(90deg, #0a0a0a, #333);
+  color: #ffd700;
+  border: 2px solid #ffd700;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+.features {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.feature {
+  background: rgba(255, 215, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  flex: 1;
+  margin: 0 10px;
+}
+
+.feature h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #ffd700;
+}
+
+.feature p {
+  font-size: 16px;
+}
+
+.footer {
+  margin-top: 40px;
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
