@@ -1,13 +1,25 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import "@/styles/buttons.css"; // Importuoja globalų CSS iš _app.js
+import "@/styles/buttons.css"; // ✅ Teisingas globalus importas
 
-const Button = forwardRef(
-  ({ type = "primary", onClick, children, icon, fullWidth, size = "medium", disabled }, ref) => {
+const Buttons = forwardRef(
+  (
+    { 
+      type = "primary", 
+      onClick, 
+      children, 
+      icon, 
+      fullWidth = false, 
+      size = "medium", 
+      disabled = false, 
+      className = "" 
+    }, 
+    ref
+  ) => {
     return (
       <button
         ref={ref}
-        className={`button ${type} ${size} ${fullWidth ? "full-width" : ""} ${disabled ? "disabled" : ""}`}
+        className={`button ${type} ${size} ${fullWidth ? "full-width" : ""} ${disabled ? "disabled" : ""} ${className}`}
         onClick={onClick}
         disabled={disabled}
       >
@@ -18,7 +30,8 @@ const Button = forwardRef(
   }
 );
 
-Button.propTypes = {
+// ✅ Props validacija
+Buttons.propTypes = {
   type: PropTypes.oneOf(["primary", "secondary", "outline", "ghost"]),
   onClick: PropTypes.func,
   children: PropTypes.node.isRequired,
@@ -26,8 +39,17 @@ Button.propTypes = {
   fullWidth: PropTypes.bool,
   size: PropTypes.oneOf(["small", "medium", "large"]),
   disabled: PropTypes.bool,
+  className: PropTypes.string,
 };
 
-Button.displayName = "Button";
+// ✅ Default reikšmės
+Buttons.defaultProps = {
+  type: "primary",
+  fullWidth: false,
+  size: "medium",
+  disabled: false,
+  className: "",
+};
 
-export default Button; // ✅ Numatytasis eksportas (default export)
+// ✅ Eksportuojame kaip default
+export default Buttons;
