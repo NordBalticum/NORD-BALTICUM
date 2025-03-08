@@ -13,7 +13,7 @@ const nextConfig = {
     if (!isServer) {
       config.resolve.fallback = { fs: false }; // Pašalina fs klaidas kliento pusėje
     }
-    config.cache = true; // Išjungia cache, jei reikalinga švari kompiliacija
+    config.cache = false; // Išjungia cache, jei reikalinga švari kompiliacija
     return config;
   },
 };
