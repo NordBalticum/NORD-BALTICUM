@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import QRCode from "qrcode.react";
 import { useRouter } from "next/router";
-import { Button } from "../components/Buttons";
-import { supabase } from "../utils/supabaseClient";
-import "../styles/send.css";
+import { Button } from "@/components/Buttons";
+import { supabase } from "@/utils/supabaseClient";
+import "@/styles/send.css";
 
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
