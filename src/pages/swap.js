@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
 import "../styles/swap.css";
+import Button from "../components/Buttons";
 
 const ONEINCH_API = "https://api.1inch.io/v5.0/56/";
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
@@ -81,5 +82,13 @@ export default function Swap() {
       {quote && <p>Expected Output: {quote.toTokenAmount} {toToken}</p>}
       {txHash && <p>Transaction: <a href={`https://bscscan.com/tx/${txHash}`} target="_blank">View on BscScan</a></p>}
     </div>
+        
+<div className="dashboard-buttons">
+  <Button text="Send" onClick={() => router.push("/send")} />
+  <Button text="Receive" onClick={() => router.push("/receive")} />
+  <Button text="Stake" onClick={() => router.push("/stake")} />
+  <Button text="Swap" onClick={() => router.push("/swap")} />
+  <Button text="Donate" onClick={() => router.push("/donate")} />
+</div>       
   );
       }
