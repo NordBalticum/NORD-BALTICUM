@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../utils/supabaseClient";
 import Chart from "react-apexcharts";
 import "../styles/dashboard.css";
 import Button from "../components/Buttons";
