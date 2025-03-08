@@ -1,61 +1,104 @@
 .dashboard-container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #121212;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #0A1F44, #142F60);
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
   text-align: center;
   color: #fff;
+  transition: all 0.3s ease-in-out;
 }
 
+/* 🎨 LUXURY BALANCE BOX */
 .balance-box {
-  background: #181818;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  font-size: 18px;
+  background: linear-gradient(135deg, #1A1A1A, #262626);
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  font-size: 20px;
   font-weight: bold;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  transition: all 0.3s ease-in-out;
 }
 
+.balance-box:hover {
+  transform: scale(1.03);
+}
+
+/* 🔥 TOKEN LIST */
 .token-list {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .token-item {
   display: flex;
   justify-content: space-between;
-  background: #222;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 5px;
+  background: linear-gradient(90deg, #142F60, #0A1F44);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
 }
 
+.token-item:hover {
+  transform: scale(1.05);
+}
+
+/* 🚀 BUTTONS GROUP */
 .buttons-group {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
 }
 
 .buttons-group button {
-  background: #ffd700;
+  background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
 }
 
 .buttons-group button:hover {
-  background: #ffcc00;
+  background: linear-gradient(90deg, #ffcc00, #ffd700);
+  transform: translateY(-3px);
 }
 
+/* 📊 CHART CONTAINER */
 .chart-container {
-  margin-top: 20px;
+  margin-top: 25px;
+  padding: 15px;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.chart-container:hover {
+  transform: scale(1.02);
 }
 
 canvas {
-  background: #181818;
-  border-radius: 10px;
+  background: transparent;
+  border-radius: 12px;
+}
+
+/* 🎭 ANIMACIJOS */
+@keyframes glow-effect {
+  0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+  100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
+}
+
+.balance-box, .token-item, .chart-container {
+  animation: glow-effect 2s infinite alternate;
 }
