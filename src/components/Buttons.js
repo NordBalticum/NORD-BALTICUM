@@ -1,29 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "../styles/Buttons.css";
+import "../styles/buttons.css";
 
-export const PrimaryButton = ({ text, onClick }) => {
+export const Button = ({ type = "primary", onClick, children, fullWidth }) => {
   return (
-    <button className="button primary-button animated-fadeIn" onClick={onClick}>
-      {text}
+    <button
+      className={`button ${type} ${fullWidth ? "full-width" : ""} animated-fadeIn`}
+      onClick={onClick}
+    >
+      {children}
     </button>
   );
 };
 
-export const SecondaryButton = ({ text, onClick }) => {
-  return (
-    <button className="button secondary-button animated-fadeIn" onClick={onClick}>
-      {text}
-    </button>
-  );
-};
-
-PrimaryButton.propTypes = {
-  text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
-
-SecondaryButton.propTypes = {
-  text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+Button.propTypes = {
+  type: PropTypes.oneOf(["primary", "secondary", "tertiary"]),
+  onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  fullWidth: PropTypes.bool,
 };
