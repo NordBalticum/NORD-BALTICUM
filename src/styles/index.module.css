@@ -1,47 +1,64 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
 .indexContainer {
-  max-width: 900px;
+  max-width: 960px;
   margin: auto;
   text-align: center;
-  padding: 50px;
-  background: linear-gradient(135deg, #121212, #1e1e1e);
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  padding: 60px;
+  background: linear-gradient(135deg, #0A1F44, #142F60);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
   color: #fff;
   animation: fadeIn 1.5s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
+.indexContainer:hover {
+  transform: scale(1.01);
+}
+
+/* 🔥 PAGRINDINIS TEKSTAS */
 .indexTitle {
-  font-size: 36px;
-  margin-bottom: 10px;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
 }
 
 .highlight {
   color: #ffd700;
   font-weight: bold;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
 }
 
 .indexText {
-  font-size: 18px;
+  font-size: 20px;
   opacity: 0.9;
 }
 
+/* 🔥 CALL TO ACTION BUTTONS */
 .ctaButtons {
-  margin-top: 30px;
+  margin-top: 35px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
 }
 
 .ctaButton {
   font-size: 18px;
-  padding: 15px 25px;
-  border-radius: 8px;
+  padding: 15px 30px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.ctaButton:hover {
+  transform: scale(1.07);
+  filter: brightness(1.2);
 }
 
 .primary {
@@ -55,43 +72,48 @@
   border: 2px solid #ffd700;
 }
 
-.ctaButton:hover {
-  transform: scale(1.05);
-}
-
+/* 🔥 FEATURE BOX */
 .features {
-  margin-top: 40px;
+  margin-top: 50px;
   display: flex;
   justify-content: space-between;
   text-align: center;
+  gap: 20px;
 }
 
 .featureBox {
   background: rgba(255, 215, 0, 0.1);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
   flex: 1;
-  margin: 0 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.featureBox:hover {
+  transform: scale(1.05);
 }
 
 .featureTitle {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
   color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
 }
 
 .featureText {
-  font-size: 16px;
+  font-size: 17px;
 }
 
+/* 🔥 FOOTER */
 .footer {
-  margin-top: 40px;
-  opacity: 0.7;
-  font-size: 14px;
+  margin-top: 45px;
+  opacity: 0.8;
+  font-size: 15px;
 }
 
-/* ✅ Sklandesnė animacija */
+/* 🔥 FADE-IN ANIMACIJA */
 @keyframes fadeIn {
   from {
     opacity: 0;
