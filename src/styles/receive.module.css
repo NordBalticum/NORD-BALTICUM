@@ -5,7 +5,7 @@
   margin: auto;
   text-align: center;
   background: rgba(10, 31, 68, 0.85); /* 🔹 GLASSMORPHIC BACKGROUND */
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
@@ -19,7 +19,7 @@
 }
 
 /* 🔹 TEKSTO STILIAI */
-h1 {
+.receive-title {
   font-size: 26px;
   font-weight: bold;
   color: #ffd700;
@@ -46,7 +46,7 @@ h1 {
 }
 
 /* 🔹 COPY BUTTON */
-.wallet-box button {
+.receive-button {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
   padding: 10px 15px;
@@ -56,7 +56,7 @@ h1 {
   transition: all 0.3s ease-in-out;
 }
 
-.wallet-box button:hover {
+.receive-button:hover {
   background: linear-gradient(90deg, #ffec8b, #ffcc00);
   transform: scale(1.08);
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
@@ -95,4 +95,21 @@ h1 {
   text-decoration: underline;
   color: #ffcc00;
   transform: scale(1.1);
+}
+
+/* 🔹 RESPONSIVE */
+@media (max-width: 500px) {
+  .receive-container {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .wallet-box {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .receive-button {
+    width: 100%;
+  }
 }
