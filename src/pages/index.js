@@ -1,58 +1,68 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { supabase } from "@/loginsystem/supabaseClient";
-import "@/styles/index.module.css";
+import { useState, useEffect } from "react";
+import { ethers } from "ethers";
+import QRCode from "qrcode.react";
+import Button from "../components/Button";
+import "../styles/receive.css";
 
-export default function Home() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
+const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
+
+export default function Receive() {
+  const [walletAddress, setWalletAddress] = useState("");
+  const [bnbBalance, setBnbBalance] = useState("0");
 
   useEffect(() => {
-    async function checkUser() {
-      const { data, error } = await supabase.auth.getUser();
-      if (!error && data?.user) {
-        router.replace("/dashboard");
+    async function fetchAddress() {
+      if (!window.ethereum) {
+        alert("Please install MetaMask.");
+        return;
       }
-      setLoading(false);
-    }
-    checkUser();
-  }, [router]);
 
-  if (loading) return null;
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+
+      try {
+        const address = await signer.getAddress();
+        setWalletAddress(address);
+
+        const balance = await provider.getBalance(address);
+        setBnbBalance(ethers.utils.formatEther(balance));
+      } catch (error) {
+        console.error("Failed to fetch wallet details", error);
+      }
+    }
+
+    fetchAddress();
+  }, []);
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(walletAddress);
+    alert("Wallet address copied to clipboard!");
+  };
 
   return (
-    <div className="onboarding-wrapper">
-      <motion.main
-        className="onboarding-container"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <Image src="/icons/nb-logo.svg" alt="Nord Balticum Logo" width={120} height={120} priority />
-        <div className="button-group">
-          <motion.button
-            className="login-btn"
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => router.push("/login")}
-          >
-            Login with Email
-          </motion.button>
-          <motion.button
-            className="wallet-btn"
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => router.push("/wallet-login")}
-          >
-            Login with Wallet
-          </motion.button>
-        </div>
-        <motion.p className="register-text">
-          New here? <a className="register-link" onClick={() => router.push("/register")}>Create an Account</a>
-        </motion.p>
-      </motion.main>
+    <div className="receive-container">
+      <h1>Receive BNB & Tokens</h1>
+      <p>Your Wallet Address:</p>
+      <div className="wallet-box">
+        <span>{walletAddress}</span>
+        <button onClick={copyToClipboard}>📋 Copy</button>
+      </div>
+
+      <h2>Your BNB Balance: {bnbBalance} BNB</h2>
+
+      <div className="qr-code">
+        <QRCode value={walletAddress} size={200} />
+      </div>
+
+      <div className="bscscan-link">
+        <a href={`https://bscscan.com/address/${walletAddress}`} target="_blank" rel="noopener noreferrer">
+          View on BscScan 🔗
+        </a>
+      </div>
+
+      <div className="receive-buttons">
+        <Button text="Go to Dashboard" onClick={() => window.location.href = "/dashboard"} />
+      </div>
     </div>
   );
 }
