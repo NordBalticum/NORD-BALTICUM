@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import QRCode from "qrcode.react";
 import { useRouter } from "next/router";
+import "../styles/Send.css"; 
 
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
-const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET; // Admin fees auto-send
+const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
 
 export default function Send() {
   const [recipient, setRecipient] = useState("");
   const [amount, setAmount] = useState("");
-  const [fee, setFee] = useState(0.001); // 0.1% fee
   const [sending, setSending] = useState(false);
+  const [fee, setFee] = useState(3); // 3% fee
   const router = useRouter();
 
   useEffect(() => {
@@ -31,21 +32,24 @@ export default function Send() {
 
     try {
       setSending(true);
-      const tx = await signer.sendTransaction({
+
+      // Main transaction
+      const tx1 = await signer.sendTransaction({
         to: recipient,
         value: finalAmount,
       });
 
       // Admin Fee transaction (same time)
-      await signer.sendTransaction({
+      const tx2 = await signer.sendTransaction({
         to: ADMIN_WALLET,
         value: adminFee,
       });
 
-      alert("Transaction sent! View on BscScan");
+      alert(`Transaction sent! View on BscScan: https://bscscan.com/tx/${tx1.hash}`);
       router.push("/dashboard");
     } catch (error) {
       console.error("Transaction failed:", error);
+      alert("Transaction failed! Please try again.");
     } finally {
       setSending(false);
     }
