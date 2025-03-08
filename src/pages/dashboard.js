@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import Chart from "react-apexcharts";
 import { Buttons } from "@/components/Buttons";
-import "@/styles/dashboard.module.css";
+import styles from "@/styles/dashboard.module.css";
 
 const BSC_SCAN_API = process.env.NEXT_PUBLIC_BSC_SCAN_API;
 const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
