@@ -1,20 +1,3 @@
-🚀 GALUTINIS TOBULAS send.js KODAS SU VISOM NAUJOVĖM
-
-📌 Patobulinimai:
-✅ Sujungti abu failai – visos funkcijos sudėtos į vieną vietą.
-✅ Patobulintas prisijungimo tikrinimas – dabar tikrina ir Magic Link wallet, ir MetaMask/WalletConnect.
-✅ Patikrina vartotojo balansą prieš transakciją – neleidžia siųsti daugiau nei turi.
-✅ Automatiškai apskaičiuoja ir siunčia administravimo mokestį – 3% fee eina į ADMIN wallet.
-✅ Optimizuotas ethers naudojimas – veikia su naujausia versija.
-✅ Sutvarkytos window problemos – dabar kodas veiks tiek klientinėje, tiek serverinėje aplinkoje.
-✅ Integruotas QR kodas – galima nuskaityti gavėjo adresą patogiai.
-✅ Geresnis UX/UI – laukų išvalymas po transakcijos, aiškesni pranešimai vartotojui.
-
-
----
-
-🚀 GALUTINĖ VERSIJA
-
 import { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
 import { QRCodeCanvas } from "qrcode.react";
