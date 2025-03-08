@@ -10,7 +10,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* 🎨 LUXURY BALANCE BOX */
+/* 🎨 PRABANGI BALANSO DĖŽUTĖ */
 .balance-box {
   background: linear-gradient(135deg, #1A1A1A, #262626);
   padding: 25px;
@@ -24,9 +24,10 @@
 
 .balance-box:hover {
   transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 }
 
-/* 🔥 TOKEN LIST */
+/* 🔥 KRIPTO TOKENŲ SĄRAŠAS */
 .token-list {
   margin-bottom: 25px;
   display: flex;
@@ -46,9 +47,10 @@
 
 .token-item:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
 
-/* 🚀 BUTTONS GROUP */
+/* 🚀 VEIKSMŲ MYGTUKAI */
 .buttons-group {
   display: flex;
   justify-content: center;
@@ -56,7 +58,7 @@
   margin-bottom: 25px;
 }
 
-.buttons-group button {
+.dashboard-button {
   background: linear-gradient(90deg, #ffd700, #ffcc00);
   color: #121212;
   padding: 12px 20px;
@@ -66,14 +68,15 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  border: none;
 }
 
-.buttons-group button:hover {
+.dashboard-button:hover {
   background: linear-gradient(90deg, #ffcc00, #ffd700);
   transform: translateY(-3px);
 }
 
-/* 📊 CHART CONTAINER */
+/* 📊 GRAFIKŲ KONTEINERIS */
 .chart-container {
   margin-top: 25px;
   padding: 15px;
@@ -87,7 +90,7 @@
   transform: scale(1.02);
 }
 
-canvas {
+.dashboard-canvas {
   background: transparent;
   border-radius: 12px;
 }
