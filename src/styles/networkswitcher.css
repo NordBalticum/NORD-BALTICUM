@@ -1,38 +1,48 @@
 .network-switcher {
+  background: var(--secondary-color);
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-glow);
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 15px;
-  padding: 10px;
-  background: #222;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-  color: #ffd700;
-  font-weight: bold;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  max-width: 300px;
+  margin: 10px auto;
 }
 
 .network-switcher p {
-  margin: 0;
   font-size: 16px;
+  font-weight: bold;
+  color: var(--text-color);
 }
 
-.network-switcher button {
-  background: linear-gradient(90deg, #ffd700, #ffcc00);
-  color: #121212;
+.network-switcher .mainnet {
+  color: #FFD700;
+}
+
+.network-switcher .testnet {
+  color: #00BFFF;
+}
+
+button {
   padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
   font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
   transition: all 0.3s ease-in-out;
 }
 
-.network-switcher button:hover {
-  transform: scale(1.05);
+.mainnet-btn {
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+  color: #121212;
 }
 
-.network-switcher .active {
-  background: #ffcc00;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+.testnet-btn {
+  background: linear-gradient(90deg, #00BFFF, #1E90FF);
+  color: #fff;
+}
+
+button:hover {
+  transform: scale(1.05);
 }
