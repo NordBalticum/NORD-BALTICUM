@@ -1,48 +1,78 @@
 .network-switcher {
-  background: var(--secondary-color);
-  padding: 12px 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-glow);
+  background: rgba(10, 31, 68, 0.85); /* 🔹 GLASSMORPHIC BACKGROUND */
+  backdrop-filter: blur(12px);
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 300px;
-  margin: 10px auto;
+  max-width: 350px;
+  margin: 15px auto;
+  border: 2px solid rgba(255, 215, 0, 0.6);
+  transition: all 0.3s ease-in-out;
 }
 
+.network-switcher:hover {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+/* 🔹 NETWORK TEKSTO DIZAINAS */
 .network-switcher p {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  color: var(--text-color);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
+/* 🔹 BSC MAINNET & TESTNET SPALVOS */
 .network-switcher .mainnet {
   color: #FFD700;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 1);
 }
 
 .network-switcher .testnet {
   color: #00BFFF;
+  text-shadow: 0 0 15px rgba(0, 191, 255, 1);
 }
 
+/* 🔥 MYGTUKAI */
 button {
-  padding: 10px 15px;
+  padding: 12px 20px;
+  font-size: 16px;
   font-weight: bold;
   border: none;
   cursor: pointer;
-  border-radius: var(--border-radius);
+  border-radius: 8px;
+  text-transform: uppercase;
   transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
+/* 🔥 MAINNET MYGTUKAS */
 .mainnet-btn {
   background: linear-gradient(90deg, #FFD700, #FFA500);
   color: #121212;
+  text-shadow: 0 0 15px rgba(255, 165, 0, 1);
 }
 
+.mainnet-btn:hover {
+  background: linear-gradient(90deg, #FFEC8B, #FFA500);
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+/* 🔥 TESTNET MYGTUKAS */
 .testnet-btn {
   background: linear-gradient(90deg, #00BFFF, #1E90FF);
   color: #fff;
+  text-shadow: 0 0 15px rgba(30, 144, 255, 1);
 }
 
-button:hover {
-  transform: scale(1.05);
+.testnet-btn:hover {
+  background: linear-gradient(90deg, #87CEFA, #1E90FF);
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
 }
