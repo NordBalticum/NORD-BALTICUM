@@ -1,0 +1,77 @@
+.donation-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #121212;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  text-align: center;
+  color: #fff;
+}
+
+.charity-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.charity-display img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #181818;
+  color: #fff;
+}
+
+.donate-btn {
+  background: #ffd700;
+  color: #121212;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.donate-btn:hover {
+  background: #ffcc00;
+}
+
+.charity-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.charity-navigation button {
+  background: none;
+  border: none;
+  color: #ffd700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.charity-navigation button:hover {
+  color: #ffcc00;
+}
