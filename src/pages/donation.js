@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
+import "@/styles/donation.css";
 
 const charities = [
   {
