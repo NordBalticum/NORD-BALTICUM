@@ -13,6 +13,9 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-apexcharts": "^1.7.0",
+    "apexcharts": "^4.5.0",
+    "qrcode.react": "^4.2.0",
     "@supabase/supabase-js": "latest",
     "ethers": "latest",
     "axios": "latest"
