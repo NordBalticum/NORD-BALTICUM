@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
@@ -37,9 +37,9 @@ export default function Donation() {
 
   const adminWallet = process.env.NEXT_PUBLIC_ADMIN_WALLET;
 
-  // Tikriname ar suma tinkama
+  // ✅ Tikriname, ar suma tinkama
   const isValidAmount = (value) => {
-    const parsedValue = parseFloat(value);
+    const parsedValue = Number(value);
     return !isNaN(parsedValue) && parsedValue >= 0.0001 && parsedValue <= 100;
   };
 
@@ -52,28 +52,27 @@ export default function Donation() {
     try {
       setLoading(true);
 
-      if (!window.ethereum) {
+      if (typeof window === "undefined" || !window.ethereum) {
         alert("MetaMask is required to make a donation.");
         return;
       }
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const userAddress = await signer.getAddress();
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
 
       // Konvertuojame sumą į WEI
-      const value = ethers.utils.parseEther(amount);
-      const fee = value.mul(3).div(100); // 3% mokesčio apskaičiavimas
-      const donationAmount = value.sub(fee); // Likusi suma po mokesčių
+      const value = ethers.parseEther(amount);
+      const fee = (value * 3n) / 100n; // 3% mokestis
+      const donationAmount = value - fee; // Likusi suma po mokesčių
 
-      // Pervedimas į labdaros gavėjo adresą
+      // 🔹 Pervedimas į labdaros gavėjo adresą
       const tx1 = await signer.sendTransaction({
         to: selectedCharity.wallet,
         value: donationAmount,
       });
       await tx1.wait();
 
-      // Pervedimas į admin piniginę (3% fee)
+      // 🔹 Pervedimas į admin piniginę (3% fee)
       const tx2 = await signer.sendTransaction({
         to: adminWallet,
         value: fee,
@@ -91,9 +90,9 @@ export default function Donation() {
   };
 
   return (
-    <div className="donation-container">
+    <div className={styles.donationContainer}>
       <h1>Donate Cryptocurrency to Trusted Funds</h1>
-      <div className="charity-display">
+      <div className={styles.charityDisplay}>
         <img src={selectedCharity.image} alt={selectedCharity.name} />
         <h2>{selectedCharity.name}</h2>
         <p>{selectedCharity.description}</p>
@@ -102,7 +101,7 @@ export default function Donation() {
         </a>
       </div>
 
-      <div className="input-group">
+      <div className={styles.inputGroup}>
         <label>Amount (BNB)</label>
         <input
           type="number"
@@ -115,11 +114,11 @@ export default function Donation() {
         />
       </div>
 
-      <button className="donate-btn" onClick={handleDonation} disabled={loading}>
+      <button className={styles.donateBtn} onClick={handleDonation} disabled={loading}>
         {loading ? "Processing..." : `Donate to ${selectedCharity.name}`}
       </button>
 
-      <div className="charity-navigation">
+      <div className={styles.charityNavigation}>
         <button
           onClick={() =>
             setSelectedCharity(
@@ -143,12 +142,12 @@ export default function Donation() {
         </button>
       </div>
 
-      <div className="dashboard-buttons">
-        <Button text="Send" onClick={() => router.push("/send")} />
-        <Button text="Receive" onClick={() => router.push("/receive")} />
-        <Button text="Stake" onClick={() => router.push("/stake")} />
-        <Button text="Swap" onClick={() => router.push("/swap")} />
-        <Button text="Donate" onClick={() => router.push("/donate")} />
+      <div className={styles.dashboardButtons}>
+        <Buttons text="Send" onClick={() => router.push("/send")} />
+        <Buttons text="Receive" onClick={() => router.push("/receive")} />
+        <Buttons text="Stake" onClick={() => router.push("/stake")} />
+        <Buttons text="Swap" onClick={() => router.push("/swap")} />
+        <Buttons text="Donate" onClick={() => router.push("/donate")} />
       </div>
     </div>
   );
