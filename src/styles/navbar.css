@@ -1,3 +1,4 @@
+/* 🔥 NAVBAR */
 .navbar {
   width: 100%;
   background: rgba(10, 31, 68, 0.85); /* 🟦 GLASSMORPHIC BACKGROUND */
@@ -15,18 +16,19 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* 🔥 LOGO */
+/* 🔥 LOGOTIPAS */
 .navbar .logo a {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffd700;
-  text-decoration: none;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
 }
 
-.navbar .logo a:hover {
-  text-shadow: 0 0 20px rgba(255, 215, 0, 1);
+.navbar .logo img {
+  width: 160px;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar .logo img:hover {
   transform: scale(1.08);
 }
 
