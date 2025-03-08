@@ -32,10 +32,10 @@ export default function Navbar() {
       <div className="logo">
         <Link href="/">
           <Image 
-            src="/images/logo.png" 
+            src="/images/logo.svg" // DABAR PILNAI PALAIKO SVG
             alt="Nord Balticum Logo" 
-            width={160} 
-            height={50} 
+            width={180} 
+            height={55} 
             priority
           />
         </Link>
