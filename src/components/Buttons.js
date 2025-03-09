@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "@/styles/buttons.css"; // Importuojame mygtukų stilius iš `buttons.css`
+import styles from "@/styles/buttons.css"; // Globalūs mygtukų stiliai iš `buttons.css`
 
 const Button = ({ text, onClick, type = "primary", size = "medium", fullWidth = false, disabled = false }) => {
   const buttonClasses = `
