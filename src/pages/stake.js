@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { BrowserProvider, parseEther, formatEther } from "ethers";
 import axios from "axios";
 import { supabase } from "@/utils/supabaseClient";
-import styles from "@/styles/stake.module.css";
+import "@/styles/stake.module.css";
 
 const ONEINCH_API = "https://api.1inch.io/v5.0/56/";
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
