@@ -1,5 +1,3 @@
-@import "@/styles/globals.css";
-
 .themeSwitcher {
   background: var(--switch-bg);
   border: 2px solid var(--switch-border);
