@@ -46,9 +46,9 @@
   font-size: 1.2rem;
   font-weight: 700;
   background: linear-gradient(90deg, #0A1F44, #142F60); /* 🔥 Juodas gradientas */
-  color: #FFD700; /* Premium auksas */
+  color: #FFF8E1; /* Baltas Auksas */
   border-radius: 10px;
-  border: 2px solid #FFD700;
+  border: 2px solid #FFF8E1;
   cursor: pointer;
   box-shadow: 0px 0px 15px rgba(255, 248, 225, 0.7);
   transition: all 0.3s ease-in-out;
