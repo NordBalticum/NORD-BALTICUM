@@ -1,17 +1,16 @@
-/* ✅ PAGRINDINIS KONTEINERIS – PILNAS EKRANAS BE RIBOJIMŲ */
+/* ✅ PAGRINDINIS KONTEINERIS – PILNAS EKRANAS VISUR! */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  width: 100vw; /* ❗ Visas ekranas – JOKIŲ JUOSTŲ */
+  width: 100vw;
   background: var(--bg-gradient);
   color: var(--text-color);
   text-align: center;
   padding: 30px;
   animation: fadeIn 1s ease-in-out;
-  overflow-x: hidden; /* ❗ Apsauga nuo overflow glitchų */
 }
 
 /* ✅ LOGOTIPAS */
@@ -22,7 +21,7 @@
   margin-bottom: 20px;
 }
 
-/* ✅ SUBTITRAS */
+/* ✅ PAAIŠKINIMAS */
 .subtitle {
   font-size: 1.5rem;
   font-weight: 400;
@@ -39,7 +38,7 @@
   margin-top: 20px;
 }
 
-/* ✅ LOGIN MYGTUKAI */
+/* ✅ LOGIN MYGTUKAI – NAUJAS PATOBULINTAS DIZAINAS */
 .loginButton {
   display: flex;
   align-items: center;
@@ -60,27 +59,34 @@
   height: 70px;
 }
 
-/* ✅ LOGOTIPAI ANT MYGTUKŲ – VIENODI DYDŽIAI VISUR */
+/* ✅ LOGOTIPAI ANT MYGTUKŲ – PADIDINTI IR CENTRUOTI */
 .loginButton img {
   width: 85%;
   height: auto;
-  max-height: 70px;
+  max-height: 75px;
   object-fit: contain;
 }
 
-/* ✅ METAMASK IR WALLETCONNECT – FINALINIS FIXAS */
+/* ✅ WALLETCONNECT IR METAMASK – IDEALIAI PRITAIKYTI */
 .walletconnect img,
 .metamask img {
   width: 90%;
-  max-height: 75px;
+  max-height: 80px;
 }
 
-/* ✅ EMAIL LOGIN TEKSTO LYGIAVIMAS */
-.email img {
-  width: 40px;
-  height: 40px;
-  margin-right: 12px;
+/* ✅ EMAIL LOGIN – LOGOTIPAS IR TEKSTAS DABAR TOBULAI LYGIUOTI */
+.email {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 }
+
+.email img {
+  width: 38px;
+  height: 38px;
+}
+
 .email span {
   font-weight: bold;
   font-size: 1.4rem;
@@ -92,17 +98,17 @@
   box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
 }
 
-/* ✅ LENTELIŲ KONTEINERIS – VISKAS PILNAI SUTVARKYTA */
+/* ✅ LENTELIŲ KONTEINERIS */
 .features {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
   margin-top: 60px;
-  width: 100vw; /* ❗ Užtikrinta, kad nebūtų tarpų */
+  width: 100vw;
 }
 
-/* ✅ LENTELĖS – FINALINIS FIX */
+/* ✅ LENTELIŲ IŠDĖSTYMAS – SECURE → FAST → GLOBAL */
 .featureCard {
   background: rgba(255, 255, 255, 0.1);
   padding: 20px 30px;
@@ -113,11 +119,9 @@
   font-size: 1.2rem;
   backdrop-filter: blur(6px);
   font-weight: 600;
-  width: 100%; /* ❗ Lentelės VISADA pilno pločio */
-  max-width: 450px; /* ✅ Bet ne per didelės desktop */
 }
 
-/* ✅ FOOTER – PILNAS FIX */
+/* ✅ FOOTER */
 .footer {
   margin-top: 60px;
   font-size: 16px;
@@ -125,11 +129,9 @@
   color: var(--text-color);
   text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
   font-weight: 500;
-  width: 100vw; /* ❗ Užtikrintas full width */
-  text-align: center;
 }
 
-/* 🔥 RESPONSIVE FIXAI – VISI ELEMENTAI DABAR 100% CENTRUOTI */
+/* 🔥 RESPONSIVE */
 @media (max-width: 768px) {
   .logo {
     width: 180px;
@@ -139,8 +141,8 @@
     padding: 16px;
   }
   .loginButton img {
-    width: 40px;
-    height: 40px;
+    width: 80%;
+    max-height: 70px;
   }
   .featureCard {
     width: 90%;
