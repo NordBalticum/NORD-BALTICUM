@@ -16,30 +16,44 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // Jei vartotojas jau prisijungęs, peradresuojame į dashboard
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) router.push("/dashboard");
   }, []);
 
   return (
     <div className={styles.container}>
+      {/* ✅ LOGOTIPAS */}
       <img src="/logo.png" alt="Nord Balticum Logo" className={styles.logo} />
-      <h1 className={styles.subtitle}>The most advanced Web3 financial ecosystem.</h1>
 
+      {/* ✅ PAGRINDINĖ ANTRAŠTĖ */}
+      <h1 className={styles.title}>
+        Welcome to <br />
+        <span className={styles.highlight}>Nord Balticum</span>
+      </h1>
+
+      {/* ✅ PAAIŠKINIMAS PO ANTRAŠTE */}
+      <p className={styles.subtitle}>
+        The most advanced Web3 financial ecosystem.
+      </p>
+
+      {/* ✅ LOGIN MYGTUKAI */}
       <div className={styles.buttonContainer}>
-        <button className={`${styles.loginButton} ${styles.walletconnect}`} onClick={() => router.push("/login/loginwagmi")}>
-          <img src="/walletconnect.png" alt="WalletConnect" />
+        <button className={styles.walletconnect} onClick={() => router.push("/login/loginwagmi")}>
+          <img src="/walletconnect.png" alt="WalletConnect" className={styles.buttonIcon} />
         </button>
 
-        <button className={`${styles.loginButton} ${styles.metamask}`} onClick={() => router.push("/login/loginweb3")}>
-          <img src="/metamask.png" alt="MetaMask" />
+        <button className={styles.metamask} onClick={() => router.push("/login/loginweb3")}>
+          <img src="/metamask.png" alt="MetaMask" className={styles.buttonIcon} />
         </button>
 
-        <button className={`${styles.loginButton} ${styles.email}`} onClick={() => router.push("/login/loginemail")}>
-          <img src="/email.png" alt="Email Login" />
+        <button className={styles.email} onClick={() => router.push("/login/loginemail")}>
+          <img src="/email.png" alt="Email Login" className={styles.emailIcon} />
           EMAIL LOGIN
         </button>
       </div>
 
+      {/* ✅ PREMIUM FUNKCIJOS */}
       <div className={styles.features}>
         <div className={styles.featureCard}>
           <h2>🛡️ Secure</h2>
