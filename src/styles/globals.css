@@ -31,6 +31,23 @@
   --switch-text: #212BFF;
 }
 
+/* ✅ TEMOS PRITAIKYMAS */
+[data-theme="dark"] {
+  --button-bg: var(--button-dark-bg);
+  --button-hover: var(--button-hover-dark);
+  --button-border: var(--button-border-dark);
+  --button-text: var(--button-text-dark);
+  --shadow: var(--shadow-dark);
+}
+
+[data-theme="light"] {
+  --button-bg: var(--button-light-bg);
+  --button-hover: var(--button-hover-light);
+  --button-border: var(--button-border-light);
+  --button-text: var(--button-text-light);
+  --shadow: var(--shadow-light);
+}
+
 /* ✅ PREMIUM PAGRINDINIAI STILIAI */
 body {
   margin: 0;
