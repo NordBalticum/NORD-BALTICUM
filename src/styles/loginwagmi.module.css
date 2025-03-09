@@ -1,4 +1,4 @@
-/* ✅ Pagrindinis konteineris – VISIŠKAI PRITAIKOMAS DYDŽIUI */
+/* ✅ Pagrindinis konteineris – PRABANGUS IR PRISITAIKANTIS */
 .login-container {
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
 
 /* 🔥 Antraštė su optimalia tipografija */
 .title {
-  font-size: clamp(2.5rem, 5vw, 3.5rem); /* Automatinis dydžio prisitaikymas */
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 800;
   text-transform: uppercase;
   text-shadow: 0 0 40px rgba(255, 255, 255, 1);
@@ -27,34 +27,45 @@
 .highlight {
   color: #FFFFFF;
   text-shadow: 0px 0px 45px rgba(255, 255, 255, 1);
-  font-size: clamp(3rem, 5vw, 4rem); /* Prisitaikantis dydis */
+  font-size: clamp(3rem, 5vw, 4rem);
   transition: all 0.3s ease-in-out;
   font-weight: bold;
 }
 
-/* ✅ Mygtukų glow efektai – White Gold */
-.login-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 0px 60px rgba(255, 255, 255, 1);
-  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-/* ✅ Mygtukų konteineris */
-.button-container {
+/* ✅ Forma – interaktyvus laukai */
+.input-container {
   display: flex;
   flex-direction: column;
-  gap: 3vh;
+  align-items: center;
+  gap: 20px;
   width: 100%;
-  max-width: 500px;
-  margin-top: 5vh;
+  max-width: 450px;
+  margin-top: 4vh;
 }
 
-/* 🚀 Login mygtukai */
+/* 🚀 Input laukai – dabar premium dizaino */
+.input-field {
+  width: 100%;
+  padding: 1.2vh 2vw;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 500;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #FFF8E1;
+  box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.6);
+}
+
+/* 🚀 Login mygtukas */
 .login-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5vw;
   width: 100%;
   padding: 2vh 2vw;
   font-size: clamp(1.2rem, 2vw, 1.6rem);
@@ -65,52 +76,31 @@
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
   box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.4);
-  color: white;
-  letter-spacing: 1.5px;
-}
-
-/* 🔹 Mygtukų ikonų dydis */
-.login-button img {
-  width: clamp(28px, 5vw, 34px);
-  height: clamp(28px, 5vw, 34px);
-  filter: drop-shadow(0px 0px 7px rgba(255, 255, 255, 0.9));
-}
-
-/* 🎨 Individualūs mygtukų stiliai */
-.login-button:first-child {
-  background: linear-gradient(90deg, #FFFFFF, #EAEAEA);
   color: #212BFF;
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.login-button:nth-child(2) {
-  background: linear-gradient(90deg, #FFFFFF, #DCDCDC);
-  color: #212BFF;
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.login-button:nth-child(3) {
   background: linear-gradient(90deg, #FFFFFF, #F5F5F5);
-  color: #212BFF;
-  border-color: rgba(255, 255, 255, 0.6);
 }
 
-/* ✅ Premium mažos kortelės */
-.featureCard {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 1.5vw 2vw;
-  border-radius: 14px;
-  text-align: center;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-  transition: transform 0.3s ease-in-out;
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  backdrop-filter: blur(6px);
-  font-weight: 600;
+.login-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
 }
 
-.featureCard:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+/* 🔥 Logotipo priderinimas */
+.login-logo {
+  width: clamp(50px, 10vw, 70px);
+  height: clamp(50px, 10vw, 70px);
+  margin-bottom: 3vh;
+}
+
+/* ✅ Prabangus animuotas loading efektas */
+.loading {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid white;
+  animation: spin 1s linear infinite;
+  margin-top: 3vh;
 }
 
 /* ✅ Footer */
@@ -134,13 +124,17 @@
   .highlight {
     font-size: 3.5rem;
   }
+  .input-field {
+    font-size: 1.1rem;
+    padding: 1vh;
+  }
   .login-button {
     font-size: 1.3rem;
     padding: 16px;
   }
-  .login-button img {
-    width: 28px;
-    height: 28px;
+  .login-logo {
+    width: 60px;
+    height: 60px;
   }
 }
 
@@ -164,5 +158,14 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
