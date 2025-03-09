@@ -14,31 +14,29 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {/* ✅ Logotipas su glow efektu */}
+      {/* ✅ LOGOTIPAS – Didelis, centro pozicija, glow efektas */}
       <img src="/logo.png" alt="Nord Balticum" className={styles.logo} />
 
       {/* ✅ UI/UX tobulinimas */}
       <p className={styles.subtitle}>The most advanced Web3 financial system</p>
 
+      {/* ✅ Mygtukai – IŠLYGINTI, DIDESNI LOGOTIPAI */}
       <div className={styles.buttonContainer}>
-        {/* ✅ WalletConnect mygtukas */}
         <button className={`${styles.loginButton} ${styles.walletconnect}`} onClick={() => router.push("/login/loginwagmi")}>
           <img src="/walletconnect.png" alt="WalletConnect" className={styles.icon} />
         </button>
 
-        {/* ✅ MetaMask mygtukas */}
         <button className={`${styles.loginButton} ${styles.metamask}`} onClick={() => router.push("/login/loginweb3")}>
           <img src="/metamask.png" alt="MetaMask" className={styles.icon} />
         </button>
 
-        {/* ✅ Email login mygtukas */}
         <button className={`${styles.loginButton} ${styles.email}`} onClick={() => router.push("/login/loginemail")}>
           <img src="/email.png" alt="Email" className={styles.icon} />
           <span>Email Login</span>
         </button>
       </div>
 
-      {/* ✅ Prabangios lentelės */}
+      {/* ✅ LENTELĖS – OPTIMIZUOTOS, PAŽEMINTOS, GERESNĖ POZICIJA */}
       <div className={styles.features}>
         <div className={styles.featureCard}>
           <h2>🛡️ Secure</h2>
