@@ -1,22 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "@/styles/index.module.css";
 import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/utils/supabaseClient";
 
 export default function Home() {
   const router = useRouter();
-  const { loginWithWallet, loginWithEmail, user } = useAuth();
-  const [isMobile, setIsMobile] = useState(false);
+  const { user } = useAuth();
 
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    checkScreenSize();
-    window.addEventListener("resize", checkScreenSize);
-    return () => window.removeEventListener("resize", checkScreenSize);
-  }, []);
-
+  // ✅ Jei vartotojas jau prisijungęs – nukreipiame į dashboard
   useEffect(() => {
     if (user) router.push("/dashboard");
   }, [user, router]);
@@ -26,28 +18,28 @@ export default function Home() {
       {/* ✅ LOGOTIPAS */}
       <img src="/logo.png" alt="Nord Balticum Logo" className={styles.logo} />
 
-      {/* ✅ ANTRAŠTĖ */}
+      {/* ✅ PAGRINDINĖ ANTRAŠTĖ */}
       <h1 className={styles.title}>
         Welcome to <br />
         <span className={styles.highlight}>Nord Balticum</span>
       </h1>
 
-      {/* ✅ PAAIŠKINIMAS */}
+      {/* ✅ SUBTITRAS */}
       <p className={styles.subtitle}>
         The most advanced Web3 financial ecosystem.
       </p>
 
       {/* ✅ LOGIN MYGTUKAI */}
       <div className={styles.buttonContainer}>
-        <button className={styles.walletconnect} onClick={loginWithWallet}>
+        <button className={styles.walletconnect} onClick={() => router.push("/login/loginwagmi")}>
           <img src="/walletconnect.png" alt="WalletConnect" className={styles.buttonIcon} />
         </button>
 
-        <button className={styles.metamask} onClick={loginWithWallet}>
+        <button className={styles.metamask} onClick={() => router.push("/login/loginweb3")}>
           <img src="/metamask.png" alt="MetaMask" className={styles.buttonIcon} />
         </button>
 
-        <button className={styles.email} onClick={() => loginWithEmail(prompt("Enter your email"))}>
+        <button className={styles.email} onClick={() => router.push("/login/loginemail")}>
           <img src="/email.png" alt="Email Login" className={styles.emailIcon} />
           EMAIL LOGIN
         </button>
