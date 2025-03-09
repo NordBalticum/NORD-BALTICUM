@@ -1,4 +1,7 @@
-/* ✅ PAGRINDINIS KONTEINERIS SU TEMŲ PRISITAIKYMU */
+/* ✅ Importuojame globalius kintamuosius */
+@import "../globals.css";
+
+/* ✅ PAGRINDINIS KONTEINERIS */
 .container {
   display: flex;
   flex-direction: column;
@@ -12,58 +15,39 @@
   animation: fadeIn 1s ease-in-out;
 }
 
-/* ✅ TEMŲ KINTAMIEJI */
-:root {
-  --bg-gradient: linear-gradient(135deg, #212BFF, #0a0a33);
-  --text-color: #FFFFFF;
-  --button-bg: linear-gradient(90deg, #000, #222);
-  --button-border: rgba(255, 255, 255, 0.4);
-  --button-text: #fff8e1;
-  --card-bg: rgba(255, 255, 255, 0.1);
+/* ✅ Logotipas */
+.logo {
+  width: 220px;
+  height: auto;
+  filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.8));
+  margin-bottom: 15px;
 }
 
-/* 🔥 DARK MODE TEMOS KINTAMIEJI */
-[data-theme="dark"] {
-  --bg-gradient: linear-gradient(135deg, #0a0a33, #020a26);
-  --text-color: #fff8e1;
-  --button-bg: linear-gradient(90deg, #111, #333);
-  --button-border: rgba(255, 255, 255, 0.6);
-  --button-text: #fff;
-  --card-bg: rgba(255, 255, 255, 0.05);
+/* ✅ Antraštė */
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 20px;
 }
 
-/* 🔥 LIGHT MODE TEMOS KINTAMIEJI */
-[data-theme="light"] {
-  --bg-gradient: linear-gradient(135deg, #ffffff, #f0f4ff);
-  --text-color: #212BFF;
-  --button-bg: linear-gradient(90deg, #fff, #e6e6e6);
-  --button-border: rgba(33, 43, 255, 0.5);
-  --button-text: #212BFF;
-  --card-bg: rgba(33, 43, 255, 0.1);
-}
-
-/* ✅ FOOTER FIX – PAŠALINTA KEISTA JUOSTA, SUTVARKYTAS GRADIENTAS */
-.footer {
-  margin-top: 55px;
-  font-size: 16px;
-  opacity: 1;
-  color: var(--text-color);
-  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
-  font-weight: 500;
-  background: var(--bg-gradient);
+/* ✅ Mygtukų konteineris */
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
-  padding: 15px 0;
-  text-align: center;
+  max-width: 450px;
+  margin-top: 30px;
 }
 
-/* ✅ LOGIN MYGTUKAI PRITAIKYTI TEMAI */
+/* ✅ Login mygtukai */
 .loginButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
   width: 100%;
-  padding: 20px;
+  padding: 18px;
   font-size: 1.4rem;
   font-weight: 800;
   border-radius: 14px;
@@ -71,43 +55,59 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
-  box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.4);
-  height: 70px;
+  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
   background: var(--button-bg);
   color: var(--button-text);
+  letter-spacing: 1px;
+  height: 60px;
 }
 
-/* ✅ LOGIN LOGOTIPAI – TEMA AUTOMATIŠKAI PRISITAIKO */
-.walletButton img, .metamaskButton img {
-  width: 80%;
-  height: auto;
+/* 🔹 Mygtukų ikonų dydis */
+.loginButton img {
+  width: 42px;
+  height: 42px;
+  filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.7));
 }
 
-/* ✅ EMAIL LOGIN – PADIDINTAS 10% */
-.emailButton img {
-  width: 44px;
-  height: 44px;
+/* 🔥 Hover efektai */
+.loginButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
 }
 
-.emailButton span {
-  font-size: 1.7rem;
-  font-weight: 900;
-  color: var(--button-text);
+/* ✅ FOOTER */
+.footer {
+  margin-top: 55px;
+  font-size: 16px;
+  opacity: 1;
+  color: var(--text-color);
+  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
+  font-weight: 500;
 }
 
-/* ✅ PREMIUM LENTELES */
-.featureCard {
-  background: var(--card-bg);
-  padding: 12px 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
-  text-align: center;
-  transition: transform 0.3s ease-in-out;
-  width: 100%;
-  max-width: 230px;
+/* 🔥 Responsive dizainas */
+@media (max-width: 768px) {
+  .logo {
+    width: 180px;
+  }
+  .loginButton {
+    font-size: 1.2rem;
+    padding: 14px;
+  }
+  .loginButton img {
+    width: 35px;
+    height: 35px;
+  }
 }
 
-.featureCard:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 35px rgba(255, 255, 255, 1);
+/* 🔥 Animacijos */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
