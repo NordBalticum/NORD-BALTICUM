@@ -1,81 +1,110 @@
-/* ✅ TEMŲ KINTAMIEJI */
+/* ✅ GLOBALIOS TEMOS KINTAMIEJI */
 :root {
-  --bg-light: linear-gradient(135deg, #ffffff, #dcdcdc);
-  --bg-dark: linear-gradient(135deg, #0a0a33, #212BFF);
-  --text-light: #212BFF;
-  --text-dark: #FFF8E1;
-  --button-light: linear-gradient(90deg, #000000, #2e2e2e);
-  --button-dark: linear-gradient(90deg, #ffffff, #f5f5f5);
+  --primary-color: #212BFF;
+  --secondary-color: #FFF8E1;
+  --background-dark: #0A0A33;
+  --background-light: #F4F4F4;
+  --text-dark: #FFFFFF;
+  --text-light: #212121;
+  --button-dark: linear-gradient(90deg, #000000, #222222);
+  --button-light: linear-gradient(90deg, #FFFFFF, #F0F0F0);
+  --button-border-dark: rgba(255, 248, 225, 0.7);
+  --button-border-light: rgba(33, 43, 255, 0.7);
+  --card-dark: rgba(255, 255, 255, 0.1);
+  --card-light: rgba(0, 0, 0, 0.1);
+  --shadow-dark: 0 0 20px rgba(255, 248, 225, 0.5);
+  --shadow-light: 0 0 20px rgba(33, 43, 255, 0.5);
+  --radius: 14px;
+  --transition: all 0.3s ease-in-out;
 }
 
-/* ✅ ŠVIESI TEMA */
-[data-theme="light"] {
-  background: var(--bg-light);
-  color: var(--text-light);
-}
-
-[data-theme="light"] .card {
-  background: rgba(0, 0, 0, 0.05);
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="light"] .loginButton {
-  background: var(--button-light);
-  color: white;
-}
-
-[data-theme="light"] .footer {
-  color: var(--text-light);
-}
-
-/* ✅ TAMSI TEMA */
+/* ✅ DARK MODE */
 [data-theme="dark"] {
-  background: var(--bg-dark);
-  color: var(--text-dark);
+  --bg-gradient: linear-gradient(135deg, var(--primary-color), var(--background-dark));
+  --text-color: var(--text-dark);
+  --button-bg: var(--button-dark);
+  --button-border: var(--button-border-dark);
+  --card-bg: var(--card-dark);
+  --shadow: var(--shadow-dark);
 }
 
-[data-theme="dark"] .card {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.2);
+/* ✅ LIGHT MODE */
+[data-theme="light"] {
+  --bg-gradient: linear-gradient(135deg, var(--background-light), #FFFFFF);
+  --text-color: var(--text-light);
+  --button-bg: var(--button-light);
+  --button-border: var(--button-border-light);
+  --card-bg: var(--card-light);
+  --shadow: var(--shadow-light);
 }
 
-[data-theme="dark"] .loginButton {
-  background: var(--button-dark);
-  color: var(--text-dark);
+/* ✅ PAGRINDINIAI STILIAI */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  transition: var(--transition);
 }
 
-[data-theme="dark"] .footer {
-  color: var(--text-dark);
+/* ✅ LOGIN MYGTUKAI – TEMOS ADAPTACIJA */
+button {
+  padding: 14px 28px;
+  border: 2px solid var(--button-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  background: var(--button-bg);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  box-shadow: var(--shadow);
 }
 
-/* ✅ 3D PRABANGOS EFEKTAI */
-[data-theme="light"] .loginButton:hover {
-  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.9);
 }
 
-[data-theme="dark"] .loginButton:hover {
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.5);
+/* ✅ LENTELĖS – TEMOS PRITAIKYMAS */
+.card {
+  background: var(--card-bg);
+  padding: 20px 30px;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(5px);
+  transition: var(--transition);
 }
 
-/* ✅ ŠVIESOS SPINDULIŲ ANIMACIJA */
-@keyframes lightGlow {
-  0% { box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4); }
-  50% { box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8); }
-  100% { box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4); }
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
 }
 
-[data-theme="dark"] .glow {
-  animation: lightGlow 2s infinite alternate;
-}
-
-[data-theme="light"] .glow {
-  animation: lightGlow 2s infinite alternate;
-}
-
-/* ✅ RESPONSIVE */
+/* ✅ RESPONSIVE DESIGN */
 @media (max-width: 768px) {
-  .loginButton {
-    font-size: 1.2rem;
-    padding: 16px;
+  h1 {
+    font-size: 2.5rem;
+  }
+  button {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+  .card {
+    width: 90%;
+  }
+}
+
+/* ✅ ANIMACIJOS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
