@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { ethers } from "ethers";
 import { useAuth } from "@/context/AuthContext";
+import styles from "@/styles/loginweb3.module.css";
 
 export default function LoginWeb3() {
   const { user, loginWithWallet } = useAuth();
