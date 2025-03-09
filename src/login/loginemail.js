@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import { useAuth } from "@/context/AuthContext";
-import styles from @/styles/loginemail.module.css";
+import styles from "@/styles/loginemail.module.css";
 
 export default function LoginEmail() {
   const [email, setEmail] = useState("");
