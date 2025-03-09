@@ -74,12 +74,15 @@ button:hover {
   box-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
 }
 
-/* ✅ FOOTER */
 .footer {
-  margin-top: 50px;
-  font-size: 14px;
-  color: var(--text-color);
-  text-shadow: var(--shadow);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  background: var(--footer-bg);
+  text-align: center;
+  z-index: 1000;
 }
 
 /* ✅ RESPONSIVE DESIGN */
@@ -92,7 +95,7 @@ button:hover {
     padding: 12px 24px;
   }
   .card {
-    width: 90%;
+    width: 100%;
   }
 }
 
