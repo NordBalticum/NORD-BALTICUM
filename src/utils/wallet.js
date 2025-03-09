@@ -1,8 +1,28 @@
-import { BrowserProvider, JsonRpcProvider, parseEther, formatEther } from "ethers";
+import { ethers, BrowserProvider, JsonRpcProvider, parseEther, formatEther } from "ethers";
+import { supabase } from "@/utils/supabaseClient";
 
 const BSC_MAINNET_RPC = "https://bsc-dataseed.binance.org/";
 const BSC_TESTNET_RPC = "https://data-seed-prebsc-1-s1.binance.org:8545/";
 const NETWORK = process.env.NEXT_PUBLIC_BSC_NETWORK || "mainnet";
+
+// 📌 ADMIN WALLET, KURI GAUNA 3% FEE
+const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
+
+/**
+ * ✅ Automatiškai parenka tinkamą BSC tinklą
+ */
+export function getBSCNetwork() {
+  return NETWORK === "mainnet" ? BSC_MAINNET_RPC : BSC_TESTNET_RPC;
+}
+
+/**
+ * ✅ Sugeneruoja naują BSC/Ethereum piniginę
+ * @returns {string} Naujas piniginės adresas
+ */
+export function generateNewWallet() {
+  const wallet = ethers.Wallet.createRandom();
+  return wallet.address;
+}
 
 /**
  * ✅ Jungiasi prie vartotojo piniginės per MetaMask.
@@ -25,7 +45,7 @@ export async function connectWallet() {
 }
 
 /**
- * ✅ Grąžina prijungtą piniginės adresą (jei jau prisijungta).
+ * ✅ Grąžina dabartinį prijungtą piniginės adresą (jei jau prisijungta)
  * @returns {Promise<string|null>} - Piniginės adresas arba null jei nėra prisijungta.
  */
 export async function getCurrentWallet() {
@@ -42,15 +62,13 @@ export async function getCurrentWallet() {
 }
 
 /**
- * ✅ Gauna BNB balansą iš Blockchain pagal adresą.
- * @param {string} address - Piniginės adresas.
- * @returns {Promise<string>} - Balansas BNB formatu.
+ * ✅ Gauna BNB balansą iš blockchain pagal adresą
+ * @param {string} address - Piniginės adresas
+ * @returns {Promise<string>} - Balansas BNB formatu
  */
 export async function getBalance(address) {
   try {
-    const provider = new JsonRpcProvider(
-      NETWORK === "mainnet" ? BSC_MAINNET_RPC : BSC_TESTNET_RPC
-    );
+    const provider = new JsonRpcProvider(getBSCNetwork());
     const balance = await provider.getBalance(address);
     return formatEther(balance);
   } catch (error) {
@@ -60,12 +78,12 @@ export async function getBalance(address) {
 }
 
 /**
- * ✅ Siunčia BNB transakciją iš vartotojo piniginės.
- * @param {string} to - Gavėjo adresas.
- * @param {string} amount - Kiekis BNB formatu (pvz., "0.1").
- * @returns {Promise<string|null>} - Transakcijos hash arba null jei nepavyko.
+ * ✅ Siunčia BNB transakciją iš vartotojo piniginės su 3% admin fee
+ * @param {string} to - Gavėjo adresas
+ * @param {string} amount - Kiekis BNB formatu (pvz., "0.1")
+ * @returns {Promise<string|null>} - Transakcijos hash arba null jei nepavyko
  */
-export async function sendTransaction(to, amount) {
+export async function sendTransactionWithFee(to, amount) {
   try {
     if (typeof window === "undefined" || !window.ethereum) {
       throw new Error("❌ MetaMask is required to send transactions.");
@@ -73,11 +91,27 @@ export async function sendTransaction(to, amount) {
 
     const provider = new BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
+
+    // ✅ Paskaičiuoja 3% admin fee
+    const totalAmount = parseEther(amount);
+    const adminFee = totalAmount.mul(3).div(100);
+    const userAmount = totalAmount.sub(adminFee);
+
+    console.log(`📌 Siunčiama: ${formatEther(userAmount)} BNB gavėjui, ${formatEther(adminFee)} BNB adminui`);
+
+    // ✅ Viena transakcija su dviem išmokėjimais (Atomic Swap)
     const tx = await signer.sendTransaction({
       to,
-      value: parseEther(amount),
+      value: userAmount,
     });
 
+    // ✅ Antra transakcija su admin fee (kad veiktų be problemų)
+    const adminTx = await signer.sendTransaction({
+      to: ADMIN_WALLET,
+      value: adminFee,
+    });
+
+    console.log("✅ Transakcijos hash:", tx.hash, adminTx.hash);
     return tx.hash;
   } catch (error) {
     console.error("❌ Transaction failed:", error);
@@ -96,6 +130,54 @@ export async function isWalletConnected() {
     return accounts.length > 0;
   } catch (error) {
     console.error("❌ Failed to check wallet connection:", error);
+    return false;
+  }
+}
+
+/**
+ * ✅ Automatinis piniginės priskyrimas naujam vartotojui per email login
+ * @param {string} email - Vartotojo el. paštas
+ * @returns {Promise<boolean>} - `true` jei priskyrė, `false` jei klaida
+ */
+export async function assignWalletToUser(email) {
+  try {
+    // 1️⃣ Tikrina, ar vartotojas jau turi piniginę DB
+    let { data: user, error } = await supabase
+      .from("users")
+      .select("wallet_address")
+      .eq("email", email)
+      .single();
+
+    if (error) {
+      console.error("❌ Error fetching user data:", error);
+      return false;
+    }
+
+    // 2️⃣ Jei vartotojas jau turi piniginę → viskas gerai
+    if (user?.wallet_address) {
+      console.log("✅ User already has wallet:", user.wallet_address);
+      return true;
+    }
+
+    // 3️⃣ Jei neturi → sugeneruoja naują BSC wallet
+    const newWallet = generateNewWallet();
+    console.log("🔥 New wallet generated:", newWallet);
+
+    // 4️⃣ Įrašo naują piniginę į DB
+    const { error: updateError } = await supabase
+      .from("users")
+      .update({ wallet_address: newWallet })
+      .eq("email", email);
+
+    if (updateError) {
+      console.error("❌ Error assigning wallet:", updateError);
+      return false;
+    }
+
+    console.log("✅ Wallet assigned successfully!");
+    return true;
+  } catch (err) {
+    console.error("❌ Unexpected error in assignWalletToUser:", err);
     return false;
   }
 }
