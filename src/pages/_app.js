@@ -14,7 +14,6 @@ import { useRouter } from "next/router";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const hideNavbar = router.pathname === "/"; // Paslepia Navbar tik index.js puslapyje
-  const hideFooter = router.pathname === "/"; // Paslepia Footer tik index.js puslapyje
   
   return (
     <AuthProvider>
