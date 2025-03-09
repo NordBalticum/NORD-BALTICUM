@@ -27,104 +27,108 @@ body {
   animation: fadeIn 1.2s ease-in-out;
 }
 
-/* ✅ TEKSTO LYGIAI – BANKINIS MODERNUMAS */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 800;
-  text-transform: uppercase;
-  text-shadow: 0px 0px 25px rgba(255, 255, 255, 0.8);
+/* ✅ PAGRINDINIS LAYOUT – GRID METODAS */
+html, body {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* HEADER – CONTENT – FOOTER */
 }
 
-/* ✅ INTERAKTYVŪS ELEMENTAI */
-button, input {
-  font-family: inherit;
-  outline: none;
-  transition: var(--transition);
-}
-
-/* ✅ MYGTUKAI – PRABANGUS BANKO STILIUS */
-button {
-  padding: 16px 32px;
-  border: 3px solid var(--button-border);
-  border-radius: var(--radius);
-  cursor: pointer;
-  background: var(--button-bg);
-  color: var(--button-text);
-  font-size: 1.4rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.6);
+/* ✅ FOOTER – FIXED, NĖRA PADDING PROBLEMOS, NEVĖLUOJA ATSIRASTI */
+.footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  text-align: center;
+  border-top: 2px solid var(--footer-border);
+  box-shadow: var(--footer-shadow);
+  font-size: 1.1rem;
+  font-weight: 600;
+  width: 100%;
+  height: 55px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  min-width: 200px;
-  height: 75px;
-}
-
-/* ✅ HOVER EFEKTAI */
-button:hover {
-  transform: scale(1.08);
-  background: linear-gradient(90deg, #111111, #444444);
-  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
-}
-
-button:active {
-  transform: scale(0.96);
-  filter: brightness(0.9);
-}
-
-/* ✅ LENTELĖS – MODERNUS BANKO DIZAINAS */
-.card {
-  background: var(--card-bg);
-  padding: 25px 35px;
-  border-radius: var(--radius);
-  text-align: center;
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
-  backdrop-filter: var(--blur);
   transition: var(--transition);
-}
-
-.card:hover {
-  transform: scale(1.06);
-  box-shadow: 0 0 45px rgba(255, 255, 255, 0.8);
-}
-
-/* ✅ FOOTER */
-.footer {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
-  padding: 22px 0;
-  background: var(--footer-bg);
-  text-align: center;
   z-index: 1000;
+}
+
+/* ✅ FOOTER TEKSTAS */
+.footer-text {
+  text-shadow: 0px 0px 12px rgba(255, 255, 255, 0.5);
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+/* ✅ FOOTER TEKSTO HOVER */
+.footer-text:hover {
+  transform: scale(1.05);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0px 0px 25px var(--footer-hover);
+}
+
+/* ✅ FOOTER ICONS */
+.footer-icons {
+  display: flex;
+  gap: 20px;
+  margin-left: 20px;
+}
+
+.footer-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  transition: var(--transition);
+}
+
+/* ✅ ICONS HOVER */
+.footer-icons a:hover {
+  transform: scale(1.15);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 1);
+}
+
+/* ✅ FOOTER COPYRIGHT */
+.footer-copyright {
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-top: 5px;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
 }
 
 /* ✅ RESPONSIVE DESIGN */
 @media (max-width: 768px) {
-  h1 {
-    font-size: 2.7rem;
+  .footer {
+    height: 50px;
   }
-  button {
-    font-size: 1.2rem;
-    padding: 14px 28px;
-    min-width: 180px;
-    height: 70px;
+  .footer-text {
+    font-size: 1rem;
   }
-  .card {
-    width: 92%;
+  .footer-icons {
+    gap: 15px;
+  }
+  .footer-icons a {
+    width: 38px;
+    height: 38px;
+  }
+  .footer-copyright {
+    font-size: 0.9rem;
   }
 }
 
-/* ✅ WOW ANIMACIJOS */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ✅ FOOTER FADE-IN ANIMACIJA */
+@keyframes fadeInFooter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.footer {
+  animation: fadeInFooter 1s ease-in-out;
 }
