@@ -44,8 +44,8 @@
   margin-top: 20px;
 }
 
-/* ✅ PREMIUM MYGTUKAI */
-.primaryButton {
+/* ✅ PREMIUM MYGTUKAI – ABU JUODI su premium white glow */
+.primaryButton, .secondaryButton {
   background: linear-gradient(90deg, #0A1F44, #142F60);
   color: #FFD700;
   border: 2px solid #FFD700;
@@ -57,9 +57,11 @@
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
+  width: auto;
+  max-width: 320px;
 }
 
-.primaryButton:hover {
+.primaryButton:hover, .secondaryButton:hover {
   background: linear-gradient(90deg, #142F60, #0A1F44);
   filter: brightness(1.1);
   transform: translateY(-3px);
@@ -93,12 +95,16 @@
   box-shadow: 0 0 25px rgba(255, 248, 225, 0.5);
 }
 
-/* ✅ Footeris iš globals.css pašalintas – dabar jis yra index.js */
+/* ✅ Footer – IŠ globals.css PAŠALINTAS, čia grąžintas */
 .footer {
   margin-top: 40px;
   font-size: 14px;
   opacity: 0.7;
   color: #FFF8E1;
+  text-align: center;
+  padding: 20px 0;
+  border-top: 2px solid rgba(255, 248, 225, 0.5);
+  box-shadow: 0 0 20px rgba(255, 248, 225, 0.3);
 }
 
 /* 🔥 Responsive stiliai */
@@ -118,7 +124,7 @@
   .buttonGroup {
     width: 100%;
   }
-  .primaryButton {
+  .primaryButton, .secondaryButton {
     font-size: 1.1rem;
     width: 100%;
     max-width: 300px;
@@ -145,7 +151,7 @@
   .buttonGroup {
     flex-direction: column;
   }
-  .primaryButton {
+  .primaryButton, .secondaryButton {
     width: 100%;
   }
   .features {
@@ -163,7 +169,7 @@
   .subtitle {
     font-size: 1.1rem;
   }
-  .primaryButton {
+  .primaryButton, .secondaryButton {
     font-size: 1rem;
     padding: 12px 25px;
   }
