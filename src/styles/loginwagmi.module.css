@@ -1,10 +1,105 @@
-@import "./loginemail.module.css";
-
-button {
-  background: #3b82f6;
+/* ✅ Pagrindinis konteineris – ORIGINALUS MĖLYNAS FONAS */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #212BFF; /* PREMIUM MĖLYNA */
   color: white;
+  text-align: center;
+  padding: 20px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* 🔥 Premium efektas antraštei */
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  text-shadow: 0px 0px 30px rgba(255, 255, 255, 0.9); /* WHITE GOLD GLOW */
+  animation: fadeInDown 0.8s ease-in-out;
+}
+
+/* ✅ Input laukelio prabanga */
+input {
+  width: 90%;
+  max-width: 380px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(5px);
+}
+
+input:focus {
+  border-color: #FFFFFF; /* WHITE GOLD */
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.6);
+  outline: none;
+}
+
+/* 🚀 PRABANGUS LOGIN MYGTUKAS */
+button {
+  width: 90%;
+  max-width: 380px;
+  padding: 14px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #FFFFFF, #EAEAEA); /* WHITE GOLD */
+  color: #212BFF; /* PREMIUM MĖLYNA TEKSTAS */
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 1.2rem;
+  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 button:hover {
-  background: #60a5fa;
+  background: linear-gradient(90deg, #FFFFFF, #DCDCDC);
+  transform: scale(1.05);
+  box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ✅ Responsive patobulinimai */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  input, button {
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
+
+/* 🔥 Prabangios animacijos */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
