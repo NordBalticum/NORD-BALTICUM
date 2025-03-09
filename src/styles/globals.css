@@ -1,52 +1,38 @@
-/* ✅ GLOBALŪS KINTAMIEJI – BANKO LYGIO */
+/* PREMIUM BANKING UI – GLOBAL VARIABLES */
 html {
-  --primary-bg: linear-gradient(135deg, #0a0a33, #212BFF);
-  --secondary-bg: linear-gradient(135deg, #212BFF, #0a0a33);
+  --primary-bg: linear-gradient(135deg, #0A0A33, #212BFF);
+  --secondary-bg: linear-gradient(135deg, #212BFF, #0A0A33);
   --text-color: #FFF8E1;
-  --button-bg: linear-gradient(90deg, #000000, #222222);
-  --button-hover: linear-gradient(90deg, #111111, #444444);
-  --button-border: rgba(255, 248, 225, 0.8);
-  --card-bg: rgba(255, 255, 255, 0.12);
-  --shadow: 0 0 30px rgba(255, 248, 225, 0.7);
-  --blur: blur(10px);
-  --radius: 18px;
-  --transition: all 0.25s ease-in-out;
-
-  /* ✅ TEMOS KINTAMIEJI */
-  --switch-bg: rgba(255, 255, 255, 0.15);
-  --switch-border: rgba(255, 255, 255, 0.5);
-  --switch-shadow: 0px 0px 25px rgba(255, 255, 255, 0.6);
-  --switch-text: #FFF8E1;
+  --button-bg: linear-gradient(90deg, #000, #222);
+  --button-hover: linear-gradient(90deg, #111, #444);
+  --button-border: rgba(255, 248, 225, 0.85);
+  --card-bg: rgba(255, 255, 255, 0.14);
+  --shadow: 0 0 35px rgba(255, 248, 225, 0.8);
+  --blur: blur(12px);
+  --radius: 20px;
+  --transition: all 0.3s ease-in-out;
 }
 
-/* ✅ TEMOS PRITAIKYMAS */
-[data-theme="dark"] {
+/* DARK & LIGHT THEMES */
+.dark-theme {
   --primary-bg: linear-gradient(135deg, #000A22, #1A1F40);
   --secondary-bg: linear-gradient(135deg, #1A1F40, #000A22);
-  --switch-bg: rgba(10, 10, 50, 0.9);
-  --switch-border: rgba(255, 255, 255, 0.8);
-  --switch-text: #FFF8E1;
-
   --button-bg: linear-gradient(90deg, #111, #222);
   --button-hover: linear-gradient(90deg, #222, #444);
   --button-border: rgba(255, 255, 255, 0.9);
-  --shadow: 0 0 35px rgba(255, 255, 255, 0.8);
+  --shadow: 0 0 40px rgba(255, 255, 255, 0.85);
 }
 
-[data-theme="light"] {
+.light-theme {
   --primary-bg: linear-gradient(135deg, #F0F0F3, #DDE0E7);
   --secondary-bg: linear-gradient(135deg, #DDE0E7, #F0F0F3);
-  --switch-bg: rgba(255, 255, 255, 0.95);
-  --switch-border: rgba(33, 43, 255, 0.8);
-  --switch-text: #212BFF;
-
   --button-bg: linear-gradient(90deg, #fff, #ddd);
   --button-hover: linear-gradient(90deg, #ddd, #bbb);
   --button-border: rgba(0, 0, 0, 0.3);
-  --shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  --shadow: 0 0 25px rgba(0, 0, 0, 0.6);
 }
 
-/* ✅ PREMIUM PAGRINDINIAI STILIAI */
+/* PREMIUM BODY STYLE */
 body {
   margin: 0;
   padding: 0;
@@ -62,14 +48,14 @@ body {
   min-height: 100vh;
 }
 
-/* ✅ PAGRINDINIS LAYOUT – GRID METODAS */
+/* FLEXIBLE GRID SYSTEM */
 html, body {
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
 
-/* ✅ FOOTER – FIXED, PREMIUM DESIGN */
+/* FOOTER – MAX PREMIUM */
 .footer {
   background: var(--secondary-bg);
   color: var(--text-color);
@@ -91,10 +77,10 @@ html, body {
   animation: fadeInFooter 1.2s ease-in-out;
 }
 
-/* ✅ FOOTER TEKSTAS */
+/* FOOTER TEXT */
 .footer-text {
-  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
-  letter-spacing: 1.2px;
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
+  letter-spacing: 1.3px;
   cursor: pointer;
   transition: var(--transition);
 }
@@ -102,42 +88,42 @@ html, body {
 .footer-text:hover {
   transform: scale(1.1);
   color: rgba(255, 255, 255, 1);
-  text-shadow: 0px 0px 30px var(--button-hover);
+  text-shadow: 0px 0px 35px var(--button-hover);
 }
 
-/* ✅ FOOTER ICONS */
+/* FOOTER ICONS */
 .footer-icons {
   display: flex;
-  gap: 22px;
-  margin-left: 25px;
+  gap: 24px;
+  margin-left: 28px;
 }
 
 .footer-icons a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0px 0px 14px rgba(255, 255, 255, 0.7);
   transition: var(--transition);
 }
 
 .footer-icons a:hover {
   transform: scale(1.2);
-  box-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
 }
 
-/* ✅ FOOTER COPYRIGHT */
+/* FOOTER COPYRIGHT */
 .footer-copyright {
   font-size: 1rem;
-  opacity: 0.9;
+  opacity: 0.92;
   margin-top: 6px;
-  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
 }
 
-/* ✅ RESPONSIVE DESIGN */
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .footer {
     height: 55px;
@@ -146,18 +132,18 @@ html, body {
     font-size: 1rem;
   }
   .footer-icons {
-    gap: 18px;
+    gap: 20px;
   }
   .footer-icons a {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
   }
   .footer-copyright {
     font-size: 0.9rem;
   }
 }
 
-/* ✅ ANIMACIJOS */
+/* SMOOTH ANIMATIONS */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
