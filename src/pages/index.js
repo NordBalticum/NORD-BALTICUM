@@ -49,13 +49,7 @@ export default function Home() {
           <p>Seamless payments worldwide.</p>
         </div>
       </div>
-
-      {/* ✅ Footer paslėptas tik index.js */}
-      {!hideFooter && (
-        <footer className={styles.footer}>
-          <p>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
-        </footer>
-      )}
+  
     </div>
   );
 }
