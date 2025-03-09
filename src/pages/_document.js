@@ -12,9 +12,6 @@ export default function Document() {
         <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        
-        {/* ✅ PWA/Mobile Chrome spalva */}
-        <meta name="theme-color" content="#0a1f44" />
 
         {/* ✅ Open Graph (Facebook, LinkedIn, Discord preview) */}
         <meta property="og:type" content="website" />
@@ -36,7 +33,7 @@ export default function Document() {
         <meta name="keywords" content="Nord Balticum, Web3, Crypto Banking, Secure Wallet, Crypto Payments" />
         <meta name="author" content="Nord Balticum" />
       </Head>
-      <body>
+      <body style={{ background: "transparent" }}>
         <Main />
         <NextScript />
       </body>
