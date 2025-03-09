@@ -14,7 +14,7 @@
 
 /* ✅ LOGOTIPAS */
 .logo {
-  width: 200px;
+  width: clamp(180px, 15vw, 220px);
   height: auto;
   filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.8));
   margin-bottom: 20px;
@@ -58,7 +58,7 @@
   height: 70px;
 }
 
-/* ✅ LOGOTIPAI ANT MYGTUKŲ – VIENODI VISUR */
+/* ✅ LOGOTIPAI ANT MYGTUKŲ – DABAR TIKRAI VIENODI VISUR */
 .loginButton img {
   width: 85%;
   height: auto;
@@ -66,19 +66,19 @@
   object-fit: contain;
 }
 
-/* ✅ METAMASK IR WALLETCONNECT – DABAR TIKRAI VIENODI */
+/* ✅ METAMASK IR WALLETCONNECT – DABAR TIKRAI STABILŪS VISUOSE ĮRENGINIUOSE */
 .walletconnect img,
 .metamask img {
   width: 90%;
   max-height: 70px;
 }
 
-/* ✅ EMAIL LOGIN – SUBTILIAI MAŽESNIS, TEKSTAS ŠALIA IKONOS */
+/* ✅ EMAIL LOGIN – TEKSTAS IR IKONA VIENODAI CENTRUOTI */
 .email {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding-left: 20px;
+  justify-content: center;
+  text-align: center;
 }
 
 .email img {
@@ -90,6 +90,7 @@
 .email span {
   font-size: 1.4rem;
   font-weight: 800;
+  text-align: center;
 }
 
 /* 🔥 HOVER EFEKTAI */
@@ -98,7 +99,7 @@
   box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
 }
 
-/* ✅ LENTELĖS */
+/* ✅ LENTELĖS – DABAR 100% CENTRUOTOS */
 .features {
   display: flex;
   flex-wrap: wrap;
@@ -107,7 +108,7 @@
   margin-top: 60px;
 }
 
-/* ✅ LENTELIŲ STILIUS */
+/* ✅ LENTELIŲ STILIUS – DABAR TIKRAI CENTRUOTI VISI TEKSTAI */
 .featureCard {
   background: rgba(255, 255, 255, 0.1);
   padding: 20px 30px;
@@ -118,6 +119,10 @@
   font-size: 1.2rem;
   backdrop-filter: blur(6px);
   font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ✅ FOOTER */
@@ -133,7 +138,7 @@
 /* 🔥 RESPONSIVE */
 @media (max-width: 768px) {
   .logo {
-    width: 160px;
+    width: 180px;
   }
   .loginButton {
     font-size: 1.3rem;
