@@ -9,6 +9,7 @@
   text-align: center;
   color: white;
   padding: 20px;
+  animation: fadeIn 1s ease-in-out; /* 💎 Sklandus užkrovimo efektas */
 }
 
 /* 🔥 Prabangus efektas antraštei */
@@ -17,20 +18,21 @@
   font-weight: 700;
   text-transform: uppercase;
   text-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
-  animation: fadeIn 1s ease-in-out;
+  animation: fadeInDown 0.8s ease-in-out; /* 💎 Soft įėjimo animacija */
 }
 
 /* 🌟 White Gold premium efektas */
 .highlight {
   color: #FFFFFF;
-  text-shadow: 0px 0px 35px rgba(255, 255, 255, 1);
+  text-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
   font-size: 3.8rem;
+  transition: all 0.3s ease-in-out;
 }
 
 /* ✅ Mygtukų glow efektai – White Gold */
 .login-button:hover {
-  transform: scale(1.07);
-  box-shadow: 0px 0px 45px rgba(255, 255, 255, 0.9);
+  transform: scale(1.08);
+  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
   transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
@@ -38,10 +40,10 @@
 .button-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
   width: 100%;
-  max-width: 400px;
-  margin-top: 20px;
+  max-width: 450px;
+  margin-top: 25px;
 }
 
 /* 🚀 Login mygtukai */
@@ -49,66 +51,69 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
   width: 100%;
-  padding: 18px;
-  font-size: 1.4rem;
-  font-weight: 700;
-  border-radius: 12px;
-  border: 2px solid transparent;
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  border-radius: 14px;
+  border: 3px solid transparent;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
   color: white;
+  letter-spacing: 1px; /* 💎 Prabangus tarpas tarp raidžių */
 }
 
 /* 🔹 Mygtukų ikonų dydis */
 .login-button img {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.7));
 }
 
 /* 🎨 Individualūs mygtukų stiliai */
 .login-button:first-child {
   background: linear-gradient(90deg, #3b82f6, #1e40af);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .login-button:nth-child(2) {
   background: linear-gradient(90deg, #f6851b, #d17d00);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .login-button:nth-child(3) {
   background: linear-gradient(90deg, #ffffff, #cccccc);
   color: #0a1f44;
-  border-color: rgba(10, 31, 68, 0.5);
+  border-color: rgba(10, 31, 68, 0.7);
 }
 
 /* ✅ Premium mažos kortelės */
 .featureCard {
   background: rgba(255, 255, 255, 0.1);
-  padding: 12px 22px;
-  border-radius: 10px;
+  padding: 14px 24px;
+  border-radius: 12px;
   text-align: center;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
   transition: transform 0.3s ease-in-out;
   font-size: 1rem;
+  backdrop-filter: blur(5px);
 }
 
 .featureCard:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+  transform: scale(1.08);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.7);
 }
 
 /* ✅ Footer */
 .footer {
-  margin-top: 40px;
-  font-size: 14px;
-  opacity: 0.9;
+  margin-top: 50px;
+  font-size: 15px;
+  opacity: 0.95;
   color: #FFFFFF;
-  text-shadow: 0px 0px 15px rgba(255, 255, 255, 1);
+  text-shadow: 0px 0px 20px rgba(255, 255, 255, 1);
 }
 
 /* 🔥 Responsive dizainas */
@@ -120,11 +125,34 @@
     font-size: 3.2rem;
   }
   .login-button {
-    font-size: 1.2rem;
-    padding: 14px;
+    font-size: 1.3rem;
+    padding: 16px;
   }
   .login-button img {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* 🔥 Prabangios animacijos */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
