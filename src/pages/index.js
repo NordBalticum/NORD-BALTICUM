@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {/* ✅ Premium Logotipas */}
+      {/* ✅ PREMIUM LOGOTIPO VIETA */}
       <div className={styles.logoContainer}>
         <img src="/logo.png" alt="Nord Balticum" className={styles.logo} />
         <p className={styles.slogan}>
@@ -30,7 +30,7 @@ export default function Home() {
         </p>
       </div>
 
-      {/* ✅ Mygtukai */}
+      {/* ✅ MYGTUKAI */}
       <div className={styles.buttonGroup}>
         <button className={`${styles.loginButton} ${styles.walletButton}`} onClick={() => router.push("/login/loginwagmi")}>
           <img src="/walletconnect.png" alt="WalletConnect" className={styles.icon} />
@@ -42,11 +42,11 @@ export default function Home() {
 
         <button className={`${styles.loginButton} ${styles.emailButton}`} onClick={() => router.push("/login/loginemail")}>
           <img src="/email.png" alt="Email Login" className={styles.icon} />
-          <span>Sign in with Email</span>
+          <span>EMAIL LOGIN</span>
         </button>
       </div>
 
-      {/* ✅ Funkcijų kortelės */}
+      {/* ✅ FUNKCIJŲ KORTELĖS */}
       <div className={styles.features}>
         <div className={styles.featureCard}>
           <h2>🛡️ Secure</h2>
@@ -56,10 +56,10 @@ export default function Home() {
           <h2>⚡ Fast</h2>
           <p>Instant transactions on Binance Smart Chain.</p>
         </div>
-        <div className={styles.featureCard}>
-          <h2>🌍 Global</h2>
-          <p>Seamless payments worldwide.</p>
-        </div>
+      </div>
+      <div className={styles.featureCardCenter}>
+        <h2>🌍 Global</h2>
+        <p>Seamless payments worldwide.</p>
       </div>
     </div>
   );
