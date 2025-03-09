@@ -2,20 +2,20 @@
 
 /* ✅ Pagrindiniai spalvų kintamieji */
 :root {
-  --primary-color: #ffd700;
-  --secondary-color: #0a1f44;
-  --background-dark: #020d26;
-  --background-light: #ffffff;
-  --text-dark: #0a0a0a;
-  --text-light: #ffffff;
-  --button-hover: #ffcc00;
-  --border-radius: 12px;
+  --primary-color: #212BFF; /* Mėlyna */
+  --accent-color: #FFF8E1; /* White Gold */
+  --background-dark: #020d26; /* Gili tamsiai mėlyna */
+  --background-light: #ffffff; /* Šviesi tema */
+  --text-dark: #0a0a0a; /* Tamsus tekstas */
+  --text-light: #FFF8E1; /* Premium white gold tekstas */
+  --button-hover: #FFD700; /* Švelnus auksinis hover */
+  --border-radius: 14px;
   --transition-speed: 0.3s;
-  --shadow-glow: 0 0 15px rgba(255, 215, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(33, 43, 255, 0.6);
   --glass-blur: rgba(18, 18, 18, 0.85);
-  --glass-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-  --holo-glow: 0 0 20px rgba(0, 255, 255, 0.7);
-  --button-gradient: linear-gradient(90deg, #ffd700, #ffcc00);
+  --glass-shadow: 0 4px 18px rgba(255, 248, 225, 0.25);
+  --holo-glow: 0 0 25px rgba(255, 248, 225, 0.7);
+  --button-gradient: linear-gradient(135deg, #212BFF, #0a1f44);
 }
 
 /* ✅ Šviesi tema */
@@ -44,33 +44,33 @@
 /* 🔥 BODY */
 body {
   background: var(--background-dark);
-  color: var(--text-dark);
+  color: var(--text-light);
   line-height: 1.6;
 }
 
 /* 🔥 NUORODŲ STILIUS */
 a {
   text-decoration: none;
-  color: var(--primary-color);
+  color: var(--accent-color);
   font-weight: 600;
 }
 
 a:hover {
   color: var(--button-hover);
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+  text-shadow: 0 0 15px rgba(255, 248, 225, 0.8);
 }
 
 /* 🔥 PAGRINDINIS KONTEINERIS */
 .container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: auto;
-  padding: 20px;
+  padding: 30px;
 }
 
 /* 🔥 PREMIUM MYGTUKAI */
 button {
-  font-size: 16px;
-  padding: 14px 24px;
+  font-size: 18px;
+  padding: 16px 28px;
   border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
@@ -78,38 +78,29 @@ button {
   box-shadow: var(--shadow-glow);
   text-transform: uppercase;
   transition: all var(--transition-speed);
+  background: var(--button-gradient);
+  color: var(--text-light);
 }
 
 button:hover {
-  transform: scale(1.08);
-}
-
-/* 🔥 PREMIUM PAGRINDINIAI MYGTUKAI */
-.primary-button {
-  background: var(--button-gradient);
-  color: #121212;
-}
-
-.secondary-button {
-  background: linear-gradient(90deg, #0a0a0a, #333);
-  color: #ffd700;
-  border: 2px solid #ffd700;
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(255, 248, 225, 0.8);
 }
 
 /* 🔥 INTERAKTYVUS TEMOS PERJUNGIMAS */
 .theme-switcher {
   background: var(--glass-blur);
-  border: 2px solid var(--primary-color);
+  border: 2px solid var(--accent-color);
   border-radius: 50%;
-  padding: 14px;
+  padding: 16px;
   cursor: pointer;
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--holo-glow);
 }
 
 .theme-switcher:hover {
-  background: var(--primary-color);
+  background: var(--accent-color);
   color: var(--background-dark);
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 /* 🔥 NAVIGACIJOS JUOSTA */
@@ -118,9 +109,9 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   background: var(--glass-blur);
-  backdrop-filter: blur(10px);
-  padding: 15px 20px;
-  border-bottom: 3px solid var(--primary-color);
+  backdrop-filter: blur(15px);
+  padding: 20px 30px;
+  border-bottom: 3px solid var(--accent-color);
   box-shadow: var(--shadow-glow);
   position: fixed;
   top: 0;
@@ -130,9 +121,9 @@ button:hover {
 }
 
 .navbar a {
-  color: var(--text-dark);
+  color: var(--text-light);
   font-weight: 600;
-  padding: 8px 12px;
+  padding: 10px 15px;
 }
 
 .navbar a:hover {
@@ -144,65 +135,65 @@ button:hover {
   text-align: center;
   padding: 20px;
   background: var(--glass-blur);
-  color: var(--text-dark);
-  font-size: 14px;
-  border-top: 3px solid var(--primary-color);
+  color: var(--text-light);
+  font-size: 16px;
+  border-top: 3px solid var(--accent-color);
   box-shadow: var(--shadow-glow);
 }
 
 /* 🔥 PREMIUM KORTELĖS */
 .card {
   background: var(--glass-blur);
-  padding: 20px;
+  padding: 25px;
   border-radius: var(--border-radius);
   box-shadow: var(--glass-shadow);
   transition: transform var(--transition-speed);
 }
 
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(255, 248, 225, 0.6);
 }
 
 /* 🔥 HOLOGRAPHIC UI */
 .holo-effect {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(0, 102, 204, 0.3));
+  background: linear-gradient(135deg, rgba(255, 248, 225, 0.3), rgba(33, 43, 255, 0.3));
   border-radius: var(--border-radius);
   box-shadow: var(--holo-glow);
-  padding: 15px;
+  padding: 20px;
   transition: transform var(--transition-speed);
 }
 
 .holo-effect:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+  transform: scale(1.1);
+  box-shadow: 0 0 35px rgba(255, 248, 225, 0.7);
 }
 
 /* 🔥 MODERNUS ANIMACIJOS */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-15px); }
+  from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .animated {
-  animation: fadeIn 0.7s ease-in-out;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
 /* 🔥 MEDIA QUERIES – ADAPTACIJA VISIEMS EKRANAMS */
 @media (max-width: 1024px) {
   .container {
-    max-width: 90%;
+    max-width: 92%;
   }
 
   .navbar {
-    padding: 12px 15px;
+    padding: 18px 20px;
   }
 }
 
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
-    padding: 10px;
+    padding: 14px;
   }
 
   .ctaButtons {
@@ -212,17 +203,17 @@ button:hover {
 
   button {
     width: 100%;
-    max-width: 280px;
+    max-width: 300px;
   }
 
   .footer {
-    padding: 15px;
+    padding: 18px;
   }
 }
 
 @media (max-width: 480px) {
   .title {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .ctaButtons {
