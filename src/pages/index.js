@@ -8,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.matchMedia("(max-width: 768px)").matches);
     };
     checkScreenSize();
     window.addEventListener("resize", checkScreenSize);
@@ -16,26 +16,27 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // Jei vartotojas jau prisijungęs, peradresuojame į dashboard
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) router.push("/dashboard");
   }, []);
 
   return (
     <div className={styles.container}>
+      {/* ✅ Premium antraštė */}
       <h1 className={styles.title}>
         Welcome to <br />
         <span className={styles.highlight}>Nord Balticum</span>
       </h1>
       <p className={styles.subtitle}>The most advanced Web3 financial ecosystem.</p>
 
+      {/* 🚀 Login mygtukai */}
       <div className={styles.buttonGroup}>
         <button className={styles.walletButton} onClick={() => router.push("/login/loginwagmi")}>
           <img src="/walletconnect.png" alt="WalletConnect" className={styles.icon} />
           WalletConnect
         </button>
 
-        <button className={styles.walletButton} onClick={() => router.push("/login/loginweb3")}>
+        <button className={styles.metamaskButton} onClick={() => router.push("/login/loginweb3")}>
           <img src="/metamask.png" alt="MetaMask" className={styles.icon} />
           MetaMask
         </button>
@@ -46,6 +47,7 @@ export default function Home() {
         </button>
       </div>
 
+      {/* 🔥 Premium funkcijos */}
       <div className={styles.features}>
         <div className={styles.featureCard}>
           <h2>🛡️ Secure</h2>
@@ -60,6 +62,9 @@ export default function Home() {
           <p>Seamless payments worldwide.</p>
         </div>
       </div>
+
+      {/* 🔹 Footer */}
+      <p className={styles.footer}>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
     </div>
   );
 }
