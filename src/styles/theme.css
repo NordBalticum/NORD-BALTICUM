@@ -113,10 +113,14 @@ input:focus {
 
 /* ✅ FOOTER */
 .footer {
-  margin-top: 60px;
-  font-size: 15px;
-  color: var(--text-color);
-  text-shadow: var(--shadow);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  background: var(--footer-bg);
+  text-align: center;
+  z-index: 1000;
 }
 
 /* ✅ RESPONSIVE DESIGN */
