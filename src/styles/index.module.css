@@ -4,25 +4,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   text-align: center;
   background: linear-gradient(135deg, rgba(33, 43, 255, 0.9), rgba(10, 15, 80, 0.9));
   color: var(--text-light);
+  padding: 20px;
 }
 
 /* 🔥 Antraštė su prabangiu efektu */
 .title {
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-weight: 700;
   text-transform: uppercase;
-  text-shadow: 0 0 20px rgba(255, 248, 225, 0.8);
+  text-shadow: 0 0 25px rgba(255, 248, 225, 0.9);
+  animation: fadeIn 1s ease-in-out;
 }
 
 /* 🌟 Auksinis premium efektas */
 .highlight {
   color: #FFF8E1;
-  text-shadow: 0px 0px 25px rgba(255, 248, 225, 0.9);
-  font-size: 3.5rem;
+  text-shadow: 0px 0px 35px rgba(255, 248, 225, 1);
+  font-size: 3.8rem;
 }
 
 /* ✅ Teksto subtitrai */
@@ -40,23 +42,27 @@
   margin-top: 20px;
 }
 
-/* 🚀 Web3 + Email Wallet mygtukai */
-.walletButton, .emailButton {
-  padding: 15px 30px;
-  font-size: 1.2rem;
+/* 🚀 Web3 Wallet mygtukas */
+.walletButton,
+.emailButton {
+  padding: 16px 32px;
+  font-size: 1.3rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #0A1F44, #142F60); /* 🔥 Juodas gradientas */
-  color: #FFF8E1; /* Baltas Auksas */
-  border-radius: 10px;
+  background: linear-gradient(90deg, #0A0A0A, #333);
+  color: #FFF8E1;
+  border-radius: 12px;
   border: 2px solid #FFF8E1;
   cursor: pointer;
-  box-shadow: 0px 0px 15px rgba(255, 248, 225, 0.7);
+  box-shadow: 0px 0px 20px rgba(255, 248, 225, 0.6);
   transition: all 0.3s ease-in-out;
+  width: 100%;
+  max-width: 320px;
 }
 
-.walletButton:hover, .emailButton:hover {
+.walletButton:hover,
+.emailButton:hover {
   transform: scale(1.05);
-  box-shadow: 0px 0px 30px rgba(255, 248, 225, 1);
+  box-shadow: 0px 0px 35px rgba(255, 248, 225, 1);
 }
 
 /* ✅ Funkcionalumai */
@@ -72,34 +78,38 @@
 .featureCard {
   background: rgba(255, 255, 255, 0.1);
   padding: 15px 25px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 248, 225, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 248, 225, 0.4);
   text-align: center;
   transition: transform 0.3s ease-in-out;
+  width: 100%;
+  max-width: 280px;
 }
 
 .featureCard:hover {
   transform: scale(1.07);
-  box-shadow: 0 0 25px rgba(255, 248, 225, 0.5);
+  box-shadow: 0 0 30px rgba(255, 248, 225, 0.6);
 }
 
 /* ✅ Footer */
 .footer {
   margin-top: 40px;
   font-size: 14px;
-  opacity: 0.7;
+  opacity: 0.8;
+  color: #FFF8E1;
+  text-shadow: 0px 0px 15px rgba(255, 248, 225, 1);
 }
 
 /* 🔥 Responsive stiliai */
 @media (max-width: 768px) {
   .title {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
   }
   .highlight {
-    font-size: 3rem;
+    font-size: 3.2rem;
   }
   .subtitle {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   .buttonGroup {
     flex-direction: column;
