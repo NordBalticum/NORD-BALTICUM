@@ -1,195 +1,240 @@
-/* ✅ VISIŠKAI PILNAS EKRANAS – NĖRA BALTŲ RĖMŲ! */
+/* ✅ GLOBALŪS KINTAMIEJI */
+:root {
+  --primary-bg: linear-gradient(135deg, #0a0a33, #212BFF);
+  --secondary-bg: linear-gradient(135deg, #212BFF, #0a0a33);
+  --text-color: #FFF8E1;
+  --button-bg: linear-gradient(90deg, #000000, #222222);
+  --button-hover: linear-gradient(90deg, #111111, #444444);
+  --button-border: rgba(255, 248, 225, 0.8);
+  --card-bg: rgba(255, 255, 255, 0.15);
+  --shadow: 0 0 25px rgba(255, 248, 225, 0.6);
+  --blur: blur(8px);
+  --radius: 16px;
+  --transition: all 0.3s ease-in-out;
+}
+
+/* ✅ PAGRINDINIS DASHBOARD KONTEINERIS */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100vh;
   width: 100vw;
-  background: var(--bg-gradient);
+  background: var(--primary-bg);
   color: var(--text-color);
   text-align: center;
   padding: 30px;
-  animation: fadeIn 1s ease-in-out;
-  overflow-x: hidden; /* ✅ Panaikina nereikalingus horizontalius scrollbarus */
+  animation: fadeIn 1.2s ease-in-out;
 }
 
-/* ✅ LOGOTIPAS – CENTRUOTAS */
-.logo {
-  width: 220px;
-  height: auto;
-  filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.8));
-  margin-bottom: 20px;
-}
-
-/* ✅ HEADER */
+/* ✅ HEADER – LOGOTIPAS + ATSIJUNGIMO MYGTUKAS */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 95%;
   max-width: 1400px;
-  padding: 0 20px;
+  padding: 20px 0;
 }
 
-/* ✅ LOGOUT MYGTUKAS */
+.logo {
+  width: 200px;
+  filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.6));
+}
+
+/* ✅ ATSIJUNGIMO MYGTUKAS */
 .logoutButton {
-  padding: 12px 24px;
-  font-size: 1.2rem;
+  padding: 12px 25px;
+  font-size: 1.3rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
-  color: white;
-  border: 2px solid #ffcccc;
-  border-radius: 8px;
+  border-radius: var(--radius);
+  border: 3px solid var(--button-border);
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  background: var(--button-bg);
+  color: var(--text-color);
+  text-transform: uppercase;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
 }
 
 .logoutButton:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.8);
+  transform: scale(1.08);
+  background: var(--button-hover);
+  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
 }
 
 /* ✅ DASHBOARD TURINYS */
 .dashboardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   max-width: 1400px;
-  padding: 30px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  animation: fadeIn 1.2s ease-in-out;
-}
-
-/* ✅ TITULAI */
-.title {
-  font-size: 3.2rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  text-shadow: 0 0 35px rgba(255, 255, 255, 1);
-  letter-spacing: 2px;
-}
-
-.subtitle {
-  font-size: 1.6rem;
-  margin-bottom: 25px;
-}
-
-/* ✅ WALLET INFO */
-.walletInfo {
   margin-top: 20px;
-  font-size: 1.3rem;
-  font-weight: 600;
+}
+
+/* ✅ WALLET INFORMACIJA */
+.walletInfo {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--blur);
+  width: 100%;
+  max-width: 600px;
+  transition: var(--transition);
+}
+
+.walletInfo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
 }
 
 .wallet {
-  font-size: 1.2rem;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 12px;
-  border-radius: 8px;
-  word-break: break-word;
-  max-width: 100%;
+  font-size: 1.4rem;
+  font-weight: bold;
+  word-break: break-all;
 }
 
 .balance {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff8e1;
-  text-shadow: 0 0 30px rgba(255, 248, 225, 1);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-top: 10px;
+  text-shadow: 0px 0px 25px rgba(255, 255, 255, 0.8);
 }
 
-/* ✅ GREITI VEIKSMAI */
+/* ✅ CHARTS – BALANCE HISTORY */
+.chartContainer {
+  width: 100%;
+  max-width: 800px;
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--blur);
+  margin-top: 30px;
+  transition: var(--transition);
+}
+
+.chartContainer:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+}
+
+.chartTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.periodSelector {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.periodSelector button {
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  background: var(--button-bg);
+  border: 2px solid var(--button-border);
+  color: var(--text-color);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.periodSelector button:hover {
+  background: var(--button-hover);
+  transform: scale(1.1);
+}
+
+.periodSelector .active {
+  background: var(--button-hover);
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
+}
+
+/* ✅ QUICK ACTIONS – SIUNTIMAS, SWAP, STAKE */
 .quickActions {
   margin-top: 40px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.quickActions h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
 .actionsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 25px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
 }
 
-/* ✅ MYGTUKAI */
 .actionButton {
-  padding: 16px 28px;
-  font-size: 1.3rem;
-  font-weight: 800;
-  background: linear-gradient(90deg, #212121, #434343);
-  color: white;
-  border-radius: 12px;
+  padding: 18px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: var(--radius);
+  background: var(--button-bg);
+  border: 2px solid var(--button-border);
+  color: var(--text-color);
+  text-align: center;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+  transition: var(--transition);
+  box-shadow: var(--shadow);
 }
 
 .actionButton:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 0px 45px rgba(255, 255, 255, 0.6);
+  transform: scale(1.08);
+  background: var(--button-hover);
+  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
 }
 
-/* ✅ "DONATE" MYGTUKAS – YPATINGAS WHITE-GOLD DIZAINAS */
 .donateButton {
-  padding: 18px 30px;
-  font-size: 1.4rem;
-  font-weight: 900;
-  background: linear-gradient(90deg, #ffcc00, #ffdb4d);
-  color: #212bff;
-  border-radius: 12px;
-  border: 2px solid white;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-  box-shadow: 0 0 40px rgba(255, 248, 225, 0.7);
+  background: linear-gradient(90deg, #ff0000, #cc0000);
 }
 
 .donateButton:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 0px 60px rgba(255, 255, 255, 1);
+  background: linear-gradient(90deg, #cc0000, #990000);
 }
 
-/* ✅ FOOTER */
-.footer {
-  margin-top: 60px;
-  font-size: 16px;
-  opacity: 1;
+/* ✅ LOADING SCREEN */
+.loadingScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background: var(--primary-bg);
   color: var(--text-color);
-  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
-  font-weight: 500;
 }
 
-/* 🔥 RESPONSIVE – UŽTIKRINTAS 100% PLOTIS! */
-@media (max-width: 768px) {
-  .container {
-    width: 100vw; /* ✅ Užtikrintas pilnas ekranas */
-  }
-  .title {
-    font-size: 2.6rem;
-  }
-  .subtitle {
-    font-size: 1.3rem;
-  }
-  .dashboardContent {
-    width: 95%;
-  }
-  .actionsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .actionButton,
-  .donateButton {
-    font-size: 1.2rem;
-    padding: 14px;
-  }
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid transparent;
+  border-top: 5px solid #FFF8E1;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
 /* 🔥 ANIMACIJOS */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
