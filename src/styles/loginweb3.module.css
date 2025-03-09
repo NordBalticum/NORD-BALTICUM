@@ -1,0 +1,10 @@
+@import "./loginemail.module.css";
+
+button {
+  background: #29b6f6;
+  color: white;
+}
+
+button:hover {
+  background: #4fc3f7;
+}
