@@ -1,21 +1,8 @@
-/* ✅ GLOBALŪS TEMOS KINTAMIEJI */
-:root {
-  --switch-bg: rgba(255, 255, 255, 0.1);
-  --switch-border: rgba(255, 255, 255, 0.4);
-  --switch-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
-  --switch-text: #FFF8E1;
-}
-
-[data-theme="dark"] {
-  --switch-bg: rgba(10, 10, 50, 0.8);
-  --switch-border: rgba(255, 255, 255, 0.7);
-  --switch-text: #FFF8E1;
-}
-
-[data-theme="light"] {
-  --switch-bg: rgba(255, 255, 255, 0.8);
-  --switch-border: rgba(33, 43, 255, 0.7);
-  --switch-text: #212BFF;
+.themeSwitcher {
+  background: var(--switch-bg);
+  border: 2px solid var(--switch-border);
+  box-shadow: var(--switch-shadow);
+  color: var(--switch-text);
 }
 
 /* ✅ PAGRINDINIS TEMŲ JUNGIKLIO KONTEINERIS */
