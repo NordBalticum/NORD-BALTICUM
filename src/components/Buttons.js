@@ -1,3 +1,5 @@
+import "@/styles/buttons.module.css";
+
 const Button = ({ 
   type = "primary", 
   size = "medium", 
