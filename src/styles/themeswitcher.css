@@ -1,83 +1,59 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
-
-/* 🔥 PREMIUM THEME SWITCHER */
+/* ✅ TEMOS PERJUNGIMO MYGTUKAS */
 .theme-switcher {
-  background: rgba(33, 43, 255, 0.85); /* 🔹 Glassmorphic Blue */
-  backdrop-filter: blur(15px);
-  border: 2px solid rgba(255, 248, 225, 0.6);
-  border-radius: 50%;
-  padding: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 22px rgba(255, 248, 225, 0.6);
-  font-size: 26px;
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+  background: var(--button-bg);
+  box-shadow: var(--glow-effect);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 999;
-  animation: glowEffect 2s infinite alternate;
+  top: 20px;
+  right: 20px;
 }
 
+/* ✅ SLANKIKLIS */
+.theme-switcher .slider {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: var(--button-text);
+  transition: all 0.3s ease-in-out;
+}
+
+/* ✅ TEMOS PASIKEITIMAS */
+[data-theme="light"] .theme-switcher {
+  background: var(--button-dark);
+}
+
+[data-theme="light"] .slider {
+  transform: translateX(25px);
+}
+
+[data-theme="dark"] .theme-switcher {
+  background: var(--button-light);
+}
+
+[data-theme="dark"] .slider {
+  transform: translateX(0px);
+}
+
+/* 🔥 HOVER EFEKTAS */
 .theme-switcher:hover {
-  background: rgba(255, 248, 225, 0.15);
-  transform: scale(1.12);
-  box-shadow: 0 0 34px rgba(255, 248, 225, 0.8);
+  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8);
 }
 
-/* 🔥 ICON STYLE */
-.icon {
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  filter: drop-shadow(0px 0px 12px rgba(255, 248, 225, 0.5));
-}
-
-/* 🔥 SUN & MOON ICON ANIMATIONS */
-.sun {
-  color: #FFD700;
-  animation: spinSun 1s linear infinite alternate;
-}
-
-.moon {
-  color: #1E90FF;
-  animation: spinMoon 1s linear infinite alternate;
-}
-
-/* 🔥 ANIMACIJOS */
-@keyframes glowEffect {
-  0% { box-shadow: 0 0 18px rgba(255, 248, 225, 0.5); }
-  50% { box-shadow: 0 0 28px rgba(255, 248, 225, 0.8); }
-  100% { box-shadow: 0 0 18px rgba(255, 248, 225, 0.5); }
-}
-
-@keyframes spinSun {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(12deg); }
-}
-
-@keyframes spinMoon {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-12deg); }
-}
-
-/* 🔥 RESPONSIVE OPTIMIZATION */
+/* ✅ RESPONSIVE */
 @media (max-width: 768px) {
   .theme-switcher {
     width: 50px;
-    height: 50px;
-    bottom: 20px;
-    right: 20px;
+    height: 25px;
   }
-}
-
-@media (max-width: 480px) {
-  .theme-switcher {
-    width: 45px;
-    height: 45px;
-    bottom: 18px;
-    right: 18px;
+  .slider {
+    width: 20px;
+    height: 20px;
   }
 }
