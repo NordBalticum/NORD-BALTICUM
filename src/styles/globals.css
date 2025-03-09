@@ -1,97 +1,109 @@
-/* ✅ Globalūs kintamieji */
+/* ✅ GLOBALŪS KINTAMIEJI */
 :root {
   --bg-gradient: linear-gradient(135deg, #212BFF, #0a0a33);
   --text-color: #FFF8E1;
-  --button-bg: linear-gradient(180deg, #000000, #1a1a1a);
+  --button-bg: linear-gradient(90deg, #000000, #222222);
   --button-text: #FFF8E1;
-  --button-border: rgba(255, 255, 255, 0.6);
-  --glow-effect: 0px 0px 20px rgba(255, 255, 255, 0.4);
+  --button-border: rgba(255, 248, 225, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --shadow: 0 0 20px rgba(255, 248, 225, 0.5);
+  --blur: blur(5px);
+  --radius: 14px;
+  --transition: all 0.3s ease-in-out;
 }
 
-/* ✅ PAGRINDINIS KONTEINERIS */
+/* ✅ PAGRINDINIAI STILIAI */
 body {
-  font-family: "Inter", sans-serif;
-  background: var(--bg-gradient);
-  color: var(--text-color);
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  text-align: center;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  animation: fadeIn 1s ease-in-out;
 }
 
-/* ✅ 3D efektai UI komponentams */
+/* ✅ TEKSTO LYGIAI */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  text-transform: uppercase;
+  text-shadow: var(--shadow);
+}
+
+/* ✅ INTERAKTYVŪS ELEMENTAI */
+button, input {
+  font-family: inherit;
+  outline: none;
+  transition: var(--transition);
+}
+
+/* ✅ MYGTUKAI – PREMIUM BANK FEELING */
+button {
+  padding: 14px 28px;
+  border: 2px solid var(--button-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  background: var(--button-bg);
+  color: var(--button-text);
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  box-shadow: var(--shadow);
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.9);
+}
+
+/* ✅ KORTELĖS / LENTELĖS */
 .card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease-in-out;
+  background: var(--card-bg);
+  padding: 20px 30px;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--blur);
+  transition: var(--transition);
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 15px 40px rgba(255, 255, 255, 0.5);
-}
-
-/* ✅ ANTRAŠTĖS */
-h1, h2, h3 {
-  text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
-}
-
-/* ✅ BANKINIO LYGIO UX/UI FORMOS */
-input, textarea {
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: 12px;
-  color: white;
-  font-size: 1rem;
-  border-radius: 8px;
-  outline: none;
-  transition: all 0.3s ease-in-out;
-}
-
-input:focus, textarea:focus {
-  border-color: rgba(255, 255, 255, 0.6);
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
-}
-
-/* ✅ ANIMACIJOS */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn 1s ease-in-out;
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
 }
 
 /* ✅ FOOTER */
 .footer {
+  margin-top: 50px;
   font-size: 14px;
-  opacity: 0.9;
   color: var(--text-color);
-  text-shadow: 0px 0px 15px rgba(255, 255, 255, 1);
+  text-shadow: var(--shadow);
 }
 
-/* ✅ RESPONSIVE */
+/* ✅ RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   h1 {
     font-size: 2.5rem;
   }
-  h2 {
-    font-size: 2rem;
+  button {
+    font-size: 1rem;
+    padding: 12px 24px;
   }
   .card {
     width: 90%;
+  }
+}
+
+/* ✅ WOW ANIMACIJOS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
