@@ -39,15 +39,32 @@ export default function Home() {
 
       {/* ✅ LOGIN MYGTUKAI */}
       <div className={styles.buttonContainer}>
-        <button className={styles.walletconnect} onClick={() => router.push("/login/loginwagmi")}>
-          <img src="/walletconnect.png" alt="WalletConnect" className={styles.buttonIcon} />
+        <button
+          className={styles.walletconnect}
+          onClick={() => router.push("/login/loginwagmi")}
+        >
+          <img
+            src="/walletconnect.png"
+            alt="WalletConnect"
+            className={styles.buttonIcon}
+          />
         </button>
 
-        <button className={styles.metamask} onClick={() => router.push("/login/loginweb3")}>
-          <img src="/metamask.png" alt="MetaMask" className={styles.buttonIcon} />
+        <button
+          className={styles.metamask}
+          onClick={() => router.push("/login/loginweb3")}
+        >
+          <img
+            src="/metamask.png"
+            alt="MetaMask"
+            className={styles.buttonIcon}
+          />
         </button>
 
-        <button className={styles.email} onClick={() => router.push("/login/loginemail")}>
+        <button
+          className={styles.email}
+          onClick={() => router.push("/login/loginemail")}
+        >
           <img src="/email.png" alt="Email Login" className={styles.emailIcon} />
           EMAIL LOGIN
         </button>
@@ -60,12 +77,12 @@ export default function Home() {
           <p>Bank-grade encryption for all transactions.</p>
         </div>
         <div className={styles.featureCard}>
-          <h2>🌍 Global</h2>
-          <p>Seamless payments worldwide.</p>
-        </div>
-        <div className={styles.featureCard}>
           <h2>⚡ Fast</h2>
           <p>Instant transactions on Binance Smart Chain.</p>
+        </div>
+        <div className={styles.featureCard}>
+          <h2>🌍 Global</h2>
+          <p>Seamless payments worldwide.</p>
         </div>
       </div>
     </div>
