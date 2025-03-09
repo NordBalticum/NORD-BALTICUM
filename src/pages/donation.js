@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ethers } from "ethers";
+import { BrowserProvider, JsonRpcProvider, formatEther, parseEther } from "ethers";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import Buttons from "@/components/Buttons"; // 🔹 Užtikrintas teisingas importas
