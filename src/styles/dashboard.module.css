@@ -1,107 +1,108 @@
+/* ✅ DASHBOARD PAGRINDINIS KONTEINERIS */
 .dashboard-container {
-  max-width: 1100px;
-  margin: 50px auto;
-  padding: 30px;
-  background: linear-gradient(135deg, #0A1F44, #142F60);
-  border-radius: 15px;
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-  text-align: center;
-  color: #fff;
-  transition: all 0.3s ease-in-out;
-}
-
-/* 🎨 PRABANGI BALANSO DĖŽUTĖ */
-.balance-box {
-  background: linear-gradient(135deg, #1A1A1A, #262626);
-  padding: 25px;
-  border-radius: 12px;
-  margin-bottom: 25px;
-  font-size: 20px;
-  font-weight: bold;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-  transition: all 0.3s ease-in-out;
-}
-
-.balance-box:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-}
-
-/* 🔥 KRIPTO TOKENŲ SĄRAŠAS */
-.token-list {
-  margin-bottom: 25px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #0A0F50, #212BFF);
+  color: white;
+  text-align: center;
 }
 
-.token-item {
-  display: flex;
-  justify-content: space-between;
-  background: linear-gradient(90deg, #142F60, #0A1F44);
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+/* ✅ DASHBOARD ANTRAŠTĖ */
+.dashboard-title {
+  font-size: 3rem;
+  font-weight: 800;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 1);
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+
+/* ✅ PASKYROS BALANSAS */
+.balance-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #FFF8E1;
+  margin-bottom: 30px;
   transition: transform 0.3s ease-in-out;
 }
 
-.token-item:hover {
+.balance-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.7);
 }
 
-/* 🚀 VEIKSMŲ MYGTUKAI */
-.buttons-group {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 25px;
+/* ✅ TRANSAKCIJŲ LENTELĖ */
+.transactions-table {
+  width: 100%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
 }
 
-.dashboard-button {
-  background: linear-gradient(90deg, #ffd700, #ffcc00);
-  color: #121212;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 16px;
+.transactions-table th,
+.transactions-table td {
+  padding: 15px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.transactions-table th {
+  background: rgba(255, 255, 255, 0.2);
   font-weight: bold;
+  text-transform: uppercase;
+}
+
+.transactions-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.transactions-table tr:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ✅ MYGTUKAI */
+.dashboard-button {
+  padding: 12px 25px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #000, #333);
+  color: #FFF8E1;
+  border-radius: 12px;
+  border: 2px solid #FFF8E1;
   cursor: pointer;
+  box-shadow: 0px 0px 20px rgba(255, 248, 225, 0.6);
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-  border: none;
+  margin-top: 30px;
 }
 
 .dashboard-button:hover {
-  background: linear-gradient(90deg, #ffcc00, #ffd700);
-  transform: translateY(-3px);
+  transform: scale(1.05);
+  box-shadow: 0px 0px 35px rgba(255, 248, 225, 1);
 }
 
-/* 📊 GRAFIKŲ KONTEINERIS */
-.chart-container {
-  margin-top: 25px;
-  padding: 15px;
-  background: rgba(255, 215, 0, 0.1);
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-  transition: all 0.3s ease-in-out;
-}
-
-.chart-container:hover {
-  transform: scale(1.02);
-}
-
-.dashboard-canvas {
-  background: transparent;
-  border-radius: 12px;
-}
-
-/* 🎭 ANIMACIJOS */
-@keyframes glow-effect {
-  0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
-  100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); }
-}
-
-.balance-box, .token-item, .chart-container {
-  animation: glow-effect 2s infinite alternate;
+/* ✅ RESPONSIVE */
+@media (max-width: 768px) {
+  .dashboard-title {
+    font-size: 2.5rem;
+  }
+  .balance-card {
+    font-size: 1.5rem;
+  }
+  .transactions-table th,
+  .transactions-table td {
+    font-size: 1rem;
+  }
 }
