@@ -1,3 +1,4 @@
+/* 🔥 Pagrindiniai mygtukų stiliai */
 .button {
   display: inline-flex;
   align-items: center;
@@ -5,20 +6,18 @@
   font-size: 16px;
   font-weight: bold;
   padding: 16px 32px;
-  border-radius: 14px;
-  border: 2px solid #FFF8E1;
+  border-radius: 12px;
+  border: 2px solid var(--white-gold);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 6px 18px rgba(255, 248, 225, 0.4);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(90deg, #0A0A0A, #333);
-  color: #FFF8E1;
+  box-shadow: 0 6px 20px rgba(255, 248, 225, 0.5);
 }
 
-/* 🔥 Futuristinis hover efektas */
+/* 🎭 Futuristinis hover efektas */
 .button::before {
   content: "";
   position: absolute;
@@ -36,24 +35,24 @@
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* 🎨 PREMIUM GRADIENTAI */
+/* ✅ 🔥 Premium Gradientai */
 .button.primary {
-  background: linear-gradient(90deg, #0A0A0A, #333);
-  color: #FFF8E1;
-  box-shadow: 0 6px 22px rgba(255, 248, 225, 0.5);
+  background: linear-gradient(90deg, #0A1F44, #142F60);
+  color: var(--white-gold);
+  box-shadow: 0 6px 22px rgba(255, 248, 225, 0.6);
 }
 
 .button.primary:hover {
-  background: linear-gradient(90deg, #333, #0A0A0A);
+  background: linear-gradient(90deg, #142F60, #0A1F44);
   filter: brightness(1.1);
   transform: translateY(-4px);
 }
 
-/* 🔵 PREMIUM BLUE VARIANT */
+/* 🔵 Premium Blue */
 .button.blue {
   background: linear-gradient(90deg, #212BFF, #0A1F44);
-  color: #FFF8E1;
-  border: 2px solid #FFF8E1;
+  color: var(--white-gold);
+  border: 2px solid var(--white-gold);
   box-shadow: 0 6px 22px rgba(33, 43, 255, 0.5);
 }
 
@@ -63,55 +62,31 @@
   transform: translateY(-4px);
 }
 
-/* 🔥 OUTLINE & GHOST */
+/* 🏆 Premium Dark */
+.button.dark {
+  background: linear-gradient(90deg, #000000, #222222);
+  color: var(--white-gold);
+  border: 2px solid var(--white-gold);
+  box-shadow: 0 6px 22px rgba(255, 248, 225, 0.5);
+}
+
+.button.dark:hover {
+  background: linear-gradient(90deg, #222222, #000000);
+  filter: brightness(1.1);
+  transform: translateY(-4px);
+}
+
+/* 🎭 Outline */
 .button.outline {
   background: transparent;
-  border: 2px solid #FFF8E1;
-  color: #FFF8E1;
+  border: 2px solid var(--white-gold);
+  color: var(--white-gold);
   box-shadow: 0 6px 18px rgba(255, 248, 225, 0.4);
 }
 
 .button.outline:hover {
   background: rgba(255, 248, 225, 0.1);
   transform: translateY(-3px);
-}
-
-.button.ghost {
-  background: none;
-  border: none;
-  color: #FFF8E1;
-}
-
-.button.ghost:hover {
-  color: #FFF8E1;
-}
-
-/* 🔥 DYDŽIAI */
-.button.small {
-  font-size: 14px;
-  padding: 12px 24px;
-}
-
-.button.medium {
-  font-size: 16px;
-  padding: 16px 32px;
-}
-
-.button.large {
-  font-size: 18px;
-  padding: 20px 40px;
-}
-
-/* 🎭 IKONOS */
-.button-icon {
-  margin-right: 10px;
-  font-size: 1.5em;
-}
-
-/* 🔄 DISABLED */
-.button.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 /* 📱 FULL WIDTH */
@@ -128,6 +103,7 @@
 
 .button.primary, 
 .button.blue, 
+.button.dark, 
 .button.outline {
   animation: neon-glow 2.5s infinite alternate;
 }
