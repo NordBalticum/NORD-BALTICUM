@@ -1,91 +1,91 @@
-/* ✅ PREMIUM BANKING UI – BALANCE CHART */
+/* PREMIUM BANKING UI – BALANCE CHART */
 .chartContainer {
   width: 100%;
-  max-width: 850px;
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 18px;
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(8px);
+  max-width: 860px;
+  padding: 26px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
   transition: all 0.3s ease-in-out;
   text-align: center;
   margin: auto;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.12);
 }
 
 .chartContainer:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 60px rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+  box-shadow: 0 0 65px rgba(255, 255, 255, 0.55);
 }
 
-/* ✅ GRAFINIO PAVADINIMAS */
+/* GRAFINIO PAVADINIMAS */
 .chartTitle {
-  font-size: 1.6rem;
-  font-weight: 800;
+  font-size: 1.7rem;
+  font-weight: 900;
   color: #FFF8E1;
-  text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
-  margin-bottom: 12px;
-  letter-spacing: 1px;
+  text-shadow: 0px 0px 22px rgba(255, 255, 255, 0.85);
+  margin-bottom: 14px;
+  letter-spacing: 1.2px;
 }
 
-/* ✅ PERIOD SELECTOR */
+/* PERIOD SELECTOR */
 .periodSelector {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-bottom: 18px;
+  gap: 18px;
+  margin-bottom: 20px;
 }
 
 .periodSelector button {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.15);
   color: #FFF8E1;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  padding: 12px 22px;
-  border-radius: 14px;
-  font-size: 1.1rem;
-  font-weight: 800;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  padding: 14px 24px;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  font-weight: 900;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
 }
 
 .periodSelector button:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.07);
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.08);
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.65);
 }
 
-/* ✅ AKTYVUS PERIODAS */
+/* AKTYVUS PERIODAS */
 .periodSelector .active {
   background: linear-gradient(90deg, #FFD700, #FFC300);
   color: #000;
   border-color: #FFD700;
-  box-shadow: 0px 0px 30px rgba(255, 215, 0, 0.9);
-  transform: scale(1.1);
+  box-shadow: 0px 0px 35px rgba(255, 215, 0, 1);
+  transform: scale(1.12);
 }
 
-/* ✅ RESPONSIVE DESIGN */
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .chartContainer {
-    width: 95%;
-    padding: 18px;
+    width: 96%;
+    padding: 20px;
   }
   .chartTitle {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
   .periodSelector {
-    gap: 12px;
+    gap: 14px;
   }
   .periodSelector button {
     font-size: 1rem;
-    padding: 10px 18px;
-    border-radius: 12px;
+    padding: 12px 20px;
+    border-radius: 14px;
   }
 }
 
-/* ✅ WOW ANIMACIJOS */
+/* WOW ANIMACIJOS */
 @keyframes fadeInChart {
-  from { opacity: 0; transform: translateY(-10px); }
+  from { opacity: 0; transform: translateY(-12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
