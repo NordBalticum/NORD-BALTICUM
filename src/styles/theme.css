@@ -1,79 +1,81 @@
-/* ✅ Kintamieji */
+/* ✅ TEMŲ KINTAMIEJI */
 :root {
-  --primary-bg: linear-gradient(135deg, #212BFF, #0A0F50);
-  --secondary-bg: linear-gradient(135deg, #000000, #222222);
-  --glow-color: rgba(255, 255, 255, 0.8);
+  --bg-light: linear-gradient(135deg, #ffffff, #dcdcdc);
+  --bg-dark: linear-gradient(135deg, #0a0a33, #212BFF);
+  --text-light: #212BFF;
+  --text-dark: #FFF8E1;
+  --button-light: linear-gradient(90deg, #000000, #2e2e2e);
+  --button-dark: linear-gradient(90deg, #ffffff, #f5f5f5);
 }
 
-/* ✅ Bendras UI stilius */
-html, body {
-  background: var(--primary-bg);
-  font-family: "Poppins", sans-serif;
-  transition: background 0.5s ease-in-out;
+/* ✅ ŠVIESI TEMA */
+[data-theme="light"] {
+  background: var(--bg-light);
+  color: var(--text-light);
 }
 
-/* ✅ UI kortelės */
-.theme-card {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 15px;
-  box-shadow: 0px 0px 25px var(--glow-color);
-  padding: 20px;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
+[data-theme="light"] .card {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.theme-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 0px 35px rgba(255, 255, 255, 1);
-}
-
-/* ✅ Premium UI mygtukai */
-.theme-button {
-  background: var(--secondary-bg);
-  border: 2px solid var(--glow-color);
+[data-theme="light"] .loginButton {
+  background: var(--button-light);
   color: white;
-  font-size: 1.2rem;
-  padding: 14px 30px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
-  transition: all 0.3s ease-in-out;
-  text-transform: uppercase;
 }
 
-.theme-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 0px 30px var(--glow-color);
+[data-theme="light"] .footer {
+  color: var(--text-light);
 }
 
-/* ✅ Prabangūs efektai */
-.theme-text-glow {
-  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
-  font-weight: 700;
-  font-size: 2rem;
+/* ✅ TAMSI TEMA */
+[data-theme="dark"] {
+  background: var(--bg-dark);
+  color: var(--text-dark);
 }
 
-.theme-border-glow {
-  border: 2px solid var(--glow-color);
-  box-shadow: 0px 0px 25px var(--glow-color);
+[data-theme="dark"] .card {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.2);
 }
 
-/* ✅ Responsive */
+[data-theme="dark"] .loginButton {
+  background: var(--button-dark);
+  color: var(--text-dark);
+}
+
+[data-theme="dark"] .footer {
+  color: var(--text-dark);
+}
+
+/* ✅ 3D PRABANGOS EFEKTAI */
+[data-theme="light"] .loginButton:hover {
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .loginButton:hover {
+  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.5);
+}
+
+/* ✅ ŠVIESOS SPINDULIŲ ANIMACIJA */
+@keyframes lightGlow {
+  0% { box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4); }
+  50% { box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.8); }
+  100% { box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4); }
+}
+
+[data-theme="dark"] .glow {
+  animation: lightGlow 2s infinite alternate;
+}
+
+[data-theme="light"] .glow {
+  animation: lightGlow 2s infinite alternate;
+}
+
+/* ✅ RESPONSIVE */
 @media (max-width: 768px) {
-  .theme-card {
-    padding: 15px;
+  .loginButton {
+    font-size: 1.2rem;
+    padding: 16px;
   }
-  .theme-button {
-    font-size: 1rem;
-    padding: 12px 25px;
-  }
-  .theme-text-glow {
-    font-size: 1.8rem;
-  }
-}
-
-/* ✅ Animacijos */
-@keyframes ultraGlow {
-  0% { box-shadow: 0px 0px 20px var(--glow-color); }
-  50% { box-shadow: 0px 0px 40px var(--glow-color); }
-  100% { box-shadow: 0px 0px 20px var(--glow-color); }
 }
