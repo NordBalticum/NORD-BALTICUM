@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserProvider, parseEther, formatEther } from "ethers";
+import { BrowserProvider, JsonRpcProvider, formatEther, parseEther } from "ethers";
 import axios from "axios";
 import { supabase } from "@/utils/supabaseClient";
 import "@/styles/stake.module.css";
