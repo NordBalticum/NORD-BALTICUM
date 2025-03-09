@@ -1,61 +1,55 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import styles from "@/styles/index.module.css";
 
 export default function Home() {
   const router = useRouter();
-  const [isClient, setIsClient] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
-    if (typeof window !== "undefined") {
-      const user = localStorage.getItem("user");
-      if (user) {
-        router.push("/dashboard");
-      }
-    }
-  }, [router]);
-
-  if (!isClient) return null; // Užtikrina, kad kodas neveikia SSR metu
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   return (
-    <div className={styles.indexContainer}>
-      <h1 className={styles.indexTitle}>
-        Welcome to <span className={styles.highlight}>Nord Balticum</span>
+    <div className={styles.container}>
+      <h1 className={styles.title}>
+        Welcome to <br />
+        <span className={styles.highlight}>Nord Balticum</span>
       </h1>
-      <p className={styles.indexText}>The most advanced Web3 financial ecosystem.</p>
+      <p className={styles.subtitle}>The most advanced Web3 financial ecosystem.</p>
 
-      <div className={styles.ctaButtons}>
-        <button
-          className={`${styles.ctaButton} ${styles.primary}`}
-          onClick={() => router.push("/auth/login")}
-        >
-          🚀 Login with Wallet
+      <div className={styles.buttonGroup}>
+        <button className={styles.walletButton} onClick={() => router.push("/login/wallet")}>
+          🚀 LOGIN WITH WALLET
         </button>
-        <button
-          className={`${styles.ctaButton} ${styles.secondary}`}
-          onClick={() => router.push("/auth/signup")}
-        >
-          ✉️ Sign up with Email
+        <button className={styles.emailButton} onClick={() => router.push("/login/email")}>
+          ✉️ LOGIN WITH EMAIL
         </button>
       </div>
 
       <div className={styles.features}>
-        <div className={styles.featureBox}>
-          <h3 className={styles.featureTitle}>🛡️ Secure</h3>
-          <p className={styles.featureText}>Bank-grade encryption for all transactions.</p>
+        <div className={styles.featureCard}>
+          <h2>🛡️ Secure</h2>
+          <p>Bank-grade encryption for all transactions.</p>
         </div>
-        <div className={styles.featureBox}>
-          <h3 className={styles.featureTitle}>⚡ Fast</h3>
-          <p className={styles.featureText}>Instant transactions on Binance Smart Chain.</p>
+        <div className={styles.featureCard}>
+          <h2>⚡ Fast</h2>
+          <p>Instant transactions on Binance Smart Chain.</p>
         </div>
-        <div className={styles.featureBox}>
-          <h3 className={styles.featureTitle}>🌍 Global</h3>
-          <p className={styles.featureText}>Seamless payments worldwide.</p>
+        <div className={styles.featureCard}>
+          <h2>🌍 Global</h2>
+          <p>Seamless payments worldwide.</p>
         </div>
       </div>
 
-      <p className={styles.footer}>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
+      <footer className={styles.footer}>
+        <p>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
+      </footer>
     </div>
   );
 }
