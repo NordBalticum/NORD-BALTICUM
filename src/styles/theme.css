@@ -3,99 +3,135 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', sans-serif;
-  background: var(--bg-gradient);
+  background: var(--primary-bg);
   color: var(--text-color);
   transition: var(--transition);
   overflow-x: hidden; /* 🔥 Jokio horizontal scroll bug'o */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ✅ LOGIN MYGTUKAI – PREMIUM BANK FEELING */
 button {
-  padding: 16px 32px;
+  padding: 18px 36px;
   border: 3px solid var(--button-border);
   border-radius: var(--radius);
   cursor: pointer;
   background: var(--button-bg);
   color: var(--text-color);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 900;
   text-transform: uppercase;
   box-shadow: var(--shadow);
   transition: var(--transition);
+  letter-spacing: 1.2px;
+  outline: none;
 }
 
 button:hover {
-  transform: scale(var(--hover-scale));
-  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+  box-shadow: 0px 0px 55px rgba(255, 255, 255, 1);
+  background: var(--button-hover);
+}
+
+button:active {
+  transform: scale(0.98);
+  box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.9);
 }
 
 /* ✅ TEKSTO ELEMENTAI */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 800;
+  font-weight: 900;
   text-transform: uppercase;
-  text-shadow: var(--shadow);
-  letter-spacing: 1.2px;
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.7);
+  letter-spacing: 1.5px;
+  transition: var(--transition);
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+  transform: scale(1.02);
+  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
 }
 
 /* ✅ LENTELĖS – GLASSMORPHISM PREMIUM */
 .card {
   background: var(--card-bg);
-  padding: 25px 35px;
+  padding: 30px 40px;
   border-radius: var(--radius);
   text-align: center;
   box-shadow: var(--shadow);
-  backdrop-filter: var(--glass-blur);
+  backdrop-filter: blur(10px);
   transition: var(--transition);
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .card:hover {
-  transform: scale(var(--hover-scale));
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.7);
+  transform: scale(1.05);
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.8);
 }
 
 /* ✅ ĮVESTIES LAUKELIAI */
 input {
-  padding: 14px;
+  padding: 16px;
   border-radius: var(--radius);
   border: 2px solid var(--button-border);
   background: rgba(255, 255, 255, 0.2);
   color: var(--text-color);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   transition: var(--transition);
+  outline: none;
 }
 
 input:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.9);
+  border-color: var(--secondary-bg);
+  box-shadow: 0px 0px 35px rgba(255, 255, 255, 1);
+  transform: scale(1.02);
 }
 
-/* ✅ FOOTER */
+/* ✅ FOOTER – PREMIUM LYGIO */
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 20px 0;
-  background: var(--footer-bg);
+  padding: 22px 0;
+  background: var(--secondary-bg);
   text-align: center;
   z-index: 1000;
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+  transition: var(--transition);
+}
+
+.footer:hover {
+  transform: scale(1.02);
 }
 
 /* ✅ RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   h1 {
-    font-size: 2.3rem;
+    font-size: 2.4rem;
   }
   button {
-    font-size: 1.1rem;
-    padding: 14px 28px;
+    font-size: 1.2rem;
+    padding: 16px 30px;
   }
   .card {
-    width: 95%;
+    width: 90%;
+    padding: 20px 30px;
   }
   input {
-    font-size: 1rem;
-    padding: 12px;
+    font-size: 1.1rem;
+    padding: 14px;
+  }
+  .footer {
+    padding: 18px 0;
   }
 }
 
@@ -103,10 +139,36 @@ input:focus {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-15px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ✅ PREMIUM SLIDINĖJIMAS */
+@keyframes smoothScroll {
+  from {
+    transform: translateY(15px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* ✅ FOOTER FADE-IN */
+@keyframes fadeInFooter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer {
+  animation: fadeInFooter 1.2s ease-in-out;
 }
