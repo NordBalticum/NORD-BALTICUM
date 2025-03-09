@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
-import "@/styles/themeswitcher.component.css";
 import "@/styles/buttons.module.css";
 
 const ThemeSwitcher = () => {
