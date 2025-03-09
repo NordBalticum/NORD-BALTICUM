@@ -21,6 +21,10 @@
     "glob": "^9.2.0",
     "critters": "latest",
     "@supabase/supabase-js": "latest",
+    "@reown/appkit": "^1.6.9",
+    "@reown/appkit-adapter-wagmi": "^1.6.9",
+    "wagmi": "^1.6.9",
+    "@tanstack/react-query": "^4.0.0",
     "ethers": "latest",
     "axios": "latest",
     "react-icons": "^5.5.0" 
