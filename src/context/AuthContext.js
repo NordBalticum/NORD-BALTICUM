@@ -7,10 +7,10 @@ import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { mainnet, arbitrum } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
 
-// Sukuriamas Auth kontekstas
+// ✅ Sukuriamas `AuthContext`
 const AuthContext = createContext(null);
 
-// AppKit + Wagmi Adapter konfigūracija
+// ✅ AppKit + Wagmi Adapter konfigūracija
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const queryClient = new QueryClient();
 
@@ -73,33 +73,40 @@ export const AuthProvider = ({ children }) => {
       }
 
       setWalletAddress(wallet);
-
-      const { data: balanceData } = await supabase
-        .from("balances")
-        .select("*")
-        .eq("user_id", user.id);
-
-      setBalances(balanceData || []);
+      await fetchBalance(wallet);
 
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("walletAddress", wallet);
-      localStorage.setItem("balances", JSON.stringify(balanceData || []));
     } catch (error) {
       console.error("Error loading user data:", error);
     }
   };
 
+  // ✅ Automatinis BSC balanso gavimas su `ethers.js`
+  const fetchBalance = async (wallet) => {
+    try {
+      const provider = new ethers.providers.JsonRpcProvider("https://bsc-dataseed.binance.org/");
+      const balance = await provider.getBalance(wallet);
+      setBalances(ethers.utils.formatEther(balance));
+    } catch (error) {
+      console.error("Balance fetch error:", error);
+    }
+  };
+
+  // ✅ Naujo Ethereum Wallet generavimas, jei jo nėra
   const generateNewWallet = () => {
     const wallet = ethers.Wallet.createRandom();
     return wallet.address;
   };
 
+  // ✅ Wallet prisijungimas per Wagmi/WalletConnect
   const loginWithWallet = async () => {
     try {
       const account = await appKit.connect();
       if (!account) throw new Error("Wallet connection failed");
 
       setWalletAddress(account.address);
+      localStorage.setItem("walletAddress", account.address);
 
       let { data: user } = await supabase
         .from("users")
@@ -108,11 +115,7 @@ export const AuthProvider = ({ children }) => {
         .single();
 
       if (!user) {
-        const { data, error } = await supabase
-          .from("users")
-          .insert({ wallet_address: account.address });
-
-        if (error) console.error(error);
+        await supabase.from("users").insert({ wallet_address: account.address });
       }
 
       await loadUserData(user);
@@ -123,6 +126,39 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ✅ Prisijungimas per MetaMask (su `ethers.js`)
+  const loginWithMetaMask = async () => {
+    if (typeof window.ethereum !== "undefined") {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        const wallet = await signer.getAddress();
+
+        setWalletAddress(wallet);
+        localStorage.setItem("walletAddress", wallet);
+
+        let { data: user } = await supabase
+          .from("users")
+          .select("*")
+          .eq("wallet_address", wallet)
+          .single();
+
+        if (!user) {
+          await supabase.from("users").insert({ wallet_address: wallet });
+        }
+
+        await loadUserData(user);
+        router.push("/dashboard");
+      } catch (error) {
+        console.error("MetaMask login error:", error);
+      }
+    } else {
+      alert("MetaMask not installed!");
+    }
+  };
+
+  // ✅ Prisijungimas per Supabase Magic Link
   const loginWithEmail = async (email) => {
     try {
       const { error } = await supabase.auth.signInWithOtp({ email });
@@ -134,6 +170,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ✅ Visiškas Logout iš visų metodų
   const logout = async () => {
     try {
       await supabase.auth.signOut();
@@ -142,7 +179,6 @@ export const AuthProvider = ({ children }) => {
       setBalances([]);
       localStorage.removeItem("user");
       localStorage.removeItem("walletAddress");
-      localStorage.removeItem("balances");
       router.push("/login");
     } catch (error) {
       console.error("Logout error:", error);
@@ -151,7 +187,16 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, walletAddress, balances, loginWithWallet, loginWithEmail, logout, loading }}
+      value={{
+        user,
+        walletAddress,
+        balances,
+        loginWithWallet,
+        loginWithMetaMask,
+        loginWithEmail,
+        logout,
+        loading,
+      }}
     >
       {children}
     </AuthContext.Provider>
