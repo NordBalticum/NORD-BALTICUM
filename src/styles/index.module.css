@@ -13,97 +13,103 @@
   animation: fadeIn 1s ease-in-out;
 }
 
-/* ✅ LOGOTIPAS – PRABANGUS BLUR SHADOW */
+/* ✅ LOGOTIPAS – 3D LIGHT SHADOW */
 .logo {
-  width: 250px;
+  width: 260px;
   height: auto;
-  filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.8));
-  margin-bottom: 25px;
+  filter: drop-shadow(0px 0px 25px rgba(255, 255, 255, 0.9));
+  margin-bottom: 30px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 1));
 }
 
 /* ✅ ANTRAŠTĖ */
 .title {
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-weight: 900;
-  text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+  text-shadow: 0px 0px 25px rgba(255, 255, 255, 0.8);
 }
 
 /* ✅ PAAIŠKINIMAS */
 .subtitle {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: 500;
-  margin-bottom: 25px;
-  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+  margin-bottom: 30px;
+  text-shadow: 0px 0px 18px rgba(255, 255, 255, 0.6);
 }
 
 /* ✅ MYGTUKŲ KONTEINERIS */
 .buttonContainer {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 30px;
   width: 100%;
-  max-width: 500px;
-  margin-top: 30px;
+  max-width: 520px;
+  margin-top: 35px;
 }
 
-/* ✅ LOGIN MYGTUKAI – PATOBULINTAS GRADIENTAS IR SHADOW */
+/* ✅ LOGIN MYGTUKAI – BANKINIO LYGIO STILIUS */
 .loginButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 18px;
   width: 100%;
-  padding: 20px;
-  font-size: 1.6rem;
+  padding: 22px;
+  font-size: 1.7rem;
   font-weight: 900;
-  border-radius: 18px;
+  border-radius: 20px;
   border: 3px solid var(--button-border);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.6);
   background: var(--button-bg);
   color: var(--button-text);
-  height: 80px;
+  height: 85px;
 }
 
 /* ✅ LOGOTIPŲ FIKSAVIMAS ANT MYGTUKŲ */
 .loginButton img {
-  width: 90%;
+  width: 92%;
   height: auto;
-  max-height: 85px;
+  max-height: 90px;
   object-fit: contain;
 }
 
 /* ✅ WALLETCONNECT IR METAMASK – PRITAIKYTI DYDŽIAI */
 .walletconnect img,
 .metamask img {
-  width: 95%;
-  max-height: 85px;
+  width: 97%;
+  max-height: 90px;
 }
 
-/* ✅ EMAIL LOGIN – LOGOTIPAS IR TEKSTAS CENTRUOTI */
+/* ✅ EMAIL LOGIN – LYGIAVIMAS */
 .email {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 22px;
 }
 
 .email img {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
 }
 
 .email span {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
 /* 🔥 HOVER EFEKTAI */
 .loginButton:hover {
-  transform: scale(1.07);
-  box-shadow: 0px 0px 45px rgba(255, 255, 255, 0.9);
+  transform: scale(1.08);
+  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
 }
 
 /* ✅ PREMIUM FUNKCIJOS KONTEINERIS */
@@ -111,59 +117,59 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 35px;
-  margin-top: 70px;
+  gap: 40px;
+  margin-top: 75px;
   width: 100vw;
 }
 
 /* ✅ PREMIUM FUNKCIJŲ LENTELĖS */
 .featureCard {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 25px 35px;
-  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 28px 38px;
+  border-radius: 20px;
   text-align: center;
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 45px rgba(255, 255, 255, 0.7);
   transition: transform 0.3s ease-in-out;
-  font-size: 1.4rem;
-  backdrop-filter: blur(8px);
+  font-size: 1.5rem;
+  backdrop-filter: blur(10px);
   font-weight: 700;
 }
 
 .featureCard:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.8);
+  transform: scale(1.1);
+  box-shadow: 0 0 55px rgba(255, 255, 255, 0.9);
 }
 
 /* ✅ FOOTER */
 .footer {
-  margin-top: 70px;
-  font-size: 18px;
+  margin-top: 75px;
+  font-size: 19px;
   opacity: 1;
   color: var(--text-color);
-  text-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
-  font-weight: 600;
+  text-shadow: 0px 0px 35px rgba(255, 255, 255, 1);
+  font-weight: 700;
 }
 
 /* 🔥 RESPONSIVE */
 @media (max-width: 768px) {
   .logo {
-    width: 200px;
+    width: 220px;
   }
   .title {
-    font-size: 2.7rem;
+    font-size: 2.9rem;
   }
   .loginButton {
-    font-size: 1.4rem;
-    padding: 18px;
-    height: 70px;
+    font-size: 1.5rem;
+    padding: 20px;
+    height: 75px;
   }
   .loginButton img {
-    width: 85%;
-    max-height: 75px;
+    width: 88%;
+    max-height: 80px;
   }
   .featureCard {
-    width: 90%;
-    font-size: 1.3rem;
+    width: 92%;
+    font-size: 1.4rem;
   }
 }
 
@@ -171,7 +177,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-15px);
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
