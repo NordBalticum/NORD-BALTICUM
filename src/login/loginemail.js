@@ -1,46 +1,58 @@
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { supabase } from "@/utils/supabaseClient";
+import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { signInWithMagicLink, assignWalletToUser } from "@/utils/auth";
+import { useRouter } from "next/router";
 import styles from "@/styles/loginemail.module.css";
 
 export default function LoginEmail() {
   const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
-  const [step, setStep] = useState("email");
-  const { user } = useAuth();
+  const [status, setStatus] = useState("idle"); // idle, sending, success, error
   const router = useRouter();
 
-  useEffect(() => {
-    if (user) router.push("/dashboard");
-  }, [user]);
+  const handleMagicLinkLogin = async (e) => {
+    e.preventDefault();
+    setStatus("sending");
 
-  const sendMagicLink = async () => {
-    const { error } = await supabase.auth.signInWithOtp({ email });
-    if (error) return alert("Error sending Magic Link");
-    setStep("otp");
-  };
+    const result = await signInWithMagicLink(email);
 
-  const verifyOtp = async () => {
-    const { error } = await supabase.auth.verifyOtp({ email, token: otp, type: "magiclink" });
-    if (error) return alert("Invalid OTP");
-    router.push("/dashboard");
+    if (result.success) {
+      setStatus("checking");
+
+      // ✅ Patikrina, ar vartotojas jau turi wallet'ą
+      const walletAssigned = await assignWalletToUser(email);
+
+      if (walletAssigned.success) {
+        setStatus("success");
+        setTimeout(() => router.push("/dashboard"), 3000);
+      } else {
+        setStatus("error");
+      }
+    } else {
+      setStatus("error");
+    }
   };
 
   return (
-    <div className="login-container">
-      <h1>Login with Email</h1>
-      {step === "email" ? (
-        <>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" />
-          <button onClick={sendMagicLink}>Send Magic Link</button>
-        </>
-      ) : (
-        <>
-          <input type="text" value={otp} onChange={(e) => setOtp(e.target.value)} placeholder="Enter OTP" />
-          <button onClick={verifyOtp}>Verify & Login</button>
-        </>
-      )}
+    <div className={styles.container}>
+      <h1 className={styles.title}>Sign in with Magic Link</h1>
+
+      {status === "checking" && <p className={styles.checking}>🔄 Checking wallet...</p>}
+      {status === "error" && <p className={styles.error}>⚠️ Failed to sign in. Try again.</p>}
+      {status === "success" && <p className={styles.success}>✅ Check your email for the link!</p>}
+
+      <form onSubmit={handleMagicLinkLogin} className={styles.form}>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className={styles.input}
+        />
+        <button type="submit" className={styles.loginButton} disabled={status === "sending" || status === "checking"}>
+          {status === "sending" ? "Sending..." : "Send Magic Link"}
+        </button>
+      </form>
     </div>
   );
-}
+      }
