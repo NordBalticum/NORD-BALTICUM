@@ -20,7 +20,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="logo">
         <Link href="/">
-          <Image src="/images/logo.svg" alt="Nord Balticum Logo" width={160} height={50} priority />
+          <Image src="/public/logo.svg" alt="Nord Balticum Logo" width={160} height={50} priority />
         </Link>
       </div>
 
