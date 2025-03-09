@@ -1,103 +1,34 @@
-/* 🔥 PREMIUM FOOTER DESIGN */
 .footer {
   width: 100%;
-  background: linear-gradient(135deg, #0A1F44, #142F60);
-  color: #FFF8E1; /* White Gold */
+  background: linear-gradient(135deg, rgba(33, 43, 255, 0.9), rgba(10, 15, 80, 0.9));
+  color: #FFF8E1; /* Premium white gold */
   text-align: center;
-  padding: 30px 0;
-  font-size: 16px;
+  padding: 20px 0;
+  font-size: 14px;
   font-weight: bold;
-  border-top: 4px solid rgba(255, 248, 225, 0.6);
-  box-shadow: 0 0 25px rgba(255, 248, 225, 0.4);
+  border-top: 3px solid rgba(255, 215, 0, 0.6);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
   transition: all 0.3s ease-in-out;
-  position: relative;
-  z-index: 1000;
 }
 
-/* 🔥 FOOTER CONTENT */
-.footer-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  transition: transform 0.3s ease-in-out;
+/* ✅ Footer tekstas */
+.footer p {
+  margin: 0;
+  opacity: 0.9;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.footer-content:hover {
-  transform: scale(1.03);
+.footer p:hover {
+  opacity: 1;
 }
 
-/* 🔥 SOCIAL ICONS */
-.social-icons {
-  display: flex;
-  gap: 22px;
-  margin-top: 12px;
-}
-
-.social-icons a {
-  color: #FFD700; /* Gold */
-  font-size: 26px;
-  transition: all 0.3s ease-in-out;
-  text-shadow: 0 0 12px rgba(255, 248, 225, 0.5);
-}
-
-.social-icons a:hover {
-  color: #FFCC00;
-  transform: scale(1.3) rotate(8deg);
-  text-shadow: 0 0 22px rgba(255, 248, 225, 0.7);
-}
-
-/* 🔥 FOOTER TEXT */
-.footer-content p {
-  font-size: 15px;
-  opacity: 0.95;
-  letter-spacing: 0.8px;
-}
-
-/* 🎭 NEON GLOW ANIMATION */
+/* 🔥 Premium švytėjimo efektas */
 @keyframes footer-glow {
-  0% { box-shadow: 0 0 15px rgba(255, 248, 225, 0.4); }
-  50% { box-shadow: 0 0 30px rgba(255, 248, 225, 0.7); }
-  100% { box-shadow: 0 0 15px rgba(255, 248, 225, 0.4); }
+  0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+  50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.7); }
+  100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
 }
 
 .footer {
-  animation: footer-glow 4s infinite alternate;
-}
-
-/* 🔥 MEDIA QUERIES – PERFECT RESPONSIVE FOOTER */
-@media (max-width: 1024px) {
-  .footer {
-    padding: 25px 0;
-  }
-
-  .social-icons {
-    gap: 18px;
-  }
-}
-
-@media (max-width: 768px) {
-  .footer {
-    padding: 20px 0;
-  }
-
-  .social-icons {
-    gap: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer {
-    padding: 18px 0;
-    font-size: 14px;
-  }
-
-  .social-icons {
-    gap: 12px;
-    font-size: 20px;
-  }
-
-  .footer-content p {
-    font-size: 13px;
-  }
+  animation: footer-glow 3s infinite alternate;
 }
