@@ -17,17 +17,17 @@ export default function IndexPage() {
 
       <div className={styles["button-container"]}>
         <button className={styles["login-button"]} onClick={() => router.push("/login/loginwagmi")}>
-          <img src="/walletconnect.png" alt="WalletConnect" className={styles["icon"]} />
+          <img src="/public/walletconnect.png" alt="WalletConnect" className={styles["icon"]} />
           WalletConnect
         </button>
 
         <button className={styles["login-button"]} onClick={() => router.push("/login/loginweb3")}>
-          <img src="/metamask.png" alt="MetaMask" className={styles["icon"]} />
+          <img src="/public/metamask.png" alt="MetaMask" className={styles["icon"]} />
           MetaMask
         </button>
 
         <button className={styles["login-button"]} onClick={() => router.push("/login/loginemail")}>
-          <img src="/email.png" alt="Email Login" className={styles["icon"]} />
+          <img src="/public/email.png" alt="Email Login" className={styles["icon"]} />
           Connect with Email
         </button>
       </div>
