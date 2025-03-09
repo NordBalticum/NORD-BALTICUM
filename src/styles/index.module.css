@@ -14,7 +14,7 @@
 
 /* ✅ LOGOTIPAS */
 .logo {
-  width: clamp(180px, 15vw, 220px);
+  width: 200px;
   height: auto;
   filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.8));
   margin-bottom: 20px;
@@ -23,7 +23,7 @@
 /* ✅ SUBTITRAS */
 .subtitle {
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: 20px;
 }
 
@@ -45,9 +45,9 @@
   gap: 12px;
   width: 100%;
   padding: 18px;
-  font-size: 1.5rem;
-  font-weight: 900;
-  border-radius: 16px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  border-radius: 14px;
   border: 3px solid var(--button-border);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -58,35 +58,21 @@
   height: 70px;
 }
 
-/* ✅ PAMAŽINTI LOGOTIPAI – 8% MAŽESNI */
-.walletconnect img,
-.metamask img {
-  width: 82%;
-  max-height: 65px;
+/* ✅ LOGOTIPŲ DYDIS – VIENODAS MOB/PC */
+.loginButton img {
+  width: 80%;
+  height: auto;
+  max-height: 70px;
+  object-fit: contain;
 }
 
-/* ✅ EMAIL LOGIN – PERKELTA 30% Į DEŠINĘ */
-.email {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: left;
-  padding-left: 30%;
+/* 🔥 HOVER EFEKTAI */
+.loginButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
 }
 
-.email img {
-  width: 40px;
-  height: 40px;
-  margin-right: 15px;
-}
-
-.email span {
-  font-size: 1.4rem;
-  font-weight: 800;
-  text-align: left;
-}
-
-/* ✅ LENTELĖS – DABAR PERDĖLIOTOS TEISINGAI */
+/* ✅ LENTELĖS */
 .features {
   display: flex;
   flex-wrap: wrap;
@@ -95,7 +81,55 @@
   margin-top: 60px;
 }
 
-/* ✅ TVARKINGA LENTELIŲ TVARKA */
-.featureCard:nth-child(1) { order: 1; } /* Secure */
-.featureCard:nth-child(2) { order: 3; } /* Fast */
-.featureCard:nth-child(3) { order: 2; } /* Global */
+/* ✅ LENTELIŲ STILIUS */
+.featureCard {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease-in-out;
+  font-size: 1.2rem;
+  backdrop-filter: blur(6px);
+  font-weight: 600;
+}
+
+/* ✅ FOOTER */
+.footer {
+  margin-top: 60px;
+  font-size: 16px;
+  opacity: 1;
+  color: var(--text-color);
+  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
+  font-weight: 500;
+}
+
+/* 🔥 RESPONSIVE */
+@media (max-width: 768px) {
+  .logo {
+    width: 180px;
+  }
+  .loginButton {
+    font-size: 1.2rem;
+    padding: 16px;
+  }
+  .loginButton img {
+    width: 70%;
+    height: auto;
+  }
+  .featureCard {
+    width: 90%;
+  }
+}
+
+/* 🔥 ANIMACIJOS */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
