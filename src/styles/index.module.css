@@ -1,34 +1,42 @@
-/* ✅ PAGRINDINIS KONTEINERIS – 100% PILNAS EKRANAS */
+/* ✅ PAGRINDINIS KONTEINERIS – PILNAS EKRANAS BE RIBOJIMŲ */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  width: 100vw; /* ✅ Užtikrintas pilnas plotis be jokių tarpų */
+  width: 100vw; /* ❗ Visas ekranas – JOKIŲ JUOSTŲ */
   background: var(--bg-gradient);
   color: var(--text-color);
   text-align: center;
-  padding: 40px;
+  padding: 30px;
   animation: fadeIn 1s ease-in-out;
+  overflow-x: hidden; /* ❗ Apsauga nuo overflow glitchų */
 }
 
-/* ✅ LOGOTIPAS – MAKSIMALUS ESTETINIS PREMIUM FEEL */
+/* ✅ LOGOTIPAS */
 .logo {
-  width: 240px;
+  width: 220px;
   height: auto;
-  filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.9));
-  margin-bottom: 30px;
+  filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.8));
+  margin-bottom: 20px;
+}
+
+/* ✅ SUBTITRAS */
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 20px;
 }
 
 /* ✅ MYGTUKŲ KONTEINERIS */
 .buttonContainer {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
   width: 100%;
-  max-width: 500px;
-  margin-top: 30px;
+  max-width: 450px;
+  margin-top: 20px;
 }
 
 /* ✅ LOGIN MYGTUKAI */
@@ -36,103 +44,106 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
-  padding: 22px;
-  font-size: 1.6rem;
+  padding: 18px;
+  font-size: 1.5rem;
   font-weight: 900;
-  border-radius: 18px;
+  border-radius: 16px;
   border: 3px solid var(--button-border);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
   background: var(--button-bg);
   color: var(--button-text);
-  height: 75px;
+  height: 70px;
 }
 
-/* ✅ WALLETCONNECT & METAMASK LOGOTIPAI – FINALINIS PERFECT SIZE */
+/* ✅ LOGOTIPAI ANT MYGTUKŲ – VIENODI DYDŽIAI VISUR */
 .loginButton img {
-  width: 110px; 
+  width: 85%;
   height: auto;
-  max-height: 80px;
+  max-height: 70px;
   object-fit: contain;
 }
 
+/* ✅ METAMASK IR WALLETCONNECT – FINALINIS FIXAS */
 .walletconnect img,
 .metamask img {
-  width: 120px;
-  max-height: 85px;
+  width: 90%;
+  max-height: 75px;
 }
 
 /* ✅ EMAIL LOGIN TEKSTO LYGIAVIMAS */
 .email img {
   width: 40px;
   height: 40px;
-  margin-right: 14px;
+  margin-right: 12px;
 }
 .email span {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
-/* 🔥 HOVER EFEKTAI – PREMIUM UI FEEL */
+/* 🔥 HOVER EFEKTAI */
 .loginButton:hover {
-  transform: scale(1.07);
-  box-shadow: 0px 0px 45px rgba(255, 255, 255, 1);
+  transform: scale(1.05);
+  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
 }
 
-/* ✅ LENTELĖS – 100% FULL WIDTH & BALANSAS */
+/* ✅ LENTELIŲ KONTEINERIS – VISKAS PILNAI SUTVARKYTA */
 .features {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 35px;
-  margin-top: 70px;
-  width: 100vw; /* ✅ Užtikrintas pilnas ekranas be jokių tarpų */
+  gap: 30px;
+  margin-top: 60px;
+  width: 100vw; /* ❗ Užtikrinta, kad nebūtų tarpų */
 }
 
-/* ✅ LENTELIŲ STILIUS – FINAL PREMIUM UI */
+/* ✅ LENTELĖS – FINALINIS FIX */
 .featureCard {
-  background: rgba(255, 255, 255, 0.12);
-  padding: 25px 35px;
-  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px 30px;
+  border-radius: 16px;
   text-align: center;
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
   transition: transform 0.3s ease-in-out;
-  font-size: 1.3rem;
-  backdrop-filter: blur(8px);
-  font-weight: 700;
-  width: 100vw; /* ✅ FIX! Nėra JOKIŲ TARPU apačioje, griežtai 100% */
+  font-size: 1.2rem;
+  backdrop-filter: blur(6px);
+  font-weight: 600;
+  width: 100%; /* ❗ Lentelės VISADA pilno pločio */
+  max-width: 450px; /* ✅ Bet ne per didelės desktop */
 }
 
-/* ✅ FOOTER – PILNAS RESPONSIVE FIXAS */
+/* ✅ FOOTER – PILNAS FIX */
 .footer {
-  margin-top: 70px;
-  font-size: 18px;
+  margin-top: 60px;
+  font-size: 16px;
   opacity: 1;
   color: var(--text-color);
-  text-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
-  font-weight: 600;
-  width: 100vw; /* ✅ VISADA PILNAI PRITAIKYTA */
+  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
+  font-weight: 500;
+  width: 100vw; /* ❗ Užtikrintas full width */
+  text-align: center;
 }
 
-/* 🔥 RESPONSIVE FINAL OPTIMIZACIJA */
+/* 🔥 RESPONSIVE FIXAI – VISI ELEMENTAI DABAR 100% CENTRUOTI */
 @media (max-width: 768px) {
   .logo {
-    width: 190px;
+    width: 180px;
   }
   .loginButton {
-    font-size: 1.4rem;
-    padding: 18px;
+    font-size: 1.3rem;
+    padding: 16px;
   }
   .loginButton img {
-    width: 100px;
-    height: auto;
+    width: 40px;
+    height: 40px;
   }
   .featureCard {
-    width: 100vw; /* ✅ FINAL FIX, NĖRA JOKIŲ TARPU! */
+    width: 90%;
   }
 }
 
