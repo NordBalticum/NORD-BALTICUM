@@ -1,11 +1,10 @@
-/* ✅ GLOBALŪS KINTAMIEJI – BANKO LYGIO SPALVOS */
+/* ✅ GLOBALŪS KINTAMIEJI – BANKO LYGIO */
 :root {
-  --primary-color: #212BFF;
-  --secondary-color: #FFF8E1;
-  --bg-gradient: linear-gradient(135deg, var(--primary-color), #0a0a33);
-  --text-color: var(--secondary-color);
+  --primary-bg: linear-gradient(135deg, #0a0a33, #212BFF);
+  --secondary-bg: linear-gradient(135deg, #212BFF, #0a0a33);
+  --text-color: #FFF8E1;
   --button-bg: linear-gradient(90deg, #000000, #222222);
-  --button-text: var(--secondary-color);
+  --button-hover: linear-gradient(90deg, #111111, #444444);
   --button-border: rgba(255, 248, 225, 0.8);
   --card-bg: rgba(255, 255, 255, 0.15);
   --shadow: 0 0 25px rgba(255, 248, 225, 0.6);
