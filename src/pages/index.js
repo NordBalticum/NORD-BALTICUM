@@ -22,28 +22,25 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {/* ✅ Premium antraštė */}
-      <h1 className={styles.title}>
-        Welcome to <br />
-        <span className={styles.highlight}>Nord Balticum</span>
-      </h1>
-      <p className={styles.subtitle}>The most advanced Web3 financial ecosystem.</p>
+      {/* ✅ Premium logotipas vietoj teksto */}
+      <div className={styles.logoWrapper}>
+        <img src="/logo.png" alt="Nord Balticum" className={styles.logo} />
+        <p className={styles.subtitle}>The most advanced Web3 financial ecosystem.</p>
+      </div>
 
       {/* 🚀 Login mygtukai */}
       <div className={styles.buttonGroup}>
-        <button className={styles.walletButton} onClick={() => router.push("/login/loginwagmi")}>
-          <img src="/walletconnect.png" alt="WalletConnect" className={styles.icon} />
-          WalletConnect
+        <button className={`${styles.loginButton} ${styles.walletButton}`} onClick={() => router.push("/login/loginwagmi")}>
+          <img src="/walletconnect.png" alt="WalletConnect" className={styles.buttonIcon} />
         </button>
 
-        <button className={styles.metamaskButton} onClick={() => router.push("/login/loginweb3")}>
-          <img src="/metamask.png" alt="MetaMask" className={styles.icon} />
-          MetaMask
+        <button className={`${styles.loginButton} ${styles.metamaskButton}`} onClick={() => router.push("/login/loginweb3")}>
+          <img src="/metamask.png" alt="MetaMask" className={styles.buttonIcon} />
         </button>
 
-        <button className={styles.emailButton} onClick={() => router.push("/login/loginemail")}>
-          <img src="/email.png" alt="Email Login" className={styles.icon} />
-          Connect with Email
+        <button className={`${styles.loginButton} ${styles.emailButton}`} onClick={() => router.push("/login/loginemail")}>
+          <img src="/email.png" alt="Email Login" className={styles.buttonIcon} />
+          <span className={styles.buttonText}>Secure Email Login</span>
         </button>
       </div>
 
@@ -62,9 +59,6 @@ export default function Home() {
           <p>Seamless payments worldwide.</p>
         </div>
       </div>
-
-      {/* 🔹 Footer */}
-      <p className={styles.footer}>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
     </div>
   );
 }
