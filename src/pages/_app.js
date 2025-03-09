@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import "@/styles/theme.css";
 import "@/styles/navbar.css";
-import "@/styles/footer.css";
 import "@/styles/themeswitcher.css";
 import "@/styles/buttons.css";
 import Navbar from "@/components/Navbar";
