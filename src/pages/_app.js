@@ -11,7 +11,6 @@ export default function App({ Component, pageProps }) {
   return (
     <AuthProvider>
       <ThemeProvider>
-        {!hideNavbar && <Navbar />}
         <Component {...pageProps} />
         <Footer />
       </ThemeProvider>
