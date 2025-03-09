@@ -1,7 +1,5 @@
 import "@/styles/globals.css";
 import "@/styles/theme.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
