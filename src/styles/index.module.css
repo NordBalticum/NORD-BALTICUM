@@ -58,7 +58,7 @@
   height: 70px;
 }
 
-/* ✅ LOGOTIPAI ANT MYGTUKŲ – DABAR TOBULI, NEBEKLIJUOJASI, TEISINGO DYDŽIO */
+/* ✅ LOGOTIPAI ANT MYGTUKŲ – DABAR IDEALUS DYDIS */
 .loginButton img {
   width: 85%;
   height: auto;
@@ -79,7 +79,7 @@
   box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
 }
 
-/* ✅ LENTELĖS – CENTRUOTOS, SUMAŽINTOS, DABAR TOBULOS */
+/* ✅ LENTELĖS */
 .features {
   display: flex;
   flex-wrap: wrap;
@@ -111,7 +111,7 @@
   font-weight: 500;
 }
 
-/* 🔥 RESPONSIVE – DABAR PILNAI OPTIMIZUOTA VISIEMS EKRANAMS! */
+/* 🔥 RESPONSIVE */
 @media (max-width: 768px) {
   .logo {
     width: 180px;
