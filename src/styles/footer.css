@@ -1,27 +1,21 @@
 .footer {
   width: 100%;
-  background: linear-gradient(135deg, #0A1F44, #142F60);
-  color: #FFF8E1; /* White Gold tekstas */
+  background: linear-gradient(135deg, #212BFF, #0A1F44);
+  color: #FFF8E1;
   text-align: center;
-  padding: 25px 0;
+  padding: 20px 0;
   font-size: 16px;
   font-weight: bold;
-  border-top: 4px solid rgba(255, 248, 225, 0.8); /* White Gold apvadas */
-  box-shadow: 0 0 20px rgba(255, 248, 225, 0.6); /* White Gold švytėjimas */
+  border-top: 4px solid rgba(255, 248, 225, 0.6);
+  box-shadow: 0 0 25px rgba(255, 248, 225, 0.6);
   transition: all 0.3s ease-in-out;
 }
 
-/* 🔥 FOOTER TEKSTO EFEKTAS */
-.footer p {
-  font-size: 15px;
-  text-shadow: 0 0 12px rgba(255, 248, 225, 0.8); /* Ryškesnis White Gold glow */
-}
-
-/* 🔥 FOOTER GLOW ANIMACIJA */
+/* 🎭 NEON GLOW ANIMATION */
 @keyframes footer-glow {
-  0% { box-shadow: 0 0 10px rgba(255, 248, 225, 0.4); }
-  50% { box-shadow: 0 0 25px rgba(255, 248, 225, 0.8); }
-  100% { box-shadow: 0 0 10px rgba(255, 248, 225, 0.4); }
+  0% { box-shadow: 0 0 15px rgba(255, 248, 225, 0.5); }
+  50% { box-shadow: 0 0 30px rgba(255, 248, 225, 0.8); }
+  100% { box-shadow: 0 0 15px rgba(255, 248, 225, 0.5); }
 }
 
 .footer {
