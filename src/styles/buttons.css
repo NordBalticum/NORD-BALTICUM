@@ -1,46 +1,114 @@
+/* ✅ GLOBALŪS KINTAMIEJI */
+:root {
+  --primary-color: #212BFF;
+  --secondary-color: #FFF8E1;
+  --button-dark-bg: linear-gradient(90deg, #000000, #222222);
+  --button-light-bg: linear-gradient(90deg, #FFFFFF, #F0F0F0);
+  --button-hover-dark: linear-gradient(90deg, #111111, #333333);
+  --button-hover-light: linear-gradient(90deg, #EAEAEA, #CCCCCC);
+  --button-border-dark: rgba(255, 248, 225, 0.7);
+  --button-border-light: rgba(33, 43, 255, 0.7);
+  --button-text-dark: #FFF8E1;
+  --button-text-light: #212BFF;
+  --shadow-dark: 0 0 20px rgba(255, 248, 225, 0.6);
+  --shadow-light: 0 0 20px rgba(33, 43, 255, 0.6);
+  --radius: 14px;
+  --transition: all 0.3s ease-in-out;
+}
+
+/* ✅ TEMOS PRITAIKYMAS */
+[data-theme="dark"] {
+  --button-bg: var(--button-dark-bg);
+  --button-hover: var(--button-hover-dark);
+  --button-border: var(--button-border-dark);
+  --button-text: var(--button-text-dark);
+  --shadow: var(--shadow-dark);
+}
+
+[data-theme="light"] {
+  --button-bg: var(--button-light-bg);
+  --button-hover: var(--button-hover-light);
+  --button-border: var(--button-border-light);
+  --button-text: var(--button-text-light);
+  --shadow: var(--shadow-light);
+}
+
 /* ✅ PAGRINDINIAI MYGTUKAI */
-.button {
+button {
+  padding: 16px 32px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  border-radius: var(--radius);
+  border: 2px solid var(--button-border);
+  cursor: pointer;
+  background: var(--button-bg);
+  color: var(--button-text);
+  text-transform: uppercase;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  width: 100%;
-  max-width: 450px;
-  padding: 18px;
-  font-size: 1.5rem;
-  font-weight: 800;
-  border-radius: 16px;
-  border: 3px solid var(--button-border);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  text-transform: uppercase;
-  box-shadow: var(--glow-effect);
-  background: var(--button-bg);
-  color: var(--button-text);
+  min-width: 180px;
   height: 70px;
 }
 
-/* ✅ MYGTUKŲ LOGOTIPŲ DYDŽIO FIKSAVIMAS */
-.button img {
-  width: 50px;
-  height: 50px;
+/* ✅ LOGOTIPŲ FIKSAVIMAS ANT MYGTUKŲ */
+button img {
+  width: 40px;
+  height: auto;
+  max-height: 50px;
   object-fit: contain;
 }
 
-/* 🔥 HOVER EFEKTAI */
-.button:hover {
-  transform: scale(1.07);
-  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
+/* ✅ HOVER & PRESSED EFEKTAI */
+button:hover {
+  transform: scale(1.05);
+  background: var(--button-hover);
+  box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.9);
 }
 
-/* ✅ RESPONSIVE */
+button:active {
+  transform: scale(0.98);
+  filter: brightness(0.9);
+}
+
+/* ✅ MYGTUKŲ SPECIFIKACIJOS */
+.walletconnect {
+  background: var(--button-bg);
+}
+
+.metamask {
+  background: var(--button-bg);
+}
+
+.email {
+  background: var(--button-bg);
+}
+
+/* ✅ RESPONSIVE DESIGN */
 @media (max-width: 768px) {
-  .button {
+  button {
     font-size: 1.2rem;
-    padding: 16px;
+    padding: 14px 28px;
+    min-width: 160px;
+    height: 60px;
   }
-  .button img {
-    width: 40px;
-    height: 40px;
+  button img {
+    width: 35px;
+    max-height: 40px;
   }
+}
+
+/* ✅ ANIMACIJOS */
+@keyframes buttonGlow {
+  0% { box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6); }
+  50% { box-shadow: 0px 0px 20px rgba(255, 255, 255, 1); }
+  100% { box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
