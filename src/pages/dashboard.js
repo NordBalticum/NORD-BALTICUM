@@ -1,191 +1,84 @@
-import { useState, useEffect, useCallback } from "react";
-import { BrowserProvider, formatEther, formatUnits } from "ethers";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/router";
-import { supabase } from "@/utils/supabaseClient";
-import dynamic from "next/dynamic"; // ✅ Užtikriname, kad komponentas vykdomas tik kliente
 import styles from "@/styles/dashboard.module.css";
-
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false }); // ✅ Dinaminis įkėlimas be SSR
-
-const BSC_SCAN_API = process.env.NEXT_PUBLIC_BSC_SCAN_API;
-const BSC_RPC_URL = "https://bsc-dataseed.binance.org/";
+import Image from "next/image";
 
 export default function Dashboard() {
-  const [wallet, setWallet] = useState(null);
-  const [bnbBalance, setBnbBalance] = useState("0");
-  const [tokens, setTokens] = useState([]);
-  const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [chartData, setChartData] = useState({
-    series: [{ data: [0, 0, 0, 0] }],
-    options: {
-      chart: { type: "line", height: 250 },
-      xaxis: { categories: ["1D", "7D", "14D", "30D"] },
-    },
-  });
-
+  const { user, walletAddress, balances, logout, loading } = useAuth();
   const router = useRouter();
-
-  // ✅ Tikriname vartotojo prisijungimą (klientinėje pusėje)
-  const checkWalletConnection = useCallback(async () => {
-    if (typeof window === "undefined") return; // 🚀 FIX SSR PROBLEMĄ
-
-    try {
-      // 📌 Patikriname Supabase naudotoją (magic link)
-      const { data: session } = await supabase.auth.getSession();
-      if (session?.user) {
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("wallet")
-          .eq("id", session.user.id)
-          .single();
-
-        if (!error && data?.wallet) {
-          setWallet(data.wallet);
-          fetchBalances(data.wallet);
-          return;
-        }
-      }
-
-      // 📌 Jei MetaMask prijungtas, naudojame Web3 adresą
-      if (window.ethereum) {
-        const provider = new BrowserProvider(window.ethereum);
-        const accounts = await provider.listAccounts();
-        if (accounts.length > 0) {
-          setWallet(accounts[0]);
-          fetchBalances(accounts[0]);
-        }
-      }
-    } catch (error) {
-      console.error("❌ Error checking wallet connection:", error);
-    }
-  }, []);
+  const [currentTime, setCurrentTime] = useState("");
 
   useEffect(() => {
-    checkWalletConnection();
-  }, [checkWalletConnection]);
-
-  // ✅ Užkrauname balansus ir operacijas
-  const fetchBalances = async (address) => {
-    try {
-      if (!address) return;
-      setLoading(true);
-
-      const provider = new BrowserProvider(window.ethereum);
-      const balance = await provider.getBalance(address);
-      setBnbBalance(formatEther(balance));
-
-      // 📌 Token balansai iš BSC Scan
-      const tokenRes = await axios.get(
-        `https://api.bscscan.com/api?module=account&action=tokenbalance&address=${address}&apikey=${BSC_SCAN_API}`
-      );
-
-      if (tokenRes.data.status === "1" && Array.isArray(tokenRes.data.result)) {
-        const formattedTokens = tokenRes.data.result.map((token) => ({
-          tokenName: token.tokenName,
-          tokenSymbol: token.tokenSymbol,
-          balance: formatUnits(token.balance || "0", token.tokenDecimal),
-        }));
-        setTokens(formattedTokens);
-      }
-
-      // 📌 Balanso istorija grafikui
-      let { data, error } = await supabase
-        .from("balances")
-        .select("amount")
-        .order("created_at", { ascending: false })
-        .limit(4);
-
-      if (!error) {
-        setChartData((prev) => ({
-          ...prev,
-          series: [{ data: data.map((item) => Number(item.amount)) }],
-        }));
-      }
-
-      // 📌 Paskutinės transakcijos
-      let { data: txData, error: txError } = await supabase
-        .from("transactions")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(5);
-
-      if (!txError) {
-        setTransactions(txData);
-      }
-
-      setLoading(false);
-    } catch (error) {
-      console.error("❌ Failed to fetch balances", error);
-      setLoading(false);
+    if (!user && !loading) {
+      router.push("/login");
     }
+    updateTime();
+    const interval = setInterval(updateTime, 60000);
+    return () => clearInterval(interval);
+  }, [user, loading]);
+
+  const updateTime = () => {
+    const now = new Date();
+    setCurrentTime(now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }));
   };
 
-  return (
-    <div className={styles.dashboardContainer}>
-      <h1>Dashboard</h1>
-
-      <div className={styles.walletInfo}>
-        <p><strong>Connected Wallet:</strong> {wallet || "Not Connected"}</p>
-        <p><strong>BNB Balance:</strong> {bnbBalance} BNB</p>
+  if (loading || !user) {
+    return (
+      <div className={styles.loadingScreen}>
+        <div className={styles.loader}></div>
+        <p>Loading dashboard...</p>
       </div>
+    );
+  }
 
-      {loading ? (
-        <p>Loading data...</p>
-      ) : (
-        <>
-          <Chart options={chartData.options} series={chartData.series} type="line" height={250} />
+  return (
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <Image src="/logo.png" alt="Nord Balticum" width={180} height={50} className={styles.logo} />
+        <button className={styles.logoutButton} onClick={logout}>
+          Logout
+        </button>
+      </header>
 
-          <div className={styles.tokenList}>
-            <h2>Your Tokens</h2>
-            {tokens.length > 0 ? (
-              tokens.map((token, index) => (
-                <div key={index} className={styles.tokenItem}>
-                  <span>{token.tokenName}</span>
-                  <span>{token.balance} {token.tokenSymbol}</span>
-                </div>
-              ))
-            ) : (
-              <p>No tokens found</p>
-            )}
+      <div className={styles.dashboardContent}>
+        <h1 className={styles.title}>Welcome, {user.email.split("@")[0]}!</h1>
+        <p className={styles.subtitle}>Your Web3 financial hub.</p>
+
+        <div className={styles.walletInfo}>
+          <h2>💳 Wallet Address:</h2>
+          <p className={styles.wallet}>{walletAddress || "Generating..."}</p>
+
+          <h2>💰 Your Balance:</h2>
+          <p className={styles.balance}>
+            {balances ? `${balances} BNB` : "Fetching balance..."}
+          </p>
+        </div>
+
+        <div className={styles.quickActions}>
+          <h2>🚀 Quick Actions</h2>
+          <div className={styles.actionsGrid}>
+            <button className={styles.actionButton} onClick={() => router.push("/send")}>
+              ✈️ Send Crypto
+            </button>
+            <button className={styles.actionButton} onClick={() => router.push("/receive")}>
+              📥 Receive Funds
+            </button>
+            <button className={styles.actionButton} onClick={() => router.push("/swap")}>
+              🔄 Swap Tokens
+            </button>
+            <button className={styles.actionButton} onClick={() => router.push("/stake")}>
+              💎 Stake BNB
+            </button>
+            <button className={styles.donateButton} onClick={() => router.push("/donation")}>
+              ❤️ Donate
+            </button>
           </div>
+        </div>
 
-          <h2>Recent Transactions</h2>
-          <table className={styles.transactionTable}>
-            <thead>
-              <tr>
-                <th>Type</th>
-                <th>Amount</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transactions.length > 0 ? (
-                transactions.map((tx, index) => (
-                  <tr key={index}>
-                    <td>{tx.type}</td>
-                    <td>{tx.amount} BNB</td>
-                    <td>{new Date(tx.created_at).toLocaleString()}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="3">No transactions found</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </>
-      )}
-
-      {/* 📌 Mygtukai */}
-      <div className={styles.dashboardButtons}>
-        <button onClick={() => router.push("/send")}>Send</button>
-        <button onClick={() => router.push("/receive")}>Receive</button>
-        <button onClick={() => router.push("/stake")}>Stake</button>
-        <button onClick={() => router.push("/swap")}>Swap</button>
-        <button onClick={() => router.push("/donate")}>Donate</button>
+        <div className={styles.footer}>
+          <p>Nord Balticum - {currentTime}</p>
+        </div>
       </div>
     </div>
   );
