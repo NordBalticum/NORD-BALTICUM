@@ -58,27 +58,20 @@
   height: 70px;
 }
 
-/* ✅ LOGOTIPAI ANT MYGTUKŲ – DABAR TIKRAI VIENODI VISUR */
-.loginButton img {
-  width: 85%;
-  height: auto;
-  max-height: 65px;
-  object-fit: contain;
-}
-
-/* ✅ METAMASK IR WALLETCONNECT – DABAR TIKRAI STABILŪS VISUOSE ĮRENGINIUOSE */
+/* ✅ PAMAŽINTI LOGOTIPAI – 8% MAŽESNI */
 .walletconnect img,
 .metamask img {
-  width: 90%;
-  max-height: 70px;
+  width: 82%;
+  max-height: 65px;
 }
 
-/* ✅ EMAIL LOGIN – TEKSTAS IR IKONA VIENODAI CENTRUOTI */
+/* ✅ EMAIL LOGIN – PERKELTA 30% Į DEŠINĘ */
 .email {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
+  padding-left: 30%;
 }
 
 .email img {
@@ -90,16 +83,10 @@
 .email span {
   font-size: 1.4rem;
   font-weight: 800;
-  text-align: center;
+  text-align: left;
 }
 
-/* 🔥 HOVER EFEKTAI */
-.loginButton:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
-}
-
-/* ✅ LENTELĖS – DABAR 100% CENTRUOTOS */
+/* ✅ LENTELĖS – DABAR PERDĖLIOTOS TEISINGAI */
 .features {
   display: flex;
   flex-wrap: wrap;
@@ -108,63 +95,7 @@
   margin-top: 60px;
 }
 
-/* ✅ LENTELIŲ STILIUS – DABAR TIKRAI CENTRUOTI VISI TEKSTAI */
-.featureCard {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px 30px;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
-  transition: transform 0.3s ease-in-out;
-  font-size: 1.2rem;
-  backdrop-filter: blur(6px);
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ✅ FOOTER */
-.footer {
-  margin-top: 60px;
-  font-size: 16px;
-  opacity: 1;
-  color: var(--text-color);
-  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
-  font-weight: 500;
-}
-
-/* 🔥 RESPONSIVE */
-@media (max-width: 768px) {
-  .logo {
-    width: 180px;
-  }
-  .loginButton {
-    font-size: 1.3rem;
-    padding: 16px;
-  }
-  .loginButton img {
-    width: 75%;
-    max-height: 60px;
-  }
-  .email img {
-    width: 35px;
-    height: 35px;
-  }
-  .featureCard {
-    width: 90%;
-  }
-}
-
-/* 🔥 ANIMACIJOS */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* ✅ TVARKINGA LENTELIŲ TVARKA */
+.featureCard:nth-child(1) { order: 1; } /* Secure */
+.featureCard:nth-child(2) { order: 3; } /* Fast */
+.featureCard:nth-child(3) { order: 2; } /* Global */
