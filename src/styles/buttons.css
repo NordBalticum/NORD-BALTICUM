@@ -1,4 +1,18 @@
-/* ✅ PREMIUM JUODI MYGTUKAI – IDENTIŠKI ABU */
+.primary-button {
+  background: linear-gradient(90deg, #0A1F44, #142F60); /* 🔥 Juodas gradientas */
+  color: #ffd700;
+  border: 2px solid #ffd700;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+}
+
+.primary-button:hover {
+  background: linear-gradient(90deg, #142F60, #0A1F44);
+  filter: brightness(1.1);
+  transform: translateY(-3px);
+}
+
+
+/* 🔥 PREMIUM BUTTON DESIGN */
 .button {
   display: inline-flex;
   align-items: center;
@@ -7,7 +21,7 @@
   font-weight: bold;
   padding: 16px 32px;
   border-radius: 14px;
-  border: 2px solid #FFF8E1;
+  border: none;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 6px 18px rgba(255, 248, 225, 0.4);
@@ -15,11 +29,11 @@
   letter-spacing: 0.05em;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(90deg, #0A1F44, #142F60);
-  color: #FFF8E1;
+  background: linear-gradient(90deg, #FFD700, #FFF8E1);
+  color: #121212;
 }
 
-/* 🔥 FUTURISTINIS HOVER EFEKTAS */
+/* 🔥 Futuristinis hover efektas */
 .button::before {
   content: "";
   position: absolute;
@@ -37,18 +51,29 @@
   transform: translate(-50%, -50%) scale(1);
 }
 
-/* 🎨 PREMIUM JUODAS GRADIENTAS */
-.button.primary, 
-.button.blue {
-  background: linear-gradient(90deg, #0A1F44, #142F60);
-  color: #FFF8E1;
-  border: 2px solid #FFF8E1;
+/* 🎨 PREMIUM GRADIENTAI */
+.button.primary {
+  background: linear-gradient(90deg, #FFD700, #FFF8E1);
+  color: #121212;
   box-shadow: 0 6px 22px rgba(255, 248, 225, 0.5);
 }
 
-.button.primary:hover, 
+.button.primary:hover {
+  background: linear-gradient(90deg, #FFF8E1, #FFD700);
+  filter: brightness(1.1);
+  transform: translateY(-4px);
+}
+
+/* 🔵 PREMIUM BLUE VARIANT */
+.button.blue {
+  background: linear-gradient(90deg, #212BFF, #0A1F44);
+  color: #FFF8E1;
+  border: 2px solid #FFF8E1;
+  box-shadow: 0 6px 22px rgba(33, 43, 255, 0.5);
+}
+
 .button.blue:hover {
-  background: linear-gradient(90deg, #142F60, #0A1F44);
+  background: linear-gradient(90deg, #0A1F44, #212BFF);
   filter: brightness(1.1);
   transform: translateY(-4px);
 }
@@ -69,11 +94,11 @@
 .button.ghost {
   background: none;
   border: none;
-  color: #FFF8E1;
+  color: #FFD700;
 }
 
 .button.ghost:hover {
-  color: #FFD700;
+  color: #FFF8E1;
 }
 
 /* 🔥 DYDŽIAI */
