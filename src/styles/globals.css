@@ -1,94 +1,69 @@
-/* ✅ Reset – viskas turi būti absoliučiai švaru */
-* {
+/* ✅ Globalūs kintamieji */
+:root {
+  --bg-gradient: linear-gradient(135deg, #212BFF, #0a0a33);
+  --text-color: #FFF8E1;
+  --button-bg: linear-gradient(180deg, #000000, #1a1a1a);
+  --button-text: #FFF8E1;
+  --button-border: rgba(255, 255, 255, 0.6);
+  --glow-effect: 0px 0px 20px rgba(255, 255, 255, 0.4);
+}
+
+/* ✅ PAGRINDINIS KONTEINERIS */
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-color);
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
-/* ✅ Visas background gradientas */
-body {
-  background: linear-gradient(135deg, #212BFF, #0A0F50);
-  color: #FFF8E1;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  text-rendering: optimizeSpeed;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-/* ✅ Bendras spalvų paletės kintamųjų rinkinys */
-:root {
-  --primary-color: #212BFF;
-  --secondary-color: #0A0F50;
-  --text-light: #FFF8E1;
-  --text-dark: #0A0A0A;
-  --button-bg: linear-gradient(135deg, #000000, #222222);
-  --button-hover-bg: linear-gradient(135deg, #333333, #555555);
-  --border-glow: 0px 0px 20px rgba(255, 255, 255, 0.6);
-}
-
-/* ✅ Premium logotipų glow efektas */
-.logo-glow {
-  filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.9));
-}
-
-/* ✅ UI mygtukų dizainas */
-.button {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 400px;
-  height: 65px;
-  padding: 16px;
-  font-size: 1.4rem;
-  font-weight: 800;
-  border-radius: 14px;
-  border: 3px solid var(--text-light);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  text-transform: uppercase;
-  box-shadow: var(--border-glow);
-  background: var(--button-bg);
-  color: var(--text-light);
+  min-height: 100vh;
+  text-align: center;
 }
 
-/* ✅ UI mygtukų hover efektai */
-.button:hover {
-  transform: scale(1.07);
-  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
-}
-
-/* ✅ UI kortelių dizainas */
+/* ✅ 3D efektai UI komponentams */
 .card {
   background: rgba(255, 255, 255, 0.1);
-  padding: 20px 30px;
-  border-radius: 14px;
-  box-shadow: var(--border-glow);
-  text-align: center;
-  transition: transform 0.3s ease-in-out;
-  width: 100%;
-  max-width: 300px;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease-in-out;
 }
 
-/* ✅ UI kortelių hover efektas */
 .card:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 40px rgba(255, 248, 225, 0.7);
+  transform: translateY(-5px);
+  box-shadow: 0px 15px 40px rgba(255, 255, 255, 0.5);
 }
 
-/* ✅ Premium antraštės */
-h1, h2, h3, h4 {
-  font-weight: 700;
-  text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+/* ✅ ANTRAŠTĖS */
+h1, h2, h3 {
+  text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
 }
 
-/* ✅ Animacijos */
+/* ✅ BANKINIO LYGIO UX/UI FORMOS */
+input, textarea {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 12px;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+input:focus, textarea:focus {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+}
+
+/* ✅ ANIMACIJOS */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
@@ -96,8 +71,27 @@ h1, h2, h3, h4 {
   }
 }
 
-@keyframes glow {
-  0% { text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7); }
-  50% { text-shadow: 0px 0px 20px rgba(255, 255, 255, 1); }
-  100% { text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7); }
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* ✅ FOOTER */
+.footer {
+  font-size: 14px;
+  opacity: 0.9;
+  color: var(--text-color);
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 1);
+}
+
+/* ✅ RESPONSIVE */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  .card {
+    width: 90%;
+  }
 }
