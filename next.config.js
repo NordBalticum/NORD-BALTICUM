@@ -7,7 +7,7 @@ const nextConfig = {
     formats: ["image/webp"], // Optimizuotos WebP formato nuotraukos
   },
   experimental: {
-    optimizeCss: true, // Optimizuoja CSS, bet naudoti atsargiai
+    optimizeCss: false, // Optimizuoja CSS, bet naudoti atsargiai
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -15,7 +15,7 @@ const nextConfig = {
         fs: false, // Pašalina fs klaidas kliento pusėje
       };
     }
-    config.cache = false; // Išjungia cache, jei reikalinga švari kompiliacija
+    config.cache = true; // Išjungia cache, jei reikalinga švari kompiliacija
     return config;
   },
 };
