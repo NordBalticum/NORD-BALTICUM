@@ -1,171 +1,111 @@
-/* ✅ Pagrindinis konteineris – PRABANGUS IR PRISITAIKANTIS */
+/* ✅ PAGRINDINIS KONTEINERIS */
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100%;
-  background: #212BFF !important;
-  color: white;
+  min-height: 100vh;
+  width: 100vw;
+  background: var(--bg-gradient);
+  color: var(--text-color);
   text-align: center;
-  padding: 5vw;
+  padding: 30px;
   animation: fadeIn 1s ease-in-out;
 }
 
-/* 🔥 Antraštė su optimalia tipografija */
-.title {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+/* ✅ FORMOS KONTEINERIS */
+.login-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 400px;
+  animation: fadeInUp 0.8s ease-in-out;
+}
+
+/* ✅ ANTRAŠTĖ */
+.login-title {
+  font-size: 2rem;
   font-weight: 800;
   text-transform: uppercase;
-  text-shadow: 0 0 40px rgba(255, 255, 255, 1);
-  letter-spacing: 2px;
-  animation: fadeInDown 0.8s ease-in-out;
+  text-shadow: 0 0 35px rgba(255, 255, 255, 1);
+  margin-bottom: 15px;
 }
 
-/* 🌟 White Gold premium efektas */
-.highlight {
-  color: #FFFFFF;
-  text-shadow: 0px 0px 45px rgba(255, 255, 255, 1);
-  font-size: clamp(3rem, 5vw, 4rem);
-  transition: all 0.3s ease-in-out;
-  font-weight: bold;
-}
-
-/* ✅ Forma – interaktyvus laukai */
-.input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+/* ✅ INPUT LAUKELIAI */
+.login-input {
   width: 100%;
-  max-width: 450px;
-  margin-top: 4vh;
-}
-
-/* 🚀 Input laukai – dabar premium dizaino */
-.input-field {
-  width: 100%;
-  padding: 1.2vh 2vw;
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  font-weight: 500;
+  padding: 14px;
+  font-size: 1.2rem;
   border-radius: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: var(--text-color);
   text-align: center;
+  margin-bottom: 15px;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
 }
 
-.input-field:focus {
-  outline: none;
-  border-color: #FFF8E1;
-  box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.6);
+.login-input:focus {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.2);
 }
 
-/* 🚀 Login mygtukas */
-.login-button {
+/* ✅ MAGIC LINK MYGTUKAS */
+.magic-link-btn {
   width: 100%;
-  padding: 2vh 2vw;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  font-weight: 900;
-  border-radius: 16px;
-  border: 3px solid transparent;
+  padding: 16px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  border-radius: 14px;
+  border: 3px solid var(--button-border);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.4);
-  color: #212BFF;
-  background: linear-gradient(90deg, #FFFFFF, #F5F5F5);
+  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
+  background: var(--button-bg);
+  color: var(--button-text);
+  height: 60px;
 }
 
-.login-button:hover {
+/* ✅ HOVER MAGIC LINK */
+.magic-link-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
 }
 
-/* 🔥 Logotipo priderinimas */
-.login-logo {
-  width: clamp(50px, 10vw, 70px);
-  height: clamp(50px, 10vw, 70px);
-  margin-bottom: 3vh;
+/* ✅ FOOTER */
+.login-footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--text-color);
+  opacity: 0.8;
 }
 
-/* ✅ Prabangus animuotas loading efektas */
-.loading {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 5px solid rgba(255, 255, 255, 0.3);
-  border-top: 5px solid white;
-  animation: spin 1s linear infinite;
-  margin-top: 3vh;
-}
-
-/* ✅ Footer */
-.footer {
-  margin-top: 6vh;
-  font-size: clamp(14px, 1.5vw, 16px);
-  opacity: 1;
-  color: #FFFFFF;
-  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
-  font-weight: 500;
-}
-
-/* 🔥 Responsive dizainas */
+/* ✅ RESPONSIVE */
 @media (max-width: 768px) {
-  .login-container {
-    padding: 5vw;
+  .login-title {
+    font-size: 1.8rem;
   }
-  .title {
-    font-size: 3rem;
+  .login-box {
+    max-width: 90%;
   }
-  .highlight {
-    font-size: 3.5rem;
-  }
-  .input-field {
-    font-size: 1.1rem;
-    padding: 1vh;
-  }
-  .login-button {
-    font-size: 1.3rem;
-    padding: 16px;
-  }
-  .login-logo {
-    width: 60px;
-    height: 60px;
+  .magic-link-btn {
+    font-size: 1.2rem;
+    padding: 14px;
   }
 }
 
-/* 🔥 Prabangios animacijos */
+/* ✅ ANIMACIJOS */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
