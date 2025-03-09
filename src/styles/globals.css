@@ -1,5 +1,5 @@
 /* ✅ GLOBALŪS KINTAMIEJI – BANKO LYGIO */
-:root {
+html {
   --primary-bg: linear-gradient(135deg, #0a0a33, #212BFF);
   --secondary-bg: linear-gradient(135deg, #212BFF, #0a0a33);
   --text-color: #FFF8E1;
@@ -19,33 +19,27 @@
   --switch-text: #FFF8E1;
 }
 
+/* ✅ TEMOS PRITAIKYMAS */
 [data-theme="dark"] {
   --switch-bg: rgba(10, 10, 50, 0.8);
   --switch-border: rgba(255, 255, 255, 0.7);
   --switch-text: #FFF8E1;
+
+  --button-bg: linear-gradient(90deg, #111, #222);
+  --button-hover: linear-gradient(90deg, #222, #444);
+  --button-border: rgba(255, 255, 255, 0.8);
+  --shadow: 0 0 30px rgba(255, 255, 255, 0.6);
 }
 
 [data-theme="light"] {
   --switch-bg: rgba(255, 255, 255, 0.8);
   --switch-border: rgba(33, 43, 255, 0.7);
   --switch-text: #212BFF;
-}
 
-/* ✅ TEMOS PRITAIKYMAS */
-[data-theme="dark"] {
-  --button-bg: var(--button-dark-bg);
-  --button-hover: var(--button-hover-dark);
-  --button-border: var(--button-border-dark);
-  --button-text: var(--button-text-dark);
-  --shadow: var(--shadow-dark);
-}
-
-[data-theme="light"] {
-  --button-bg: var(--button-light-bg);
-  --button-hover: var(--button-hover-light);
-  --button-border: var(--button-border-light);
-  --button-text: var(--button-text-light);
-  --shadow: var(--shadow-light);
+  --button-bg: linear-gradient(90deg, #fff, #ddd);
+  --button-hover: linear-gradient(90deg, #ddd, #bbb);
+  --button-border: rgba(0, 0, 0, 0.2);
+  --shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
 /* ✅ PREMIUM PAGRINDINIAI STILIAI */
@@ -65,10 +59,10 @@ body {
 html, body {
   height: 100%;
   display: grid;
-  grid-template-rows: auto 1fr auto; /* HEADER – CONTENT – FOOTER */
+  grid-template-rows: auto 1fr auto;
 }
 
-/* ✅ FOOTER – FIXED, NĖRA PADDING PROBLEMOS, NEVĖLUOJA ATSIRASTI */
+/* ✅ FOOTER – FIXED, PREMIUM DESIGN */
 .footer {
   background: var(--secondary-bg);
   color: var(--text-color);
@@ -87,6 +81,7 @@ html, body {
   bottom: 0;
   left: 0;
   z-index: 1000;
+  animation: fadeInFooter 1s ease-in-out;
 }
 
 /* ✅ FOOTER TEKSTAS */
@@ -155,18 +150,13 @@ html, body {
   }
 }
 
-/* ✅ FOOTER FADE-IN ANIMACIJA */
-@keyframes fadeInFooter {
-  from { opacity: 0; transform: translateY(10px); }
+/* ✅ ANIMACIJOS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-15px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.footer {
-  animation: fadeInFooter 1s ease-in-out;
-}
-
-/* 🔥 ANIMACIJOS */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-15px); }
+@keyframes fadeInFooter {
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
