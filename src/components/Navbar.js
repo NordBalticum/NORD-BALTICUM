@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import Image from "next/image";
-import "@/styles/navbar.css";
-import "@/styles/themeswitcher.css";
+import "@/styles/navbar.module.css";
+import "@/styles/themeswitcher.module.css";
 
 export default function Navbar() {
   const router = useRouter();
