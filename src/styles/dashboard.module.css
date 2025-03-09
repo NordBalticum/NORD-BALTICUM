@@ -1,19 +1,7 @@
-/* ✅ GLOBALŪS KINTAMIEJI */
-:root {
-  --primary-bg: linear-gradient(135deg, #0a0a33, #212BFF);
-  --secondary-bg: linear-gradient(135deg, #212BFF, #0a0a33);
-  --text-color: #FFF8E1;
-  --button-bg: linear-gradient(90deg, #000000, #222222);
-  --button-hover: linear-gradient(90deg, #111111, #444444);
-  --button-border: rgba(255, 248, 225, 0.8);
-  --card-bg: rgba(255, 255, 255, 0.15);
-  --shadow: 0 0 25px rgba(255, 248, 225, 0.6);
-  --blur: blur(8px);
-  --radius: 16px;
-  --transition: all 0.3s ease-in-out;
-}
+/* ✅ IMPORTUOJAME GLOBALIUS KINTAMUOSIUS */
+@import "@/styles/globals.css";
 
-/* ✅ PAGRINDINIS DASHBOARD KONTEINERIS */
+/* ✅ DASHBOARD KONTEINERIS */
 .container {
   display: flex;
   flex-direction: column;
@@ -40,13 +28,18 @@
 
 .logo {
   width: 200px;
-  filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.6));
+  filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.8));
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 /* ✅ ATSIJUNGIMO MYGTUKAS */
 .logoutButton {
-  padding: 12px 25px;
-  font-size: 1.3rem;
+  padding: 14px 30px;
+  font-size: 1.4rem;
   font-weight: 700;
   border-radius: var(--radius);
   border: 3px solid var(--button-border);
@@ -55,62 +48,25 @@
   color: var(--text-color);
   text-transform: uppercase;
   box-shadow: var(--shadow);
-  transition: var(--transition);
+  transition: all 0.3s ease-in-out;
 }
 
 .logoutButton:hover {
   transform: scale(1.08);
   background: var(--button-hover);
-  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 60px rgba(255, 255, 255, 1);
 }
 
-/* ✅ DASHBOARD TURINYS */
-.dashboardContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1400px;
-  margin-top: 20px;
+.logoutButton:active {
+  transform: scale(0.95);
 }
 
-/* ✅ WALLET INFORMACIJA */
-.walletInfo {
-  background: var(--card-bg);
-  padding: 25px;
-  border-radius: var(--radius);
-  text-align: center;
-  box-shadow: var(--shadow);
-  backdrop-filter: var(--blur);
-  width: 100%;
-  max-width: 600px;
-  transition: var(--transition);
-}
-
-.walletInfo:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
-}
-
-.wallet {
-  font-size: 1.4rem;
-  font-weight: bold;
-  word-break: break-all;
-}
-
-.balance {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin-top: 10px;
-  text-shadow: 0px 0px 25px rgba(255, 255, 255, 0.8);
-}
-
-/* ✅ CHARTS – BALANCE HISTORY */
+/* ✅ BALANCE CHART */
 .chartContainer {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   background: var(--card-bg);
-  padding: 20px;
+  padding: 25px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   backdrop-filter: var(--blur);
@@ -120,15 +76,10 @@
 
 .chartContainer:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.9);
 }
 
-.chartTitle {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
+/* ✅ PERIOD SELECTOR */
 .periodSelector {
   display: flex;
   justify-content: center;
@@ -137,7 +88,7 @@
 }
 
 .periodSelector button {
-  padding: 8px 18px;
+  padding: 10px 20px;
   font-size: 1rem;
   font-weight: 600;
   border-radius: var(--radius);
@@ -155,10 +106,28 @@
 
 .periodSelector .active {
   background: var(--button-hover);
-  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.9);
 }
 
-/* ✅ QUICK ACTIONS – SIUNTIMAS, SWAP, STAKE */
+/* ✅ WALLET INFORMACIJA */
+.walletInfo {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--blur);
+  width: 100%;
+  max-width: 600px;
+  transition: var(--transition);
+}
+
+.walletInfo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 45px rgba(255, 255, 255, 0.9);
+}
+
+/* ✅ QUICK ACTIONS */
 .quickActions {
   margin-top: 40px;
   width: 100%;
@@ -166,8 +135,8 @@
 }
 
 .quickActions h2 {
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-size: 1.8rem;
+  font-weight: 800;
   margin-bottom: 20px;
 }
 
@@ -180,9 +149,9 @@
 }
 
 .actionButton {
-  padding: 18px;
-  font-size: 1.2rem;
-  font-weight: 700;
+  padding: 20px;
+  font-size: 1.3rem;
+  font-weight: 800;
   border-radius: var(--radius);
   background: var(--button-bg);
   border: 2px solid var(--button-border);
@@ -194,17 +163,9 @@
 }
 
 .actionButton:hover {
-  transform: scale(1.08);
+  transform: scale(1.1);
   background: var(--button-hover);
-  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
-}
-
-.donateButton {
-  background: linear-gradient(90deg, #ff0000, #cc0000);
-}
-
-.donateButton:hover {
-  background: linear-gradient(90deg, #cc0000, #990000);
+  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
 }
 
 /* ✅ LOADING SCREEN */
@@ -220,10 +181,10 @@
 }
 
 .loader {
-  width: 50px;
-  height: 50px;
-  border: 5px solid transparent;
-  border-top: 5px solid #FFF8E1;
+  width: 60px;
+  height: 60px;
+  border: 6px solid transparent;
+  border-top: 6px solid #FFF8E1;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
