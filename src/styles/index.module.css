@@ -11,21 +11,24 @@
   padding: 40px;
 }
 
-/* 🔥 Premium antraštė */
-.title {
-  font-size: 4rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  text-shadow: 0 0 40px rgba(255, 255, 255, 1);
-  letter-spacing: 2px;
-  animation: fadeInDown 0.8s ease-in-out;
+/* 🔥 Premium logotipas */
+.logoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 🌟 Akcentinė spalva */
-.highlight {
+.logo {
+  width: 180px;
+  filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 1));
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
   color: #FFF8E1;
-  text-shadow: 0px 0px 45px rgba(255, 255, 255, 1);
-  font-size: 4.5rem;
 }
 
 /* ✅ Mygtukų grupė */
@@ -36,8 +39,8 @@
   margin-top: 30px;
 }
 
-/* 🚀 Mygtukų stilius */
-.walletButton, .metamaskButton, .emailButton {
+/* 🚀 Login mygtukai */
+.loginButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,34 +51,25 @@
   font-size: 1.4rem;
   font-weight: 800;
   border-radius: 14px;
-  border: 3px solid transparent;
+  border: 3px solid #FFF8E1;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
   box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, #000000, #222222);
+  color: #FFF8E1;
 }
 
 /* 🔹 Ikonų dydis */
-.walletButton img, .metamaskButton img, .emailButton img {
-  width: 30px;
-  height: 30px;
+.buttonIcon {
+  width: 38px;
+  height: 38px;
   object-fit: contain;
 }
 
-/* 🎨 Individualūs mygtukų spalvos */
-.walletButton {
-  background: linear-gradient(90deg, #FFFFFF, #EAEAEA);
-  color: #212BFF;
-}
-
-.metamaskButton {
-  background: linear-gradient(90deg, #FFFFFF, #DCDCDC);
-  color: #212BFF;
-}
-
-.emailButton {
-  background: linear-gradient(90deg, #FFFFFF, #F5F5F5);
-  color: #212BFF;
+/* 🔥 Email login tekstas */
+.buttonText {
+  margin-left: 10px;
 }
 
 /* ✅ Kortelės */
@@ -87,7 +81,7 @@
   margin-top: 35px;
 }
 
-/* 🔥 Prabangūs premium kortelės */
+/* 🔥 Prabangios premium kortelės */
 .featureCard {
   background: rgba(255, 255, 255, 0.1);
   padding: 20px 30px;
@@ -104,30 +98,20 @@
   box-shadow: 0 0 40px rgba(255, 248, 225, 0.6);
 }
 
-/* ✅ Footer */
-.footer {
-  margin-top: 55px;
-  font-size: 16px;
-  color: #FFF8E1;
-  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
-  font-weight: 500;
-}
-
-/* 🔥 Responsive stiliai */
+/* 🔥 Responsive */
 @media (max-width: 768px) {
-  .title {
-    font-size: 3.2rem;
+  .logo {
+    width: 140px;
   }
-  .highlight {
-    font-size: 3.7rem;
+  .subtitle {
+    font-size: 1.3rem;
   }
-  .buttonGroup {
-    gap: 15px;
-  }
-  .walletButton, .metamaskButton, .emailButton {
-    font-size: 1.2rem;
-    padding: 14px;
+  .loginButton {
     height: 60px;
+  }
+  .buttonIcon {
+    width: 30px;
+    height: 30px;
   }
 }
 
