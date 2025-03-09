@@ -1,94 +1,99 @@
-/* ✅ Globalūs stiliai */
-.container {
+/* ✅ Pagrindinis konteineris */
+.login-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #0a1f44, #162f5b);
   text-align: center;
-  background: linear-gradient(135deg, rgba(33, 43, 255, 0.9), rgba(10, 15, 80, 0.9));
-  color: var(--text-light);
+  color: white;
   padding: 20px;
 }
 
-/* 🔥 Antraštė su prabangiu efektu */
+/* 🔥 Prabangus efektas antraštei */
 .title {
   font-size: 3.2rem;
   font-weight: 700;
   text-transform: uppercase;
-  text-shadow: 0 0 25px rgba(255, 248, 225, 0.9);
+  text-shadow: 0 0 25px rgba(255, 255, 255, 0.9);
   animation: fadeIn 1s ease-in-out;
 }
 
-/* 🌟 Auksinis premium efektas */
+/* 🌟 White Gold premium akcentas */
 .highlight {
-  color: #FFF8E1;
-  text-shadow: 0px 0px 35px rgba(255, 248, 225, 1);
+  color: #FFFFFF;
+  text-shadow: 0px 0px 35px rgba(255, 255, 255, 1);
   font-size: 3.8rem;
 }
 
-/* ✅ Teksto subtitrai */
-.subtitle {
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin-bottom: 20px;
-}
-
-/* 🔥 Mygtukų grupė */
-.buttonGroup {
+/* ✅ Mygtukų konteineris */
+.button-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
+  max-width: 400px;
   margin-top: 20px;
 }
 
-/* 🚀 Web3 Wallet mygtukas */
-.walletButton,
-.emailButton {
-  padding: 16px 32px;
+/* 🚀 Login mygtukai */
+.login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
   font-size: 1.3rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #0A0A0A, #333);
-  color: #FFF8E1;
   border-radius: 12px;
-  border: 2px solid #FFF8E1;
+  border: none;
   cursor: pointer;
-  box-shadow: 0px 0px 20px rgba(255, 248, 225, 0.6);
   transition: all 0.3s ease-in-out;
-  width: 100%;
-  max-width: 320px;
+  text-transform: uppercase;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.6);
+  color: white;
 }
 
-.walletButton:hover,
-.emailButton:hover {
+.login-button img {
+  width: 28px;
+  height: 28px;
+}
+
+.login-button:hover {
   transform: scale(1.05);
-  box-shadow: 0px 0px 35px rgba(255, 248, 225, 1);
+  box-shadow: 0px 0px 35px rgba(255, 255, 255, 1);
 }
 
-/* ✅ Funkcionalumai */
-.features {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 30px;
+/* 🎨 Individualūs mygtukų stiliai */
+.login-button:first-child {
+  background: linear-gradient(90deg, #3b82f6, #1e40af);
 }
 
-/* 🔥 Prabangūs premium kortelės */
+.login-button:nth-child(2) {
+  background: linear-gradient(90deg, #f6851b, #d17d00);
+}
+
+.login-button:nth-child(3) {
+  background: linear-gradient(90deg, #ffffff, #cccccc);
+  color: #0a1f44;
+}
+
+/* ✅ Premium mažos kortelės */
 .featureCard {
   background: rgba(255, 255, 255, 0.1);
-  padding: 15px 25px;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 248, 225, 0.4);
+  padding: 10px 20px;
+  border-radius: 8px;
   text-align: center;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
   transition: transform 0.3s ease-in-out;
-  width: 100%;
-  max-width: 280px;
+  font-size: 0.9rem;
 }
 
 .featureCard:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 30px rgba(255, 248, 225, 0.6);
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
 }
 
 /* ✅ Footer */
@@ -96,11 +101,11 @@
   margin-top: 40px;
   font-size: 14px;
   opacity: 0.8;
-  color: #FFF8E1;
-  text-shadow: 0px 0px 15px rgba(255, 248, 225, 1);
+  color: #FFFFFF;
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 1);
 }
 
-/* 🔥 Responsive stiliai */
+/* 🔥 Responsive dizainas */
 @media (max-width: 768px) {
   .title {
     font-size: 2.8rem;
@@ -108,13 +113,11 @@
   .highlight {
     font-size: 3.2rem;
   }
-  .subtitle {
-    font-size: 1.3rem;
+  .login-button {
+    font-size: 1.1rem;
   }
-  .buttonGroup {
-    flex-direction: column;
-  }
-  .walletButton, .emailButton {
-    width: 100%;
+  .login-button img {
+    width: 24px;
+    height: 24px;
   }
 }
