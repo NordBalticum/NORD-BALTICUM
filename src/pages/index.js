@@ -6,6 +6,9 @@ export default function Home() {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
 
+  const hideNavbar = router.pathname === "/";
+  const hideFooter = router.pathname === "/";
+
   useEffect(() => {
     const checkScreenSize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -16,7 +19,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} animated-fadeIn`}>
       <h1 className={styles.title}>
         Welcome to <br />
         <span className={styles.highlight}>Nord Balticum</span>
@@ -47,9 +50,12 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className={styles.footer}>
-        <p>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
-      </footer>
+      {/* ✅ Footer paslėptas tik index.js */}
+      {!hideFooter && (
+        <footer className={styles.footer}>
+          <p>© 2025 Nord Balticum. The Future of Web3 Finance.</p>
+        </footer>
+      )}
     </div>
   );
 }
