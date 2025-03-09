@@ -1,5 +1,8 @@
-/* ✅ PAGRINDINIAI MYGTUKAI */
+/* PAGRINDINIAI MYGTUKAI */
 button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 18px 36px;
   font-size: 1.4rem;
   font-weight: 900;
@@ -10,10 +13,7 @@ button {
   color: var(--button-text);
   text-transform: uppercase;
   box-shadow: var(--shadow);
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   gap: 14px;
   min-width: 220px;
   height: 75px;
@@ -21,34 +21,35 @@ button {
   overflow: hidden;
 }
 
-/* ✅ LOGOTIPŲ FIKSAVIMAS ANT MYGTUKŲ */
+/* LOGOTIPŲ FIKSAVIMAS ANT MYGTUKŲ */
 button img {
   width: 45px;
   height: auto;
   max-height: 55px;
   object-fit: contain;
+  transition: filter 0.3s ease-in-out;
 }
 
-/* ✅ HOVER & PRESSED EFEKTAI */
+/* HOVER & PRESSED EFEKTAI */
 button:hover {
-  transform: scale(var(--hover-scale));
+  transform: scale(1.08);
   background: var(--button-hover);
-  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 60px rgba(255, 255, 255, 1);
 }
 
 button:active {
-  transform: scale(var(--active-scale));
+  transform: scale(0.96);
   filter: brightness(0.9);
 }
 
-/* ✅ PULSUOJANTIS ŠVYTĖJIMAS AKTYVIEMS MYGTUKAMS */
+/* PULSUOJANTIS ŠVYTĖJIMAS AKTYVIEMS MYGTUKAMS */
 button::before {
   content: "";
   position: absolute;
   width: 200%;
   height: 200%;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
-  transition: var(--transition);
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
   opacity: 0;
   transform: scale(0.5);
 }
@@ -58,12 +59,12 @@ button:hover::before {
   transform: scale(1.5);
 }
 
-/* ✅ MYGTUKŲ SPECIFIKACIJOS */
+/* MYGTUKŲ SPECIFIKACIJOS */
 .walletconnect, .metamask, .email {
   background: var(--button-bg);
 }
 
-/* ✅ RESPONSIVE DESIGN */
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   button {
     font-size: 1.2rem;
@@ -77,10 +78,10 @@ button:hover::before {
   }
 }
 
-/* ✅ WOW ANIMACIJOS */
+/* WOW ANIMACIJOS */
 @keyframes buttonGlow {
   0% { box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.7); }
-  50% { box-shadow: 0px 0px 30px rgba(255, 255, 255, 1); }
+  50% { box-shadow: 0px 0px 35px rgba(255, 255, 255, 1); }
   100% { box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.7); }
 }
 
