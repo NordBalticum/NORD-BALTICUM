@@ -40,40 +40,21 @@
   margin-top: 20px;
 }
 
-/* 🚀 Web3 Wallet mygtukas */
-.walletButton {
+/* 🚀 Web3 + Email Wallet mygtukai */
+.walletButton, .emailButton {
   padding: 15px 30px;
   font-size: 1.2rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #D4AF37, #B8860B);
-  color: #000;
+  background: linear-gradient(90deg, #0A1F44, #142F60); /* 🔥 Juodas gradientas */
+  color: #FFD700; /* Premium auksas */
   border-radius: 10px;
-  border: 2px solid #FFF8E1;
+  border: 2px solid #FFD700;
   cursor: pointer;
   box-shadow: 0px 0px 15px rgba(255, 248, 225, 0.7);
   transition: all 0.3s ease-in-out;
 }
 
-.walletButton:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 0px 30px rgba(255, 248, 225, 1);
-}
-
-/* 📩 Email Login mygtukas */
-.emailButton {
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #0a0a0a, #333);
-  color: #FFF8E1;
-  border-radius: 10px;
-  border: 2px solid #FFF8E1;
-  cursor: pointer;
-  box-shadow: 0px 0px 15px rgba(255, 248, 225, 0.7);
-  transition: all 0.3s ease-in-out;
-}
-
-.emailButton:hover {
+.walletButton:hover, .emailButton:hover {
   transform: scale(1.05);
   box-shadow: 0px 0px 30px rgba(255, 248, 225, 1);
 }
