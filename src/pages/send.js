@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { BrowserProvider, parseEther, isAddress } from "ethers";
+import { BrowserProvider, JsonRpcProvider, formatEther, parseEther } from "ethers";
 import { QRCodeCanvas } from "qrcode.react";
 import { useRouter } from "next/router";
 import Buttons from "@/components/Buttons";
