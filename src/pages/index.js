@@ -4,23 +4,22 @@ import styles from "@/styles/index.module.css";
 
 export default function Home() {
   const router = useRouter();
-  const [theme, setTheme] = useState("dark");
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const currentTheme = localStorage.getItem("theme") || "dark";
-    setTheme(currentTheme);
-    document.documentElement.setAttribute("data-theme", currentTheme);
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   return (
     <div className={styles.container}>
-      {/* ✅ LOGOTIPAS – Dabar tobulai centruotas ir pritaikytas kiekvienam ekranui */}
-      <img src="/logo.png" alt="Nord Balticum" className={styles.logo} />
-
-      {/* ✅ Subtitras po logotipu */}
+      <img src="/logo.png" alt="Nord Balticum Logo" className={styles.logo} />
       <p className={styles.subtitle}>The most advanced Web3 financial system</p>
 
-      {/* ✅ MYGTUKAI – Dabar visiškai taisyklingai išdėstyti */}
       <div className={styles.buttonContainer}>
         <button className={`${styles.loginButton} ${styles.walletconnect}`} onClick={() => router.push("/login/loginwagmi")}>
           <img src="/walletconnect.png" alt="WalletConnect" className={styles.icon} />
@@ -31,12 +30,11 @@ export default function Home() {
         </button>
 
         <button className={`${styles.loginButton} ${styles.email}`} onClick={() => router.push("/login/loginemail")}>
-          <img src="/email.png" alt="Email" className={styles.icon} />
-          <span>Email Login</span>
+          <img src="/email.png" alt="Email Login" className={styles.icon} />
+          <span>EMAIL LOGIN</span>
         </button>
       </div>
 
-      {/* ✅ LENTELĖS – GERESNIS DIZAINAS IR PERKELTOS TOLIAU NUO FOOTERIO */}
       <div className={styles.features}>
         <div className={styles.featureCard}>
           <h2>🛡️ Secure</h2>
