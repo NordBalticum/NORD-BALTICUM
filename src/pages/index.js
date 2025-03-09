@@ -14,13 +14,13 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {/* ✅ LOGOTIPAS – Didelis, centro pozicija, glow efektas */}
+      {/* ✅ LOGOTIPAS – Dabar tobulai centruotas ir pritaikytas kiekvienam ekranui */}
       <img src="/logo.png" alt="Nord Balticum" className={styles.logo} />
 
-      {/* ✅ UI/UX tobulinimas */}
+      {/* ✅ Subtitras po logotipu */}
       <p className={styles.subtitle}>The most advanced Web3 financial system</p>
 
-      {/* ✅ Mygtukai – IŠLYGINTI, DIDESNI LOGOTIPAI */}
+      {/* ✅ MYGTUKAI – Dabar visiškai taisyklingai išdėstyti */}
       <div className={styles.buttonContainer}>
         <button className={`${styles.loginButton} ${styles.walletconnect}`} onClick={() => router.push("/login/loginwagmi")}>
           <img src="/walletconnect.png" alt="WalletConnect" className={styles.icon} />
@@ -36,7 +36,7 @@ export default function Home() {
         </button>
       </div>
 
-      {/* ✅ LENTELĖS – OPTIMIZUOTOS, PAŽEMINTOS, GERESNĖ POZICIJA */}
+      {/* ✅ LENTELĖS – GERESNIS DIZAINAS IR PERKELTOS TOLIAU NUO FOOTERIO */}
       <div className={styles.features}>
         <div className={styles.featureCard}>
           <h2>🛡️ Secure</h2>
