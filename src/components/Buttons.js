@@ -1,17 +1,18 @@
-import React from "react";
-
-const Button = ({ text, onClick, type = "primary", size = "medium", fullWidth = false, disabled = false }) => {
-  const buttonClasses = `
-    ${styles.button} 
-    ${styles[type] || styles.primary} 
-    ${styles[size] || styles.medium} 
-    ${fullWidth ? styles.fullWidth : ""}
-    ${disabled ? styles.disabled : ""}
-  `;
-
+const Button = ({ 
+  type = "primary", 
+  size = "medium", 
+  className = "", 
+  children, 
+  onClick, 
+  disabled = false 
+}) => {
   return (
-    <button className={buttonClasses} onClick={onClick} disabled={disabled}>
-      {text}
+    <button 
+      className={`button ${type} ${size} ${className}`} 
+      onClick={onClick} 
+      disabled={disabled}
+    >
+      {children}
     </button>
   );
 };
