@@ -131,10 +131,3 @@ html, body {
 .footer {
   animation: fadeInFooter 1s ease-in-out;
 }
-
-.themeSwitcher {
-  background: var(--switch-bg);
-  border: 2px solid var(--switch-border);
-  box-shadow: var(--switch-shadow);
-  color: var(--switch-text);
-}
