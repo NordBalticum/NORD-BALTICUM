@@ -1,20 +1,20 @@
-// src/login/loginweb3.js
 import { useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/router";
+import { ethers } from "ethers";
+import { useAuth } from "@/context/AuthContext";
 
 export default function LoginWeb3() {
+  const { user, loginWithWallet } = useAuth();
   const router = useRouter();
-  const { user, loginWithWallet, loading } = useAuth();
 
   useEffect(() => {
-    if (user) router.push("/dashboard"); // Jei jau prisijungęs, meta tiesiai į dashboard
+    if (user) router.push("/dashboard");
   }, [user]);
 
   return (
     <div className="login-container">
-      <h1>Login with Web3</h1>
-      <button onClick={loginWithWallet} disabled={loading}>Connect MetaMask</button>
+      <h1>Login with MetaMask</h1>
+      <button onClick={loginWithWallet}>Connect Wallet</button>
     </div>
   );
 }
