@@ -1,129 +1,80 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
-
+/* ✅ PROFILIO KONTEINERIS */
 .profile-container {
-  max-width: 650px;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #0A0F50, #212BFF);
+  color: white;
   text-align: center;
-  background: rgba(10, 31, 68, 0.85); /* 🔹 GLASSMORPHIC BACKGROUND */
-  backdrop-filter: blur(10px);
+}
+
+/* ✅ PROFILIO ANTRAŠTĖ */
+.profile-title {
+  font-size: 3rem;
+  font-weight: 800;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 1);
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+}
+
+/* ✅ PROFILIO KORTELĖ */
+.profile-card {
+  background: rgba(255, 255, 255, 0.1);
   padding: 25px;
   border-radius: 15px;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
-  color: #fff;
-  border: 2px solid rgba(255, 215, 0, 0.6);
-  transition: all 0.3s ease-in-out;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FFF8E1;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease-in-out;
 }
 
-.profile-container:hover {
-  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+.profile-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.7);
 }
 
-/* 🔹 TEKSTO STILIAI */
-.profile-title {
-  font-size: 26px;
-  font-weight: bold;
-  color: #ffd700;
-  text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+/* ✅ PROFILIO INFORMACIJA */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
 }
 
-.profile-label {
-  display: block;
-  font-size: 18px;
-  margin-top: 15px;
-  font-weight: 600;
-  color: #ffffff;
-}
-
-/* 🔥 INPUT FIELDS */
-.profile-input {
-  padding: 12px;
-  width: 85%;
-  font-size: 16px;
-  margin-top: 8px;
-  border-radius: 8px;
-  background: rgba(255, 215, 0, 0.15);
-  border: 2px solid rgba(255, 215, 0, 0.6);
-  color: #fff;
-  transition: all 0.3s ease-in-out;
-}
-
-.profile-input:focus {
-  border-color: #ffd700;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-  outline: none;
-}
-
-/* 🔥 MYGTUKAI */
-.profile-button {
-  padding: 12px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-}
-
-/* 🔥 PRIMARY BUTTON */
-.profile-button:not(.profile-logout) {
-  background: linear-gradient(90deg, #ffd700, #ffcc00);
-  color: #121212;
-}
-
-.profile-button:not(.profile-logout):hover {
-  background: linear-gradient(90deg, #ffec8b, #ffcc00);
-  transform: scale(1.08);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-}
-
-/* 🔥 LOGOUT BUTTON */
-.profile-logout {
-  background: linear-gradient(90deg, #ff4c4c, #ff0000);
-  color: #ffffff;
-}
-
-.profile-logout:hover {
-  background: linear-gradient(90deg, #ff6666, #cc0000);
-  transform: scale(1.08);
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
-}
-
-/* 🔥 STATUS */
-.profile-status {
-  font-weight: bold;
-  font-size: 16px;
-  color: #ff4c4c;
-  text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-}
-
-/* 🔥 INTERACTIVE PROFILE SECTIONS */
-.profile-section {
-  background: rgba(255, 215, 0, 0.1);
-  padding: 15px;
+/* ✅ REDAGAVIMO MYGTUKAS */
+.edit-button {
+  padding: 12px 25px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #000, #333);
+  color: #FFF8E1;
   border-radius: 12px;
-  margin: 10px 0;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  border: 2px solid #FFF8E1;
+  cursor: pointer;
+  box-shadow: 0px 0px 20px rgba(255, 248, 225, 0.6);
   transition: all 0.3s ease-in-out;
+  margin-top: 30px;
 }
 
-.profile-section:hover {
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+.edit-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 35px rgba(255, 248, 225, 1);
 }
 
-/* 🔹 RESPONSIVE */
-@media (max-width: 500px) {
-  .profile-container {
-    padding: 20px;
-    max-width: 90%;
+/* ✅ RESPONSIVE */
+@media (max-width: 768px) {
+  .profile-title {
+    font-size: 2.5rem;
   }
-
-  .profile-input {
-    width: 100%;
-  }
-
-  .profile-button {
-    width: 100%;
+  .profile-card {
+    font-size: 1.3rem;
   }
 }
