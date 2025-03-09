@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import Buttons from "@/components/Buttons"; // 🔹 Užtikrintas teisingas importas
-import styles from "@/styles/donation.module.css";
+import "@/styles/donation.module.css";
 
 const charities = [
   {
