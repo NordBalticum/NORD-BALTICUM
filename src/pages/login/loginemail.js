@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { signInWithMagicLink, assignWalletToUser } from "@/utils/auth";
 import { useRouter } from "next/router";
-import styles from "@/styles/loginemail.module.css";
+import "@/styles/loginemail.module.css";
 
 export default function LoginEmail() {
   const [email, setEmail] = useState("");
