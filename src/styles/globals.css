@@ -1,18 +1,20 @@
-/* ✅ GLOBALŪS KINTAMIEJI */
+/* ✅ GLOBALŪS KINTAMIEJI – BANKO LYGIO SPALVOS */
 :root {
-  --bg-gradient: linear-gradient(135deg, #212BFF, #0a0a33);
-  --text-color: #FFF8E1;
+  --primary-color: #212BFF;
+  --secondary-color: #FFF8E1;
+  --bg-gradient: linear-gradient(135deg, var(--primary-color), #0a0a33);
+  --text-color: var(--secondary-color);
   --button-bg: linear-gradient(90deg, #000000, #222222);
-  --button-text: #FFF8E1;
-  --button-border: rgba(255, 248, 225, 0.7);
-  --card-bg: rgba(255, 255, 255, 0.1);
-  --shadow: 0 0 20px rgba(255, 248, 225, 0.5);
-  --blur: blur(5px);
-  --radius: 14px;
+  --button-text: var(--secondary-color);
+  --button-border: rgba(255, 248, 225, 0.8);
+  --card-bg: rgba(255, 255, 255, 0.15);
+  --shadow: 0 0 25px rgba(255, 248, 225, 0.6);
+  --blur: blur(8px);
+  --radius: 16px;
   --transition: all 0.3s ease-in-out;
 }
 
-/* ✅ PAGRINDINIAI STILIAI */
+/* ✅ PREMIUM PAGRINDINIAI STILIAI */
 body {
   margin: 0;
   padding: 0;
@@ -22,14 +24,14 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 1.2s ease-in-out;
 }
 
-/* ✅ TEKSTO LYGIAI */
+/* ✅ TEKSTO LYGIAI – BANKINIS MODERNUMAS */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
-  text-shadow: var(--shadow);
+  text-shadow: 0px 0px 25px rgba(255, 255, 255, 0.8);
 }
 
 /* ✅ INTERAKTYVŪS ELEMENTAI */
@@ -39,47 +41,61 @@ button, input {
   transition: var(--transition);
 }
 
-/* ✅ MYGTUKAI – PREMIUM BANK FEELING */
+/* ✅ MYGTUKAI – PRABANGUS BANKO STILIUS */
 button {
-  padding: 14px 28px;
-  border: 2px solid var(--button-border);
+  padding: 16px 32px;
+  border: 3px solid var(--button-border);
   border-radius: var(--radius);
   cursor: pointer;
   background: var(--button-bg);
   color: var(--button-text);
-  font-size: 1.2rem;
-  font-weight: 800;
+  font-size: 1.4rem;
+  font-weight: 900;
   text-transform: uppercase;
-  box-shadow: var(--shadow);
+  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-width: 200px;
+  height: 75px;
 }
 
+/* ✅ HOVER EFEKTAI */
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.9);
+  transform: scale(1.08);
+  background: linear-gradient(90deg, #111111, #444444);
+  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
 }
 
-/* ✅ KORTELĖS / LENTELĖS */
+button:active {
+  transform: scale(0.96);
+  filter: brightness(0.9);
+}
+
+/* ✅ LENTELĖS – MODERNUS BANKO DIZAINAS */
 .card {
   background: var(--card-bg);
-  padding: 20px 30px;
+  padding: 25px 35px;
   border-radius: var(--radius);
   text-align: center;
-  box-shadow: var(--shadow);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
   backdrop-filter: var(--blur);
   transition: var(--transition);
 }
 
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.6);
+  transform: scale(1.06);
+  box-shadow: 0 0 45px rgba(255, 255, 255, 0.8);
 }
 
+/* ✅ FOOTER */
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 20px 0;
+  padding: 22px 0;
   background: var(--footer-bg);
   text-align: center;
   z-index: 1000;
@@ -88,14 +104,16 @@ button:hover {
 /* ✅ RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.7rem;
   }
   button {
-    font-size: 1rem;
-    padding: 12px 24px;
+    font-size: 1.2rem;
+    padding: 14px 28px;
+    min-width: 180px;
+    height: 70px;
   }
   .card {
-    width: 100%;
+    width: 92%;
   }
 }
 
@@ -103,7 +121,7 @@ button:hover {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-15px);
   }
   to {
     opacity: 1;
