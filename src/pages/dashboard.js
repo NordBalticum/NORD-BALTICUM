@@ -76,7 +76,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className={styles.footer}>
+        <div <footer className="footer">
           <p>Nord Balticum - {currentTime}</p>
         </div>
       </div>
