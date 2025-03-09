@@ -1,194 +1,82 @@
-/* 🔥 PREMIUM NAVBAR DESIGN */
+/* ✅ NAVBAR PAGRINDINIAI STILIAI */
 .navbar {
-  width: 100%;
-  background: rgba(33, 43, 255, 0.9); /* 🔵 GLASSMORPHIC BLUE */
-  backdrop-filter: blur(18px);
-  padding: 18px 30px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  border-bottom: 3px solid rgba(255, 248, 225, 0.6);
-  box-shadow: 0 0 24px rgba(255, 248, 225, 0.5);
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(10, 15, 80, 0.8);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
   position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
   z-index: 1000;
+  backdrop-filter: blur(10px);
   transition: all 0.3s ease-in-out;
 }
 
-/* 🔥 LOGOTIPAS */
-.navbar .logo a {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.navbar .logo img {
-  max-height: 60px;
+/* ✅ NAVBAR LOGOTIPAS */
+.navbar-logo {
+  height: 55px;
+  filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8));
   transition: transform 0.3s ease-in-out;
 }
 
-.navbar .logo img:hover {
-  transform: scale(1.12);
+.navbar-logo:hover {
+  transform: scale(1.05);
 }
 
-/* 🔥 NAVIGACIJA */
-.menu {
+/* ✅ NAVBAR MENIU */
+.nav-menu {
   display: flex;
-  gap: 35px;
+  gap: 25px;
   list-style: none;
 }
 
-.menu li {
-  position: relative;
-}
-
-.menu a {
-  color: #FFF8E1;
-  font-weight: 700;
-  padding: 14px 22px;
-  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+.nav-item {
+  font-size: 1.2rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 17px;
-  text-shadow: 0 0 14px rgba(255, 248, 225, 0.5);
-}
-
-.menu a:hover {
-  color: #FFD700;
-  text-shadow: 0 0 22px rgba(255, 248, 225, 0.9);
-  transform: scale(1.1);
-}
-
-/* 🔥 DROPDOWN */
-.dropdown:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.dropdown-menu {
-  position: absolute;
-  background: rgba(20, 20, 40, 0.98);
-  border-radius: 12px;
-  box-shadow: 0 0 24px rgba(255, 248, 225, 0.6);
-  top: 55px;
-  left: 0;
-  padding: 14px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-12px);
-  transition: all 0.3s ease-in-out;
-}
-
-.dropdown-menu li {
-  padding: 12px 18px;
-}
-
-.dropdown-menu li a {
-  color: #FFD700;
-  font-weight: bold;
-}
-
-.dropdown-menu li a:hover {
   color: #FFF8E1;
-  text-shadow: 0 0 16px rgba(255, 255, 255, 0.85);
-}
-
-/* 🔥 LOGIN / LOGOUT */
-.logout-btn, .login-btn {
-  background: none;
-  border: 2px solid #FFD700;
-  padding: 12px 18px;
-  cursor: pointer;
-  border-radius: 8px;
-  color: #FFD700;
-  font-weight: bold;
   transition: all 0.3s ease-in-out;
 }
 
-.logout-btn:hover, .login-btn:hover {
-  background: #FFD700;
-  color: #121212;
-  box-shadow: 0 0 14px rgba(255, 248, 225, 0.8);
-}
-
-/* 🔥 TEMOS PERJUNGIMAS */
-.theme-toggle {
-  background: none;
-  border: 2px solid #FFD700;
-  padding: 12px 18px;
-  cursor: pointer;
-  border-radius: 8px;
+.nav-item:hover {
   color: #FFD700;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
+  text-shadow: 0px 0px 10px rgba(255, 215, 0, 1);
+  transform: scale(1.05);
 }
 
-.theme-toggle:hover {
-  background: #FFD700;
-  color: #121212;
-  box-shadow: 0 0 12px rgba(255, 248, 225, 0.75);
-}
-
-/* 🔥 MOBILUS MENIU */
-.menu-toggle {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #FFD700;
-  transition: all 0.3s ease-in-out;
-}
-
-.menu-toggle:hover {
-  transform: scale(1.2);
-}
-
-/* 🔥 RESPONSIVE ADAPTACIJA */
-@media (max-width: 1024px) {
-  .menu {
-    gap: 25px;
-  }
-  
-  .menu a {
-    font-size: 16px;
-    padding: 12px 18px;
-  }
-}
-
+/* ✅ NAVBAR RESPONSIVE */
 @media (max-width: 768px) {
-  .menu {
-    display: none;
+  .nav-menu {
     flex-direction: column;
-    background: rgba(20, 20, 40, 0.98);
-    width: 280px;
-    padding: 18px;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background: rgba(10, 15, 80, 0.9);
+    box-shadow: -5px 5px 20px rgba(255, 255, 255, 0.2);
+    width: 200px;
+    padding: 20px;
+    display: none;
+    transition: all 0.3s ease-in-out;
   }
 
-  .menu.open {
-    display: flex;
+  .nav-item {
+    padding: 10px 0;
   }
 
-  .menu-toggle {
+  .navbar-toggle {
     display: block;
   }
 }
 
-@media (max-width: 480px) {
-  .navbar {
-    padding: 12px 20px;
+/* ✅ NAVBAR ANIMACIJA */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
   }
-  
-  .menu {
-    width: 240px;
-  }
-  
-  .menu a {
-    font-size: 15px;
-    padding: 10px 16px;
-  }
-
-  .menu-toggle {
-    font-size: 26px;
+  to {
+    transform: translateY(0);
   }
 }
