@@ -74,12 +74,5 @@ export default function Dashboard() {
               ❤️ Donate
             </button>
           </div>
-        </div>
-
-        <div <footer className="footer">
-          <p>Nord Balticum - {currentTime}</p>
-        </div>
-      </div>
-    </div>
   );
 }
