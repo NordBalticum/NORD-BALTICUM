@@ -1,111 +1,97 @@
-/* ✅ PAGRINDINIS KONTEINERIS */
-.login-container {
+/* 🔥 Premium Magic Link Login Styles */
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  width: 100vw;
-  background: var(--bg-gradient);
-  color: var(--text-color);
+  background: linear-gradient(135deg, #0a0a33, #212BFF);
+  color: #FFF8E1;
   text-align: center;
-  padding: 30px;
-  animation: fadeIn 1s ease-in-out;
+  padding: 40px;
+  animation: fadeIn 1.2s ease-in-out;
 }
 
-/* ✅ FORMOS KONTEINERIS */
-.login-box {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
+.title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
   width: 100%;
   max-width: 400px;
-  animation: fadeInUp 0.8s ease-in-out;
 }
 
-/* ✅ ANTRAŠTĖ */
-.login-title {
-  font-size: 2rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  text-shadow: 0 0 35px rgba(255, 255, 255, 1);
-  margin-bottom: 15px;
-}
-
-/* ✅ INPUT LAUKELIAI */
-.login-input {
+.input {
+  padding: 16px;
   width: 100%;
-  padding: 14px;
   font-size: 1.2rem;
   border-radius: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.7);
   background: rgba(255, 255, 255, 0.1);
-  color: var(--text-color);
+  color: #FFF8E1;
   text-align: center;
-  margin-bottom: 15px;
   transition: all 0.3s ease-in-out;
 }
 
-.login-input:focus {
-  border-color: rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.2);
+.input:focus {
+  border-color: #FFD700;
+  box-shadow: 0px 0px 25px rgba(255, 215, 0, 0.9);
 }
 
-/* ✅ MAGIC LINK MYGTUKAS */
-.magic-link-btn {
-  width: 100%;
-  padding: 16px;
-  font-size: 1.3rem;
-  font-weight: 800;
-  border-radius: 14px;
-  border: 3px solid var(--button-border);
+.loginButton {
+  padding: 20px 40px;
+  font-size: 1.6rem;
+  font-weight: 900;
+  border-radius: 15px;
+  border: 3px solid rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  background: linear-gradient(90deg, #000000, #222222);
+  color: #FFF8E1;
   text-transform: uppercase;
-  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
-  background: var(--button-bg);
-  color: var(--button-text);
-  height: 60px;
+  box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease-in-out;
 }
 
-/* ✅ HOVER MAGIC LINK */
-.magic-link-btn:hover {
+.loginButton:hover {
   transform: scale(1.05);
-  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
+  background: linear-gradient(90deg, #111111, #444444);
+  box-shadow: 0px 0px 50px rgba(255, 255, 255, 1);
 }
 
-/* ✅ FOOTER */
-.login-footer {
+.loginButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.success {
+  font-size: 1.3rem;
+  color: #0f0;
   margin-top: 20px;
-  font-size: 14px;
-  color: var(--text-color);
-  opacity: 0.8;
+  text-shadow: 0px 0px 15px rgba(0, 255, 0, 0.7);
 }
 
-/* ✅ RESPONSIVE */
-@media (max-width: 768px) {
-  .login-title {
-    font-size: 1.8rem;
-  }
-  .login-box {
-    max-width: 90%;
-  }
-  .magic-link-btn {
-    font-size: 1.2rem;
-    padding: 14px;
-  }
+.error {
+  font-size: 1.3rem;
+  color: #ff4d4d;
+  margin-top: 20px;
+  text-shadow: 0px 0px 15px rgba(255, 0, 0, 0.7);
 }
 
-/* ✅ ANIMACIJOS */
+/* 🔥 WOW Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
