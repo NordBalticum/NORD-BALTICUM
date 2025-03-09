@@ -1,9 +1,9 @@
-/* ✅ GLOBALŪS KINTAMIEJI */
+/* ✅ GLOBALŪS KINTAMIEJI – PREMIUM STILIAUS PALETĖ */
 :root {
   --footer-bg: linear-gradient(180deg, rgba(33, 43, 255, 1), rgba(10, 15, 80, 0.95));
   --footer-text: #FFF8E1;
-  --footer-border: rgba(255, 248, 225, 0.8);
-  --footer-shadow: 0px -4px 25px rgba(255, 248, 225, 0.4);
+  --footer-border: rgba(255, 248, 225, 0.9);
+  --footer-shadow: 0px -4px 30px rgba(255, 248, 225, 0.5);
   --transition: all 0.3s ease-in-out;
 }
 
@@ -16,76 +16,84 @@
 
 [data-theme="light"] {
   --footer-bg: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(220, 220, 255, 0.95));
-  --footer-border: rgba(33, 43, 255, 0.7);
+  --footer-border: rgba(33, 43, 255, 0.8);
   --footer-text: #212BFF;
 }
 
-/* ✅ PAGRINDINIS FOOTER KONTEINERIS */
+/* ✅ PAGRINDINIS FOOTER KONTEINERIS – PILNAS AUTOMATINIS DIZAINAS */
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   background: var(--footer-bg);
-  padding: 20px 0;
+  padding: 15px 0;
   text-align: center;
   z-index: 1000;
+  box-shadow: var(--footer-shadow);
+  border-top: 2px solid var(--footer-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ✅ FOOTER TEKSTAS */
+/* ✅ FOOTER TEKSTAS – PREMIUM KOKYBĖS ANTRAŠTĖ */
 .footer-text {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
   letter-spacing: 1.2px;
-  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+  text-shadow: 0px 0px 12px rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
 }
 
-/* ✅ SOCIALINĖS IKONOS */
+/* ✅ SOCIALINĖS IKONOS – 3D BANKING STILIAUS ANIMACIJOS */
 .footer-icons {
   display: flex;
-  gap: 25px;
-  margin-top: 20px;
+  gap: 22px;
+  margin-top: 12px;
 }
 
 .footer-icons a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.6);
   transition: var(--transition);
 }
 
 .footer-icons a:hover {
-  transform: scale(1.15);
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
+  transform: scale(1.18);
+  box-shadow: 0px 0px 35px rgba(255, 255, 255, 1);
+  filter: brightness(1.3);
 }
 
-/* ✅ COPYRIGHT */
+/* ✅ COPYRIGHT TEKSTAS – BANKINĖ KOKYBĖ */
 .footer-copyright {
   font-size: 1rem;
   opacity: 0.85;
-  margin-top: 15px;
-  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
+  margin-top: 8px;
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.6);
 }
 
-/* ✅ ANIMACIJOS */
+/* ✅ ANIMACIJOS – TOBULAS PATEKIMAS Į PUSLAPĮ */
 @keyframes fadeInFooter {
   from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .footer {
-  animation: fadeInFooter 1s ease-in-out;
+  animation: fadeInFooter 0.8s ease-in-out;
 }
 
-/* ✅ RESPONSIVE DESIGN */
-@media (max-width: 768px) {
+/* ✅ RESPONSIVE DESIGN – AUTOMATINIS PRITAIKYMAS VISIEMS EKRANAMS */
+@media (max-width: 1024px) {
   .footer {
-    padding: 30px 15px;
+    padding: 12px 0;
   }
   .footer-text {
     font-size: 1.1rem;
@@ -94,10 +102,29 @@
     gap: 18px;
   }
   .footer-icons a {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
   }
   .footer-copyright {
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 10px 0;
+  }
+  .footer-text {
+    font-size: 1rem;
+  }
+  .footer-icons {
+    gap: 15px;
+  }
+  .footer-icons a {
+    width: 35px;
+    height: 35px;
+  }
+  .footer-copyright {
+    font-size: 0.85rem;
   }
 }
