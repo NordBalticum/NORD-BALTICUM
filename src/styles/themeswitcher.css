@@ -1,57 +1,53 @@
-.themeSwitcher {
-  background: var(--switch-bg);
-  border: 2px solid var(--switch-border);
-  box-shadow: var(--switch-shadow);
-  color: var(--switch-text);
-}
-
 /* ✅ PAGRINDINIS TEMŲ JUNGIKLIO KONTEINERIS */
 .theme-switcher {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  border-radius: 12px;
+  padding: 12px;
+  border-radius: 14px;
   background: var(--switch-bg);
-  border: 2px solid var(--switch-border);
+  border: 3px solid var(--switch-border);
   box-shadow: var(--switch-shadow);
   cursor: pointer;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  width: fit-content;
 }
 
-/* ✅ JUNGIKLIO MYGTUKAS */
+/* ✅ TEMŲ MYGTUKO DIZAINAS */
 .theme-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 60px;
-  height: 30px;
+  width: 65px;
+  height: 32px;
   padding: 5px;
-  border-radius: 15px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
   position: relative;
-  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
-  transition: all 0.4s ease-in-out;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
 }
 
 /* ✅ JUNGIKLIO ANIMUOTAS RATUKAS */
 .theme-toggle .toggle-circle {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   background: white;
   border-radius: 50%;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.7);
   position: absolute;
   top: 2px;
   left: 2px;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 /* ✅ DARK MODE POZICIJA */
 [data-theme="dark"] .theme-toggle .toggle-circle {
-  left: 32px;
+  left: 35px;
   background: #FFD700; /* White Gold */
-  box-shadow: 0px 0px 15px rgba(255, 248, 225, 0.9);
+  box-shadow: 0px 0px 18px rgba(255, 248, 225, 1);
 }
 
 /* ✅ LIGHT MODE POZICIJA */
@@ -62,39 +58,51 @@
 
 /* ✅ TEMŲ IKONOS */
 .theme-toggle .icon {
-  width: 18px;
-  height: 18px;
-  opacity: 0.8;
+  width: 20px;
+  height: 20px;
+  opacity: 0.9;
   transition: all 0.3s ease-in-out;
-}
-
-.theme-toggle .icon.sun {
   filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8));
 }
 
+.theme-toggle .icon.sun {
+  filter: drop-shadow(0px 0px 6px rgba(255, 255, 255, 1));
+}
+
 .theme-toggle .icon.moon {
-  filter: drop-shadow(0px 0px 5px rgba(255, 248, 225, 0.8));
+  filter: drop-shadow(0px 0px 6px rgba(255, 248, 225, 1));
+}
+
+/* ✅ TEMŲ PERĖJIMO EFEKTAS */
+[data-theme="dark"] .theme-toggle {
+  background: linear-gradient(135deg, rgba(10, 10, 50, 0.8), rgba(10, 10, 80, 0.9));
+  box-shadow: 0px 0px 25px rgba(255, 248, 225, 0.9);
+}
+
+[data-theme="light"] .theme-toggle {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(200, 200, 255, 0.9));
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
 }
 
 /* ✅ HOVER ANIMACIJA */
 .theme-switcher:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
+  transform: scale(1.08);
+  box-shadow: 0px 0px 35px rgba(255, 255, 255, 1);
 }
 
 /* ✅ RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .theme-toggle {
-    width: 50px;
-    height: 25px;
+    width: 55px;
+    height: 28px;
   }
   .theme-toggle .toggle-circle {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
   .theme-toggle .icon {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -105,5 +113,15 @@
 }
 
 .theme-switcher {
-  animation: fadeInThemeSwitcher 0.8s ease-in-out;
+  animation: fadeInThemeSwitcher 0.6s ease-in-out;
+}
+
+/* ✅ JUNGIKLIO SKLANDUS PERĖJIMAS */
+@keyframes toggleSlide {
+  from { transform: translateX(-10px); }
+  to { transform: translateX(0); }
+}
+
+.theme-toggle .toggle-circle {
+  animation: toggleSlide 0.3s ease-in-out;
 }
