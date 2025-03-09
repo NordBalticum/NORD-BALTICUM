@@ -1,82 +1,52 @@
-/* ✅ NAVBAR PAGRINDINIAI STILIAI */
+/* ✅ NAVBAR STILIAI */
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
-  background: rgba(10, 15, 80, 0.8);
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
-  position: fixed;
+  justify-content: space-between;
+  padding: 15px 30px;
   width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.3);
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease-in-out;
 }
 
 /* ✅ NAVBAR LOGOTIPAS */
 .navbar-logo {
-  height: 55px;
+  height: 50px;
   filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8));
-  transition: transform 0.3s ease-in-out;
 }
 
-.navbar-logo:hover {
-  transform: scale(1.05);
-}
-
-/* ✅ NAVBAR MENIU */
-.nav-menu {
+/* ✅ NAVIGACIJOS ELEMENTAI */
+.nav-links {
   display: flex;
-  gap: 25px;
-  list-style: none;
+  gap: 20px;
 }
 
 .nav-item {
   font-size: 1.2rem;
-  font-weight: 600;
+  color: var(--text-color);
   text-transform: uppercase;
-  color: #FFF8E1;
+  cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
 .nav-item:hover {
-  color: #FFD700;
-  text-shadow: 0px 0px 10px rgba(255, 215, 0, 1);
-  transform: scale(1.05);
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
 }
 
-/* ✅ NAVBAR RESPONSIVE */
+/* ✅ RESPONSIVE */
 @media (max-width: 768px) {
-  .nav-menu {
-    flex-direction: column;
-    position: absolute;
-    top: 80px;
-    right: 0;
-    background: rgba(10, 15, 80, 0.9);
-    box-shadow: -5px 5px 20px rgba(255, 255, 255, 0.2);
-    width: 200px;
-    padding: 20px;
-    display: none;
-    transition: all 0.3s ease-in-out;
+  .navbar {
+    padding: 10px 20px;
   }
-
+  .nav-links {
+    gap: 15px;
+  }
   .nav-item {
-    padding: 10px 0;
-  }
-
-  .navbar-toggle {
-    display: block;
-  }
-}
-
-/* ✅ NAVBAR ANIMACIJA */
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
+    font-size: 1rem;
   }
 }
