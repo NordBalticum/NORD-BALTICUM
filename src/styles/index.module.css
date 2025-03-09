@@ -1,21 +1,20 @@
-/* ✅ Pagrindinis konteineris – TOBULAI PRISITAIKANTIS PRIE EKRANO */
+/* ✅ Pagrindinis konteineris */
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 100%;
   background: #212BFF !important; /* PREMIUM MĖLYNA */
   color: white;
   text-align: center;
-  padding: 5vw;
+  padding: 30px;
   animation: fadeIn 1s ease-in-out;
 }
 
-/* 🔥 Antraštė su optimalia tipografija */
+/* 🔥 Antraštė */
 .title {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: 3.5rem;
   font-weight: 800;
   text-transform: uppercase;
   text-shadow: 0 0 40px rgba(255, 255, 255, 1);
@@ -27,96 +26,86 @@
 .highlight {
   color: #FFFFFF;
   text-shadow: 0px 0px 45px rgba(255, 255, 255, 1);
-  font-size: clamp(3rem, 5vw, 4rem);
-  transition: all 0.3s ease-in-out;
+  font-size: 4rem;
   font-weight: bold;
-}
-
-/* ✅ Mygtukų glow efektai – White Gold */
-.login-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 0px 60px rgba(255, 255, 255, 1);
-  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 /* ✅ Mygtukų konteineris */
 .button-container {
   display: flex;
   flex-direction: column;
-  gap: 3vh;
+  gap: 20px;
   width: 100%;
-  max-width: 500px;
-  margin-top: 5vh;
+  max-width: 450px;
+  margin-top: 30px;
 }
 
-/* 🚀 Login mygtukai – DABAR SU LOGOTIPAIS */
+/* 🚀 Login mygtukai */
 .login-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5vw;
+  gap: 10px;
   width: 100%;
-  padding: 2vh 2vw;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  font-weight: 900;
-  border-radius: 16px;
+  padding: 18px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  border-radius: 14px;
   border: 3px solid transparent;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
   color: white;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
+  height: 60px;
 }
 
 /* 🔹 Mygtukų ikonų dydis */
 .login-button img {
-  width: clamp(28px, 5vw, 34px);
-  height: clamp(28px, 5vw, 34px);
-  filter: drop-shadow(0px 0px 7px rgba(255, 255, 255, 0.9));
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.7));
 }
 
 /* 🎨 Individualūs mygtukų stiliai */
-.login-button:first-child {
+.walletconnect {
   background: linear-gradient(90deg, #FFFFFF, #EAEAEA);
   color: #212BFF;
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-.login-button:nth-child(2) {
+.metamask {
   background: linear-gradient(90deg, #FFFFFF, #DCDCDC);
   color: #212BFF;
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-.login-button:nth-child(3) {
+.email {
   background: linear-gradient(90deg, #FFFFFF, #F5F5F5);
   color: #212BFF;
   border-color: rgba(255, 255, 255, 0.6);
 }
 
-/* ✅ Premium mažos kortelės */
-.featureCard {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 1.5vw 2vw;
-  border-radius: 14px;
-  text-align: center;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-  transition: transform 0.3s ease-in-out;
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  backdrop-filter: blur(6px);
-  font-weight: 600;
+/* ✅ Logotipų dydžio fiksavimas */
+.login-button img {
+  width: 32px;
+  height: 32px;
+  max-height: 35px;
+  object-fit: contain;
 }
 
-.featureCard:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+/* 🔥 Hover efektai */
+.login-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 /* ✅ Footer */
 .footer {
-  margin-top: 6vh;
-  font-size: clamp(14px, 1.5vw, 16px);
+  margin-top: 55px;
+  font-size: 16px;
   opacity: 1;
   color: #FFFFFF;
   text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
@@ -125,9 +114,6 @@
 
 /* 🔥 Responsive dizainas */
 @media (max-width: 768px) {
-  .login-container {
-    padding: 5vw;
-  }
   .title {
     font-size: 3rem;
   }
@@ -135,8 +121,8 @@
     font-size: 3.5rem;
   }
   .login-button {
-    font-size: 1.3rem;
-    padding: 16px;
+    font-size: 1.2rem;
+    padding: 14px;
   }
   .login-button img {
     width: 28px;
@@ -144,7 +130,7 @@
   }
 }
 
-/* 🔥 Prabangios animacijos */
+/* 🔥 Animacijos */
 @keyframes fadeIn {
   from {
     opacity: 0;
