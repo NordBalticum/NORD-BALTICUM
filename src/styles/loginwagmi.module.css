@@ -1,83 +1,146 @@
-/* ✅ Pagrindinis konteineris – ORIGINALUS MĖLYNAS FONAS */
+/* ✅ Pagrindinis konteineris – VISIŠKAI PRITAIKOMAS DYDŽIUI */
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: #212BFF; /* PREMIUM MĖLYNA */
+  width: 100%;
+  background: #212BFF !important;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 5vw;
   animation: fadeIn 1s ease-in-out;
 }
 
-/* 🔥 Premium efektas antraštei */
-h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin-bottom: 2rem;
-  text-shadow: 0px 0px 30px rgba(255, 255, 255, 0.9); /* WHITE GOLD GLOW */
+/* 🔥 Antraštė su optimalia tipografija */
+.title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem); /* Automatinis dydžio prisitaikymas */
+  font-weight: 800;
+  text-transform: uppercase;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 1);
+  letter-spacing: 2px;
   animation: fadeInDown 0.8s ease-in-out;
 }
 
-/* ✅ Input laukelio prabanga */
-input {
-  width: 90%;
-  max-width: 380px;
-  padding: 14px;
-  border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  margin-bottom: 1.2rem;
-  text-align: center;
-  font-size: 1.1rem;
+/* 🌟 White Gold premium efektas */
+.highlight {
+  color: #FFFFFF;
+  text-shadow: 0px 0px 45px rgba(255, 255, 255, 1);
+  font-size: clamp(3rem, 5vw, 4rem); /* Prisitaikantis dydis */
   transition: all 0.3s ease-in-out;
-  backdrop-filter: blur(5px);
-}
-
-input:focus {
-  border-color: #FFFFFF; /* WHITE GOLD */
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.6);
-  outline: none;
-}
-
-/* 🚀 PRABANGUS LOGIN MYGTUKAS */
-button {
-  width: 90%;
-  max-width: 380px;
-  padding: 14px;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #FFFFFF, #EAEAEA); /* WHITE GOLD */
-  color: #212BFF; /* PREMIUM MĖLYNA TEKSTAS */
   font-weight: bold;
+}
+
+/* ✅ Mygtukų glow efektai – White Gold */
+.login-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 60px rgba(255, 255, 255, 1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* ✅ Mygtukų konteineris */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 5vh;
+}
+
+/* 🚀 Login mygtukai */
+.login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5vw;
+  width: 100%;
+  padding: 2vh 2vw;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 900;
+  border-radius: 16px;
+  border: 3px solid transparent;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  font-size: 1.2rem;
-  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.4);
+  color: white;
+  letter-spacing: 1.5px;
 }
 
-button:hover {
+/* 🔹 Mygtukų ikonų dydis */
+.login-button img {
+  width: clamp(28px, 5vw, 34px);
+  height: clamp(28px, 5vw, 34px);
+  filter: drop-shadow(0px 0px 7px rgba(255, 255, 255, 0.9));
+}
+
+/* 🎨 Individualūs mygtukų stiliai */
+.login-button:first-child {
+  background: linear-gradient(90deg, #FFFFFF, #EAEAEA);
+  color: #212BFF;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.login-button:nth-child(2) {
   background: linear-gradient(90deg, #FFFFFF, #DCDCDC);
-  transform: scale(1.05);
-  box-shadow: 0px 0px 35px rgba(255, 255, 255, 0.7);
-  border-color: rgba(255, 255, 255, 0.5);
+  color: #212BFF;
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* ✅ Responsive patobulinimai */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 2rem;
-  }
+.login-button:nth-child(3) {
+  background: linear-gradient(90deg, #FFFFFF, #F5F5F5);
+  color: #212BFF;
+  border-color: rgba(255, 255, 255, 0.6);
+}
 
-  input, button {
-    font-size: 1rem;
-    padding: 12px;
+/* ✅ Premium mažos kortelės */
+.featureCard {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1.5vw 2vw;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease-in-out;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  backdrop-filter: blur(6px);
+  font-weight: 600;
+}
+
+.featureCard:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+}
+
+/* ✅ Footer */
+.footer {
+  margin-top: 6vh;
+  font-size: clamp(14px, 1.5vw, 16px);
+  opacity: 1;
+  color: #FFFFFF;
+  text-shadow: 0px 0px 25px rgba(255, 255, 255, 1);
+  font-weight: 500;
+}
+
+/* 🔥 Responsive dizainas */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 5vw;
+  }
+  .title {
+    font-size: 3rem;
+  }
+  .highlight {
+    font-size: 3.5rem;
+  }
+  .login-button {
+    font-size: 1.3rem;
+    padding: 16px;
+  }
+  .login-button img {
+    width: 28px;
+    height: 28px;
   }
 }
 
