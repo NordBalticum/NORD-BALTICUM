@@ -1,189 +1,148 @@
-/* ✅ PAGRINDINIS KONTEINERIS – FULL WIDTH, FULL RESPONSIVE */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  width: 100vw;
-  background: var(--primary-bg);
-  color: var(--text-color);
+  background: linear-gradient(135deg, #0A1F44, #071A35);
+  color: white;
   text-align: center;
-  padding: 40px;
-  animation: fadeIn 1s ease-in-out;
+  padding: 20px;
 }
 
-/* ✅ LOGOTIPAS – 3D LIGHT SHADOW */
 .logo {
-  width: 280px;
+  width: 150px;
   height: auto;
-  filter: drop-shadow(0px 0px 30px rgba(255, 255, 255, 1));
-  margin-bottom: 35px;
-  transition: transform 0.3s ease-in-out;
+  margin-bottom: 20px;
 }
 
-.logo:hover {
-  transform: scale(1.08);
-  filter: drop-shadow(0px 0px 50px rgba(255, 255, 255, 1));
-}
-
-/* ✅ ANTRAŠTĖ */
 .title {
-  font-size: 3.4rem;
-  font-weight: 900;
-  text-shadow: 0px 0px 30px rgba(255, 255, 255, 0.9);
-  letter-spacing: 1.2px;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
-/* ✅ PAAIŠKINIMAS */
+.highlight {
+  color: #FFD700;
+  text-shadow: 0px 0px 10px #FFD700;
+}
+
 .subtitle {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 35px;
-  text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+  opacity: 0.8;
+  margin-bottom: 30px;
 }
 
-/* ✅ MYGTUKŲ KONTEINERIS */
 .buttonContainer {
   display: flex;
   flex-direction: column;
-  gap: 35px;
-  width: 100%;
-  max-width: 540px;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: white;
+}
+
+.walletconnect {
+  background: #3B82F6;
+  box-shadow: 0px 0px 15px rgba(59, 130, 246, 0.5);
+}
+
+.walletconnect:hover {
+  background: #2563EB;
+  box-shadow: 0px 0px 20px rgba(37, 99, 235, 0.8);
+}
+
+.metamask {
+  background: #E4761B;
+  box-shadow: 0px 0px 15px rgba(228, 118, 27, 0.5);
+}
+
+.metamask:hover {
+  background: #CD6116;
+  box-shadow: 0px 0px 20px rgba(205, 97, 22, 0.8);
+}
+
+.email {
+  background: #22C55E;
+  box-shadow: 0px 0px 15px rgba(34, 197, 94, 0.5);
+}
+
+.email:hover {
+  background: #16A34A;
+  box-shadow: 0px 0px 20px rgba(22, 163, 74, 0.8);
+}
+
+.buttonIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.emailIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
   margin-top: 40px;
 }
 
-/* ✅ LOGIN MYGTUKAI – BANKINIO LYGIO STILIUS */
-.loginButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
-  padding: 24px;
-  font-size: 1.8rem;
-  font-weight: 900;
-  border-radius: 22px;
-  border: 3px solid var(--button-border);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  text-transform: uppercase;
-  box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.7);
-  background: var(--button-bg);
-  color: var(--text-color);
-  height: 90px;
-}
-
-.loginButton:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 0px 60px rgba(255, 255, 255, 1);
-}
-
-/* ✅ LOGOTIPŲ FIKSAVIMAS ANT MYGTUKŲ */
-.loginButton img {
-  width: 95%;
-  height: auto;
-  max-height: 92px;
-  object-fit: contain;
-}
-
-/* ✅ WALLETCONNECT IR METAMASK – PRITAIKYTI DYDŽIAI */
-.walletconnect img,
-.metamask img {
-  width: 99%;
-  max-height: 95px;
-}
-
-/* ✅ EMAIL LOGIN – LYGIAVIMAS */
-.email {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-}
-
-.email img {
-  width: 44px;
-  height: 44px;
-}
-
-.email span {
-  font-weight: bold;
-  font-size: 1.7rem;
-}
-
-/* ✅ PREMIUM FUNKCIJOS KONTEINERIS */
-.features {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 45px;
-  margin-top: 80px;
-  width: 100vw;
-}
-
-/* ✅ PREMIUM FUNKCIJŲ LENTELĖS */
 .featureCard {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 30px 40px;
-  border-radius: 22px;
-  text-align: center;
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.8);
-  transition: transform 0.3s ease-in-out;
-  font-size: 1.6rem;
-  backdrop-filter: blur(12px);
-  font-weight: 800;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease-in-out;
 }
 
 .featureCard:hover {
-  transform: scale(1.12);
-  box-shadow: 0 0 65px rgba(255, 255, 255, 1);
+  transform: scale(1.05);
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
 }
 
-/* ✅ FOOTER */
-.footer {
-  margin-top: 80px;
-  font-size: 20px;
-  opacity: 1;
-  color: var(--text-color);
-  text-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
-  font-weight: 800;
+.featureCard h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 
-/* ✅ RESPONSIVE DESIGN */
+.featureCard p {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* ✅ Responsive */
 @media (max-width: 768px) {
-  .logo {
-    width: 230px;
-  }
   .title {
-    font-size: 3rem;
+    font-size: 2.2rem;
   }
-  .subtitle {
-    font-size: 1.6rem;
-  }
-  .loginButton {
-    font-size: 1.6rem;
-    padding: 22px;
-    height: 80px;
-  }
-  .loginButton img {
-    width: 90%;
-    max-height: 85px;
-  }
-  .featureCard {
-    width: 94%;
-    font-size: 1.5rem;
-  }
-}
 
-/* ✅ WOW ANIMACIJOS */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
+  .buttonContainer {
+    width: 100%;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  button {
+    width: 100%;
+  }
+
+  .features {
+    flex-direction: column;
   }
 }
