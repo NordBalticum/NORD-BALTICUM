@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { supabase } from "@/utils/supabaseClient";
-import { BrowserProvider, JsonRpcProvider, formatEther, parseEther } from "ethers";
+import { connectWallet } from "@/utils/wallet";
 import { useRouter } from "next/router";
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
@@ -10,7 +10,6 @@ import { QueryClient } from "@tanstack/react-query";
 // ✅ Sukuriamas `AuthContext`
 const AuthContext = createContext(null);
 
-// ✅ AppKit + Wagmi Adapter konfigūracija
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const queryClient = new QueryClient();
 
@@ -28,7 +27,6 @@ const appKit = createAppKit({
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
-  const [balances, setBalances] = useState([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -50,72 +48,37 @@ export const AuthProvider = ({ children }) => {
 
     supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
-      if (session?.user) loadUserData(session.user);
+      if (session?.user) {
+        loadUserData(session.user);
+      }
     });
   }, []);
 
-  const loadUserData = async (user) => {
+  useEffect(() => {
+    // ✅ Automatinis redirect į dashboard, jei prisijungęs
+    if (user || walletAddress) {
+      router.push("/dashboard");
+    } else {
+      router.push("/");
+    }
+  }, [user, walletAddress, router]);
+
+  const loginWithMetaMask = async () => {
     try {
-      const { data: walletData } = await supabase
-        .from("users")
-        .select("wallet_address")
-        .eq("email", user.email)
-        .single();
-
-      let wallet = walletData?.wallet_address;
-
-      if (!wallet) {
-        wallet = generateNewWallet();
-        await supabase
-          .from("users")
-          .update({ wallet_address: wallet })
-          .eq("email", user.email);
-      }
+      const wallet = await connectWallet();
+      if (!wallet) throw new Error("Wallet connection failed");
 
       setWalletAddress(wallet);
-      await fetchBalance(wallet);
-
-      localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("walletAddress", wallet);
-    } catch (error) {
-      console.error("Error loading user data:", error);
-    }
-  };
-
-  // ✅ Automatinis BSC balanso gavimas su `ethers.js`
-  const fetchBalance = async (wallet) => {
-    try {
-      const provider = new ethers.providers.JsonRpcProvider("https://bsc-dataseed.binance.org/");
-      const balance = await provider.getBalance(wallet);
-      setBalances(ethers.utils.formatEther(balance));
-    } catch (error) {
-      console.error("Balance fetch error:", error);
-    }
-  };
-
-  // ✅ Naujo Ethereum Wallet generavimas, jei jo nėra
-  const generateNewWallet = () => {
-    const wallet = ethers.Wallet.createRandom();
-    return wallet.address;
-  };
-
-  // ✅ Wallet prisijungimas per Wagmi/WalletConnect
-  const loginWithWallet = async () => {
-    try {
-      const account = await appKit.connect();
-      if (!account) throw new Error("Wallet connection failed");
-
-      setWalletAddress(account.address);
-      localStorage.setItem("walletAddress", account.address);
 
       let { data: user } = await supabase
         .from("users")
         .select("*")
-        .eq("wallet_address", account.address)
+        .eq("wallet_address", wallet)
         .single();
 
       if (!user) {
-        await supabase.from("users").insert({ wallet_address: account.address });
+        await supabase.from("users").insert({ wallet_address: wallet });
       }
 
       await loadUserData(user);
@@ -126,39 +89,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ✅ Prisijungimas per MetaMask (su `ethers.js`)
-  const loginWithMetaMask = async () => {
-    if (typeof window.ethereum !== "undefined") {
-      try {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send("eth_requestAccounts", []);
-        const signer = provider.getSigner();
-        const wallet = await signer.getAddress();
-
-        setWalletAddress(wallet);
-        localStorage.setItem("walletAddress", wallet);
-
-        let { data: user } = await supabase
-          .from("users")
-          .select("*")
-          .eq("wallet_address", wallet)
-          .single();
-
-        if (!user) {
-          await supabase.from("users").insert({ wallet_address: wallet });
-        }
-
-        await loadUserData(user);
-        router.push("/dashboard");
-      } catch (error) {
-        console.error("MetaMask login error:", error);
-      }
-    } else {
-      alert("MetaMask not installed!");
-    }
-  };
-
-  // ✅ Prisijungimas per Supabase Magic Link
   const loginWithEmail = async (email) => {
     try {
       const { error } = await supabase.auth.signInWithOtp({ email });
@@ -170,16 +100,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ✅ Visiškas Logout iš visų metodų
   const logout = async () => {
     try {
       await supabase.auth.signOut();
       setUser(null);
       setWalletAddress(null);
-      setBalances([]);
       localStorage.removeItem("user");
       localStorage.removeItem("walletAddress");
-      router.push("/login");
+      router.push("/"); // ✅ Atsijungus nukreipia į pagrindinį puslapį
     } catch (error) {
       console.error("Logout error:", error);
     }
@@ -190,8 +118,6 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         walletAddress,
-        balances,
-        loginWithWallet,
         loginWithMetaMask,
         loginWithEmail,
         logout,
