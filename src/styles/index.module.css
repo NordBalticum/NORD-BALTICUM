@@ -1,4 +1,11 @@
 /* ✅ PILNAS SCREEN FIX VISIEMS ĮRENGINIAMS */
+:root {
+  --main-bg-gradient: linear-gradient(135deg, #0A1F44, #091833);
+  --hover-bg: #FFD700;
+  --box-shadow-main: 0px 5px 15px rgba(255, 255, 255, 0.2);
+  --box-shadow-hover: 0px 10px 30px rgba(255, 255, 255, 0.4);
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -6,7 +13,7 @@
   align-items: center;
   min-height: 100vh;
   width: 100vw;
-  background: linear-gradient(135deg, #0A1F44, #091833);
+  background: var(--main-bg-gradient);
   background-size: cover;
   background-position: center;
   color: #ffffff;
@@ -20,6 +27,7 @@
   width: 320px;
   filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 1));
   transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .bigLogo:hover {
@@ -29,12 +37,13 @@
 
 /* ✅ TITULAS */
 .title {
-  font-size: 36px;
+  font-size: 38px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7);
   margin-bottom: 20px;
+  animation: fadeIn 1.2s ease-in-out;
 }
 
 /* ✅ LOGIN BLOKAS */
@@ -44,7 +53,8 @@
   background: rgba(255, 255, 255, 0.1);
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  box-shadow: var(--box-shadow-main);
+  animation: fadeIn 1.4s ease-in-out;
 }
 
 /* ✅ LOGIN MYGTUKŲ KONTEINERIS */
@@ -67,14 +77,14 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, border 0.3s ease-in-out;
-  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
+  box-shadow: var(--box-shadow-main);
 }
 
 .walletButton:hover {
   transform: scale(1.12);
-  background: #FFD700;
+  background: var(--hover-bg);
   border-color: #FFF;
-  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
+  box-shadow: var(--box-shadow-hover);
 }
 
 /* ✅ MYGTUKŲ IKONOS */
@@ -96,13 +106,13 @@
   background: rgba(255, 255, 255, 0.15);
   padding: 25px;
   border-radius: 15px;
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.25);
+  box-shadow: var(--box-shadow-main);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .featureCard:hover {
   transform: scale(1.07);
-  box-shadow: 0px 0px 40px rgba(255, 255, 255, 0.5);
+  box-shadow: var(--box-shadow-hover);
 }
 
 /* ✅ RESPONSYVUMAS – AUTOMATINIS PRISITAIKYMAS */
@@ -160,16 +170,27 @@
   }
 }
 
-/* ✅ ANIMACIJOS */
+/* ✅ PREMIUM ANIMACIJOS */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-15px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ✅ PAPILDOMAS FULLSCREEN FIX – UŽTIKRINA KAD VISADA BŪTŲ PILNAS EKRANAS */
+@keyframes scaleGlow {
+  0% { transform: scale(1); box-shadow: var(--box-shadow-main); }
+  50% { transform: scale(1.02); box-shadow: var(--box-shadow-hover); }
+  100% { transform: scale(1); box-shadow: var(--box-shadow-main); }
+}
+
+/* ✅ PILNO EKRANO FIX – DABAR 100% KOREKCIJA */
 html, body {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  background: var(--main-bg-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
