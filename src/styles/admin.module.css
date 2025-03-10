@@ -1,33 +1,36 @@
+/* ✅ ADMIN KONTEINERIS */
 .admin-container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 40px auto;
-  padding: 25px;
-  background: linear-gradient(135deg, #0A1F44, #142F60);
-  border-radius: 15px;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+  padding: 30px;
+  background: linear-gradient(135deg, #0A1F44, #152E5D);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
   text-align: center;
   color: #ffffff;
-  animation: fadeIn 1.2s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
 }
 
-/* 🔥 TITULAI */
+/* ✅ TITULAI */
 .admin-title {
-  font-size: 30px;
-  margin-bottom: 20px;
-  color: var(--accent-color);
+  font-size: 32px;
+  margin-bottom: 25px;
+  color: #FFD700;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.8px;
+  font-weight: bold;
+  text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7);
 }
 
-/* 🔍 PAIEŠKOS LAUKAS */
+/* ✅ PAIEŠKOS LAUKAS */
 .search-box input {
   width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  border: 2px solid var(--accent-color);
-  background: rgba(255, 215, 0, 0.05);
+  padding: 14px;
+  font-size: 17px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  border: 2px solid #FFD700;
+  background: rgba(255, 215, 0, 0.08);
   color: #ffffff;
   text-align: center;
   transition: 0.3s;
@@ -36,55 +39,57 @@
 .search-box input:focus {
   outline: none;
   border-color: #ffcc00;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
 }
 
-/* 📊 LENTELĖS */
+/* ✅ LENTELĖS */
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 30px;
-  border-radius: 10px;
+  margin-bottom: 35px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
 .admin-table th, .admin-table td {
-  padding: 14px;
+  padding: 16px;
   text-align: center;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .admin-table th {
-  background: rgba(255, 215, 0, 0.2);
-  color: var(--accent-color);
+  background: rgba(255, 215, 0, 0.25);
+  color: #FFD700;
   font-weight: bold;
 }
 
 .admin-table tr:nth-child(even) {
-  background: rgba(255, 215, 0, 0.05);
+  background: rgba(255, 215, 0, 0.08);
 }
 
 .admin-table tr:nth-child(odd) {
-  background: rgba(255, 215, 0, 0.1);
+  background: rgba(255, 215, 0, 0.15);
 }
 
 .admin-table tr:hover {
-  background: rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.4);
+  transform: scale(1.01);
+  transition: 0.3s ease-in-out;
 }
 
-/* 🎛️ MYGTUKAI */
+/* ✅ MYGTUKAI */
 .admin-button {
-  padding: 12px 18px;
-  font-size: 14px;
+  padding: 14px 20px;
+  font-size: 15px;
   font-weight: bold;
-  border-radius: 6px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
 .admin-button:hover {
-  transform: scale(1.05);
+  transform: scale(1.07);
 }
 
 .ban-button { background: #ff4c4c; color: #ffffff; }
@@ -92,75 +97,80 @@
 .freeze-button { background: #ff9800; color: #ffffff; }
 .unfreeze-button { background: #03a9f4; color: #ffffff; }
 
-/* ⚙️ ADMIN FEE */
+.ban-button:hover { background: #e63939; }
+.unban-button:hover { background: #3c9f40; }
+.freeze-button:hover { background: #e68900; }
+.unfreeze-button:hover { background: #0290d4; }
+
+/* ✅ ADMIN FEE */
 .admin-fee {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 15px;
+  margin-top: 25px;
 }
 
 .admin-fee input {
-  padding: 12px;
-  font-size: 16px;
-  width: 120px;
-  border: 2px solid var(--accent-color);
-  background: rgba(255, 215, 0, 0.1);
+  padding: 14px;
+  font-size: 17px;
+  width: 140px;
+  border: 2px solid #FFD700;
+  background: rgba(255, 215, 0, 0.12);
   color: #ffffff;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 10px;
   transition: 0.3s;
 }
 
 .admin-fee input:focus {
   outline: none;
   border-color: #ffcc00;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
 
 .admin-fee .admin-button {
-  background: linear-gradient(90deg, #ffd700, #ffcc00);
+  background: linear-gradient(90deg, #FFD700, #FFCC00);
   color: #121212;
   font-weight: bold;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 14px 22px;
+  border-radius: 10px;
 }
 
 .admin-fee .admin-button:hover {
-  background: #ffcc00;
+  background: #FFCC00;
 }
 
-/* 🔥 STATUSAI */
+/* ✅ STATUSAI */
 .banned { color: #ff4c4c; font-weight: bold; }
 .active { color: #4caf50; font-weight: bold; }
 
-/* 🔄 NETWORK SWITCHER */
+/* ✅ NETWORK SWITCHER */
 .network-switcher {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 18px;
 }
 
 .network-switcher .admin-button {
-  padding: 12px 16px;
-  font-size: 14px;
+  padding: 14px 18px;
+  font-size: 15px;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  background: linear-gradient(90deg, #ffd700, #ffcc00);
+  background: linear-gradient(90deg, #FFD700, #FFCC00);
   color: #121212;
 }
 
 .network-switcher .admin-button:hover {
-  transform: scale(1.05);
-  background: #ffcc00;
+  transform: scale(1.1);
+  background: #FFCC00;
 }
 
-/* 🔥 ANIMACIJOS */
+/* ✅ ANIMACIJOS */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -169,5 +179,30 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ✅ RESPONSYVUMAS */
+@media (max-width: 1200px) {
+  .admin-container {
+    max-width: 95%;
+    padding: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-table th, .admin-table td {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .admin-button {
+    font-size: 14px;
+    padding: 12px 18px;
+  }
+
+  .admin-fee input {
+    width: 100px;
+    padding: 12px;
   }
 }
