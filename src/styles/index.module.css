@@ -1,12 +1,3 @@
-/* ✅ BENDRI STILIAI */
-:root {
-  --primary-bg: #0A1F44;
-  --text-color: #FFFFFF;
-  --button-bg: #1E2A3A;
-  --button-hover: #FFD700;
-  --radius: 12px;
-}
-
 /* ✅ KONTEINERIS – PILNAS 100% WIDTH */
 .container {
   display: flex;
@@ -15,8 +6,9 @@
   justify-content: center;
   min-height: 100vh;
   width: 100vw;
-  background: var(--primary-bg);
+  background: #0A1F44; /* Naudojame spalvą tiesiogiai */
   text-align: center;
+  color: #FFFFFF; /* Teksto spalva */
 }
 
 /* ✅ PREMIUM LOGOTIPAS */
@@ -43,7 +35,7 @@
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background: var(--button-bg);
+  background: #1E2A3A;
   border: none;
   display: flex;
   align-items: center;
@@ -53,7 +45,7 @@
 
 .walletButton:hover {
   transform: scale(1.1);
-  background: var(--button-hover);
+  background: #FFD700;
 }
 
 /* ✅ MYGTUKŲ IKONOS */
@@ -74,7 +66,7 @@
 .featureCard {
   background: rgba(255, 255, 255, 0.1);
   padding: 20px;
-  border-radius: var(--radius);
+  border-radius: 12px;
   box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
