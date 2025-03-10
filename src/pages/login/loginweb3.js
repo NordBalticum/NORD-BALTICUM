@@ -12,7 +12,7 @@ export default function LoginWeb3() {
   useEffect(() => {
     if (user && walletAddress) {
       setStatus("success");
-      setTimeout(() => router.push("/dashboard"), 1500);
+      setTimeout(() => router.push("/dashboard"), 1200);
     }
   }, [user, walletAddress, router]);
 
@@ -21,11 +21,11 @@ export default function LoginWeb3() {
 
     try {
       const wallet = await connectWallet();
-      if (!wallet) throw new Error("⚠️ Failed to connect wallet.");
+      if (!wallet) throw new Error("Failed to connect wallet.");
 
       await loginWithMetaMask(); // Autentifikuojam per MetaMask/Wagmi
       setStatus("success");
-      setTimeout(() => router.push("/dashboard"), 1500);
+      setTimeout(() => router.push("/dashboard"), 1200);
     } catch (error) {
       console.error("Wallet login error:", error);
       setStatus("error");
