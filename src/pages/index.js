@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
-import { supabase } from "@/utils/supabaseClient";
 import styles from "@/styles/index.module.css";
 
 export default function Home() {
@@ -33,10 +32,12 @@ export default function Home() {
       <div className={styles.buttonContainer}>
         <button className={styles.walletconnect} onClick={() => router.push("/login/loginwagmi")}>
           <img src="/walletconnect.png" alt="WalletConnect" className={styles.buttonIcon} />
+          WalletConnect
         </button>
 
         <button className={styles.metamask} onClick={() => router.push("/login/loginweb3")}>
           <img src="/metamask.png" alt="MetaMask" className={styles.buttonIcon} />
+          MetaMask
         </button>
 
         <button className={styles.email} onClick={() => router.push("/login/loginemail")}>
