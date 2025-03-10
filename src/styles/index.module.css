@@ -1,4 +1,4 @@
-/* ✅ GLOBAL SETTINGS */
+/* ✅ GLOBAL SETTINGS – 100% STABILUS PREMIUM */
 .globals {
   background: linear-gradient(135deg, #0A1F44, #091833);
   color: #ffffff;
@@ -10,6 +10,7 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* ✅ PILNAS SCREEN FIX VISIEMS ĮRENGINIAMS */
@@ -21,88 +22,89 @@
   min-height: 100vh;
   width: 100vw;
   text-align: center;
-  padding: 30px;
+  padding: 40px;
   animation: fadeIn 1.2s ease-in-out;
+  backdrop-filter: blur(10px);
 }
 
 /* ✅ PREMIUM LOGOTIPAS */
 .bigLogo {
-  width: 320px;
-  filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 1));
+  width: 340px;
+  filter: drop-shadow(0px 0px 50px rgba(255, 255, 255, 1));
   transition: all 0.3s ease-in-out;
-  animation: fadeIn 1s ease-in-out, pulseGlow 3s infinite;
+  animation: fadeIn 1s ease-in-out, pulseGlow 3s infinite alternate;
 }
 
 .bigLogo:hover {
-  transform: scale(1.08);
-  filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1));
+  transform: scale(1.1);
+  filter: drop-shadow(0px 0px 80px rgba(255, 255, 255, 1));
 }
 
 /* ✅ TITULAS */
 .title {
-  font-size: 42px;
+  font-size: 46px;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  text-shadow: 0px 0px 20px rgba(255, 215, 0, 1);
-  margin-bottom: 25px;
+  letter-spacing: 2px;
+  text-shadow: 0px 0px 30px rgba(255, 215, 0, 1);
+  margin-bottom: 30px;
   animation: fadeIn 1.2s ease-in-out;
 }
 
 /* ✅ LOGIN BLOKAS */
 .loginBox {
   width: 100%;
-  max-width: 500px;
-  background: rgba(255, 255, 255, 0.12);
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
+  max-width: 550px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0px 6px 18px rgba(255, 255, 255, 0.25);
   animation: fadeIn 1.4s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
 .loginBox:hover {
-  transform: scale(1.02);
-  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0px 12px 40px rgba(255, 255, 255, 0.5);
 }
 
 /* ✅ LOGIN MYGTUKŲ KONTEINERIS */
 .buttonContainer {
   display: flex;
   justify-content: center;
-  gap: 25px;
-  margin-top: 30px;
+  gap: 30px;
+  margin-top: 35px;
   flex-wrap: wrap;
 }
 
-/* ✅ LOGIN MYGTUKAI – PREMIUM KOKYBĖ */
+/* ✅ LOGIN MYGTUKAI – ULTRA PREMIUM GLOW */
 .walletButton {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  background: rgba(30, 42, 58, 0.85);
-  border: 3px solid rgba(255, 255, 255, 0.2);
+  background: rgba(30, 42, 58, 0.9);
+  border: 4px solid rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 6px 18px rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
 }
 
 .walletButton:hover {
-  transform: scale(1.12);
+  transform: scale(1.15);
   background: #FFD700;
   border-color: #FFF;
-  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 14px 50px rgba(255, 255, 255, 0.7);
 }
 
 .walletButton::before {
   content: "";
   position: absolute;
-  width: 300%;
-  height: 300%;
+  width: 350%;
+  height: 350%;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
   top: 50%;
   left: 50%;
@@ -118,7 +120,7 @@
 
 /* ✅ MYGTUKŲ IKONOS */
 .buttonIcon {
-  width: 80%;
+  width: 85%;
   height: auto;
 }
 
@@ -126,48 +128,48 @@
 .features {
   display: flex;
   justify-content: center;
-  gap: 25px;
-  margin-top: 40px;
+  gap: 30px;
+  margin-top: 50px;
 }
 
 /* ✅ PREMIUM LENTELĖS */
 .featureCard {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.18);
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0px 6px 18px rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease-in-out;
 }
 
 .featureCard:hover {
-  transform: scale(1.07);
-  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+  box-shadow: 0px 14px 50px rgba(255, 255, 255, 0.6);
 }
 
 /* ✅ RESPONSYVUMAS – AUTOMATINIS PRISITAIKYMAS */
 @media (max-width: 1024px) {
   .buttonContainer {
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
   }
 
   .walletButton {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
   }
 
   .buttonIcon {
-    width: 70%;
+    width: 75%;
   }
 
   .bigLogo {
-    width: 260px;
+    width: 300px;
   }
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 20px;
+    padding: 25px;
   }
 
   .buttonContainer {
@@ -177,45 +179,36 @@
   }
 
   .walletButton {
-    width: 90px;
-    height: 90px;
+    width: 95px;
+    height: 95px;
   }
 
   .buttonIcon {
-    width: 65%;
+    width: 70%;
   }
 
   .bigLogo {
-    width: 220px;
+    width: 250px;
   }
 
   .features {
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
   }
 
   .featureCard {
-    padding: 20px;
+    padding: 25px;
   }
 }
 
 /* ✅ PREMIUM ANIMACIJOS */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-15px); }
+  from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulseGlow {
-  0% { transform: scale(1); filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 1)); }
-  50% { transform: scale(1.02); filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1)); }
-  100% { transform: scale(1); filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 1)); }
-}
-
-/* ✅ PILNO EKRANO FIX – DABAR 100% KOREKCIJA */
-html {
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  0% { transform: scale(1); filter: drop-shadow(0px 0px 50px rgba(255, 255, 255, 1)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0px 0px 90px rgba(255, 255, 255, 1)); }
+  100% { transform: scale(1); filter: drop-shadow(0px 0px 50px rgba(255, 255, 255, 1)); }
 }
