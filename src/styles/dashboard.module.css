@@ -1,4 +1,4 @@
-/* ✅ KONTEINERIS – PILNAS 100% WIDTH IR 4K SUPPORT */
+/* ✅ PILNAS 100% WIDTH IR AUTOMATINIS PRISITAIKYMAS PRIE 4K EKRANŲ */
 .container {
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   justify-content: flex-start;
   min-height: 100vh;
   width: 100vw;
-  background: #0A1F44; /* Premium fonas */
+  background: linear-gradient(135deg, #0A1F44 30%, #001F3F 100%);
   color: #FFFFFF;
   text-align: center;
   padding: 30px;
@@ -18,34 +18,35 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
-  max-width: 1600px;
-  padding: 20px 0;
+  width: 90%;
+  max-width: 1800px;
+  padding: 25px 0;
 }
 
+/* ✅ PREMIUM LOGOTIPAS SU GLOW */
 .logo {
-  width: 200px;
-  filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.8));
+  width: 250px;
+  filter: drop-shadow(0px 0px 35px rgba(255, 255, 255, 0.9));
   transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 
 .logo:hover {
-  transform: scale(1.07);
-  filter: drop-shadow(0px 0px 30px rgba(255, 255, 255, 1));
+  transform: scale(1.1);
+  filter: drop-shadow(0px 0px 50px rgba(255, 255, 255, 1));
 }
 
-/* ✅ ATSIJUNGIMO MYGTUKAS */
+/* ✅ PREMIUM ATSIJUNGIMO MYGTUKAS */
 .logoutButton {
-  padding: 14px 30px;
-  font-size: 1.4rem;
-  font-weight: 700;
-  border-radius: 12px;
+  padding: 16px 35px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  border-radius: 14px;
   border: 3px solid #FFD700;
   cursor: pointer;
   background: #1E2A3A;
   color: #FFFFFF;
   text-transform: uppercase;
-  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
   transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
@@ -53,100 +54,90 @@
   transform: scale(1.1);
   background: #FFD700;
   color: #000;
-  box-shadow: 0px 0px 75px rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 90px rgba(255, 255, 255, 1);
 }
 
 .logoutButton:active {
   transform: scale(0.96);
 }
 
-/* ✅ DASHBOARD TURINYS */
-.dashboardContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1400px;
-  margin-top: 30px;
-}
-
 /* ✅ WALLET INFORMACIJA */
 .walletInfo {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 35px;
+  border-radius: 15px;
   text-align: center;
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.3);
   width: 100%;
-  max-width: 600px;
+  max-width: 750px;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .walletInfo:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.9);
+  transform: scale(1.08);
+  box-shadow: 0 0 60px rgba(255, 255, 255, 1);
 }
 
 /* ✅ BALANCE CHART */
 .balanceChart {
   width: 100%;
-  max-width: 900px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  margin-top: 30px;
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  margin-top: 35px;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .balanceChart:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 65px rgba(255, 255, 255, 0.9);
+  transform: scale(1.06);
+  box-shadow: 0 0 80px rgba(255, 255, 255, 1);
 }
 
 /* ✅ QUICK ACTIONS */
 .quickActions {
-  margin-top: 40px;
+  margin-top: 50px;
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
 }
 
 .quickActions h2 {
-  font-size: 1.9rem;
+  font-size: 2rem;
   font-weight: 900;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 /* ✅ GREITI VEIKSMAI – GRID */
 .actionsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
   width: 100%;
   justify-content: center;
 }
 
 /* ✅ PREMIUM MYGTUKAI */
 .actionButton {
-  padding: 20px;
-  font-size: 1.4rem;
+  padding: 22px;
+  font-size: 1.6rem;
   font-weight: 900;
-  border-radius: 12px;
-  background: #1E2A3A;
-  border: 2px solid #FFD700;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #1E2A3A, #22334C);
+  border: 3px solid #FFD700;
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
 }
 
 .actionButton:hover {
-  transform: scale(1.15);
-  background: #FFD700;
+  transform: scale(1.18);
+  background: linear-gradient(145deg, #FFD700, #FFA500);
   color: #000;
-  box-shadow: 0px 0px 60px rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 80px rgba(255, 255, 255, 1);
 }
 
 /* ✅ DONATE BUTTON */
@@ -157,35 +148,13 @@
 
 .donateButton:hover {
   background: linear-gradient(90deg, #cc0000, #990000);
-  transform: scale(1.15);
-  box-shadow: 0px 0px 75px rgba(255, 50, 50, 1);
-}
-
-/* ✅ LOADING SCREEN */
-.loadingScreen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  background: #0A1F44;
-  color: #FFFFFF;
-  animation: fadeIn 1s ease-in-out;
-}
-
-.loader {
-  width: 50px;
-  height: 50px;
-  border: 6px solid transparent;
-  border-top: 6px solid #FFF8E1;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+  transform: scale(1.18);
+  box-shadow: 0px 0px 90px rgba(255, 50, 50, 1);
 }
 
 /* ✅ ANIMACIJOS */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-15px); }
+  from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -202,18 +171,18 @@
   }
 
   .logoutButton {
-    margin-top: 10px;
+    margin-top: 15px;
   }
 }
 
 @media (max-width: 768px) {
   .dashboardContent {
-    width: 95%;
+    width: 90%;
   }
 
   .actionsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
   }
 
   .walletInfo {
