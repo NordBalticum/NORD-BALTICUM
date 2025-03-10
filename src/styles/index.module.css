@@ -10,107 +10,91 @@
   padding: 20px;
 }
 
-.logo {
-  width: 150px;
+/* ✅ MAX PRESTIGE LOGOTIPAS */
+.bigLogo {
+  width: 220px; /* Padidintas dydis */
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
-.title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.highlight {
-  color: #FFD700;
-  text-shadow: 0px 0px 10px #FFD700;
-}
-
-.subtitle {
-  font-size: 1.2rem;
-  opacity: 0.8;
-  margin-bottom: 30px;
-}
-
+/* ✅ LOGIN MYGTUKAI */
 .buttonContainer {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-bottom: 40px;
+  gap: 20px;
+  margin-bottom: 50px;
 }
 
+/* ✅ Premium mygtukų stiliai */
 button {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 250px;
-  height: 50px;
-  font-size: 1rem;
-  font-weight: bold;
+  height: 60px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   color: white;
 }
 
+/* ✅ WalletConnect mygtukas */
 .walletconnect {
   background: #3B82F6;
-  box-shadow: 0px 0px 15px rgba(59, 130, 246, 0.5);
+  box-shadow: 0px 0px 20px rgba(59, 130, 246, 0.5);
 }
 
 .walletconnect:hover {
   background: #2563EB;
-  box-shadow: 0px 0px 20px rgba(37, 99, 235, 0.8);
+  box-shadow: 0px 0px 25px rgba(37, 99, 235, 0.8);
 }
 
+/* ✅ MetaMask mygtukas */
 .metamask {
   background: #E4761B;
-  box-shadow: 0px 0px 15px rgba(228, 118, 27, 0.5);
+  box-shadow: 0px 0px 20px rgba(228, 118, 27, 0.5);
 }
 
 .metamask:hover {
   background: #CD6116;
-  box-shadow: 0px 0px 20px rgba(205, 97, 22, 0.8);
+  box-shadow: 0px 0px 25px rgba(205, 97, 22, 0.8);
 }
 
+/* ✅ Email mygtukas */
 .email {
   background: #22C55E;
-  box-shadow: 0px 0px 15px rgba(34, 197, 94, 0.5);
+  box-shadow: 0px 0px 20px rgba(34, 197, 94, 0.5);
 }
 
 .email:hover {
   background: #16A34A;
-  box-shadow: 0px 0px 20px rgba(22, 163, 74, 0.8);
+  box-shadow: 0px 0px 25px rgba(22, 163, 74, 0.8);
 }
 
-.buttonIcon {
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
-}
-
+/* ✅ Didesni login ikonų dydžiai */
+.buttonIcon,
 .emailIcon {
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
+  width: 40px;
+  height: 40px;
 }
 
+/* ✅ PREMIUM FUNKCIJOS (-30% mažesnės) */
 .features {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .featureCard {
   background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
+  padding: 15px;
   border-radius: 10px;
   backdrop-filter: blur(10px);
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease-in-out;
+  width: 180px; /* -30% mažesnės lentelės */
 }
 
 .featureCard:hover {
@@ -119,19 +103,19 @@ button {
 }
 
 .featureCard h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
 }
 
 .featureCard p {
-  font-size: 1rem;
+  font-size: 0.9rem;
   opacity: 0.8;
 }
 
 /* ✅ Responsive */
 @media (max-width: 768px) {
-  .title {
-    font-size: 2.2rem;
+  .bigLogo {
+    width: 180px; /* Responsyvus mažesnis logotipas */
   }
 
   .buttonContainer {
