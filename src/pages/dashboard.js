@@ -1,81 +1,57 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "@/login/AuthProvider";
-import { supabase } from "@/utils/supabaseClient";
-import { ethers } from "ethers";
+import { useEffect } from "react";
+import { useAuth } from "@/context/AuthContext"; // ✅ NAUDOJA AUTHCONTEXT
+import { useRouter } from "next/router";
+import Image from "next/image";
 import styles from "@/styles/dashboard.module.css";
+import logo from "@/public/icons/logo.svg";
+import logoutIcon from "@/public/icons/logout.svg";
+import walletIcon from "@/public/icons/wallet-icon.svg";
 
 export default function Dashboard() {
-  const { user, walletAddress, balance, logout, error } = useAuth();
-  const [recentTransactions, setRecentTransactions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { user, walletAddress, balance, logout, loading } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
-    if (walletAddress) {
-      fetchRecentTransactions();
+    if (!user) {
+      router.push("/");
     }
-  }, [walletAddress]);
-
-  const fetchRecentTransactions = async () => {
-    try {
-      setLoading(true);
-      const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL);
-      const history = await provider.getHistory(walletAddress);
-
-      const transactions = history.slice(-5).map((tx) => ({
-        hash: tx.hash,
-        from: tx.from,
-        to: tx.to,
-        value: ethers.utils.formatEther(tx.value),
-        timestamp: new Date(tx.timestamp * 1000).toLocaleString(),
-      }));
-
-      setRecentTransactions(transactions);
-    } catch (err) {
-      console.error("❌ Failed to fetch transactions:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [user, router]);
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <img src="/logo.png" alt="Logo" className={styles.logo} />
-        <button onClick={logout} className={styles.logoutButton}>
-          Logout
+      {/* ✅ HEADER */}
+      <header className={styles.header}>
+        <Image src={logo} alt="NordBalticum Logo" className={styles.logo} priority />
+        <button className={styles.logoutButton} onClick={logout}>
+          <Image src={logoutIcon} alt="Logout" className={styles.logoutIcon} />
         </button>
-      </div>
+      </header>
 
-      <div className={styles.walletInfo}>
-        <h2>Your Wallet</h2>
-        <p><strong>Address:</strong> {walletAddress || "N/A"}</p>
-        <p><strong>Balance:</strong> {balance} BNB</p>
-      </div>
+      {/* ✅ DASHBOARD TURINYS */}
+      <div className={styles.dashboardContent}>
+        <h1 className={styles.title}>Welcome, {user?.email || "User"} 👑</h1>
 
-      <div className={styles.balanceChart}>
-        <h2>Recent Transactions</h2>
-        {loading ? (
-          <p>Loading transactions...</p>
-        ) : recentTransactions.length > 0 ? (
-          <ul>
-            {recentTransactions.map((tx, index) => (
-              <li key={index}>
-                <span><strong>From:</strong> {tx.from}</span><br />
-                <span><strong>To:</strong> {tx.to}</span><br />
-                <span><strong>Amount:</strong> {tx.value} BNB</span><br />
-                <span><strong>Time:</strong> {tx.timestamp}</span><br />
-                <a href={`https://bscscan.com/tx/${tx.hash}`} target="_blank" rel="noopener noreferrer">
-                  View on BscScan
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No transactions found.</p>
-        )}
-      </div>
+        {/* ✅ WALLET INFO */}
+        <div className={styles.walletInfo}>
+          <h2 className={styles.walletTitle}>Your Wallet</h2>
+          <p className={styles.walletAddress}>
+            <Image src={walletIcon} alt="Wallet" className={styles.walletIcon} />
+            {walletAddress || "Not Connected"}
+          </p>
+          <p className={styles.balance}>Balance: {loading ? "Loading..." : `${balance} BNB`}</p>
+        </div>
 
-      {error && <p className={styles.error}>{error}</p>}
+        {/* ✅ GREITI VEIKSMAI */}
+        <div className={styles.quickActions}>
+          <h2>Quick Actions</h2>
+          <div className={styles.actionsGrid}>
+            <button className={styles.actionButton}>Deposit</button>
+            <button className={styles.actionButton}>Withdraw</button>
+            <button className={styles.actionButton}>Swap</button>
+            <button className={styles.donateButton}>Donate</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
-      }
+}
