@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import Image from "next/image";
-import "@/styles/navbar.module.css";
+import styles from "@/styles/navbar.module.css";
 import "@/styles/themeswitcher.module.css";
 import "@/styles/buttons.module.css";
 
@@ -13,6 +13,19 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const { user, signOut } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleLogout = async () => {
     await signOut();
@@ -20,18 +33,20 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      <div className="logo">
+    <nav className={`${styles.navbar} ${scrolled ? styles.navScrolled : ""}`}>
+      {/* ✅ LOGOTIPAS */}
+      <div className={styles.navbarLogo}>
         <Link href="/">
-          <Image src="/public/logo.png" alt="Nord Balticum Logo" width={160} height={50} priority />
+          <Image src="/logo.png" alt="Nord Balticum Logo" width={180} height={55} priority />
         </Link>
       </div>
 
-      <ul className={`menu ${menuOpen ? "open" : ""}`}>
+      {/* ✅ NAVIGACIJOS MENIU */}
+      <ul className={`${styles.navLinks} ${menuOpen ? styles.menuOpen : ""}`}>
         <li><Link href="/dashboard">Dashboard</Link></li>
-        <li className="dropdown">
+        <li className={styles.dropdown}>
           <span>Crypto Actions ▼</span>
-          <ul className="dropdown-menu">
+          <ul className={styles.dropdownMenu}>
             <li><Link href="/send">Send</Link></li>
             <li><Link href="/receive">Receive</Link></li>
             <li><Link href="/stake">Stake</Link></li>
@@ -45,25 +60,27 @@ export default function Navbar() {
             <li><Link href="/profile">Profile</Link></li>
             <li><Link href="/settings">Settings</Link></li>
             <li>
-              <button className="logout-btn" onClick={handleLogout}>Logout</button>
+              <button className={styles.logoutBtn} onClick={handleLogout}>Logout</button>
             </li>
           </>
         ) : (
           <li>
             <Link href="/auth/login">
-              <button className="login-btn">Login</button>
+              <button className={styles.loginBtn}>Login</button>
             </Link>
           </li>
         )}
 
+        {/* ✅ TEMOS PERJUNGIMAS */}
         <li>
-          <button className="theme-toggle" onClick={toggleTheme}>
+          <button className={styles.themeSwitcher} onClick={toggleTheme}>
             {theme === "light" ? "🌙 Dark" : "☀️ Light"}
           </button>
         </li>
       </ul>
 
-      <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+      {/* ✅ MOBILUS MENIU TOGGLE */}
+      <div className={styles.menuToggle} onClick={() => setMenuOpen(!menuOpen)}>
         ☰
       </div>
     </nav>
