@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/login/AuthProvider";
 import { useRouter } from "next/router";
 import styles from "@/styles/index.module.css";
 
