@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
 import { createAppKit } from "@reown/appkit/react";
-import "@/styles/loginwagmi.module.css";
+import styles from "@/styles/loginwagmi.module.css";
 
 export default function LoginWagmi() {
   const { user } = useAuth();
