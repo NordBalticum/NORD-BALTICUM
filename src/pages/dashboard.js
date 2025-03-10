@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { FaPaperPlane, FaDownload, FaExchangeAlt, FaGem, FaHeart } from "react-icons/fa";
-import "@/styles/dashboard.module.css";
-import "@/styles/buttons.module.css";
+import styles from "@/styles/dashboard.module.css";
+import styles from "@/styles/buttons.module.css";
 
 // Dinaminis importas grafikui (apsaugo nuo SSR problemų)
 const BalanceChart = dynamic(() => import("@/components/BalanceChart"), { ssr: false });
