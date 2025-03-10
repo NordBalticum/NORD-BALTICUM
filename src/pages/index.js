@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "@/login/AuthProvider";
+import { useAuth } from "@/context/AuthContext"; // ✅ TEISINGAS AUTH IMPORTAS
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styles from "@/styles/index.module.css";
@@ -10,7 +10,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (auth && auth.user) {
+    if (auth?.user) {
       router.push("/dashboard");
     } else {
       setIsLoading(false); // ✅ Užbaigiama įkrovimo būsena
