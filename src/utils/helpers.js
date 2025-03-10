@@ -3,29 +3,27 @@
  * @returns {boolean} - `true` jei mobile, `false` jei ne.
  */
 export function detectMobile() {
-  if (typeof navigator !== "undefined" && navigator.userAgent) {
-    return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
-  }
-  return false;
+  return typeof navigator !== "undefined" && /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+}
+
+/**
+ * ✅ Tikrina, ar el. paštas yra validus.
+ * @param {string} email - El. pašto adresas.
+ * @returns {boolean} - `true` jei validus, `false` jei ne.
+ */
+export function isValidEmail(email) {
+  return typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 /**
  * ✅ Saugus datos formatavimas.
  * @param {string|number|Date} timestamp - Data kaip timestamp, string arba Date objektas.
- * @param {Object} options - Formato nustatymai.
  * @returns {string} - Formatuota data arba klaida.
  */
-export function formatDate(timestamp, options = {
-  year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit"
-}) {
-  try {
-    if (!timestamp) throw new Error("Invalid Date");
-    const date = new Date(timestamp);
-    if (isNaN(date.getTime())) throw new Error("Invalid Date");
-    return date.toLocaleString(undefined, options);
-  } catch (error) {
-    return `❌ ${error.message}`;
-  }
+export function formatDate(timestamp) {
+  if (!timestamp) return "❌ Invalid Date";
+  const date = new Date(timestamp);
+  return isNaN(date.getTime()) ? "❌ Invalid Date" : date.toLocaleString();
 }
 
 /**
@@ -44,13 +42,8 @@ export function truncateAddress(address) {
  * @returns {string} - Konvertuota reikšmė.
  */
 export function weiToEth(weiValue, decimals = 4) {
-  try {
-    const value = parseFloat(weiValue);
-    if (isNaN(value) || value < 0) throw new Error("Invalid Value");
-    return (value / 1e18).toFixed(decimals).replace(/\.?0+$/, "");
-  } catch (error) {
-    return `❌ ${error.message}`;
-  }
+  const value = parseFloat(weiValue);
+  return isNaN(value) ? "❌ Invalid Value" : (value / 1e18).toFixed(decimals).replace(/\.?0+$/, "");
 }
 
 /**
@@ -69,16 +62,10 @@ export function isValidAddress(address) {
  * @returns {string} - Formatuotas skaičius arba klaida.
  */
 export function formatNumber(number, decimals = 2) {
-  try {
-    const num = parseFloat(number);
-    if (isNaN(num)) throw new Error("Invalid Number");
-    return num.toLocaleString(undefined, {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals
-    });
-  } catch (error) {
-    return `❌ ${error.message}`;
-  }
+  const num = parseFloat(number);
+  return isNaN(num) ? "❌ Invalid Number" : num.toLocaleString(undefined, {
+    minimumFractionDigits: decimals, maximumFractionDigits: decimals
+  });
 }
 
 /**
@@ -87,13 +74,8 @@ export function formatNumber(number, decimals = 2) {
  * @returns {string} - Konvertuota reikšmė arba klaida.
  */
 export function ethToWei(ethValue) {
-  try {
-    const value = parseFloat(ethValue);
-    if (isNaN(value) || value < 0) throw new Error("Invalid Value");
-    return (value * 1e18).toFixed(0);
-  } catch (error) {
-    return `❌ ${error.message}`;
-  }
+  const value = parseFloat(ethValue);
+  return isNaN(value) ? "❌ Invalid Value" : (value * 1e18).toFixed(0);
 }
 
 /**
@@ -110,12 +92,7 @@ export function generateUniqueId() {
  * @returns {number} - Timestamp (milisekundės) arba klaida.
  */
 export function dateToTimestamp(date) {
-  try {
-    if (!date) throw new Error("Invalid Date");
-    const timestamp = Date.parse(date);
-    if (isNaN(timestamp)) throw new Error("Invalid Date");
-    return timestamp;
-  } catch (error) {
-    return `❌ ${error.message}`;
-  }
+  if (!date) return "❌ Invalid Date";
+  const timestamp = Date.parse(date);
+  return isNaN(timestamp) ? "❌ Invalid Date" : timestamp;
 }
