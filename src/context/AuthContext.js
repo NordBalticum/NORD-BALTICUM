@@ -5,9 +5,9 @@ import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { mainnet, arbitrum } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
-import { detectMobile } from "@/utils/helpers"; // ✅ Pagalbinė funkcija
+import { detectMobile } from "@/utils/helpers"; // ✅ FIXED IMPORT
 
-// ✅ Konfigūracija
+// ✅ AppKit + Wagmi Adapter konfigūracija
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const queryClient = new QueryClient();
 const wagmiAdapter = new WagmiAdapter({ projectId, networks: [mainnet, arbitrum] });
@@ -22,10 +22,11 @@ export const AuthProvider = ({ children }) => {
   const [balance, setBalance] = useState("0");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
-  const isMobile = detectMobile();
 
   useEffect(() => {
+    setIsMobile(detectMobile()); // ✅ Nustatome, ar vartotojas mobilus
     checkSession();
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
@@ -41,7 +42,6 @@ export const AuthProvider = ({ children }) => {
 
   const checkSession = async () => {
     try {
-      setLoading(true);
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         setUser(user);
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         logout();
       }
     } catch (error) {
-      setError("Session error");
+      setError("❌ Session error");
     } finally {
       setLoading(false);
     }
@@ -58,7 +58,6 @@ export const AuthProvider = ({ children }) => {
 
   const loadUserData = async (user) => {
     try {
-      setError(null);
       const { data: walletData } = await supabase
         .from("users")
         .select("wallet_address")
@@ -71,7 +70,7 @@ export const AuthProvider = ({ children }) => {
       setWalletAddress(wallet);
       fetchBalance(wallet);
     } catch (error) {
-      setError("Error loading user data");
+      setError("❌ Error loading user data");
     }
   };
 
@@ -80,7 +79,7 @@ export const AuthProvider = ({ children }) => {
       const balance = await getBalance(wallet);
       if (balance) setBalance(balance);
     } catch (error) {
-      setError("Balance fetch error");
+      setError("❌ Balance fetch error");
     }
   };
 
@@ -88,7 +87,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setError(null);
       const account = await appKit.connect({ qrModal: isMobile });
-      if (!account) throw new Error("Wallet connection failed");
+      if (!account) throw new Error("❌ Wallet connection failed");
 
       setWalletAddress(account.address);
       let { data: user } = await supabase
@@ -105,7 +104,7 @@ export const AuthProvider = ({ children }) => {
       await loadUserData(user);
       router.push("/dashboard");
     } catch (error) {
-      setError("Wallet login failed. Try again.");
+      setError("❌ Wallet login failed. Try again.");
     }
   };
 
@@ -118,7 +117,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       const wallet = await connectWallet();
-      if (!wallet) throw new Error("MetaMask login failed.");
+      if (!wallet) throw new Error("❌ MetaMask login failed.");
 
       setWalletAddress(wallet);
       let { data: user } = await supabase
@@ -135,7 +134,7 @@ export const AuthProvider = ({ children }) => {
       await loadUserData(user);
       router.push("/dashboard");
     } catch (error) {
-      setError("MetaMask login failed.");
+      setError("❌ MetaMask login failed.");
     }
   };
 
@@ -144,9 +143,9 @@ export const AuthProvider = ({ children }) => {
       setError(null);
       const { error } = await supabase.auth.signInWithOtp({ email });
       if (error) throw error;
-      alert("Check your email for the Magic Link.");
+      alert("✅ Check your email for the Magic Link.");
     } catch (error) {
-      setError("Failed to send Magic Link.");
+      setError("❌ Failed to send Magic Link.");
     }
   };
 
@@ -158,7 +157,7 @@ export const AuthProvider = ({ children }) => {
       setBalance("0");
       router.push("/");
     } catch (error) {
-      setError("Logout error");
+      setError("❌ Logout error");
     }
   };
 
@@ -174,7 +173,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         loading,
         error,
-        isMobile,
+        isMobile, // ✅ PRIDĖTAS MOBILIŲ APTIKIMAS
       }}
     >
       {children}
