@@ -1,15 +1,16 @@
 import { useState, useEffect, createContext, useContext } from "react";
-import { supabase } from "@/utils/supabaseClient";
-import { connectWallet } from "@/utils/wallet";
 import { useRouter } from "next/router";
+import { supabase } from "@/utils/supabaseClient";
+import { connectWallet, getBalance } from "@/utils/wallet";
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { mainnet, arbitrum } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
 
-// ✅ Sukuriamas `AuthContext`
+// ✅ Sukuriam AuthContext
 const AuthContext = createContext(null);
 
+// ✅ AppKit + Wagmi Adapter konfigūracija
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const appKit = createAppKit({
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
+  const [balance, setBalance] = useState("0");
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -39,7 +41,7 @@ export const AuthProvider = ({ children }) => {
           await loadUserData(user);
         }
       } catch (error) {
-        console.error("Session check error:", error);
+        console.error("❌ Session check error:", error);
       }
       setLoading(false);
     };
@@ -50,23 +52,79 @@ export const AuthProvider = ({ children }) => {
       setUser(session?.user ?? null);
       if (session?.user) {
         loadUserData(session.user);
+      } else {
+        router.push("/"); // ⬅️ Atsijungus, meta į index.js
       }
     });
   }, []);
 
-  useEffect(() => {
-    // ✅ Automatinis redirect į dashboard, jei prisijungęs
-    if (user || walletAddress) {
-      router.push("/dashboard");
-    } else {
-      router.push("/");
-    }
-  }, [user, walletAddress, router]);
+  const loadUserData = async (user) => {
+    try {
+      const { data: walletData } = await supabase
+        .from("users")
+        .select("wallet_address")
+        .eq("email", user.email)
+        .single();
 
+      let wallet = walletData?.wallet_address;
+
+      if (!wallet) {
+        console.warn("⚠️ No wallet found, skipping balance fetch.");
+        return;
+      }
+
+      setWalletAddress(wallet);
+      await fetchBalance(wallet);
+
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("walletAddress", wallet);
+    } catch (error) {
+      console.error("❌ Error loading user data:", error);
+    }
+  };
+
+  // ✅ Automatinis BSC balanso gavimas
+  const fetchBalance = async (wallet) => {
+    try {
+      const balance = await getBalance(wallet);
+      setBalance(balance);
+    } catch (error) {
+      console.error("❌ Balance fetch error:", error);
+    }
+  };
+
+  // ✅ Prisijungimas per WalletConnect/Wagmi
+  const loginWithWallet = async () => {
+    try {
+      const account = await appKit.connect();
+      if (!account) throw new Error("Wallet connection failed");
+
+      setWalletAddress(account.address);
+      localStorage.setItem("walletAddress", account.address);
+
+      let { data: user } = await supabase
+        .from("users")
+        .select("*")
+        .eq("wallet_address", account.address)
+        .single();
+
+      if (!user) {
+        await supabase.from("users").insert({ wallet_address: account.address });
+      }
+
+      await loadUserData(user);
+      router.push("/dashboard"); // ⬅️ Prisijungus meta į dashboard
+    } catch (error) {
+      console.error("❌ Wallet login error:", error);
+      alert("Failed to connect wallet. Please try again.");
+    }
+  };
+
+  // ✅ Prisijungimas per MetaMask
   const loginWithMetaMask = async () => {
     try {
       const wallet = await connectWallet();
-      if (!wallet) throw new Error("Wallet connection failed");
+      if (!wallet) throw new Error("MetaMask login failed.");
 
       setWalletAddress(wallet);
       localStorage.setItem("walletAddress", wallet);
@@ -82,34 +140,36 @@ export const AuthProvider = ({ children }) => {
       }
 
       await loadUserData(user);
-      router.push("/dashboard");
+      router.push("/dashboard"); // ⬅️ Prisijungus meta į dashboard
     } catch (error) {
-      console.error("Wallet login error:", error);
-      alert("Failed to connect wallet. Please try again.");
+      console.error("❌ MetaMask login error:", error);
     }
   };
 
+  // ✅ Prisijungimas per Supabase Magic Link
   const loginWithEmail = async (email) => {
     try {
       const { error } = await supabase.auth.signInWithOtp({ email });
       if (error) throw error;
       alert("Check your email for the Magic Link.");
     } catch (error) {
-      console.error("Magic Link login error:", error);
+      console.error("❌ Magic Link login error:", error);
       alert("Failed to send Magic Link.");
     }
   };
 
+  // ✅ Pilnas logout
   const logout = async () => {
     try {
       await supabase.auth.signOut();
       setUser(null);
       setWalletAddress(null);
+      setBalance("0");
       localStorage.removeItem("user");
       localStorage.removeItem("walletAddress");
-      router.push("/"); // ✅ Atsijungus nukreipia į pagrindinį puslapį
+      router.push("/"); // ⬅️ Atsijungus meta į index.js
     } catch (error) {
-      console.error("Logout error:", error);
+      console.error("❌ Logout error:", error);
     }
   };
 
@@ -118,6 +178,8 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         walletAddress,
+        balance,
+        loginWithWallet,
         loginWithMetaMask,
         loginWithEmail,
         logout,
