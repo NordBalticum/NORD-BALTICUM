@@ -1,4 +1,4 @@
-/* DASHBOARD KONTEINERIS */
+/* ✅ PILNAS 4K RESPONSIVE DIZAINAS */
 .container {
   display: flex;
   flex-direction: column;
@@ -6,14 +6,12 @@
   justify-content: flex-start;
   min-height: 100vh;
   width: 100vw;
-  background: var(--primary-bg);
-  color: var(--text-color);
-  text-align: center;
+  background: linear-gradient(180deg, #0A1F44 0%, #021026 100%);
+  color: white;
   padding: 30px;
-  animation: fadeIn 1.2s ease-in-out;
 }
 
-/* HEADER – LOGOTIPAS + ATSIJUNGIMO MYGTUKAS */
+/* ✅ HEADER */
 .header {
   display: flex;
   justify-content: space-between;
@@ -23,190 +21,62 @@
   padding: 20px 0;
 }
 
+/* ✅ PREMIUM LOGOTIPAS */
 .logo {
-  width: 200px;
-  filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.8));
-  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+  width: 220px;
+  filter: drop-shadow(0px 0px 20px rgba(255, 255, 255, 0.9));
 }
 
-.logo:hover {
-  transform: scale(1.07);
-  filter: drop-shadow(0px 0px 30px rgba(255, 255, 255, 1));
-}
-
-/* ATSIJUNGIMO MYGTUKAS */
+/* ✅ ATSIJUNGIMO MYGTUKAS */
 .logoutButton {
   padding: 14px 30px;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  border-radius: var(--radius);
-  border: 3px solid var(--button-border);
-  cursor: pointer;
-  background: var(--button-bg);
-  color: var(--text-color);
-  text-transform: uppercase;
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 12px;
+  background: #ff4444;
+  color: white;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .logoutButton:hover {
   transform: scale(1.1);
-  background: var(--button-hover);
-  box-shadow: 0px 0px 75px rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 20px rgba(255, 50, 50, 0.9);
 }
 
-.logoutButton:active {
-  transform: scale(0.96);
-}
-
-/* BALANCE CHART */
-.chartContainer {
-  width: 100%;
-  max-width: 900px;
-  background: var(--card-bg);
-  padding: 30px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  backdrop-filter: var(--blur);
-  margin-top: 30px;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.chartContainer:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 65px rgba(255, 255, 255, 0.9);
-}
-
-/* PERIOD SELECTOR */
-.periodSelector {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.periodSelector button {
-  padding: 12px 24px;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: var(--radius);
-  background: var(--button-bg);
-  border: 2px solid var(--button-border);
-  color: var(--text-color);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.periodSelector button:hover {
-  background: var(--button-hover);
-  transform: scale(1.15);
-}
-
-.periodSelector .active {
-  background: var(--button-hover);
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.9);
-}
-
-/* WALLET INFORMACIJA */
+/* ✅ WALLET INFO */
 .walletInfo {
-  background: var(--card-bg);
+  background: rgba(255, 255, 255, 0.1);
   padding: 30px;
-  border-radius: var(--radius);
+  border-radius: 15px;
   text-align: center;
-  box-shadow: var(--shadow);
-  backdrop-filter: var(--blur);
-  width: 100%;
-  max-width: 600px;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.1);
 }
 
-.walletInfo:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.9);
+/* ✅ INTERAKTYVUS BALANSO GRAFIKAS */
+.balanceChart {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
 }
 
-/* QUICK ACTIONS */
-.quickActions {
-  margin-top: 40px;
-  width: 100%;
-  max-width: 800px;
-}
-
-.quickActions h2 {
-  font-size: 1.9rem;
-  font-weight: 900;
-  margin-bottom: 20px;
-}
-
+/* ✅ GREITI VEIKSMAI */
 .actionsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 25px;
-  width: 100%;
-  justify-content: center;
 }
 
 .actionButton {
   padding: 20px;
   font-size: 1.4rem;
-  font-weight: 900;
-  border-radius: var(--radius);
-  background: var(--button-bg);
-  border: 2px solid var(--button-border);
-  color: var(--text-color);
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  box-shadow: var(--shadow);
+  border-radius: 12px;
+  background: #0367fc;
+  color: white;
+  transition: transform 0.3s ease-in-out;
 }
 
 .actionButton:hover {
   transform: scale(1.15);
-  background: var(--button-hover);
-  box-shadow: 0px 0px 60px rgba(255, 255, 255, 1);
-}
-
-/* DONATE BUTTON */
-.donateButton {
-  background: linear-gradient(90deg, #ff0000, #cc0000);
-  font-weight: 900;
-}
-
-.donateButton:hover {
-  background: linear-gradient(90deg, #cc0000, #990000);
-  transform: scale(1.15);
-  box-shadow: 0px 0px 75px rgba(255, 50, 50, 1);
-}
-
-/* LOADING SCREEN */
-.loadingScreen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  background: var(--primary-bg);
-  color: var(--text-color);
-  animation: fadeIn 1s ease-in-out;
-}
-
-.loader {
-  width: 50px;
-  height: 50px;
-  border: 6px solid transparent;
-  border-top: 6px solid #FFF8E1;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-/* ANIMACIJOS */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  background: #024bb7;
 }
