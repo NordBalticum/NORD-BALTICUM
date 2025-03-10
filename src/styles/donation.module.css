@@ -13,8 +13,8 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* ✅ TITULAS */
-h1 {
+/* ✅ TITULAS (SUTVARKYTAS) */
+.donationTitle {
   font-size: 34px;
   margin-bottom: 20px;
   color: #FFD700;
@@ -112,7 +112,7 @@ h1 {
   transition: all 0.3s ease-in-out;
   background: linear-gradient(90deg, #FFD700, #FFCC00);
   color: #121212;
-  box-shadow: 0px 0px 25px rgba(255, 215, 0, 0.6);
+  box-shadow: 0px 0px 25px rgba(255, 255, 0, 0.6);
 }
 
 .donateBtn:hover {
@@ -198,7 +198,7 @@ h1 {
     padding: 12px;
   }
 
-  h1 {
+  .donationTitle {
     font-size: 28px;
   }
 }
