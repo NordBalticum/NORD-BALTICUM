@@ -1,4 +1,4 @@
-/* ✅ PILNAS SCREEN FIX – 100% WIDTH, AUTOMATINIS PRISITAIKYMAS */
+/* ✅ PILNAS SCREEN FIX – 8K READY */
 .container {
   display: flex;
   flex-direction: column;
@@ -6,58 +6,78 @@
   justify-content: center;
   min-height: 100vh;
   width: 100vw;
-  background: linear-gradient(135deg, #0A1F44 30%, #001F3F 100%);
+  background: linear-gradient(135deg, #0A1F44, #001F3F);
   color: #FFFFFF;
   text-align: center;
   padding: 50px;
-  animation: fadeIn 1.2s ease-in-out;
+  animation: fadeIn 1.5s ease-in-out;
+  backdrop-filter: blur(12px);
 }
 
-/* ✅ PREMIUM LOGIN BLOKAS */
+/* ✅ HEADER – LOGOTIPAS */
+.header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 40px 0;
+}
+
+/* ✅ PREMIUM LOGOTIPAS */
+.logo {
+  width: 300px;
+  filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1));
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+  animation: glowPulse 4s infinite alternate;
+}
+
+.logo:hover {
+  transform: scale(1.12);
+  filter: drop-shadow(0px 0px 100px rgba(255, 255, 255, 1));
+}
+
+/* ✅ TITULAI */
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0px 0px 20px rgba(255, 215, 0, 1);
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  opacity: 0.8;
+  margin-bottom: 40px;
+}
+
+/* ✅ LOGIN BLOKAS */
 .loginBox {
-  background: rgba(255, 255, 255, 0.12);
-  padding: 40px;
-  border-radius: 18px;
-  text-align: center;
-  box-shadow: 0px 8px 25px rgba(255, 255, 255, 0.3);
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .loginBox:hover {
   transform: scale(1.02);
-  box-shadow: 0 0 80px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
 }
 
-/* ✅ PREMIUM LOGOTIPAS */
-.logo {
-  width: 220px;
-  margin-bottom: 20px;
-  filter: drop-shadow(0px 0px 30px rgba(255, 255, 255, 1));
-  animation: glowPulse 3s infinite alternate;
-}
-
-/* ✅ TITULAS */
-.title {
-  font-size: 2.5rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  text-shadow: 0px 0px 20px rgba(255, 215, 0, 1);
-  margin-bottom: 25px;
-  animation: fadeIn 1.2s ease-in-out;
-}
-
-/* ✅ LOGIN MYGTUKŲ KONTEINERIS */
+/* ✅ LOGIN MYGTUKAI */
 .buttonContainer {
   display: flex;
   justify-content: center;
   gap: 25px;
   margin-top: 30px;
-  flex-wrap: wrap;
 }
 
-/* ✅ LOGIN MYGTUKAI – PREMIUM KOKYBĖ */
+/* ✅ MYGTUKŲ STILIUS */
 .walletButton {
   width: 120px;
   height: 120px;
@@ -67,10 +87,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, border 0.3s ease-in-out;
-  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
 }
 
 .walletButton:hover {
@@ -80,61 +97,17 @@
   box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
 }
 
-/* ✅ MYGTUKŲ IKONOS */
-.buttonIcon {
-  width: 80%;
-  height: auto;
-}
-
-/* ✅ MAGIC LINK EMAIL KONTEINERIS */
-.emailContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 25px;
-}
-
-.emailInput {
-  width: 260px;
-  padding: 12px;
-  font-size: 1rem;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  transition: background 0.3s ease-in-out;
-}
-
-.emailInput:focus {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.emailButton {
-  margin-top: 10px;
-  padding: 12px 20px;
-  font-size: 1rem;
-  font-weight: 700;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  background: #FFD700;
-  color: #000;
-  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
-}
-
-.emailButton:hover {
-  transform: scale(1.08);
-  background: #FFC400;
-}
-
-/* ✅ ERROR MESSAGE */
+/* ✅ STATUS PRANEŠIMAI */
 .error {
-  color: #FF5050;
-  font-weight: 700;
-  margin-top: 15px;
+  color: red;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
+.loading {
+  color: yellow;
+  font-size: 1.2rem;
+  margin-top: 20px;
 }
 
 /* ✅ ANIMACIJOS */
@@ -144,44 +117,27 @@
 }
 
 @keyframes glowPulse {
-  0% { filter: drop-shadow(0px 0px 30px rgba(255, 255, 255, 1)); }
-  100% { filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1)); }
+  0% { filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1)); }
+  100% { filter: drop-shadow(0px 0px 100px rgba(255, 255, 255, 1)); }
 }
 
-/* ✅ RESPONSYVUMAS – VISI EKRANAI (MOBILUS, TABLETAI, 8K) */
-@media (max-width: 1200px) {
+/* ✅ RESPONSYVUMAS */
+@media (max-width: 1000px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
   .buttonContainer {
     flex-wrap: wrap;
+    gap: 20px;
   }
 
   .walletButton {
     width: 100px;
     height: 100px;
-  }
-
-  .logo {
-    width: 200px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 30px;
-  }
-
-  .emailInput {
-    width: 220px;
-  }
-
-  .emailButton {
-    font-size: 0.9rem;
-  }
-
-  .title {
-    font-size: 2rem;
-  }
-
-  .buttonContainer {
-    gap: 20px;
   }
 }
