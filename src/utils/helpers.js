@@ -1,8 +1,19 @@
 /**
- * ✅ Saugus datos formatavimas su numatytais arba pasirinktais parametrais.
+ * ✅ Nustato, ar vartotojas naudoja mobilų įrenginį.
+ * @returns {boolean} - `true` jei mobile, `false` jei ne.
+ */
+export function detectMobile() {
+  if (typeof navigator !== "undefined") {
+    return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent);
+  }
+  return false;
+}
+
+/**
+ * ✅ Saugus datos formatavimas.
  * @param {string|number|Date} timestamp - Data kaip timestamp, string arba Date objektas.
- * @param {Object} options - Formato nustatymai (numatytieji: metai, mėnuo, diena, valanda, minutė, sekundė).
- * @returns {string} - Formatuota data arba klaidos pranešimas.
+ * @param {Object} options - Formato nustatymai.
+ * @returns {string} - Formatuota data.
  */
 export function formatDate(
   timestamp,
@@ -16,42 +27,34 @@ export function formatDate(
   }
 ) {
   if (!timestamp) return "❌ Invalid Date";
-
   const date = new Date(timestamp);
-  if (isNaN(date.getTime())) return "❌ Invalid Date";
-
-  return date.toLocaleString(undefined, options);
+  return isNaN(date.getTime()) ? "❌ Invalid Date" : date.toLocaleString(undefined, options);
 }
 
 /**
- * ✅ Saugi funkcija sutrumpinti piniginės adresą iki formato: `0x1234...abcd`
- * @param {string} address - Pilnas Ethereum/BSC adresas.
- * @returns {string} - Sutrumpintas adresas arba klaidos pranešimas.
+ * ✅ Sutrumpina Ethereum/BSC adresą.
+ * @param {string} address - Pilnas adresas.
+ * @returns {string} - Sutrumpintas adresas.
  */
 export function truncateAddress(address) {
-  if (!address || typeof address !== "string") return "❌ Invalid Address";
-  if (!/^0x[a-fA-F0-9]{40}$/.test(address)) return "❌ Invalid Ethereum Address";
-
-  return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  return isValidAddress(address) ? `${address.slice(0, 6)}...${address.slice(-4)}` : "❌ Invalid Address";
 }
 
 /**
- * ✅ Konvertuoja WEI į ETH/BNB su pasirenkamu tikslumu.
+ * ✅ Konvertuoja WEI į ETH/BNB.
  * @param {string|number} weiValue - WEI kiekis.
- * @param {number} decimals - Po kablelio rodomų skaičių skaičius (numatytasis: 4).
- * @returns {string} - Konvertuota reikšmė arba klaida.
+ * @param {number} decimals - Po kablelio rodomų skaičių skaičius.
+ * @returns {string} - Konvertuota reikšmė.
  */
 export function weiToEth(weiValue, decimals = 4) {
   if (!weiValue || isNaN(weiValue)) return "❌ Invalid Value";
-  
-  const result = (parseFloat(weiValue) / 1e18).toFixed(decimals);
-  return result.replace(/\.?0+$/, ""); // 🔥 Pašalina nereikalingus nulius
+  return (parseFloat(weiValue) / 1e18).toFixed(decimals).replace(/\.?0+$/, ""); // 🔥 Pašalina nereikalingus nulius
 }
 
 /**
  * ✅ Patikrina, ar tekstas yra validus Ethereum/BSC adresas.
  * @param {string} address - Adresas, kurį norima patikrinti.
- * @returns {boolean} - `true`, jei adresas validus, `false`, jei ne.
+ * @returns {boolean} - `true`, jei adresas validus.
  */
 export function isValidAddress(address) {
   return /^0x[a-fA-F0-9]{40}$/.test(address);
@@ -60,13 +63,11 @@ export function isValidAddress(address) {
 /**
  * ✅ Saugiai formatuoja skaičių su pasirenkamu tikslumu.
  * @param {number|string} number - Skaičius.
- * @param {number} decimals - Kiek skaičių po kablelio rodyti (numatytasis: 2).
+ * @param {number} decimals - Kiek skaičių po kablelio rodyti.
  * @returns {string} - Formatuotas skaičius.
  */
 export function formatNumber(number, decimals = 2) {
-  if (isNaN(number)) return "❌ Invalid Number";
-  
-  return Number(number).toLocaleString(undefined, {
+  return isNaN(number) ? "❌ Invalid Number" : Number(number).toLocaleString(undefined, {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
@@ -75,11 +76,10 @@ export function formatNumber(number, decimals = 2) {
 /**
  * ✅ Konvertuoja ETH/BNB į WEI.
  * @param {string|number} ethValue - ETH arba BNB kiekis.
- * @returns {string} - Konvertuota reikšmė arba klaida.
+ * @returns {string} - Konvertuota reikšmė.
  */
 export function ethToWei(ethValue) {
   if (!ethValue || isNaN(ethValue)) return "❌ Invalid Value";
-  
   return (parseFloat(ethValue) * 1e18).toFixed(0);
 }
 
@@ -98,7 +98,6 @@ export function generateUniqueId() {
  */
 export function dateToTimestamp(date) {
   if (!date) return "❌ Invalid Date";
-  
   const timestamp = new Date(date).getTime();
   return isNaN(timestamp) ? "❌ Invalid Date" : timestamp;
 }
