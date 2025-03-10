@@ -3,8 +3,8 @@ import { useAuth } from "@/login/AuthProvider";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styles from "@/styles/index.module.css";
-import logo from "@/public/icons/logo.svg";
-import walletIcon from "@/public/icons/wallet-icon.svg";
+import logo from '/icons/logo.svg';
+import walletIcon from '/icons/wallet-icon.svg';
 import metamaskIcon from "@/public/icons/metamask-icon.svg";
 import emailIcon from "@/public/icons/email-icon.svg";
 
