@@ -1,32 +1,36 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "@/context/AuthContext"; // ✅ TEISINGAS AUTH IMPORTAS
+import { useEffect } from "react";
+import { useAuth } from "@/context/AuthContext"; // ✅ Atnaujintas AuthContext kelias
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styles from "@/styles/index.module.css";
 
+// ✅ Teisingi logotipų ir ikonų importai
+import logo from "/public/icons/logo.svg";
+import walletIcon from "/public/icons/wallet-icon.svg";
+import metamaskIcon from "/public/icons/metamask-icon.svg";
+import emailIcon from "/public/icons/email-icon.svg";
+
 export default function Home() {
-  const auth = useAuth();
+  const { user, loginWithWallet, loginWithMetaMask, loginWithEmail, error, loading } = useAuth();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
 
+  // ✅ Automatinis nukreipimas į dashboard, jei vartotojas jau prisijungęs
   useEffect(() => {
-    if (auth?.user) {
+    if (user) {
       router.push("/dashboard");
-    } else {
-      setIsLoading(false); // ✅ Užbaigiama įkrovimo būsena
     }
-  }, [auth, auth?.user, router]);
-
-  if (isLoading) {
-    return <p className={styles.loading}>Loading...</p>;
-  }
+  }, [user, router]);
 
   return (
     <div className={styles.container}>
-      {/* ✅ HEADER */}
+      {/* ✅ PREMIUM HEADER */}
       <header className={styles.header}>
-        <Image src="/icons/logo.svg" alt="NordBalticum Logo" width={150} height={150} priority />
+        <Image src={logo} alt="NordBalticum Logo" className={styles.logo} priority />
       </header>
+
+      {/* ✅ TITULAS */}
+      <h1 className={styles.title}>Welcome to NordBalticum</h1>
+      <p className={styles.subtitle}>The Ultimate Web3 Banking Experience</p>
 
       {/* ✅ LOGIN BLOKAS */}
       <div className={styles.loginBox}>
@@ -34,25 +38,31 @@ export default function Home() {
 
         {/* ✅ LOGIN MYGTUKAI */}
         <div className={styles.buttonContainer}>
-          <button className={styles.walletButton} onClick={auth?.loginWithWallet} disabled={auth?.loading}>
-            <Image src="/icons/wallet-icon.svg" alt="WalletConnect" width={50} height={50} />
+          {/* WalletConnect */}
+          <button className={styles.walletButton} onClick={loginWithWallet} disabled={loading}>
+            <Image src={walletIcon} alt="WalletConnect" className={styles.buttonIcon} />
+            <span>WalletConnect</span>
           </button>
 
-          <button className={styles.walletButton} onClick={auth?.loginWithMetaMask} disabled={auth?.loading}>
-            <Image src="/icons/metamask-icon.svg" alt="MetaMask" width={50} height={50} />
+          {/* MetaMask */}
+          <button className={styles.walletButton} onClick={loginWithMetaMask} disabled={loading}>
+            <Image src={metamaskIcon} alt="MetaMask" className={styles.buttonIcon} />
+            <span>MetaMask</span>
           </button>
 
+          {/* Email Magic Link */}
           <button className={styles.walletButton} onClick={() => {
             const email = prompt("Enter your email:");
-            if (email) auth?.loginWithEmail(email);
-          }} disabled={auth?.loading}>
-            <Image src="/icons/email-icon.svg" alt="Email" width={50} height={50} />
+            if (email) loginWithEmail(email);
+          }} disabled={loading}>
+            <Image src={emailIcon} alt="Email" className={styles.buttonIcon} />
+            <span>Email Login</span>
           </button>
         </div>
 
         {/* ✅ STATUS PRANEŠIMAI */}
-        {auth?.error && <p className={styles.error}>{auth.error}</p>}
-        {auth?.loading && <p className={styles.loading}>Processing...</p>}
+        {error && <p className={styles.error}>{error}</p>}
+        {loading && <p className={styles.loading}>Processing...</p>}
       </div>
     </div>
   );
