@@ -1,19 +1,4 @@
-/* ✅ GLOBAL SETTINGS – 100% STABILUS PREMIUM */
-.globals {
-  background: linear-gradient(135deg, #0A1F44, #091833);
-  color: #ffffff;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  font-family: 'Poppins', sans-serif;
-}
-
-/* ✅ PILNAS SCREEN FIX VISIEMS ĮRENGINIAMS */
+/* ✅ PILNAS SCREEN FIX – 8K READY */
 .container {
   display: flex;
   flex-direction: column;
@@ -22,193 +7,112 @@
   min-height: 100vh;
   width: 100vw;
   text-align: center;
-  padding: 40px;
-  animation: fadeIn 1.2s ease-in-out;
-  backdrop-filter: blur(10px);
-}
-
-/* ✅ PREMIUM LOGOTIPAS */
-.bigLogo {
-  width: 340px;
-  filter: drop-shadow(0px 0px 50px rgba(255, 255, 255, 1));
-  transition: all 0.3s ease-in-out;
-  animation: fadeIn 1s ease-in-out, pulseGlow 3s infinite alternate;
-}
-
-.bigLogo:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0px 0px 80px rgba(255, 255, 255, 1));
-}
-
-/* ✅ TITULAS */
-.title {
-  font-size: 46px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0px 0px 30px rgba(255, 215, 0, 1);
-  margin-bottom: 30px;
-  animation: fadeIn 1.2s ease-in-out;
+  padding: 60px;
+  animation: fadeIn 1.5s ease-in-out;
+  background: linear-gradient(135deg, #0A1F44, #001F3F);
+  backdrop-filter: blur(15px);
 }
 
 /* ✅ LOGIN BLOKAS */
 .loginBox {
-  width: 100%;
-  max-width: 550px;
   background: rgba(255, 255, 255, 0.15);
-  padding: 35px;
-  border-radius: 18px;
-  box-shadow: 0px 6px 18px rgba(255, 255, 255, 0.25);
-  animation: fadeIn 1.4s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 40px rgba(255, 255, 255, 0.5);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
 }
 
-.loginBox:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 12px 40px rgba(255, 255, 255, 0.5);
+/* ✅ PREMIUM LOGOTIPAS */
+.logo {
+  width: 280px;
+  filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1));
+  transition: transform 0.3s ease-in-out;
+  animation: glowPulse 4s infinite alternate;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0px 0px 100px rgba(255, 255, 255, 1));
+}
+
+/* ✅ TITULAS */
+.title {
+  font-size: 42px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0px 0px 20px rgba(255, 215, 0, 1);
+  margin-bottom: 25px;
+  animation: fadeIn 1.2s ease-in-out;
 }
 
 /* ✅ LOGIN MYGTUKŲ KONTEINERIS */
 .buttonContainer {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  margin-top: 35px;
+  gap: 25px;
+  margin-top: 30px;
   flex-wrap: wrap;
 }
 
-/* ✅ LOGIN MYGTUKAI – ULTRA PREMIUM GLOW */
+/* ✅ LOGIN MYGTUKAI */
 .walletButton {
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  background: rgba(30, 42, 58, 0.9);
-  border: 4px solid rgba(255, 255, 255, 0.25);
+  background: rgba(30, 42, 58, 0.85);
+  border: 4px solid rgba(255, 255, 255, 0.3);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0px 6px 18px rgba(255, 255, 255, 0.3);
-  position: relative;
-  overflow: hidden;
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.3);
 }
 
 .walletButton:hover {
-  transform: scale(1.15);
+  transform: scale(1.12);
   background: #FFD700;
   border-color: #FFF;
-  box-shadow: 0px 14px 50px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.5);
 }
 
-.walletButton::before {
-  content: "";
-  position: absolute;
-  width: 350%;
-  height: 350%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  opacity: 0;
-  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-}
-
-.walletButton:hover::before {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
+.walletButton span {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
 }
 
 /* ✅ MYGTUKŲ IKONOS */
 .buttonIcon {
-  width: 85%;
+  width: 50px;
   height: auto;
 }
 
-/* ✅ FUNKCIJŲ KONTEINERIS */
-.features {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 50px;
+/* ✅ STATUS TEXT */
+.status {
+  margin-top: 15px;
+  color: #FFD700;
+  font-weight: bold;
 }
 
-/* ✅ PREMIUM LENTELĖS */
-.featureCard {
-  background: rgba(255, 255, 255, 0.18);
-  padding: 30px;
-  border-radius: 18px;
-  box-shadow: 0px 6px 18px rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease-in-out;
+.error {
+  margin-top: 15px;
+  color: red;
+  font-weight: bold;
 }
 
-.featureCard:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 14px 50px rgba(255, 255, 255, 0.6);
-}
-
-/* ✅ RESPONSYVUMAS – AUTOMATINIS PRISITAIKYMAS */
-@media (max-width: 1024px) {
-  .buttonContainer {
-    flex-wrap: wrap;
-    gap: 25px;
-  }
-
-  .walletButton {
-    width: 110px;
-    height: 110px;
-  }
-
-  .buttonIcon {
-    width: 75%;
-  }
-
-  .bigLogo {
-    width: 300px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 25px;
-  }
-
-  .buttonContainer {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .walletButton {
-    width: 95px;
-    height: 95px;
-  }
-
-  .buttonIcon {
-    width: 70%;
-  }
-
-  .bigLogo {
-    width: 250px;
-  }
-
-  .features {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .featureCard {
-    padding: 25px;
-  }
-}
-
-/* ✅ PREMIUM ANIMACIJOS */
+/* ✅ ANIMACIJOS */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
+  from { opacity: 0; transform: translateY(-30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes pulseGlow {
-  0% { transform: scale(1); filter: drop-shadow(0px 0px 50px rgba(255, 255, 255, 1)); }
-  50% { transform: scale(1.05); filter: drop-shadow(0px 0px 90px rgba(255, 255, 255, 1)); }
-  100% { transform: scale(1); filter: drop-shadow(0px 0px 50px rgba(255, 255, 255, 1)); }
+@keyframes glowPulse {
+  0% { filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1)); }
+  100% { filter: drop-shadow(0px 0px 100px rgba(255, 255, 255, 1)); }
 }
