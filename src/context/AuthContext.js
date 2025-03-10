@@ -3,15 +3,17 @@ import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
-import { mainnet, arbitrum } from "@reown/appkit/networks";
+import { mainnet, arbitrum, bsc, bscTestnet } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
-import { detectMobile, connectMetaMask } from "@/utils/helpers"; 
+import { detectMobile } from "@/utils/helpers";
 
-// ✅ AppKit konfigūracija
+// ✅ AppKit konfigūracija (dabar veikia su mainnet ir testnet)
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const queryClient = new QueryClient();
-const wagmiAdapter = new WagmiAdapter({ projectId, networks: [mainnet, arbitrum] });
-const appKit = createAppKit({ adapters: [wagmiAdapter], networks: [mainnet, arbitrum], projectId });
+const networks = [mainnet, arbitrum, bsc, bscTestnet];
+
+const wagmiAdapter = new WagmiAdapter({ projectId, networks });
+const appKit = createAppKit({ adapters: [wagmiAdapter], networks, projectId });
 
 // ✅ Sukuriame AuthContext
 const AuthContext = createContext(null);
@@ -20,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
   const [balance, setBalance] = useState("0");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
@@ -53,7 +55,7 @@ export const AuthProvider = ({ children }) => {
         logout();
       }
     } catch (err) {
-      setError("❌ Session error: " + err.message);
+      setError(`❌ Session error: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -67,13 +69,13 @@ export const AuthProvider = ({ children }) => {
         .eq("email", user.email)
         .single();
 
-      if (error) throw error;
+      if (error && error.code !== "PGRST116") throw error;
       if (!walletData?.wallet_address) return;
 
       setWalletAddress(walletData.wallet_address);
       fetchBalance(walletData.wallet_address);
     } catch (err) {
-      setError("❌ Error loading user data: " + err.message);
+      setError(`❌ Error loading user data: ${err.message}`);
     }
   };
 
@@ -82,11 +84,11 @@ export const AuthProvider = ({ children }) => {
       const balance = await getBalance(wallet);
       setBalance(balance || "0");
     } catch (err) {
-      setError("❌ Balance fetch error: " + err.message);
+      setError(`❌ Balance fetch error: ${err.message}`);
     }
   };
 
-  // ✅ WALLETCONNECT LOGIN
+  // ✅ WalletConnect login
   const loginWithWalletConnect = async () => {
     try {
       setError(null);
@@ -98,30 +100,35 @@ export const AuthProvider = ({ children }) => {
       setWalletAddress(account.address);
       await handleUserLogin(account.address);
     } catch (err) {
-      setError("❌ WalletConnect login failed: " + err.message);
+      setError(`❌ WalletConnect login failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  // ✅ METAMASK LOGIN
+  // ✅ MetaMask login (atskirtas nuo WalletConnect)
   const loginWithMetaMask = async () => {
     try {
       setError(null);
       setLoading(true);
-      const wallet = await connectMetaMask();
+      if (isMobile) {
+        alert("⚠️ Use WalletConnect on mobile for better experience.");
+        return;
+      }
+
+      const wallet = await connectWallet(); // ✅ Funkcija turi būti iš helpers.js
       if (!wallet) throw new Error("❌ MetaMask login failed.");
 
       setWalletAddress(wallet);
       await handleUserLogin(wallet);
     } catch (err) {
-      setError("❌ MetaMask login failed: " + err.message);
+      setError(`❌ MetaMask login failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  // ✅ MAGIC LINK LOGIN
+  // ✅ Magic Link (email login)
   const loginWithEmail = async (email) => {
     try {
       setError(null);
@@ -129,31 +136,35 @@ export const AuthProvider = ({ children }) => {
       if (error) throw error;
       alert("✅ Check your email for the Magic Link.");
     } catch (err) {
-      setError("❌ Failed to send Magic Link: " + err.message);
+      setError(`❌ Magic Link failed: ${err.message}`);
     }
   };
 
+  // ✅ Universalus vartotojo prisijungimas per bet kurį metodą
   const handleUserLogin = async (wallet) => {
-    let { data: user, error } = await supabase
-      .from("users")
-      .select("*")
-      .eq("wallet_address", wallet)
-      .single();
-
-    if (error && error.code !== "PGRST116") throw error;
-
-    if (!user) {
-      const { data } = await supabase
+    try {
+      let { data: user, error } = await supabase
         .from("users")
-        .insert({ wallet_address: wallet })
         .select("*")
+        .eq("wallet_address", wallet)
         .single();
 
-      user = data;
-    }
+      if (error && error.code !== "PGRST116") throw error;
 
-    await loadUserData(user);
-    router.push("/dashboard");
+      if (!user) {
+        const { data } = await supabase
+          .from("users")
+          .insert({ wallet_address: wallet })
+          .select("*")
+          .single();
+        user = data;
+      }
+
+      await loadUserData(user);
+      router.push("/dashboard");
+    } catch (err) {
+      setError(`❌ Login error: ${err.message}`);
+    }
   };
 
   const logout = async () => {
@@ -164,7 +175,7 @@ export const AuthProvider = ({ children }) => {
       setBalance("0");
       router.push("/");
     } catch (err) {
-      setError("❌ Logout error: " + err.message);
+      setError(`❌ Logout error: ${err.message}`);
     }
   };
 
@@ -174,8 +185,8 @@ export const AuthProvider = ({ children }) => {
         user,
         walletAddress,
         balance,
-        loginWithWalletConnect,
-        loginWithMetaMask,
+        loginWithWalletConnect, // ✅ Atskirta nuo MetaMask
+        loginWithMetaMask, // ✅ Atskirta nuo WalletConnect
         loginWithEmail,
         logout,
         loading,
