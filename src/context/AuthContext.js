@@ -3,19 +3,16 @@ import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
-import { mainnet, arbitrum, bsc, bscTestnet } from "@reown/appkit/networks";
+import { mainnet, arbitrum } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
-import { detectMobile } from "@/utils/helpers";
+import { detectMobile, isValidAddress } from "@/utils/helpers"; 
 
-// ✅ AppKit konfigūracija (dabar veikia su mainnet ir testnet)
+// ✅ AppKit konfigūracija
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const queryClient = new QueryClient();
-const networks = [mainnet, arbitrum, bsc, bscTestnet];
+const wagmiAdapter = new WagmiAdapter({ projectId, networks: [mainnet, arbitrum] });
+const appKit = createAppKit({ adapters: [wagmiAdapter], networks: [mainnet, arbitrum], projectId });
 
-const wagmiAdapter = new WagmiAdapter({ projectId, networks });
-const appKit = createAppKit({ adapters: [wagmiAdapter], networks, projectId });
-
-// ✅ Sukuriame AuthContext
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -30,7 +27,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     setIsMobile(detectMobile());
     checkSession();
-
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         setUser(session.user);
@@ -44,7 +40,6 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const checkSession = async () => {
-    setLoading(true);
     try {
       const { data: { user }, error } = await supabase.auth.getUser();
       if (error) throw error;
@@ -55,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         logout();
       }
     } catch (err) {
-      setError(`❌ Session error: ${err.message}`);
+      setError("❌ Session error: " + err.message);
     } finally {
       setLoading(false);
     }
@@ -69,13 +64,13 @@ export const AuthProvider = ({ children }) => {
         .eq("email", user.email)
         .single();
 
-      if (error && error.code !== "PGRST116") throw error;
-      if (!walletData?.wallet_address) return;
+      if (error) throw error;
+      if (!walletData?.wallet_address || !isValidAddress(walletData.wallet_address)) return;
 
       setWalletAddress(walletData.wallet_address);
       fetchBalance(walletData.wallet_address);
     } catch (err) {
-      setError(`❌ Error loading user data: ${err.message}`);
+      setError("❌ Error loading user data: " + err.message);
     }
   };
 
@@ -84,69 +79,23 @@ export const AuthProvider = ({ children }) => {
       const balance = await getBalance(wallet);
       setBalance(balance || "0");
     } catch (err) {
-      setError(`❌ Balance fetch error: ${err.message}`);
+      setError("❌ Balance fetch error: " + err.message);
     }
   };
 
-  // ✅ WalletConnect login
-  const loginWithWalletConnect = async () => {
+  const loginWithWallet = async () => {
     try {
       setError(null);
       setLoading(true);
       const account = await appKit.connect({ qrModal: isMobile });
 
-      if (!account?.address) throw new Error("❌ Wallet connection failed");
+      if (!account?.address || !isValidAddress(account.address)) throw new Error("❌ Invalid Wallet Address");
 
       setWalletAddress(account.address);
-      await handleUserLogin(account.address);
-    } catch (err) {
-      setError(`❌ WalletConnect login failed: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // ✅ MetaMask login (atskirtas nuo WalletConnect)
-  const loginWithMetaMask = async () => {
-    try {
-      setError(null);
-      setLoading(true);
-      if (isMobile) {
-        alert("⚠️ Use WalletConnect on mobile for better experience.");
-        return;
-      }
-
-      const wallet = await connectWallet(); // ✅ Funkcija turi būti iš helpers.js
-      if (!wallet) throw new Error("❌ MetaMask login failed.");
-
-      setWalletAddress(wallet);
-      await handleUserLogin(wallet);
-    } catch (err) {
-      setError(`❌ MetaMask login failed: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // ✅ Magic Link (email login)
-  const loginWithEmail = async (email) => {
-    try {
-      setError(null);
-      const { error } = await supabase.auth.signInWithOtp({ email });
-      if (error) throw error;
-      alert("✅ Check your email for the Magic Link.");
-    } catch (err) {
-      setError(`❌ Magic Link failed: ${err.message}`);
-    }
-  };
-
-  // ✅ Universalus vartotojo prisijungimas per bet kurį metodą
-  const handleUserLogin = async (wallet) => {
-    try {
       let { data: user, error } = await supabase
         .from("users")
         .select("*")
-        .eq("wallet_address", wallet)
+        .eq("wallet_address", account.address)
         .single();
 
       if (error && error.code !== "PGRST116") throw error;
@@ -154,7 +103,7 @@ export const AuthProvider = ({ children }) => {
       if (!user) {
         const { data } = await supabase
           .from("users")
-          .insert({ wallet_address: wallet })
+          .insert({ wallet_address: account.address })
           .select("*")
           .single();
         user = data;
@@ -163,7 +112,20 @@ export const AuthProvider = ({ children }) => {
       await loadUserData(user);
       router.push("/dashboard");
     } catch (err) {
-      setError(`❌ Login error: ${err.message}`);
+      setError("❌ Wallet login failed: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loginWithEmail = async (email) => {
+    try {
+      setError(null);
+      const { error } = await supabase.auth.signInWithOtp({ email });
+      if (error) throw error;
+      alert("✅ Check your email for the Magic Link.");
+    } catch (err) {
+      setError("❌ Failed to send Magic Link: " + err.message);
     }
   };
 
@@ -175,25 +137,12 @@ export const AuthProvider = ({ children }) => {
       setBalance("0");
       router.push("/");
     } catch (err) {
-      setError(`❌ Logout error: ${err.message}`);
+      setError("❌ Logout error: " + err.message);
     }
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        walletAddress,
-        balance,
-        loginWithWalletConnect, // ✅ Atskirta nuo MetaMask
-        loginWithMetaMask, // ✅ Atskirta nuo WalletConnect
-        loginWithEmail,
-        logout,
-        loading,
-        error,
-        isMobile,
-      }}
-    >
+    <AuthContext.Provider value={{ user, walletAddress, balance, loginWithWallet, loginWithEmail, logout, loading, error, isMobile }}>
       {children}
     </AuthContext.Provider>
   );
