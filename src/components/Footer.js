@@ -1,13 +1,18 @@
 import React from "react";
 import Link from "next/link";
 import { FaTwitter, FaTelegram, FaDiscord, FaGithub } from "react-icons/fa";
-import styles from "@/styles/footer.module.css"; 
+import styles from "@/styles/footer.module.css";
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
-        <p className={styles.footerText}>© {new Date().getFullYear()} NordBalticum. All Rights Reserved.</p>
+        {/* ✅ COPYRIGHT */}
+        <p className={styles.footerText}>
+          © {new Date().getFullYear()} <span className={styles.brand}>NordBalticum</span>. All Rights Reserved.
+        </p>
+
+        {/* ✅ SOCIAL MEDIA ICONS */}
         <div className={styles.footerIcons}>
           <Link href="https://twitter.com/NordBalticum" target="_blank">
             <FaTwitter className={styles.icon} />
@@ -23,6 +28,9 @@ export default function Footer() {
           </Link>
         </div>
       </div>
+
+      {/* ✅ GLOW ANIMATION */}
+      <div className={styles.footerGlow}></div>
     </footer>
   );
 }
