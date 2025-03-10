@@ -15,20 +15,48 @@ export default function Home() {
   return (
     <div className={styles.container}>
       {/* ✅ DIDELIS PRABANGUS LOGOTIPAS */}
-      <img src="/logo.png" alt="Nord Balticum Logo" className={styles.bigLogo} />
+      <img
+        src="/logo.png"
+        alt="Nord Balticum Logo"
+        className={styles.bigLogo}
+      />
 
       {/* ✅ LOGIN MYGTUKAI - LYGIAGREČIAI */}
       <div className={styles.buttonContainer}>
-        <button className={styles.walletconnect} onClick={() => router.push("/login/loginwagmi")}>
-          <img src="/walletconnect.png" alt="WalletConnect" className={styles.buttonIcon} />
+        <button
+          className={`${styles.buttonClass} ${styles.walletconnect}`}
+          onClick={() => router.push("/login/loginwagmi")}
+          aria-label="Connect with WalletConnect"
+        >
+          <img
+            src="/walletconnect.png"
+            alt="WalletConnect"
+            className={styles.buttonIcon}
+          />
         </button>
 
-        <button className={styles.metamask} onClick={() => router.push("/login/loginweb3")}>
-          <img src="/metamask.png" alt="MetaMask" className={styles.buttonIcon} />
+        <button
+          className={`${styles.buttonClass} ${styles.metamask}`}
+          onClick={() => router.push("/login/loginweb3")}
+          aria-label="Connect with MetaMask"
+        >
+          <img
+            src="/metamask.png"
+            alt="MetaMask"
+            className={styles.buttonIcon}
+          />
         </button>
 
-        <button className={styles.email} onClick={() => router.push("/login/loginemail")}>
-          <img src="/email.png" alt="Email Login" className={styles.emailIcon} />
+        <button
+          className={`${styles.buttonClass} ${styles.email}`}
+          onClick={() => router.push("/login/loginemail")}
+          aria-label="Login with Email"
+        >
+          <img
+            src="/email.png"
+            alt="Email Login"
+            className={styles.emailIcon}
+          />
         </button>
       </div>
 
