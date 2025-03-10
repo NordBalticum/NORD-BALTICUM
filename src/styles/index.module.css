@@ -1,143 +1,76 @@
-/* ✅ BENDRAS UI FONAS */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0A1F44, #071A35);
-  color: white;
-  text-align: center;
-  padding: 20px;
-  animation: fadeIn 1.5s ease-in-out;
-}
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useAuth } from "@/context/AuthContext";
+import styles from "@/styles/index.module.css";
 
-/* ✅ PRABANGUS LOGOTIPAS */
-.bigLogo {
-  width: 260px;
-  height: auto;
-  margin-bottom: 50px;
-  filter: drop-shadow(0px 10px 20px rgba(255, 215, 0, 0.4));
-  transition: transform 0.3s ease-in-out;
-}
+export default function Home() {
+  const router = useRouter();
+  const { user } = useAuth();
 
-.bigLogo:hover {
-  transform: scale(1.05);
-}
+  // ✅ Jei vartotojas jau prisijungęs – nukreipiame į dashboard
+  useEffect(() => {
+    if (user) router.push("/dashboard");
+  }, [user, router]);
 
-/* ✅ LOGIN MYGTUKAI – LYGIAGREČIAI */
-.buttonContainer {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-bottom: 50px;
-}
+  return (
+    <div className={styles.container}>
+      {/* ✅ DIDELIS PRABANGUS LOGOTIPAS */}
+      <img
+        src="/logo.png"
+        alt="Nord Balticum Logo"
+        className={styles.bigLogo}
+      />
 
-/* ✅ PREMIUM MYGTUKAI */
-.buttonClass {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 85px;
-  height: 85px;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  color: white;
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
-}
+      {/* ✅ LOGIN MYGTUKAI - LYGIAGREČIAI */}
+      <div className={styles.buttonContainer}>
+        <button
+          className={`${styles.buttonClass} ${styles.walletconnect}`}
+          onClick={() => router.push("/login/loginwagmi")}
+          aria-label="Connect with WalletConnect"
+        >
+          <img
+            src="/walletconnect.png"
+            alt="WalletConnect"
+            className={styles.buttonIcon}
+          />
+        </button>
 
-/* ✅ WalletConnect */
-.walletconnect {
-  background: #3B82F6;
-}
+        <button
+          className={`${styles.buttonClass} ${styles.metamask}`}
+          onClick={() => router.push("/login/loginweb3")}
+          aria-label="Connect with MetaMask"
+        >
+          <img
+            src="/metamask.png"
+            alt="MetaMask"
+            className={styles.buttonIcon}
+          />
+        </button>
 
-.walletconnect:hover {
-  background: #2563EB;
-  transform: scale(1.15);
-}
+        <button
+          className={`${styles.buttonClass} ${styles.email}`}
+          onClick={() => router.push("/login/loginemail")}
+          aria-label="Login with Email"
+        >
+          <img
+            src="/email.png"
+            alt="Email Login"
+            className={styles.emailIcon}
+          />
+        </button>
+      </div>
 
-/* ✅ MetaMask */
-.metamask {
-  background: #E4761B;
-}
-
-.metamask:hover {
-  background: #CD6116;
-  transform: scale(1.15);
-}
-
-/* ✅ Email Login */
-.email {
-  background: #22C55E;
-}
-
-.email:hover {
-  background: #16A34A;
-  transform: scale(1.15);
-}
-
-/* ✅ Login ikonų dydžiai */
-.buttonIcon,
-.emailIcon {
-  width: 48px;
-  height: 48px;
-}
-
-/* ✅ PREMIUM FUNKCIJOS (-20% mažesnės, lygiagrečiai) */
-.features {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 30px;
-}
-
-.featureCard {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 14px;
-  border-radius: 12px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease-in-out;
-  width: 150px;
-}
-
-.featureCard:hover {
-  transform: scale(1.07);
-  box-shadow: 0px 0px 18px rgba(255, 255, 255, 0.2);
-}
-
-.featureCard h2 {
-  font-size: 1.3rem;
-  margin-bottom: 6px;
-  text-shadow: 0px 2px 5px rgba(255, 255, 255, 0.3);
-}
-
-.featureCard p {
-  font-size: 0.9rem;
-  opacity: 0.85;
-}
-
-/* ✅ ANIMACIJOS */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ✅ Responsive */
-@media (max-width: 768px) {
-  .bigLogo {
-    width: 220px;
-  }
-
-  .buttonContainer {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .features {
-    flex-direction: column;
-    align-items: center;
-  }
-}
+      {/* ✅ PREMIUM FUNKCIJOS (-20% mažesnės, lygiagrečiai) */}
+      <div className={styles.features}>
+        <div className={styles.featureCard}>
+          <h2>🛡️ Secure</h2>
+          <p>Bank-grade encryption for all transactions.</p>
+        </div>
+        <div className={styles.featureCard}>
+          <h2>⚡ Fast</h2>
+          <p>Instant transactions on Binance Smart Chain.</p>
+        </div>
+      </div>
+    </div>
+  );
+                        }
