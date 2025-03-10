@@ -1,20 +1,23 @@
-/* ✅ KONTEINERIS – 100% WIDTH ANT VISŲ EKRANŲ */
+/* ✅ PILNAS SCREEN FIX VISIEMS ĮRENGINIAMS */
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   min-height: 100vh;
   width: 100vw;
   background: linear-gradient(135deg, #0A1F44, #091833);
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
   text-align: center;
-  color: #FFFFFF;
+  padding: 30px;
   overflow: hidden;
 }
 
-/* ✅ PREMIUM LOGOTIPAS (DIDELIS, MATOMAS) */
+/* ✅ PREMIUM LOGOTIPAS */
 .bigLogo {
-  width: 320px; /* Padidintas 60-70% */
+  width: 320px;
   filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 1));
   transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
@@ -24,7 +27,27 @@
   filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1));
 }
 
-/* ✅ MYGTUKŲ KONTEINERIS */
+/* ✅ TITULAS */
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7);
+  margin-bottom: 20px;
+}
+
+/* ✅ LOGIN BLOKAS */
+.loginBox {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* ✅ LOGIN MYGTUKŲ KONTEINERIS */
 .buttonContainer {
   display: flex;
   justify-content: center;
@@ -33,7 +56,7 @@
   flex-wrap: wrap;
 }
 
-/* ✅ LOGIN MYGTUKAI – PREMIUM */
+/* ✅ LOGIN MYGTUKAI – PREMIUM KOKYBĖ */
 .walletButton {
   width: 120px;
   height: 120px;
@@ -104,6 +127,10 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
   .buttonContainer {
     flex-direction: row;
     flex-wrap: wrap;
@@ -137,4 +164,12 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-15px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* ✅ PAPILDOMAS FULLSCREEN FIX – UŽTIKRINA KAD VISADA BŪTŲ PILNAS EKRANAS */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
