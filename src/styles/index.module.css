@@ -1,10 +1,6 @@
 /* ✅ GLOBAL SETTINGS */
-body {
-  --main-bg-gradient: linear-gradient(135deg, #0A1F44, #091833);
-  --hover-bg: #FFD700;
-  --box-shadow-main: 0px 5px 15px rgba(255, 255, 255, 0.2);
-  --box-shadow-hover: 0px 10px 30px rgba(255, 255, 255, 0.4);
-  background: var(--main-bg-gradient);
+.globals {
+  background: linear-gradient(135deg, #0A1F44, #091833);
   color: #ffffff;
   margin: 0;
   padding: 0;
@@ -60,14 +56,14 @@ body {
   background: rgba(255, 255, 255, 0.12);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: var(--box-shadow-main);
+  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
   animation: fadeIn 1.4s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
 .loginBox:hover {
   transform: scale(1.02);
-  box-shadow: var(--box-shadow-hover);
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
 }
 
 /* ✅ LOGIN MYGTUKŲ KONTEINERIS */
@@ -90,16 +86,16 @@ body {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease-in-out;
-  box-shadow: var(--box-shadow-main);
+  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
 }
 
 .walletButton:hover {
   transform: scale(1.12);
-  background: var(--hover-bg);
+  background: #FFD700;
   border-color: #FFF;
-  box-shadow: var(--box-shadow-hover);
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
 }
 
 .walletButton::before {
@@ -139,13 +135,13 @@ body {
   background: rgba(255, 255, 255, 0.15);
   padding: 25px;
   border-radius: 15px;
-  box-shadow: var(--box-shadow-main);
+  box-shadow: 0px 5px 15px rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease-in-out;
 }
 
 .featureCard:hover {
   transform: scale(1.07);
-  box-shadow: var(--box-shadow-hover);
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
 }
 
 /* ✅ RESPONSYVUMAS – AUTOMATINIS PRISITAIKYMAS */
@@ -216,7 +212,7 @@ body {
 }
 
 /* ✅ PILNO EKRANO FIX – DABAR 100% KOREKCIJA */
-html, body {
+html {
   height: 100vh;
   width: 100vw;
   margin: 0;
