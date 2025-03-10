@@ -5,30 +5,25 @@ import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { mainnet, arbitrum } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
+import { detectMobile } from "@/utils/helpers"; // ✅ Pagalbinė funkcija
 
-const AuthContext = createContext(null);
-
-// ✅ AppKit + Wagmi Adapter konfigūracija
+// ✅ Konfigūracija
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const queryClient = new QueryClient();
+const wagmiAdapter = new WagmiAdapter({ projectId, networks: [mainnet, arbitrum] });
+const appKit = createAppKit({ adapters: [wagmiAdapter], networks: [mainnet, arbitrum], projectId });
 
-const wagmiAdapter = new WagmiAdapter({
-  projectId,
-  networks: [mainnet, arbitrum],
-});
-
-const appKit = createAppKit({
-  adapters: [wagmiAdapter],
-  networks: [mainnet, arbitrum],
-  projectId,
-});
+// ✅ Sukuriam AuthContext
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
   const [balance, setBalance] = useState("0");
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const router = useRouter();
+  const isMobile = detectMobile();
 
   useEffect(() => {
     checkSession();
@@ -46,6 +41,7 @@ export const AuthProvider = ({ children }) => {
 
   const checkSession = async () => {
     try {
+      setLoading(true);
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         setUser(user);
@@ -54,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         logout();
       }
     } catch (error) {
-      console.error("❌ Session check error:", error);
+      setError("Session error");
     } finally {
       setLoading(false);
     }
@@ -62,6 +58,7 @@ export const AuthProvider = ({ children }) => {
 
   const loadUserData = async (user) => {
     try {
+      setError(null);
       const { data: walletData } = await supabase
         .from("users")
         .select("wallet_address")
@@ -69,16 +66,12 @@ export const AuthProvider = ({ children }) => {
         .single();
 
       let wallet = walletData?.wallet_address || null;
-
-      if (!wallet) {
-        console.warn("⚠️ No wallet found, skipping balance fetch.");
-        return;
-      }
+      if (!wallet) return;
 
       setWalletAddress(wallet);
       fetchBalance(wallet);
     } catch (error) {
-      console.error("❌ Error loading user data:", error);
+      setError("Error loading user data");
     }
   };
 
@@ -87,17 +80,17 @@ export const AuthProvider = ({ children }) => {
       const balance = await getBalance(wallet);
       if (balance) setBalance(balance);
     } catch (error) {
-      console.error("❌ Balance fetch error:", error);
+      setError("Balance fetch error");
     }
   };
 
   const loginWithWallet = async () => {
     try {
-      const account = await appKit.connect();
+      setError(null);
+      const account = await appKit.connect({ qrModal: isMobile });
       if (!account) throw new Error("Wallet connection failed");
 
       setWalletAddress(account.address);
-
       let { data: user } = await supabase
         .from("users")
         .select("*")
@@ -112,18 +105,22 @@ export const AuthProvider = ({ children }) => {
       await loadUserData(user);
       router.push("/dashboard");
     } catch (error) {
-      console.error("❌ Wallet login error:", error);
-      alert("Failed to connect wallet. Please try again.");
+      setError("Wallet login failed. Try again.");
     }
   };
 
   const loginWithMetaMask = async () => {
     try {
+      setError(null);
+      if (isMobile) {
+        alert("⚠️ Use WalletConnect on mobile for better experience.");
+        return;
+      }
+
       const wallet = await connectWallet();
       if (!wallet) throw new Error("MetaMask login failed.");
 
       setWalletAddress(wallet);
-
       let { data: user } = await supabase
         .from("users")
         .select("*")
@@ -138,18 +135,18 @@ export const AuthProvider = ({ children }) => {
       await loadUserData(user);
       router.push("/dashboard");
     } catch (error) {
-      console.error("❌ MetaMask login error:", error);
+      setError("MetaMask login failed.");
     }
   };
 
   const loginWithEmail = async (email) => {
     try {
+      setError(null);
       const { error } = await supabase.auth.signInWithOtp({ email });
       if (error) throw error;
       alert("Check your email for the Magic Link.");
     } catch (error) {
-      console.error("❌ Magic Link login error:", error);
-      alert("Failed to send Magic Link.");
+      setError("Failed to send Magic Link.");
     }
   };
 
@@ -161,7 +158,7 @@ export const AuthProvider = ({ children }) => {
       setBalance("0");
       router.push("/");
     } catch (error) {
-      console.error("❌ Logout error:", error);
+      setError("Logout error");
     }
   };
 
@@ -176,6 +173,8 @@ export const AuthProvider = ({ children }) => {
         loginWithEmail,
         logout,
         loading,
+        error,
+        isMobile,
       }}
     >
       {children}
