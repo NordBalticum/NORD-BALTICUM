@@ -1,24 +1,22 @@
-/* ✅ PILNAS SCREEN FIX VISIEMS ĮRENGINIAMS */
-html {
+/* ✅ GLOBAL SETTINGS */
+body {
   --main-bg-gradient: linear-gradient(135deg, #0A1F44, #091833);
   --hover-bg: #FFD700;
   --box-shadow-main: 0px 5px 15px rgba(255, 255, 255, 0.2);
   --box-shadow-hover: 0px 10px 30px rgba(255, 255, 255, 0.4);
-}
-
-body {
-  height: 100vh;
-  width: 100vw;
+  background: var(--main-bg-gradient);
+  color: #ffffff;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  background: var(--main-bg-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
-/* ✅ PREMIUM UI */
+/* ✅ PILNAS SCREEN FIX VISIEMS ĮRENGINIAMS */
 .container {
   display: flex;
   flex-direction: column;
@@ -26,10 +24,8 @@ body {
   align-items: center;
   min-height: 100vh;
   width: 100vw;
-  color: #ffffff;
   text-align: center;
   padding: 30px;
-  overflow: hidden;
   animation: fadeIn 1.2s ease-in-out;
 }
 
@@ -37,8 +33,8 @@ body {
 .bigLogo {
   width: 320px;
   filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 1));
-  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
-  animation: fadeIn 1s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 1s ease-in-out, pulseGlow 3s infinite;
 }
 
 .bigLogo:hover {
@@ -48,12 +44,12 @@ body {
 
 /* ✅ TITULAS */
 .title {
-  font-size: 38px;
-  font-weight: bold;
+  font-size: 42px;
+  font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  text-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7);
-  margin-bottom: 20px;
+  text-shadow: 0px 0px 20px rgba(255, 215, 0, 1);
+  margin-bottom: 25px;
   animation: fadeIn 1.2s ease-in-out;
 }
 
@@ -61,11 +57,17 @@ body {
 .loginBox {
   width: 100%;
   max-width: 500px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   padding: 30px;
-  border-radius: 12px;
+  border-radius: 15px;
   box-shadow: var(--box-shadow-main);
   animation: fadeIn 1.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.loginBox:hover {
+  transform: scale(1.02);
+  box-shadow: var(--box-shadow-hover);
 }
 
 /* ✅ LOGIN MYGTUKŲ KONTEINERIS */
@@ -87,8 +89,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, border 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   box-shadow: var(--box-shadow-main);
+  position: relative;
+  overflow: hidden;
 }
 
 .walletButton:hover {
@@ -96,6 +100,24 @@ body {
   background: var(--hover-bg);
   border-color: #FFF;
   box-shadow: var(--box-shadow-hover);
+}
+
+.walletButton::before {
+  content: "";
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.walletButton:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
 }
 
 /* ✅ MYGTUKŲ IKONOS */
@@ -118,7 +140,7 @@ body {
   padding: 25px;
   border-radius: 15px;
   box-shadow: var(--box-shadow-main);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .featureCard:hover {
@@ -187,8 +209,17 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes scaleGlow {
-  0% { transform: scale(1); box-shadow: var(--box-shadow-main); }
-  50% { transform: scale(1.02); box-shadow: var(--box-shadow-hover); }
-  100% { transform: scale(1); box-shadow: var(--box-shadow-main); }
+@keyframes pulseGlow {
+  0% { transform: scale(1); filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 1)); }
+  50% { transform: scale(1.02); filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1)); }
+  100% { transform: scale(1); filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 1)); }
+}
+
+/* ✅ PILNO EKRANO FIX – DABAR 100% KOREKCIJA */
+html, body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
