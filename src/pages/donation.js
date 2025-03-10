@@ -3,6 +3,7 @@ import { BrowserProvider, JsonRpcProvider, formatEther, parseEther } from "ether
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
 import Buttons from "@/components/Buttons"; // 🔹 Užtikrintas teisingas importas
+import NetworkSwitcher from "@/components/NetworkSwitcher"; // ✅ Naujas komponentas tinklams
 import styles from "@/styles/donation.module.css";
 
 const charities = [
@@ -33,11 +34,14 @@ export default function Donation() {
   const [selectedCharity, setSelectedCharity] = useState(charities[0]);
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
+  const [network, setNetwork] = useState("bsc"); // ✅ Pridėtas tinklo pasirinkimas
   const router = useRouter();
-
   const adminWallet = process.env.NEXT_PUBLIC_ADMIN_WALLET;
 
-  // ✅ Tikriname, ar suma tinkama
+  useEffect(() => {
+    console.log("🔄 Current network:", network);
+  }, [network]);
+
   const isValidAmount = (value) => {
     const parsedValue = Number(value);
     return !isNaN(parsedValue) && parsedValue >= 0.0001 && parsedValue <= 100;
@@ -57,22 +61,19 @@ export default function Donation() {
         return;
       }
 
-      const provider = new ethers.BrowserProvider(window.ethereum);
+      const provider = new BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
 
-      // 🔹 Konvertuojame sumą į WEI
-      const value = ethers.parseEther(amount);
-      const fee = (value * 3n) / 100n; // 3% mokestis
-      const donationAmount = value - fee; // Likusi suma po mokesčių
+      const value = parseEther(amount);
+      const fee = (value * 3n) / 100n;
+      const donationAmount = value - fee;
 
-      // 🔹 Pervedimas į labdaros gavėjo adresą
       const tx1 = await signer.sendTransaction({
         to: selectedCharity.wallet,
         value: donationAmount,
       });
       await tx1.wait();
 
-      // 🔹 Pervedimas į admin piniginę (3% fee)
       const tx2 = await signer.sendTransaction({
         to: adminWallet,
         value: fee,
@@ -92,6 +93,9 @@ export default function Donation() {
   return (
     <div className={styles.donationContainer}>
       <h1>Donate Cryptocurrency to Trusted Funds</h1>
+
+      {/* 🔹 TINKLO PASIRINKIMAS */}
+      <NetworkSwitcher network={network} setNetwork={setNetwork} />
 
       {/* 📌 Labdaros organizacijos informacija */}
       <div className={styles.charityDisplay}>
@@ -115,6 +119,7 @@ export default function Donation() {
           max="100"
           step="0.0001"
         />
+        <p className={styles.feeInfo}>💰 3% admin fee: {amount ? (parseFloat(amount) * 0.03).toFixed(6) : "0"} BNB</p>
       </div>
 
       {/* 📌 Donate mygtukas */}
