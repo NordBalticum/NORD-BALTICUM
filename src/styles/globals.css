@@ -1,155 +1,202 @@
-/* PREMIUM BANKING UI – GLOBAL VARIABLES */
-html {
-  --primary-bg: linear-gradient(135deg, #0A0A33, #212BFF);
-  --secondary-bg: linear-gradient(135deg, #212BFF, #0A0A33);
-  --text-color: #FFF8E1;
-  --button-bg: linear-gradient(90deg, #000, #222);
-  --button-hover: linear-gradient(90deg, #111, #444);
-  --button-border: rgba(255, 248, 225, 0.85);
-  --card-bg: rgba(255, 255, 255, 0.14);
-  --shadow: 0 0 35px rgba(255, 248, 225, 0.8);
-  --blur: blur(12px);
-  --radius: 20px;
-  --transition: all 0.3s ease-in-out;
+/* ✅ BENDRINIAI KINTAMIEJI – PREMIUM BANK COLORS */
+:root {
+  --primary-bg: #0A1F44;
+  --secondary-bg: #111D36;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --button-bg: #1E2A3A;
+  --button-hover: #FFD700;
+  --text-color: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --shadow: 0px 0px 25px rgba(255, 255, 255, 0.15);
+  --radius: 12px;
+  --blur: blur(15px);
 }
 
-/* DARK & LIGHT THEMES */
-.dark-theme {
-  --primary-bg: linear-gradient(135deg, #000A22, #1A1F40);
-  --secondary-bg: linear-gradient(135deg, #1A1F40, #000A22);
-  --button-bg: linear-gradient(90deg, #111, #222);
-  --button-hover: linear-gradient(90deg, #222, #444);
-  --button-border: rgba(255, 255, 255, 0.9);
-  --shadow: 0 0 40px rgba(255, 255, 255, 0.85);
-}
-
-.light-theme {
-  --primary-bg: linear-gradient(135deg, #F0F0F3, #DDE0E7);
-  --secondary-bg: linear-gradient(135deg, #DDE0E7, #F0F0F3);
-  --button-bg: linear-gradient(90deg, #fff, #ddd);
-  --button-hover: linear-gradient(90deg, #ddd, #bbb);
-  --button-border: rgba(0, 0, 0, 0.3);
-  --shadow: 0 0 25px rgba(0, 0, 0, 0.6);
-}
-
-/* PREMIUM BODY STYLE */
-body {
+/* ✅ PILNAS 4K SUPPORT IR 100% WIDTH VISUR */
+html, body {
   margin: 0;
   padding: 0;
+  width: 100vw;
+  min-height: 100vh;
   font-family: 'Inter', sans-serif;
   background: var(--primary-bg);
   color: var(--text-color);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  animation: fadeIn 1s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* FLEXIBLE GRID SYSTEM */
-html, body {
-  height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-}
-
-/* FOOTER – MAX PREMIUM */
-.footer {
-  background: var(--secondary-bg);
-  color: var(--text-color);
   text-align: center;
-  border-top: 2px solid var(--button-border);
-  box-shadow: var(--shadow);
+  overflow-x: hidden;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* ✅ PRABANGUS SCROLLBAR */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--button-hover);
+  border-radius: var(--radius);
+}
+
+/* ✅ ANIMUOTAS FONAS */
+@keyframes backgroundFade {
+  0% { background-color: #0A1F44; }
+  50% { background-color: #111D36; }
+  100% { background-color: #0A1F44; }
+}
+
+body {
+  animation: backgroundFade 10s infinite alternate;
+}
+
+/* ✅ PREMIUM ANTRAŠTĖS */
+h1, h2, h3 {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--button-hover);
+  text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* ✅ PREMIUM MYGTUKAI */
+button {
+  padding: 14px 30px;
   font-size: 1.2rem;
-  font-weight: 600;
-  width: 100%;
-  height: 60px;
+  font-weight: 700;
+  border-radius: var(--radius);
+  border: 3px solid var(--button-hover);
+  cursor: pointer;
+  background: var(--button-bg);
+  color: var(--text-color);
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+  box-shadow: var(--shadow);
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: var(--button-hover);
+  color: #000;
+  box-shadow: 0px 0px 75px rgba(255, 255, 255, 1);
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+/* ✅ FORMOS IR INPUT LAUKELIAI */
+input, textarea {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--button-hover);
+  padding: 12px;
+  border-radius: var(--radius);
+  color: var(--text-color);
+  transition: border 0.3s ease-in-out;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--button-hover);
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* ✅ NAVIGACIJA – HEADER */
+.navbar {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  transition: var(--transition);
+  width: 100%;
+  max-width: 1600px;
+  padding: 15px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(10, 31, 68, 0.9);
+  box-shadow: var(--shadow);
+}
+
+.navbar a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  color: var(--button-hover);
+}
+
+/* ✅ FOOTER */
+.footer {
+  width: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  text-align: center;
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 1000;
-  animation: fadeInFooter 1.2s ease-in-out;
+  backdrop-filter: var(--blur);
 }
 
-/* FOOTER TEXT */
-.footer-text {
-  text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
-  letter-spacing: 1.3px;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.footer-text:hover {
-  transform: scale(1.1);
-  color: rgba(255, 255, 255, 1);
-  text-shadow: 0px 0px 35px var(--button-hover);
-}
-
-/* FOOTER ICONS */
-.footer-icons {
+/* ✅ LOADING SCREEN */
+.loadingScreen {
   display: flex;
-  gap: 24px;
-  margin-left: 28px;
-}
-
-.footer-icons a {
-  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  box-shadow: 0px 0px 14px rgba(255, 255, 255, 0.7);
-  transition: var(--transition);
+  height: 100vh;
+  width: 100vw;
+  background: var(--primary-bg);
+  color: var(--text-color);
+  animation: fadeIn 1s ease-in-out;
 }
 
-.footer-icons a:hover {
-  transform: scale(1.2);
-  box-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
-}
-
-/* FOOTER COPYRIGHT */
-.footer-copyright {
-  font-size: 1rem;
-  opacity: 0.92;
-  margin-top: 6px;
-  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
-}
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 768px) {
-  .footer {
-    height: 55px;
-  }
-  .footer-text {
-    font-size: 1rem;
-  }
-  .footer-icons {
-    gap: 20px;
-  }
-  .footer-icons a {
-    width: 42px;
-    height: 42px;
-  }
-  .footer-copyright {
-    font-size: 0.9rem;
-  }
-}
-
-/* SMOOTH ANIMATIONS */
+/* ✅ ANIMACIJOS */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
+  from { opacity: 0; transform: translateY(-15px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInFooter {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 6px solid transparent;
+  border-top: 6px solid var(--button-hover);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* ✅ RESPONSYVUMAS */
+@media (max-width: 1200px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .navbar {
+    padding: 10px 15px;
+  }
 }
