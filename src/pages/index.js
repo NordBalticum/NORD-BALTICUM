@@ -14,39 +14,25 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {/* ✅ LOGOTIPAS */}
-      <img src="/logo.png" alt="Nord Balticum Logo" className={styles.logo} />
-
-      {/* ✅ PAGRINDINĖ ANTRAŠTĖ */}
-      <h1 className={styles.title}>
-        Welcome to <br />
-        <span className={styles.highlight}>Nord Balticum</span>
-      </h1>
-
-      {/* ✅ SUBTITRAS */}
-      <p className={styles.subtitle}>
-        The most advanced Web3 financial ecosystem.
-      </p>
+      {/* ✅ DIDELIS PREMIUM LOGOTIPAS */}
+      <img src="/logo.png" alt="Nord Balticum Logo" className={styles.bigLogo} />
 
       {/* ✅ LOGIN MYGTUKAI */}
       <div className={styles.buttonContainer}>
         <button className={styles.walletconnect} onClick={() => router.push("/login/loginwagmi")}>
           <img src="/walletconnect.png" alt="WalletConnect" className={styles.buttonIcon} />
-          WalletConnect
         </button>
 
         <button className={styles.metamask} onClick={() => router.push("/login/loginweb3")}>
           <img src="/metamask.png" alt="MetaMask" className={styles.buttonIcon} />
-          MetaMask
         </button>
 
         <button className={styles.email} onClick={() => router.push("/login/loginemail")}>
           <img src="/email.png" alt="Email Login" className={styles.emailIcon} />
-          EMAIL LOGIN
         </button>
       </div>
 
-      {/* ✅ PREMIUM FUNKCIJOS */}
+      {/* ✅ PREMIUM FUNKCIJOS – -30% subtilumas */}
       <div className={styles.features}>
         <div className={styles.featureCard}>
           <h2>🛡️ Secure</h2>
