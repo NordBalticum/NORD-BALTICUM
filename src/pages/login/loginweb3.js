@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { connectWallet, getCurrentWallet } from "@/utils/wallet";
 import { useRouter } from "next/router";
-import "@/styles/loginweb3.module.css"; // Importuojam premium CSS
+import styles from "@/styles/loginweb3.module.css"; // Importuojam premium CSS
 
 export default function LoginWeb3() {
   const { user, loginWithMetaMask, walletAddress, loading } = useAuth();
