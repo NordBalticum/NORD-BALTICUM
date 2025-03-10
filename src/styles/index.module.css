@@ -1,11 +1,24 @@
 /* ✅ PILNAS SCREEN FIX VISIEMS ĮRENGINIAMS */
-:root {
+html {
   --main-bg-gradient: linear-gradient(135deg, #0A1F44, #091833);
   --hover-bg: #FFD700;
   --box-shadow-main: 0px 5px 15px rgba(255, 255, 255, 0.2);
   --box-shadow-hover: 0px 10px 30px rgba(255, 255, 255, 0.4);
 }
 
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--main-bg-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ✅ PREMIUM UI */
 .container {
   display: flex;
   flex-direction: column;
@@ -13,13 +26,11 @@
   align-items: center;
   min-height: 100vh;
   width: 100vw;
-  background: var(--main-bg-gradient);
-  background-size: cover;
-  background-position: center;
   color: #ffffff;
   text-align: center;
   padding: 30px;
   overflow: hidden;
+  animation: fadeIn 1.2s ease-in-out;
 }
 
 /* ✅ PREMIUM LOGOTIPAS */
@@ -180,17 +191,4 @@
   0% { transform: scale(1); box-shadow: var(--box-shadow-main); }
   50% { transform: scale(1.02); box-shadow: var(--box-shadow-hover); }
   100% { transform: scale(1); box-shadow: var(--box-shadow-main); }
-}
-
-/* ✅ PILNO EKRANO FIX – DABAR 100% KOREKCIJA */
-html, body {
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: var(--main-bg-gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
