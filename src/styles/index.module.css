@@ -10,91 +10,90 @@
   padding: 20px;
 }
 
-/* ✅ MAX PRESTIGE LOGOTIPAS */
+/* ✅ PRABANGUS LOGOTIPAS */
 .bigLogo {
-  width: 220px; /* Padidintas dydis */
+  width: 240px;
   height: auto;
   margin-bottom: 50px;
+  animation: fadeIn 1.5s ease-in-out;
 }
 
-/* ✅ LOGIN MYGTUKAI */
+/* ✅ LOGIN MYGTUKAI – LYGIAGREČIAI */
 .buttonContainer {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  gap: 15px;
+  justify-content: center;
   margin-bottom: 50px;
 }
 
-/* ✅ Premium mygtukų stiliai */
+/* ✅ PREMIUM MYGTUKAI */
 button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 250px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border: none;
-  border-radius: 12px;
+  border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* ✅ WalletConnect mygtukas */
+/* ✅ WalletConnect */
 .walletconnect {
   background: #3B82F6;
-  box-shadow: 0px 0px 20px rgba(59, 130, 246, 0.5);
 }
 
 .walletconnect:hover {
   background: #2563EB;
-  box-shadow: 0px 0px 25px rgba(37, 99, 235, 0.8);
+  transform: scale(1.1);
 }
 
-/* ✅ MetaMask mygtukas */
+/* ✅ MetaMask */
 .metamask {
   background: #E4761B;
-  box-shadow: 0px 0px 20px rgba(228, 118, 27, 0.5);
 }
 
 .metamask:hover {
   background: #CD6116;
-  box-shadow: 0px 0px 25px rgba(205, 97, 22, 0.8);
+  transform: scale(1.1);
 }
 
-/* ✅ Email mygtukas */
+/* ✅ Email Login */
 .email {
   background: #22C55E;
-  box-shadow: 0px 0px 20px rgba(34, 197, 94, 0.5);
 }
 
 .email:hover {
   background: #16A34A;
-  box-shadow: 0px 0px 25px rgba(22, 163, 74, 0.8);
+  transform: scale(1.1);
 }
 
-/* ✅ Didesni login ikonų dydžiai */
+/* ✅ Login ikonų dydžiai */
 .buttonIcon,
 .emailIcon {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
 }
 
-/* ✅ PREMIUM FUNKCIJOS (-30% mažesnės) */
+/* ✅ PREMIUM FUNKCIJOS (-20% mažesnės, lygiagrečiai) */
 .features {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
   margin-top: 30px;
 }
 
 .featureCard {
   background: rgba(255, 255, 255, 0.1);
-  padding: 15px;
+  padding: 12px;
   border-radius: 10px;
   backdrop-filter: blur(10px);
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease-in-out;
-  width: 180px; /* -30% mažesnės lentelės */
+  width: 160px;
 }
 
 .featureCard:hover {
@@ -103,30 +102,34 @@ button {
 }
 
 .featureCard h2 {
-  font-size: 1.3rem;
-  margin-bottom: 8px;
+  font-size: 1.2rem;
+  margin-bottom: 6px;
 }
 
 .featureCard p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   opacity: 0.8;
+}
+
+/* ✅ ANIMACIJOS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ✅ Responsive */
 @media (max-width: 768px) {
   .bigLogo {
-    width: 180px; /* Responsyvus mažesnis logotipas */
+    width: 200px;
   }
 
   .buttonContainer {
-    width: 100%;
-  }
-
-  button {
-    width: 100%;
+    flex-direction: column;
+    align-items: center;
   }
 
   .features {
     flex-direction: column;
+    align-items: center;
   }
 }
