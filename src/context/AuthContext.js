@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         setUser(session.user);
         loadUserData(session.user);
       } else {
-        logout(); // ✅ Jei nėra vartotojo – automatinis logout
+        logout();
       }
     });
 
