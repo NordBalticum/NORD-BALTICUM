@@ -5,7 +5,7 @@ import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { mainnet, arbitrum } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
-import { detectMobile } from "@/utils/helpers"; 
+import { detectMobile, connectMetaMask } from "@/utils/helpers"; 
 
 // ✅ AppKit konfigūracija
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
   const [balance, setBalance] = useState("0");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
@@ -86,7 +86,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const loginWithWallet = async () => {
+  // ✅ WALLETCONNECT LOGIN
+  const loginWithWalletConnect = async () => {
     try {
       setError(null);
       setLoading(true);
@@ -95,66 +96,24 @@ export const AuthProvider = ({ children }) => {
       if (!account?.address) throw new Error("❌ Wallet connection failed");
 
       setWalletAddress(account.address);
-      let { data: user, error } = await supabase
-        .from("users")
-        .select("*")
-        .eq("wallet_address", account.address)
-        .single();
-
-      if (error && error.code !== "PGRST116") throw error;
-
-      if (!user) {
-        const { data } = await supabase
-          .from("users")
-          .insert({ wallet_address: account.address })
-          .select("*")
-          .single();
-
-        user = data;
-      }
-
-      await loadUserData(user);
-      router.push("/dashboard");
+      await handleUserLogin(account.address);
     } catch (err) {
-      setError("❌ Wallet login failed: " + err.message);
+      setError("❌ WalletConnect login failed: " + err.message);
     } finally {
       setLoading(false);
     }
   };
 
+  // ✅ METAMASK LOGIN
   const loginWithMetaMask = async () => {
     try {
       setError(null);
       setLoading(true);
-      if (isMobile) {
-        alert("⚠️ Use WalletConnect on mobile for better experience.");
-        return;
-      }
-
-      const wallet = await connectWallet();
+      const wallet = await connectMetaMask();
       if (!wallet) throw new Error("❌ MetaMask login failed.");
 
       setWalletAddress(wallet);
-      let { data: user, error } = await supabase
-        .from("users")
-        .select("*")
-        .eq("wallet_address", wallet)
-        .single();
-
-      if (error && error.code !== "PGRST116") throw error;
-
-      if (!user) {
-        const { data } = await supabase
-          .from("users")
-          .insert({ wallet_address: wallet })
-          .select("*")
-          .single();
-
-        user = data;
-      }
-
-      await loadUserData(user);
-      router.push("/dashboard");
+      await handleUserLogin(wallet);
     } catch (err) {
       setError("❌ MetaMask login failed: " + err.message);
     } finally {
@@ -162,6 +121,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ✅ MAGIC LINK LOGIN
   const loginWithEmail = async (email) => {
     try {
       setError(null);
@@ -171,6 +131,29 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       setError("❌ Failed to send Magic Link: " + err.message);
     }
+  };
+
+  const handleUserLogin = async (wallet) => {
+    let { data: user, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("wallet_address", wallet)
+      .single();
+
+    if (error && error.code !== "PGRST116") throw error;
+
+    if (!user) {
+      const { data } = await supabase
+        .from("users")
+        .insert({ wallet_address: wallet })
+        .select("*")
+        .single();
+
+      user = data;
+    }
+
+    await loadUserData(user);
+    router.push("/dashboard");
   };
 
   const logout = async () => {
@@ -191,7 +174,7 @@ export const AuthProvider = ({ children }) => {
         user,
         walletAddress,
         balance,
-        loginWithWallet,
+        loginWithWalletConnect,
         loginWithMetaMask,
         loginWithEmail,
         logout,
