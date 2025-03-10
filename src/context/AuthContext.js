@@ -5,15 +5,15 @@ import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { mainnet, arbitrum } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
-import { detectMobile } from "@/utils/helpers"; // ✅ FIXED IMPORT
+import { detectMobile } from "@/utils/helpers"; 
 
-// ✅ AppKit + Wagmi Adapter konfigūracija
+// ✅ AppKit konfigūracija
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const queryClient = new QueryClient();
 const wagmiAdapter = new WagmiAdapter({ projectId, networks: [mainnet, arbitrum] });
 const appKit = createAppKit({ adapters: [wagmiAdapter], networks: [mainnet, arbitrum], projectId });
 
-// ✅ Sukuriam AuthContext
+// ✅ Sukuriame AuthContext
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -26,8 +26,9 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    setIsMobile(detectMobile()); // ✅ Nustatome, ar vartotojas mobilus
+    setIsMobile(detectMobile());
     checkSession();
+
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         setUser(session.user);
@@ -41,16 +42,18 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const checkSession = async () => {
+    setLoading(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (error) throw error;
       if (user) {
         setUser(user);
         await loadUserData(user);
       } else {
         logout();
       }
-    } catch (error) {
-      setError("❌ Session error");
+    } catch (err) {
+      setError("❌ Session error: " + err.message);
     } finally {
       setLoading(false);
     }
@@ -58,59 +61,71 @@ export const AuthProvider = ({ children }) => {
 
   const loadUserData = async (user) => {
     try {
-      const { data: walletData } = await supabase
+      const { data: walletData, error } = await supabase
         .from("users")
         .select("wallet_address")
         .eq("email", user.email)
         .single();
 
-      let wallet = walletData?.wallet_address || null;
-      if (!wallet) return;
+      if (error) throw error;
+      if (!walletData?.wallet_address) return;
 
-      setWalletAddress(wallet);
-      fetchBalance(wallet);
-    } catch (error) {
-      setError("❌ Error loading user data");
+      setWalletAddress(walletData.wallet_address);
+      fetchBalance(walletData.wallet_address);
+    } catch (err) {
+      setError("❌ Error loading user data: " + err.message);
     }
   };
 
   const fetchBalance = async (wallet) => {
     try {
       const balance = await getBalance(wallet);
-      if (balance) setBalance(balance);
-    } catch (error) {
-      setError("❌ Balance fetch error");
+      setBalance(balance || "0");
+    } catch (err) {
+      setError("❌ Balance fetch error: " + err.message);
     }
   };
 
   const loginWithWallet = async () => {
     try {
       setError(null);
+      setLoading(true);
       const account = await appKit.connect({ qrModal: isMobile });
-      if (!account) throw new Error("❌ Wallet connection failed");
+
+      if (!account?.address) throw new Error("❌ Wallet connection failed");
 
       setWalletAddress(account.address);
-      let { data: user } = await supabase
+      let { data: user, error } = await supabase
         .from("users")
         .select("*")
         .eq("wallet_address", account.address)
         .single();
 
+      if (error && error.code !== "PGRST116") throw error;
+
       if (!user) {
-        const { data } = await supabase.from("users").insert({ wallet_address: account.address }).select("*").single();
+        const { data } = await supabase
+          .from("users")
+          .insert({ wallet_address: account.address })
+          .select("*")
+          .single();
+
         user = data;
       }
 
       await loadUserData(user);
       router.push("/dashboard");
-    } catch (error) {
-      setError("❌ Wallet login failed. Try again.");
+    } catch (err) {
+      setError("❌ Wallet login failed: " + err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const loginWithMetaMask = async () => {
     try {
       setError(null);
+      setLoading(true);
       if (isMobile) {
         alert("⚠️ Use WalletConnect on mobile for better experience.");
         return;
@@ -120,21 +135,30 @@ export const AuthProvider = ({ children }) => {
       if (!wallet) throw new Error("❌ MetaMask login failed.");
 
       setWalletAddress(wallet);
-      let { data: user } = await supabase
+      let { data: user, error } = await supabase
         .from("users")
         .select("*")
         .eq("wallet_address", wallet)
         .single();
 
+      if (error && error.code !== "PGRST116") throw error;
+
       if (!user) {
-        const { data } = await supabase.from("users").insert({ wallet_address: wallet }).select("*").single();
+        const { data } = await supabase
+          .from("users")
+          .insert({ wallet_address: wallet })
+          .select("*")
+          .single();
+
         user = data;
       }
 
       await loadUserData(user);
       router.push("/dashboard");
-    } catch (error) {
-      setError("❌ MetaMask login failed.");
+    } catch (err) {
+      setError("❌ MetaMask login failed: " + err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -144,8 +168,8 @@ export const AuthProvider = ({ children }) => {
       const { error } = await supabase.auth.signInWithOtp({ email });
       if (error) throw error;
       alert("✅ Check your email for the Magic Link.");
-    } catch (error) {
-      setError("❌ Failed to send Magic Link.");
+    } catch (err) {
+      setError("❌ Failed to send Magic Link: " + err.message);
     }
   };
 
@@ -156,8 +180,8 @@ export const AuthProvider = ({ children }) => {
       setWalletAddress(null);
       setBalance("0");
       router.push("/");
-    } catch (error) {
-      setError("❌ Logout error");
+    } catch (err) {
+      setError("❌ Logout error: " + err.message);
     }
   };
 
@@ -173,7 +197,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         loading,
         error,
-        isMobile, // ✅ PRIDĖTAS MOBILIŲ APTIKIMAS
+        isMobile,
       }}
     >
       {children}
