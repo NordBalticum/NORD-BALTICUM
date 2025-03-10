@@ -3,9 +3,9 @@ import { useAuth } from "@/context/AuthContext"; // ✅ NAUDOJA AUTHCONTEXT
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styles from "@/styles/dashboard.module.css";
-import logo from "@/public/icons/logo.svg";
-import logoutIcon from "@/public/icons/logout.svg";
-import walletIcon from "@/public/icons/wallet-icon.svg";
+import logo from '/icons/logo.svg';
+import logoutIcon from '/icons/logout.svg';
+import walletIcon from '/icons/wallet-icon.svg';
 
 export default function Dashboard() {
   const { user, walletAddress, balance, logout, loading } = useAuth();
