@@ -5,13 +5,16 @@ import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { mainnet, arbitrum } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
-import { detectMobile, isValidAddress } from "@/utils/helpers"; 
+import { detectMobile } from "@/utils/helpers";
 
-// ✅ AppKit konfigūracija
+// ✅ ENV KINTAMIEJI – TESTNET/MAINNET, 2FA
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
+const ENABLE_2FA = process.env.NEXT_PUBLIC_ENABLE_2FA === "true";
+const IS_TESTNET = process.env.NEXT_PUBLIC_IS_TESTNET === "true";
+
 const queryClient = new QueryClient();
-const wagmiAdapter = new WagmiAdapter({ projectId, networks: [mainnet, arbitrum] });
-const appKit = createAppKit({ adapters: [wagmiAdapter], networks: [mainnet, arbitrum], projectId });
+const wagmiAdapter = new WagmiAdapter({ projectId, networks: IS_TESTNET ? [arbitrum] : [mainnet] });
+const appKit = createAppKit({ adapters: [wagmiAdapter], networks: IS_TESTNET ? [arbitrum] : [mainnet], projectId });
 
 const AuthContext = createContext(null);
 
@@ -22,11 +25,13 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [requires2FA, setRequires2FA] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     setIsMobile(detectMobile());
     checkSession();
+
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         setUser(session.user);
@@ -40,6 +45,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const checkSession = async () => {
+    setLoading(true);
     try {
       const { data: { user }, error } = await supabase.auth.getUser();
       if (error) throw error;
@@ -60,14 +66,15 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data: walletData, error } = await supabase
         .from("users")
-        .select("wallet_address")
+        .select("wallet_address, requires_2fa")
         .eq("email", user.email)
         .single();
 
       if (error) throw error;
-      if (!walletData?.wallet_address || !isValidAddress(walletData.wallet_address)) return;
+      if (!walletData?.wallet_address) return;
 
       setWalletAddress(walletData.wallet_address);
+      setRequires2FA(ENABLE_2FA && walletData.requires_2fa);
       fetchBalance(walletData.wallet_address);
     } catch (err) {
       setError("❌ Error loading user data: " + err.message);
@@ -89,7 +96,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       const account = await appKit.connect({ qrModal: isMobile });
 
-      if (!account?.address || !isValidAddress(account.address)) throw new Error("❌ Invalid Wallet Address");
+      if (!account?.address) throw new Error("❌ Wallet connection failed");
 
       setWalletAddress(account.address);
       let { data: user, error } = await supabase
@@ -106,13 +113,62 @@ export const AuthProvider = ({ children }) => {
           .insert({ wallet_address: account.address })
           .select("*")
           .single();
+
         user = data;
       }
 
-      await loadUserData(user);
-      router.push("/dashboard");
+      if (requires2FA) {
+        router.push("/2fa");
+      } else {
+        await loadUserData(user);
+        router.push("/dashboard");
+      }
     } catch (err) {
       setError("❌ Wallet login failed: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loginWithMetaMask = async () => {
+    try {
+      setError(null);
+      setLoading(true);
+      if (isMobile) {
+        alert("⚠️ Use WalletConnect on mobile for better experience.");
+        return;
+      }
+
+      const wallet = await connectWallet();
+      if (!wallet) throw new Error("❌ MetaMask login failed.");
+
+      setWalletAddress(wallet);
+      let { data: user, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("wallet_address", wallet)
+        .single();
+
+      if (error && error.code !== "PGRST116") throw error;
+
+      if (!user) {
+        const { data } = await supabase
+          .from("users")
+          .insert({ wallet_address: wallet })
+          .select("*")
+          .single();
+
+        user = data;
+      }
+
+      if (requires2FA) {
+        router.push("/2fa");
+      } else {
+        await loadUserData(user);
+        router.push("/dashboard");
+      }
+    } catch (err) {
+      setError("❌ MetaMask login failed: " + err.message);
     } finally {
       setLoading(false);
     }
@@ -142,7 +198,21 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, walletAddress, balance, loginWithWallet, loginWithEmail, logout, loading, error, isMobile }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        walletAddress,
+        balance,
+        loginWithWallet,
+        loginWithMetaMask,
+        loginWithEmail,
+        logout,
+        loading,
+        error,
+        isMobile,
+        requires2FA,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
