@@ -1,194 +1,203 @@
-/* PREMIUM BANKING UI – GLOBAL STYLES */
-body {
+/* ✅ PAGRINDINĖ SPALVŲ SCHEMA */
+:root {
+  --primary-bg: #0A1F44;
+  --secondary-bg: #111D36;
+  --highlight-bg: rgba(255, 223, 0, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --button-bg: #1E2A3A;
+  --button-hover: #FFD700;
+  --text-color: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --shadow: 0px 0px 25px rgba(255, 255, 255, 0.15);
+  --radius: 12px;
+  --blur: blur(15px);
+  --gold-glow: 0px 0px 15px rgba(255, 223, 0, 0.7);
+}
+
+/* ✅ PILNAS 4K SUPPORT IR 100% WIDTH VISUR */
+html, body {
   margin: 0;
   padding: 0;
+  width: 100vw;
+  min-height: 100vh;
   font-family: 'Inter', sans-serif;
   background: var(--primary-bg);
   color: var(--text-color);
-  transition: var(--transition);
+  text-align: center;
   overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* LOGIN MYGTUKAI – BANKING FEELING */
+/* ✅ NAVIGACIJOS STILIAI */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1600px;
+  padding: 15px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(10, 31, 68, 0.9);
+  box-shadow: var(--shadow);
+}
+
+.navbar a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  color: var(--button-hover);
+}
+
+/* ✅ PREMIUM ANTRAŠTĖS */
+h1, h2, h3 {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--button-hover);
+  text-shadow: var(--gold-glow);
+}
+
+/* ✅ PREMIUM MYGTUKAI */
 button {
-  padding: 20px 38px;
-  border: 3px solid var(--button-border);
+  padding: 14px 30px;
+  font-size: 1.2rem;
+  font-weight: 700;
   border-radius: var(--radius);
+  border: 3px solid var(--button-hover);
   cursor: pointer;
   background: var(--button-bg);
   color: var(--text-color);
-  font-size: 1.5rem;
-  font-weight: 900;
   text-transform: uppercase;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-  transition: var(--transition);
-  letter-spacing: 1.3px;
-  outline: none;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  box-shadow: var(--shadow);
 }
 
 button:hover {
-  transform: scale(1.12);
-  box-shadow: 0px 0px 65px rgba(255, 255, 255, 1);
+  transform: scale(1.05);
   background: var(--button-hover);
+  color: #000;
+  box-shadow: var(--gold-glow);
 }
 
 button:active {
-  transform: scale(0.98);
-  filter: brightness(0.85);
-  box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.9);
+  transform: scale(0.96);
 }
 
-/* INTERACTIVE SHADOW GLOW */
-button::before {
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
-  transition: var(--transition);
-  opacity: 0;
-  transform: scale(0.5);
+/* ✅ FORMOS IR INPUT LAUKELIAI */
+input, textarea {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--button-hover);
+  padding: 12px;
+  border-radius: var(--radius);
+  color: var(--text-color);
+  transition: border 0.3s ease-in-out;
 }
 
-button:hover::before {
-  opacity: 1;
-  transform: scale(1.5);
+input:focus, textarea:focus {
+  border-color: var(--button-hover);
+  box-shadow: var(--gold-glow);
 }
 
-/* TEXT ELEMENTS */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 900;
-  text-transform: uppercase;
-  text-shadow: 0px 0px 18px rgba(255, 255, 255, 0.8);
-  letter-spacing: 1.6px;
-  transition: var(--transition);
-}
-
-h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
-  transform: scale(1.03);
-  text-shadow: 0px 0px 30px rgba(255, 255, 255, 1);
-}
-
-/* GLASSMORPHISM CARDS */
+/* ✅ KORTELIŲ STILIAI */
 .card {
   background: var(--card-bg);
-  padding: 32px 45px;
+  padding: 30px;
   border-radius: var(--radius);
-  text-align: center;
   box-shadow: var(--shadow);
   backdrop-filter: var(--blur);
-  transition: var(--transition);
-  border: 3px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .card:hover {
-  transform: scale(1.07);
-  box-shadow: 0 0 55px rgba(255, 255, 255, 0.85);
+  transform: scale(1.05);
+  box-shadow: 0 0 45px rgba(255, 255, 255, 0.6);
 }
 
-/* INPUT FIELDS */
-input {
-  padding: 18px;
-  border-radius: var(--radius);
-  border: 2px solid var(--button-border);
-  background: rgba(255, 255, 255, 0.15);
+/* ✅ LOADING SCREEN */
+.loadingScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background: var(--primary-bg);
   color: var(--text-color);
-  font-size: 1.3rem;
-  transition: var(--transition);
-  outline: none;
 }
 
-input:focus {
-  border-color: var(--secondary-bg);
-  box-shadow: 0px 0px 40px rgba(255, 255, 255, 1);
-  transform: scale(1.03);
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 6px solid transparent;
+  border-top: 6px solid var(--button-hover);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-/* FOOTER – MAXIMUM PREMIUM */
+/* ✅ FOOTER */
 .footer {
+  width: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  text-align: center;
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
-  padding: 24px 0;
-  background: var(--secondary-bg);
-  text-align: center;
-  z-index: 1000;
-  font-size: 1.3rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.8);
-  transition: var(--transition);
+  backdrop-filter: var(--blur);
 }
 
-.footer:hover {
-  transform: scale(1.03);
-}
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.6rem;
-  }
-  button {
-    font-size: 1.3rem;
-    padding: 18px 32px;
-  }
-  .card {
-    width: 90%;
-    padding: 24px 36px;
-  }
-  input {
-    font-size: 1.2rem;
-    padding: 16px;
-  }
-  .footer {
-    padding: 20px 0;
-  }
-}
-
-/* WOW ANIMATIONS */
+/* ✅ ANIMACIJOS */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes goldPulse {
+  0% { box-shadow: var(--gold-glow); }
+  50% { box-shadow: 0px 0px 25px rgba(255, 223, 0, 0.3); }
+  100% { box-shadow: var(--gold-glow); }
+}
+
+/* ✅ GOLDEN GLOW MYGTUKAI */
+.glowButton {
+  animation: goldPulse 2s infinite;
+}
+
+/* ✅ RESPONSYVUMAS */
+@media (max-width: 1200px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .footer {
+    text-align: center;
   }
 }
 
-/* PREMIUM SCROLL */
-@keyframes smoothScroll {
-  from {
-    transform: translateY(15px);
+@media (max-width: 768px) {
+  body {
+    padding: 20px;
   }
-  to {
-    transform: translateY(0);
-  }
-}
 
-/* FOOTER FADE-IN */
-@keyframes fadeInFooter {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
+  button {
+    font-size: 1rem;
+    padding: 10px 20px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-.footer {
-  animation: fadeInFooter 1.3s ease-in-out;
+  .navbar {
+    padding: 10px 15px;
+  }
 }
