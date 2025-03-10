@@ -14,10 +14,10 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {/* ✅ DIDELIS PREMIUM LOGOTIPAS */}
+      {/* ✅ DIDELIS PRABANGUS LOGOTIPAS */}
       <img src="/logo.png" alt="Nord Balticum Logo" className={styles.bigLogo} />
 
-      {/* ✅ LOGIN MYGTUKAI */}
+      {/* ✅ LOGIN MYGTUKAI - LYGIAGREČIAI */}
       <div className={styles.buttonContainer}>
         <button className={styles.walletconnect} onClick={() => router.push("/login/loginwagmi")}>
           <img src="/walletconnect.png" alt="WalletConnect" className={styles.buttonIcon} />
@@ -32,7 +32,7 @@ export default function Home() {
         </button>
       </div>
 
-      {/* ✅ PREMIUM FUNKCIJOS – -30% subtilumas */}
+      {/* ✅ PREMIUM FUNKCIJOS (-20% mažesnės, lygiagrečiai) */}
       <div className={styles.features}>
         <div className={styles.featureCard}>
           <h2>🛡️ Secure</h2>
@@ -41,10 +41,6 @@ export default function Home() {
         <div className={styles.featureCard}>
           <h2>⚡ Fast</h2>
           <p>Instant transactions on Binance Smart Chain.</p>
-        </div>
-        <div className={styles.featureCard}>
-          <h2>🌍 Global</h2>
-          <p>Seamless payments worldwide.</p>
         </div>
       </div>
     </div>
