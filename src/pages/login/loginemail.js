@@ -1,32 +1,28 @@
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { signInWithMagicLink, assignWalletToUser } from "@/utils/auth";
 import { useRouter } from "next/router";
 import styles from "@/styles/loginemail.module.css";
 
 export default function LoginEmail() {
+  const { loginWithEmail } = useAuth();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle"); // idle, sending, success, error
   const router = useRouter();
 
   const handleMagicLinkLogin = async (e) => {
     e.preventDefault();
-    setStatus("sending");
+    if (!email) return alert("Enter a valid email!");
 
-    const result = await signInWithMagicLink(email);
+    setStatus("sending");
+    const result = await loginWithEmail(email);
 
     if (result.success) {
       setStatus("checking");
 
-      // ✅ Patikrina, ar vartotojas jau turi wallet'ą
-      const walletAssigned = await assignWalletToUser(email);
-
-      if (walletAssigned.success) {
+      setTimeout(() => {
         setStatus("success");
-        setTimeout(() => router.push("/dashboard"), 3000);
-      } else {
-        setStatus("error");
-      }
+        setTimeout(() => router.push("/dashboard"), 2000); // ✅ Automatinis peradresavimas
+      }, 1500);
     } else {
       setStatus("error");
     }
@@ -34,12 +30,14 @@ export default function LoginEmail() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Sign in with Magic Link</h1>
+      <h1 className={styles.title}>🔒 Secure Web3 Email Login</h1>
 
-      {status === "checking" && <p className={styles.checking}>🔄 Checking wallet...</p>}
+      {/* 🔹 Dinaminiai pranešimai */}
+      {status === "checking" && <p className={styles.checking}>🔄 Verifying account...</p>}
       {status === "error" && <p className={styles.error}>⚠️ Failed to sign in. Try again.</p>}
-      {status === "success" && <p className={styles.success}>✅ Check your email for the link!</p>}
+      {status === "success" && <p className={styles.success}>✅ Magic Link sent! Check your email.</p>}
 
+      {/* 🔹 Prisijungimo forma */}
       <form onSubmit={handleMagicLinkLogin} className={styles.form}>
         <input
           type="email"
