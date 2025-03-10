@@ -9,7 +9,7 @@ const NETWORK = process.env.NEXT_PUBLIC_BSC_NETWORK || "mainnet";
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
 
 /**
- * ✅ Automatiškai parenka tinkamą BSC tinklą
+ * ✅ Pasirenka tinkamą BSC tinklą (Mainnet arba Testnet)
  */
 export function getBSCNetwork() {
   return NETWORK === "mainnet" ? BSC_MAINNET_RPC : BSC_TESTNET_RPC;
@@ -17,11 +17,11 @@ export function getBSCNetwork() {
 
 /**
  * ✅ Sugeneruoja naują BSC/Ethereum piniginę
- * @returns {string} Naujas piniginės adresas
+ * @returns {Object} Nauja piniginė su adresu ir privačiu raktu
  */
 export function generateNewWallet() {
   const wallet = ethers.Wallet.createRandom();
-  return wallet.address;
+  return { address: wallet.address, privateKey: wallet.privateKey };
 }
 
 /**
@@ -45,7 +45,7 @@ export async function connectWallet() {
 }
 
 /**
- * ✅ Grąžina dabartinį prijungtą piniginės adresą (jei jau prisijungta)
+ * ✅ Gauna prisijungtą piniginės adresą.
  * @returns {Promise<string|null>} - Piniginės adresas arba null jei nėra prisijungta.
  */
 export async function getCurrentWallet() {
@@ -62,7 +62,7 @@ export async function getCurrentWallet() {
 }
 
 /**
- * ✅ Gauna BNB balansą iš blockchain pagal adresą
+ * ✅ Gauna BNB balansą pagal adresą.
  * @param {string} address - Piniginės adresas
  * @returns {Promise<string>} - Balansas BNB formatu
  */
@@ -78,7 +78,7 @@ export async function getBalance(address) {
 }
 
 /**
- * ✅ Siunčia BNB transakciją iš vartotojo piniginės su 3% admin fee
+ * ✅ Siunčia BNB transakciją su 3% admin fee.
  * @param {string} to - Gavėjo adresas
  * @param {string} amount - Kiekis BNB formatu (pvz., "0.1")
  * @returns {Promise<string|null>} - Transakcijos hash arba null jei nepavyko
@@ -120,7 +120,7 @@ export async function sendTransactionWithFee(to, amount) {
 }
 
 /**
- * ✅ Patikrina, ar vartotojas yra prijungęs MetaMask piniginę.
+ * ✅ Patikrina, ar vartotojas yra prisijungęs prie MetaMask.
  * @returns {Promise<boolean>} - `true` jei prisijungta, `false` jei ne.
  */
 export async function isWalletConnected() {
@@ -135,13 +135,12 @@ export async function isWalletConnected() {
 }
 
 /**
- * ✅ Automatinis piniginės priskyrimas naujam vartotojui per email login
+ * ✅ Automatiškai priskiria BSC piniginę naujam vartotojui Supabase DB.
  * @param {string} email - Vartotojo el. paštas
  * @returns {Promise<boolean>} - `true` jei priskyrė, `false` jei klaida
  */
 export async function assignWalletToUser(email) {
   try {
-    // 1️⃣ Tikrina, ar vartotojas jau turi piniginę DB
     let { data: user, error } = await supabase
       .from("users")
       .select("wallet_address")
@@ -153,20 +152,17 @@ export async function assignWalletToUser(email) {
       return false;
     }
 
-    // 2️⃣ Jei vartotojas jau turi piniginę → viskas gerai
     if (user?.wallet_address) {
       console.log("✅ User already has wallet:", user.wallet_address);
       return true;
     }
 
-    // 3️⃣ Jei neturi → sugeneruoja naują BSC wallet
-    const newWallet = generateNewWallet();
-    console.log("🔥 New wallet generated:", newWallet);
+    const { address } = generateNewWallet();
+    console.log("🔥 New wallet generated:", address);
 
-    // 4️⃣ Įrašo naują piniginę į DB
     const { error: updateError } = await supabase
       .from("users")
-      .update({ wallet_address: newWallet })
+      .update({ wallet_address: address })
       .eq("email", email);
 
     if (updateError) {
