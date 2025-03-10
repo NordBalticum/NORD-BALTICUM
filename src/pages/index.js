@@ -1,48 +1,56 @@
 import { useEffect } from "react";
+import { useAuth } from "@/loginsystem/AuthProvider";
 import { useRouter } from "next/router";
-import { useAuth } from "@/context/AuthContext";
 import styles from "@/styles/index.module.css";
 
 export default function Home() {
-  const router = useRouter();
-  const { user } = useAuth();
+  const {
+    user,
+    loginWithWalletConnect,
+    loginWithMetaMask,
+    loginWithEmail,
+    loading,
+    error,
+  } = useAuth();
 
-  // ✅ Jei vartotojas jau prisijungęs – nukreipiame į dashboard
+  const router = useRouter();
+
   useEffect(() => {
-    if (user) router.push("/dashboard");
+    if (user) {
+      router.push("/dashboard");
+    }
   }, [user, router]);
 
   return (
     <div className={styles.container}>
-      {/* ✅ DIDELIS PREMIUM LOGOTIPAS */}
-      <img src="/logo.png" alt="Nord Balticum Logo" className={styles.bigLogo} />
+      <div className={styles.loginBox}>
+        <img src="/logo.png" alt="NordBalticum" className={styles.logo} />
 
-      {/* ✅ LOGIN MYGTUKAI */}
-      <div className={styles.buttonContainer}>
-        <button className={`${styles.walletButton} ${styles.walletconnect}`} onClick={() => router.push("/login/loginwagmi")}>
-          <img src="/walletconnect.png" alt="WalletConnect" className={styles.buttonIcon} />
-        </button>
+        <h1 className={styles.title}>Welcome to NordBalticum</h1>
 
-        <button className={`${styles.walletButton} ${styles.metamask}`} onClick={() => router.push("/login/loginweb3")}>
-          <img src="/metamask.png" alt="MetaMask" className={styles.buttonIcon} />
-        </button>
+        <div className={styles.buttonContainer}>
+          <button className={styles.walletButton} onClick={loginWithMetaMask}>
+            <img src="/icons/metamask.svg" alt="MetaMask" className={styles.buttonIcon} />
+            <span>MetaMask</span>
+          </button>
 
-        <button className={`${styles.walletButton} ${styles.email}`} onClick={() => router.push("/login/loginemail")}>
-          <img src="/email.png" alt="Email Login" className={styles.buttonIcon} />
-        </button>
-      </div>
+          <button className={styles.walletButton} onClick={loginWithWalletConnect}>
+            <img src="/icons/walletconnect.svg" alt="WalletConnect" className={styles.buttonIcon} />
+            <span>WalletConnect</span>
+          </button>
 
-      {/* ✅ PREMIUM FUNKCIJOS */}
-      <div className={styles.features}>
-        <div className={styles.featureCard}>
-          <h2>🛡️ Secure</h2>
-          <p>Bank-grade encryption for all transactions.</p>
+          <button className={styles.walletButton} onClick={() => {
+            const email = prompt("Enter your email:");
+            if (email) loginWithEmail(email);
+          }}>
+            <img src="/icons/email.svg" alt="Email Login" className={styles.buttonIcon} />
+            <span>Email Login</span>
+          </button>
         </div>
-        <div className={styles.featureCard}>
-          <h2>⚡ Fast</h2>
-          <p>Instant transactions on Binance Smart Chain.</p>
-        </div>
+
+        {loading && <p className={styles.status}>Loading...</p>}
+        {error && <p className={styles.error}>{error}</p>}
       </div>
     </div>
   );
-}
+        }
