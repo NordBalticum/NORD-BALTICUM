@@ -39,7 +39,6 @@ export default function Dashboard() {
 
   const fetchChartData = async () => {
     try {
-      // ✅ Tikriname, ar esame naršyklės aplinkoje prieš vykdant API requestą
       if (typeof window !== "undefined") {
         setChartData([
           { period: "1d", value: 1.25 },
@@ -66,7 +65,7 @@ export default function Dashboard() {
     <div className={styles.container}>
       {/* ✅ HEADER */}
       <header className={styles.header}>
-        <Image src="/logo.png" alt="Nord Balticum" width={180} height={50} className={styles.logo} />
+        <Image src="/logo.png" alt="Nord Balticum" width={220} height={65} className={styles.logo} />
         <button className={styles.logoutButton} onClick={logout}>Logout</button>
       </header>
 
