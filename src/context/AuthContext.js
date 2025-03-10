@@ -7,15 +7,17 @@ import { mainnet, arbitrum } from "@reown/appkit/networks";
 import { QueryClient } from "@tanstack/react-query";
 import { detectMobile } from "@/utils/helpers";
 
-// ✅ ENV KINTAMIEJI – TESTNET/MAINNET, 2FA
+// ✅ ENV KINTAMIEJI
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
 const ENABLE_2FA = process.env.NEXT_PUBLIC_ENABLE_2FA === "true";
 const IS_TESTNET = process.env.NEXT_PUBLIC_IS_TESTNET === "true";
 
+// ✅ Konfigūracija pagal tinklą (Testnet arba Mainnet)
 const queryClient = new QueryClient();
 const wagmiAdapter = new WagmiAdapter({ projectId, networks: IS_TESTNET ? [arbitrum] : [mainnet] });
 const appKit = createAppKit({ adapters: [wagmiAdapter], networks: IS_TESTNET ? [arbitrum] : [mainnet], projectId });
 
+// ✅ Sukuriamas AuthContext
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -90,6 +92,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ✅ WalletConnect prisijungimas
   const loginWithWallet = async () => {
     try {
       setError(null);
@@ -130,6 +133,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ✅ MetaMask prisijungimas
   const loginWithMetaMask = async () => {
     try {
       setError(null);
@@ -174,6 +178,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ✅ Magic Link prisijungimas
   const loginWithEmail = async (email) => {
     try {
       setError(null);
@@ -185,6 +190,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // ✅ Atsijungimas
   const logout = async () => {
     try {
       await supabase.auth.signOut();
