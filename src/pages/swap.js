@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { BrowserProvider, parseEther, formatEther } from "ethers";
 import axios from "axios";
 import { supabase } from "@/utils/supabaseClient";
-import "@/styles/swap.module.css";
+import styles from "@/styles/swap.module.css";
 
 const ONEINCH_API = "https://api.1inch.io/v5.0/56/";
 const ADMIN_WALLET = process.env.NEXT_PUBLIC_ADMIN_WALLET;
