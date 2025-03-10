@@ -1,7 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "@/utils/supabaseClient";
-import { connectWallet, getBalance } from "@/utils/wallet";
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { mainnet, arbitrum } from "@reown/appkit/networks";
