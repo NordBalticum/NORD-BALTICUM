@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useAuth } from "@/login/AuthProvider";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import styles from "@/styles/index.module.css";
-import logo from '/icons/logo.svg';
-import walletIcon from '/icons/wallet-icon.svg';
-import metamaskIcon from "@/public/icons/metamask-icon.svg";
-import emailIcon from "@/public/icons/email-icon.svg";
+
+const logo = "/icons/logo.svg";
+const walletIcon = "/icons/wallet-icon.svg";
+const metamaskIcon = "/icons/metamask-icon.svg";
+const emailIcon = "/icons/email-icon.svg";
 
 export default function Home() {
   const { user, loginWithWallet, loginWithMetaMask, loginWithEmail, error, loading } = useAuth();
@@ -22,7 +22,7 @@ export default function Home() {
     <div className={styles.container}>
       {/* ✅ PREMIUM HEADER */}
       <header className={styles.header}>
-        <Image src={logo} alt="NordBalticum Logo" className={styles.logo} priority />
+        <img src={logo} alt="NordBalticum Logo" className={styles.logo} />
       </header>
 
       {/* ✅ TITULAS */}
@@ -37,20 +37,24 @@ export default function Home() {
         <div className={styles.buttonContainer}>
           {/* WalletConnect */}
           <button className={styles.walletButton} onClick={loginWithWallet} disabled={loading}>
-            <Image src={walletIcon} alt="WalletConnect" className={styles.buttonIcon} />
+            <img src={walletIcon} alt="WalletConnect" className={styles.buttonIcon} />
           </button>
 
           {/* MetaMask */}
           <button className={styles.walletButton} onClick={loginWithMetaMask} disabled={loading}>
-            <Image src={metamaskIcon} alt="MetaMask" className={styles.buttonIcon} />
+            <img src={metamaskIcon} alt="MetaMask" className={styles.buttonIcon} />
           </button>
 
           {/* Email Magic Link */}
-          <button className={styles.walletButton} onClick={() => {
-            const email = prompt("Enter your email:");
-            if (email) loginWithEmail(email);
-          }} disabled={loading}>
-            <Image src={emailIcon} alt="Email" className={styles.buttonIcon} />
+          <button
+            className={styles.walletButton}
+            onClick={() => {
+              const email = prompt("Enter your email:");
+              if (email) loginWithEmail(email);
+            }}
+            disabled={loading}
+          >
+            <img src={emailIcon} alt="Email" className={styles.buttonIcon} />
           </button>
         </div>
 
