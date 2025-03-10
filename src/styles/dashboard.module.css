@@ -1,186 +1,135 @@
-/* ✅ GLOBAL SETTINGS – PRABANGUS & EFEKTYVUS DIZAINAS */
-.globals {
-  background: linear-gradient(135deg, #0A1F44, #001F3F);
-  color: #ffffff;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  font-family: 'Poppins', sans-serif;
-}
-
 /* ✅ PILNAS SCREEN FIX – 8K READY */
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: flex-start;
   min-height: 100vh;
   width: 100vw;
+  background: linear-gradient(135deg, #0A1F44, #001F3F);
+  color: #FFFFFF;
   text-align: center;
-  padding: 50px;
-  animation: fadeIn 1.2s ease-in-out;
+  padding: 60px;
+  animation: fadeIn 1.5s ease-in-out;
+  backdrop-filter: blur(12px);
 }
 
-/* ✅ HEADER – PRABANGUS STILIUS */
+/* ✅ HEADER */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 96%;
-  max-width: 2200px;
-  padding: 35px 0;
+  width: 97%;
+  max-width: 2400px;
+  padding: 40px 0;
 }
 
 /* ✅ PREMIUM LOGOTIPAS SU NEON GLOW */
 .logo {
-  width: 280px;
-  filter: drop-shadow(0px 0px 40px rgba(255, 255, 255, 0.8));
-  transition: transform 0.2s ease-in-out;
+  width: 300px;
+  filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1));
+  transition: transform 0.3s ease-in-out;
+  animation: glowPulse 4s infinite alternate;
 }
 
 .logo:hover {
-  transform: scale(1.08);
-  filter: drop-shadow(0px 0px 70px rgba(255, 255, 255, 1));
+  transform: scale(1.12);
+  filter: drop-shadow(0px 0px 100px rgba(255, 255, 255, 1));
 }
 
-/* ✅ PREMIUM ATSIJUNGIMO MYGTUKAS */
+/* ✅ LOGOUT BUTTON */
 .logoutButton {
-  padding: 18px 45px;
-  font-size: 1.8rem;
-  font-weight: 800;
-  border-radius: 16px;
-  border: 4px solid rgba(255, 215, 0, 0.9);
+  padding: 22px 50px;
+  font-size: 2rem;
+  font-weight: 900;
+  border-radius: 20px;
+  border: 5px solid rgba(255, 215, 0, 1);
   cursor: pointer;
   background: #1E2A3A;
   color: #FFFFFF;
   text-transform: uppercase;
-  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.3);
-  transition: transform 0.2s ease-in-out, background 0.2s ease-in-out;
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .logoutButton:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
   background: #FFD700;
   color: #000;
-  box-shadow: 0px 0px 90px rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 160px rgba(255, 255, 255, 1);
 }
 
 .logoutButton:active {
-  transform: scale(0.96);
+  transform: scale(0.95);
 }
 
-/* ✅ WALLET INFORMACIJA – OPTIMIZUOTAS UI */
+/* ✅ WALLET INFO */
 .walletInfo {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 40px;
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 60px;
+  border-radius: 20px;
   text-align: center;
-  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 10px 40px rgba(255, 255, 255, 0.5);
   width: 100%;
-  max-width: 900px;
-  transition: transform 0.2s ease-in-out;
+  max-width: 1000px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .walletInfo:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 80px rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+  box-shadow: 0 0 180px rgba(255, 255, 255, 1);
 }
 
-/* ✅ BALANCE CHART – PERFORMANCE OPTIMIZATION */
-.balanceChart {
-  width: 100%;
-  max-width: 1100px;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  margin-top: 40px;
-  transition: transform 0.2s ease-in-out;
-}
-
-.balanceChart:hover {
-  transform: scale(1.04);
-  box-shadow: 0 0 90px rgba(255, 255, 255, 1);
-}
-
-/* ✅ GREITI VEIKSMAI */
+/* ✅ QUICK ACTIONS */
 .quickActions {
-  margin-top: 50px;
+  margin-top: 80px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
 }
 
 .quickActions h2 {
-  font-size: 2.2rem;
+  font-size: 2.6rem;
   font-weight: 900;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
-/* ✅ PREMIUM MYGTUKAI */
+/* ✅ ACTION BUTTONS */
+.actionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 45px;
+  width: 100%;
+  justify-content: center;
+}
+
 .actionButton {
-  padding: 22px;
-  font-size: 1.7rem;
+  padding: 28px;
+  font-size: 2rem;
   font-weight: 900;
-  border-radius: 16px;
+  border-radius: 20px;
   background: linear-gradient(145deg, #1E2A3A, #22334C);
-  border: 3px solid rgba(255, 215, 0, 0.9);
+  border: 5px solid rgba(255, 215, 0, 1);
   color: #FFFFFF;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-  box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.4);
 }
 
 .actionButton:hover {
-  transform: scale(1.15);
+  transform: scale(1.25);
   background: linear-gradient(145deg, #FFD700, #FFA500);
   color: #000;
-  box-shadow: 0px 0px 120px rgba(255, 255, 255, 1);
-}
-
-/* ✅ DONATE BUTTON */
-.donateButton {
-  background: linear-gradient(90deg, #ff0000, #cc0000);
-  font-weight: 900;
-}
-
-.donateButton:hover {
-  background: linear-gradient(90deg, #cc0000, #990000);
-  transform: scale(1.15);
-  box-shadow: 0px 0px 120px rgba(255, 50, 50, 1);
+  box-shadow: 0px 0px 180px rgba(255, 255, 255, 1);
 }
 
 /* ✅ ANIMACIJOS */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
+  from { opacity: 0; transform: translateY(-30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ✅ RESPONSYVUMAS – ADAPTACIJA VISIEMS EKRANAMS */
-@media (max-width: 1400px) {
-  .header {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-@media (max-width: 900px) {
-  .dashboardContent {
-    width: 95%;
-  }
-
-  .actionsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 30px;
-  }
-
-  .walletInfo, .balanceChart, .quickActions {
-    max-width: 95%;
-  }
+@keyframes glowPulse {
+  0% { filter: drop-shadow(0px 0px 60px rgba(255, 255, 255, 1)); }
+  100% { filter: drop-shadow(0px 0px 100px rgba(255, 255, 255, 1)); }
 }
