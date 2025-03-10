@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { connectWallet } from "@/utils/wallet";
 import { useRouter } from "next/router";
 import styles from "@/styles/loginweb3.module.css";
 
